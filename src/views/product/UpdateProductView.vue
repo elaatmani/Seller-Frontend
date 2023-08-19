@@ -150,7 +150,7 @@
             md="12"
             class="tw-border-t tw-border-t-neutral-300 tw-py-2"
           >
-            <div class="tw-h-fit tw-mb-">
+            <div v-if="user.role=='admin'" class="tw-h-fit tw-mb-">
               <span class="tw-text-sm tw-text-neutral-600">Warehouse</span>
               <div class="tw-relative">
                 <select
@@ -310,8 +310,18 @@
                     >
                       <tr>
                         <th
+                        v-if="user.role == 'admin'"
+                          scope="col"
+                          class="tw-px-6 tw-py-3 text-truncate"
+                        >
+                          <div
+                            class="tw-w-fit tw-flex tw-whitespace-nowrap tw-capitalize"
+                          >
+                            warehouse
+                          </div>
+                        </th>
+                        <th
                           v-for="column in [
-                            'warehouse',
                             'size',
                             'color',
                             'qty',
@@ -337,7 +347,7 @@
                         :key="variant.id"
                         class="tw-bg-white tw-border-b tw-whitespace-nowrap hover:tw-bg-gray-50"
                       >
-                        <td class="tw-px-6 tw-py-2 tw-capitalize">
+                        <td v-if="user.role=='admin'" class="tw-px-6 tw-py-2 tw-capitalize">
                           {{ variant.warehouse.name }}
                         </td>
                         <td
@@ -382,7 +392,7 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12">
+          <v-col cols="12" v-if="user.role=='admin'">
             <div>
               <h1>Deliveries</h1>
               <div class="tw-mt-2">
@@ -570,6 +580,11 @@ export default {
     users() {
       return this.$store.getters['user/users']
     },
+
+    user() {
+      return this.$store.getters['user/user']
+    },
+
     deliveries() {
       return this.users.filter(u => u.role?.name == "delivery")
       .map(u => ({...u, fullname: u.firstname + ' ' + u.lastname}))
@@ -684,7 +699,7 @@ export default {
         color: this.color.toUpperCase(),
         size: this.size.toUpperCase(),
         quantity: this.quantity,
-        warehouse_id: this.warehouse,
+        warehouse_id: this.user.role=='admin'? this.warehouse : 1,
         warehouse: this.warehouses.find(w => w.id == this.warehouse),
         stockAlert: this.stockAlert,
       };

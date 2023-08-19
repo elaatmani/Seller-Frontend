@@ -146,7 +146,7 @@
             md="6"
             class="tw-border-l tw-border-r-neutral-700 tw-py-2"
           >
-          <div class="tw-h-fit tw-mb-">
+          <div  v-if="user.role=='admin'" class="tw-h-fit tw-mb-">
             <span class="tw-text-sm tw-text-neutral-600">Warehouse</span>
             <div class="tw-relative">
               <select 
@@ -375,7 +375,7 @@
         </v-row>
 
         <v-row>
-          <v-col cols="12">
+          <v-col cols="12" v-if="user.role == 'admin'">
             <div>
               <h1 class="tw-font-medium">Deliveries</h1>
               <div class="tw-mt-2">
@@ -562,6 +562,9 @@ export default {
     users() {
       return this.$store.getters['user/users']
     },
+    user() {
+      return this.$store.getters['user/user']
+    },
     deliveries() {
       return this.users.filter(u => u.role?.name == "delivery")
       .map(u => ({...u, fullname: u.firstname + ' ' + u.lastname}))
@@ -587,7 +590,7 @@ export default {
               color: null,
               size: null,
               quantity: this.quantity,
-              warehouse_id: this.warehouse,
+              warehouse_id: this.user.role == 'admin' ? this.warehouse : 1,
               stockAlert: this.stockAlert
             }]
         product.variants = variants;
@@ -674,7 +677,7 @@ export default {
       );
       this.formStatus.variants = validateVariants(this.variants);
 
-      if(!this.addVariants) {
+      if(!this.addVariants && this.user.role == "admin") {
         this.formStatus.warehouse = {
           valid: this.warehouse != 0,
           message: this.warehouse != 0 ? '' : 'Please select a warehouse'
@@ -695,21 +698,22 @@ export default {
 
     addVariant() {
 
-      this.formStatus.warehouse = {
-        valid: this.warehouse != 0,
-        message: this.warehouse != 0 ? '' : 'Please select a warehouse'
-      }
+        if(this.user.role == 'admin'){
+            this.formStatus.warehouse = {
+            valid: this.warehouse != 0,
+            message: this.warehouse != 0 ? '' : 'Please select a warehouse'
+          }
 
-      if(!this.formStatus.warehouse.valid) {
-        return false;
+          if(!this.formStatus.warehouse.valid) {
+            return false;
+          }
       }
-
       const variant = {
         id: this.variantId,
         color: this.color.toUpperCase(),
         size: this.size.toUpperCase(),
         quantity: this.quantity,
-        warehouse_id: this.warehouse,
+        warehouse_id: this.user.role == 'admin' ? this.warehouse : 1,
         stockAlert: this.stockAlert
       };
 
