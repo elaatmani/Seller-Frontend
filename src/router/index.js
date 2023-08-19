@@ -14,6 +14,7 @@ import shop from './routes/shop'
 import warehouse from './routes/warehouse'
 import factorisation from './routes/factorisation'
 import sheet from './routes/sheet'
+import seller from './routes/seller'
 import followup from './routes/followup'
 import dashboard from './routes/dashboard'
 
@@ -36,6 +37,7 @@ const routes = [
   factorisation,
   sheet,
   followup,
+  seller,
   
   {
     name: 'default',

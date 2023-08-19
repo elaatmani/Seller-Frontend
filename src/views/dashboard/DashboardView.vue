@@ -43,7 +43,6 @@ export default {
             case 'admin':
                 this.$router.push({name: 'dashboards/admin'})
             break;
-        
             default:
                 this.exists = true;
             break;

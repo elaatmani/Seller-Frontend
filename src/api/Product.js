@@ -65,9 +65,9 @@ class Product {
         return Api.get('api/products');
     }
 
-    async allForOrder() {
+    async allForOrder(id) {
         await Csrf.getCookie();
-        return Api.get('api/products/for-order');
+        return Api.get('api/products/for-order/'+id);
     }
 
     async getProduct(id) {

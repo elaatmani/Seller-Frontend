@@ -119,6 +119,27 @@ export const links = [
     },
 
     {
+        id: 10,
+        module: 'sellersale',
+        title: 'Seller Sales',
+        hasChildren: true,
+        gate: 'access_to_seller_sales', 
+        icon: {
+            type: 'icon',
+            value: 'mdi-sale'
+        },
+        children: [
+            {
+                id: 1,
+                title: 'Seller Sales',
+                subModule: 'seller/list',
+                gate: 'show_seller_sales',
+                to: '/seller/list'
+            },
+        ]
+    },
+
+    {
         id: 5,
         module: 'factorisation',
         title: 'Factorisation',
