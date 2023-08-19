@@ -1,24 +1,26 @@
 <template>
   <div class="tw-pb-40">
     <div class="tw-space-y-3">
-        <OnlineUsers />
 
         <IndexFilters @update="f => filters= f" @filter="handleFilter" />
 
-        <IndexStatistics :statistics="statistics" :fetching="fetching" />
+        <IndexRevenue :statistics="statistics" :fetching="fetching" />
+        
+        <IndexStatistics :statistics="statistics" :fetching="fetching" />        
 
     </div>
   </div>
 </template>
 
 <script>
-import OnlineUsers from '@/views/newdashboards/admin/partials/users/OnlineUsers';
-import IndexStatistics from '@/views/newdashboards/admin/partials/statistics/IndexStatistics'
-import IndexFilters from '@/views/newdashboards/admin/partials/filters/IndexFilters'
-import Admin from '@/api/Admin';
+import IndexStatistics from '@/views/newdashboards/seller/partials/statistics/IndexStatistics'
+import IndexFilters from '@/views/newdashboards/seller/partials/filters/IndexFilters'
+import IndexRevenue from '@/views/newdashboards/seller/partials/statistics/IndexRevenue'
+
+import Seller from '@/api/Seller';
 
 export default {
-    components: { OnlineUsers, IndexStatistics, IndexFilters },
+    components: {IndexStatistics, IndexFilters, IndexRevenue },
 
     data() {
         return {
@@ -37,7 +39,7 @@ export default {
     methods: {
         handleFilter() {
             this.fetching = true;
-            Admin.statistics(this.filters)
+            Seller.statistics(this.filters)
             .then(res => {
                 if(res.data.code == 'SUCCESS') {
                     this.statistics = res.data.data.statistics;
@@ -49,7 +51,7 @@ export default {
     },
 
     mounted() {
-        if(this.user.role != 'admin') this.$router.push({name: '404'});
+        if(this.user.role != 'seller') this.$router.push({name: '404'});
     }
 }
 </script>

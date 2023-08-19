@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import DashboardCard from '@/views/newdashboards/admin/partials/statistics/components/DashboardCard'
+import DashboardCard from '@/views/newdashboards/seller/partials/statistics/components/DashboardCard'
 
 export default {
     components: { DashboardCard },

@@ -11,6 +11,7 @@ import DeliveryDashboard from './dashboards/DeliveryDashboard.vue'
 import AgenteDashboard from './dashboards/AgenteDashboard.vue'
 import DefaultDashboard from './dashboards/DefaultDashboard.vue'
 import FollowUpDashboard from '@/views/dashboard/dashboards/FollowUpDashboard'
+import SellerDashboard from '@/views/dashboard/dashboards/SellerDashboard'
 
 export default {
     components: { 
@@ -18,6 +19,7 @@ export default {
         delivery: DeliveryDashboard,
         agente: AgenteDashboard,
         default: DefaultDashboard,
+        seller: SellerDashboard,
         'follow-up': FollowUpDashboard
      },
 
@@ -33,7 +35,7 @@ export default {
         },
         dashboard() {
             
-            return ['admin', 'delivery', 'agente', 'follow-up'].includes(this.user.role) ? this.user.role : 'default'
+            return ['admin', 'seller','delivery', 'agente', 'follow-up'].includes(this.user.role) ? this.user.role : 'default'
         },
         
     },
@@ -42,6 +44,9 @@ export default {
             switch (this.user.role) {
             case 'admin':
                 this.$router.push({name: 'dashboards/admin'})
+            break;
+            case 'seller':
+                this.$router.push({name: 'dashboards/seller'})
             break;
             default:
                 this.exists = true;

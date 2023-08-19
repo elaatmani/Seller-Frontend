@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import ConfirmationTab from '@/views/newdashboards/admin/partials/statistics/components/ConfirmationTab'
-import DeliveryTab from '@/views/newdashboards/admin/partials/statistics/components/DeliveryTab'
+import ConfirmationTab from '@/views/newdashboards/seller/partials/statistics/components/ConfirmationTab'
+import DeliveryTab from '@/views/newdashboards/seller/partials/statistics/components/DeliveryTab'
 
 export default {
     components: { ConfirmationTab, DeliveryTab },
