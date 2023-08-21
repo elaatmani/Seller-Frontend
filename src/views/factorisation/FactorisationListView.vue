@@ -62,7 +62,44 @@
         date: null,
         search: '',
         showPopup:false,
-        columns: 
+        userColumns: 
+        [
+          {
+              prop: 'id',
+              name: '#',
+          },
+          {
+              prop: "factorisation_id",
+              name: "Code",
+          },
+          {
+              prop: "user_id",
+              name: "Seller",
+          },
+          {
+              prop: "commands_number",
+              name: "Nb Commands",
+          },
+          {
+              prop: "price",
+              name: "Total Price",
+          },
+          {
+              prop: "close_at",
+              name: "Closed at",
+          },
+          {
+              prop: "paid_at",
+              name: "Paid at",
+          },
+           
+          {
+              prop: 'created_at',
+              name: 'Created at',
+          },
+          
+      ],  
+      adminColumns: 
         [
           {
               prop: 'id',
@@ -75,6 +112,10 @@
           {
               prop: "delivery_id",
               name: "Delivery",
+          },
+          {
+              prop: "user_id",
+              name: "Seller",
           },
           {
               prop: "commands_number",
@@ -113,6 +154,16 @@
       }
     },
     computed: {
+      user() {
+            return this.$store.getters['user/user']
+      },
+      columns(){
+        if(this.user.role == "admin"){
+          return this.adminColumns;
+        }else{
+          return this.userColumns;
+        }
+      },
       factorisations() {
         // console.log(this.$store.getters['factorisation/factorisations'])
         return this.$store.getters['factorisation/factorisations'];

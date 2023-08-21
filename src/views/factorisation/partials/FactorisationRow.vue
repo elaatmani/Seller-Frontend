@@ -16,8 +16,14 @@
             </button>
         </td>
 
+        <td v-if="this.user.role == 'admin'" class="tw-px-6 tw-py-4">
+           <span v-if="factorisation.delivery">{{ deliveryName }}</span>
+           <span v-else>-</span>
+        </td>
+        
         <td class="tw-px-6 tw-py-4">
-            {{ deliveryName }}
+            <span v-if="factorisation.seller">{{ sellerName }}</span>
+            <span v-else>-</span>
         </td>
         <td class="tw-px-6 tw-py-4">
             {{ factorisation.commands_number }}
@@ -31,7 +37,7 @@
         <td class="tw-px-6 tw-py-4">
             {{ factorisation.paid_at?.split("T")[0] }}
         </td>
-        <td class="tw-px-6 tw-py-4">
+        <td v-if="this.user.role == 'admin'"  class="tw-px-6 tw-py-4">
             <div
                 class="tw-flex tw-items-center tw-w-full tw-text-neutral-600 dark:tw-text-neutral-200 tw-text-md tw-py-1">
                 <label class="tw-relative tw-inline-flex tw-items-center tw-cursor-pointer tw-w-fit tw-scale-75">
@@ -43,7 +49,7 @@
                 <v-icon v-if="isLoadingClose" color="green" size="small" class="tw-animate-spin">mdi-loading</v-icon>
             </div>
         </td>
-        <td class="tw-px-6 tw-py-4">
+        <td v-if="this.user.role == 'admin'"  class="tw-px-6 tw-py-4">
             <div
                 class="tw-flex tw-items-center tw-w-full tw-text-neutral-600 dark:tw-text-neutral-200 tw-text-md tw-py-1">
                 <label class="tw-relative tw-inline-flex tw-items-center tw-cursor-pointer tw-w-fit tw-scale-75">
@@ -58,7 +64,7 @@
         <td class="tw-px-6 tw-py-4">
             {{ factorisation.created_at.split("T")[0] }}
         </td>
-        <td class="tw-flex tw-items-center tw-px-6 tw-py-4 tw-space-x-3">
+        <td v-if="this.user.role == 'admin'"  class="tw-flex tw-items-center tw-px-6 tw-py-4 tw-space-x-3">
             <FactorisationActions :factorisation="factorisation" />
         </td>
     </tr>
@@ -92,6 +98,18 @@
                     console.log(v);
                 },
             },
+            sellerName: {
+                get(){
+                    return (
+                        this.factorisation.seller.firstname + 
+                        " " +
+                        this.factorisation.seller.lastname
+                    )
+                },
+                set(v) {
+                    console.log(v);
+                },
+            },
             paid: {
                 get() {
                     return this.factorisation.paid == 1 ? true : false;
@@ -108,6 +126,9 @@
                     this.updateClose(v);
                 },
             },
+            user() {
+            return this.$store.getters['user/user']
+      },
         },
 
         methods: {
