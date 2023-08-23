@@ -9,7 +9,7 @@
         <v-btn color="primary-color" link :to="{name: 'product/add'}" variant="flat" class="text-capitalize">
           <v-icon icon="mdi-plus" class="mr-2 text-white "></v-icon>
           <span class="text-white">
-            Add Product
+            Add Expedition
           </span>
         </v-btn>
       </div>

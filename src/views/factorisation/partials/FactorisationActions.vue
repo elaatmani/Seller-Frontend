@@ -1,5 +1,6 @@
 <template>
   <div class="tw-flex tw-items-center tw-gap-1">
+    
     <v-btn
       @click="showUpdateCommentPopup = true"
       v-if="$can(`update_factorisation`)"
@@ -50,6 +51,22 @@
       <!-- <span class="text-white text-capitalize">Delete</span> -->
     </v-btn>
 
+    <v-btn
+      @click="showUpdateFeesPopup = true"
+      v-if="$can(`update_factorisation`) && this.factorisation.type =='seller'"
+      class="mr-2 !tw-px-0 !tw-py-0"
+      min-height="25px"
+      min-width="30"
+      color="green"
+      variant="flat"
+      density="comfortable"
+      :ripple="false"
+      size="small"
+    >
+      <v-icon color="white">mdi-format-list-text</v-icon>
+      <!-- <span class="text-white text-capitalize">Edit</span> -->
+    </v-btn>
+
     <UpdateFactorisation
       :visible="showUpdatePopup"
       @cancel="showUpdatePopup = false"
@@ -58,11 +75,19 @@
     />
 
     <UpdateComment
-    :visible="showUpdateCommentPopup"
-    @cancel="showUpdateCommentPopup = false"
+      :visible="showUpdateCommentPopup"
+      @cancel="showUpdateCommentPopup = false"
+      :key="factorisation.id"
+      :factorisation="factorisation"
+    />
+
+    <UpdateFees
+    :visible="showUpdateFeesPopup"
+    @cancel="showUpdateFeesPopup = false"
     :key="factorisation.id"
     :factorisation="factorisation"
   />
+
 
     <popup
       type="warning"
@@ -78,20 +103,23 @@
 import Factorisation from "@/api/Factorisation";
 import UpdateFactorisation from "./UpdateFactorisation";
 import UpdateComment from "./UpdateComment";
+import UpdateFees from "./UpdateFees";
+
 // myVue.vue
 
 // your vue component
 export default {
   // access any cell properties here
-  components: { UpdateFactorisation , UpdateComment },
+  components: { UpdateFactorisation, UpdateComment, UpdateFees},
   props: ["rowIndex", "factorisation"],
   name: "factorisationActions",
   data() {
     return {
       showPopup: false,
       isLoading: false,
-      showUpdatePopup: false,
       showUpdateCommentPopup: false,
+      showUpdateFeesPopup: false,
+      showUpdatePopup: false,
     };
   },
   methods: {
@@ -111,7 +139,7 @@ export default {
                 this.factorisation.id
               );
             }
-            if (res.data.code == "DELETE_ERROR"){
+            if (res.data.code == "DELETE_ERROR") {
               this.$alert({
                 type: "warning",
                 title: res.data.message,

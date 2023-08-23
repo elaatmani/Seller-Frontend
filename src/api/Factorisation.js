@@ -35,6 +35,13 @@ class Factorisation {
         });
     }
 
+    async updateFees(id , fees) {
+        await Csrf.getCookie();
+        return Api.post('api/factorisations/update/fees/' + id, {
+            fees: fees
+        });
+    }
+
     async all() {
         await Csrf.getCookie();
         return Api.get('api/factorisations');
