@@ -34,7 +34,7 @@
               </tr>
             </thead>
             <tbody>
-              <ProductVariantDetailsRow  v-for="item in source.product_variations" :key="item.id" :item="item" :type="type" />
+              <ProductVariantDetailsRow  v-for="(item , index) in source.product_variations" :index="index" :key="item.id" :item="item" :type="type" />
             </tbody>
           </table>
 

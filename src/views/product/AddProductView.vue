@@ -501,10 +501,10 @@
                       Store Link
                     </div>
                     <v-text-field
-                      :error="!formStatus.name.valid"
-                      @keyup="resetError('name')"
+                      :error="!formStatus.link_store.valid"
+                      @keyup="resetError('link_store')"
                       :hide-details="true"
-                      v-model="product.name"
+                      v-model="product.link_store"
                       clearable
                       clear-icon="mdi-close"
                       class="tw-w-full"
@@ -515,7 +515,7 @@
                     <div
                       class="tw-h-[3px] tw-text-red-700 tw-mb-3 tw-mt-1 tw-text-xs"
                     >
-                      {{ formStatus.name.message }}
+                      {{ formStatus.link_store.message }}
                     </div>
                   </div>
                 </v-col>
@@ -525,10 +525,10 @@
                       Video Link
                     </div>
                     <v-text-field
-                      :error="!formStatus.reference.valid"
-                      @keyup="resetError('reference')"
+                      :error="!formStatus.link_video.valid"
+                      @keyup="resetError('link_video')"
                       :hide-details="true"
-                      v-model="product.reference"
+                      v-model="product.link_video"
                       clearable
                       clear-icon="mdi-close"
                       class="tw-w-full"
@@ -539,11 +539,90 @@
                     <div
                       class="tw-h-[3px] tw-text-red-700 tw-mb-3 tw-mt-1 tw-text-xs"
                     >
-                      {{ formStatus.reference.message }}
+                      {{ formStatus.link_video.message }}
                     </div>
                   </div>
                 </v-col>
 
+                <v-col class="!tw-py-2" cols="12" sm="6" md="6">
+                  <div class="tw-w-full">
+                    <div class="mb-1 text-body-2 tw-text-zinc-700">
+                      Transport Mode
+                    </div>
+                    <div class="tw-relative">
+                    <select
+                      class="tw-w-full focus:tw-border-orange-400 tw-h-[40px] px-2 tw-rounded-md tw-border tw-border-solid tw-border-neutral-400 tw-outline-0 tw-text-sm"
+                      :error="!formStatus.transport_mode.valid"
+                      @keyup="resetError('transport_mode')"
+                      v-model="product.transport_mode"
+                    >
+                      <option value="" disabled>Select</option>
+                      <option value="Sea">Sea</option>
+                      <option value="Air">Air</option>
+                    </select>
+                    <v-icon
+                      class="tw-pointer-events-none tw-absolute tw-right-1 tw-text-neutral-500 tw-top-1/2 -tw-translate-y-1/2"
+                      >mdi-chevron-down</v-icon
+                    >
+                    </div>
+                    <div
+                      class="tw-h-[3px] tw-text-red-700 tw-mb-3 tw-mt-1 tw-text-xs"
+                    >
+                      {{ formStatus.transport_mode.message }}
+                    </div>
+                  </div>
+                </v-col>
+
+                <v-col class="!tw-py-2" cols="12" sm="6" md="6">
+                  <div class="tw-w-full">
+                    <div class="mb-1 text-body-2 tw-text-zinc-700">
+                      Country Of Purchase
+                    </div>
+                    <div class="tw-relative">
+                    <select
+                      class="tw-w-full focus:tw-border-orange-400 tw-h-[40px] px-2 tw-rounded-md tw-border tw-border-solid tw-border-neutral-400 tw-outline-0 tw-text-sm"
+                      :error="!formStatus.country_of_purchase.valid"
+                      @keyup="resetError('country_of_purchase')"
+                      v-model="product.country_of_purchase"
+                    >
+                      <option value="">Select</option>
+                      <option value="China">China</option>
+                      <option value="Dubai">Dubai</option>
+                      <option value="Turky">Turky</option>
+                    </select>
+                    <v-icon
+                      class="tw-pointer-events-none tw-absolute tw-right-1 tw-text-neutral-500 tw-top-1/2 -tw-translate-y-1/2"
+                      >mdi-chevron-down</v-icon
+                    >
+                    </div>
+                    <div
+                      class="tw-h-[3px] tw-text-red-700 tw-mb-3 tw-mt-1 tw-text-xs"
+                    >
+                      {{ formStatus.country_of_purchase.message }}
+                    </div>
+                  </div>
+                </v-col>
+
+                <v-col class="!tw-py-2" cols="12" sm="6" md="6">
+                  <div class="tw-w-full">
+                    <div class="mb-1 text-body-2 tw-text-zinc-700">
+                       Expedition Date
+                    </div>
+                    <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
+                      <input
+                      v-model="product.expedition_date"
+                      type="date"
+                      class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
+                      />
+                  </div>
+                    <div
+                      class="tw-h-[3px] tw-text-red-700 tw-mb-3 tw-mt-1 tw-text-xs"
+                    >
+                      {{ formStatus.expedition_date.message }}
+                    </div>
+                  </div>
+                </v-col>
+             
 
               </v-row>
             </v-col>
@@ -561,7 +640,6 @@
           </v-row>
         </div>
 
-        
         <div class="mb-5" v-if="user.role == 'admin'">
           <h4 class="tw-font-bold tw-text-gray-500/75">Affectation</h4>
           <v-row class="py-5 px-5 tw-border bg-white tw-w-full tw-rounded-md">
@@ -637,6 +715,11 @@ export default {
       product: {
         name: "",
         reference: "",
+        link_video: "",
+        link_store: "",
+        transport_mode: "",
+        expedition_date: "",
+        country_of_purchase: "",
         buyingPrice: 0,
         sellingPrice: 0,
         description: "",
@@ -656,6 +739,28 @@ export default {
           valid: true,
           message: "",
         },
+
+        link_video: {
+          valid: true,
+          message: "",
+        },
+        link_store: {
+          valid: true,
+          message: "",
+        },
+        transport_mode: {
+          valid: true,
+          message: "",
+        },
+        expedition_date: {
+          valid: true,
+          message: "",
+        },
+        country_of_purchase: {
+          valid: true,
+          message: "",
+        },
+
         sellingPrice: {
           valid: true,
           message: "",
@@ -716,6 +821,7 @@ export default {
 
   methods: {
     create() {
+
       if (!this.validate()) return false;
 
       this.isLoading = true;
@@ -756,6 +862,11 @@ export default {
             this.product = {
               name: "",
               reference: "",
+              link_video: "",
+              link_store: "",
+              transport_mode: "",
+              expedition_date: "",
+              country_of_purchase: "",
               buyingPrice: 0,
               sellingPrice: 0,
               description: "",
@@ -813,6 +924,27 @@ export default {
         this.product.buyingPrice,
         "Buying price"
       );
+
+      this.formStatus.link_store = validateName(
+        this.product.link_store,
+        "Link store"
+      );
+      this.formStatus.link_video = validateName(
+        this.product.link_video,
+        "Link video"
+      );
+      this.formStatus.transport_mode = validateName(
+        this.product.transport_mode,
+        "Transport Mode"
+      );
+      this.formStatus.expedition_date = validateName(
+        this.product.expedition_date,
+        "Expedition Date"
+      );
+      this.formStatus.country_of_purchase = validateName(
+        this.product.country_of_purchase,
+        "Country of purchase"
+      );
       this.formStatus.quantity = validateName(this.quantity, "Quantity");
       this.formStatus.sellingPrice = validateName(
         this.product.sellingPrice,
@@ -834,6 +966,11 @@ export default {
       return (
         this.formStatus.name.valid &&
         this.formStatus.buyingPrice.valid &&
+        this.formStatus.link_store.valid &&
+        this.formStatus.link_video.valid &&
+        this.formStatus.expedition_date.valid &&
+        this.formStatus.country_of_purchase.valid &&
+        this.formStatus.transport_mode.valid &&
         this.formStatus.reference.valid &&
         this.formStatus.sellingPrice &&
         this.formStatus.description.valid &&
@@ -912,6 +1049,8 @@ export default {
         }
       }, this.$handleApiError);
     },
+
+    
   },
 
   mounted() {

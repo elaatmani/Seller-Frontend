@@ -47,6 +47,37 @@
       </div>
     </div>
 
+    <h1 v-if="isLoaded" class="tw-text-neutral-700 tw-font-bold tw-mb-1 tw-mt-5">Expidition Infos</h1>
+    <div v-if="isLoaded" class="py-5 px-5 tw-border bg-white tw-w-full tw-rounded-md">
+      <div>
+        <div>
+          <!-- <h1 class="tw-text-neutral-700 tw-font-bold tw-mb-2">Informations</h1> -->
+          <div class="tw-grid tw-grid-cols-12 tw-gap-2">
+            <div class="tw-col-span-12 md:tw-col-span-6 tw-flex tw-gap-2 tw-items-center tw-justify-between tw-flex-wrap">
+              <p class="tw-font-light tw-text-neutral-500">Store Link:</p>
+              <a target="_blank" href="{{ product.link_store }}" class="tw-text-blue-800 tw-font-medium tw-underline tw-px-3">{{ product.link_store }}</a>
+            </div>
+            <div class="tw-col-span-12 md:tw-col-span-6 tw-flex tw-gap-2 tw-items-center tw-justify-between tw-flex-wrap">
+              <p class="tw-font-light tw-text-neutral-500">Video Link:</p>
+              <a target="_blank" href="{{ product.link_video }}" class="tw-text-blue-800 tw-font-medium tw-underline tw-px-3">{{ product.link_video }}</a>
+            </div>
+            <div class="tw-col-span-12 md:tw-col-span-6 tw-flex tw-gap-2 tw-items-center tw-justify-between tw-flex-wrap">
+              <p class="tw-font-light tw-text-neutral-500">Expidition Date:</p>
+              <p class="tw-text-neutral-800 tw-font-medium tw-px-3">{{ product.expedition_date.split(' ')[0] }}</p>
+            </div>
+            <div class="tw-col-span-12 md:tw-col-span-6 tw-flex tw-gap-2 tw-items-center tw-justify-between tw-flex-wrap">
+              <p class="tw-font-light tw-text-neutral-500">Transport Mode:</p>
+              <p class="tw-text-neutral-800 tw-font-medium tw-px-3">{{ product.transport_mode }}</p>
+            </div>
+            <div class="tw-col-span-12 md:tw-col-span-6 tw-flex tw-gap-2 tw-items-center tw-justify-between tw-flex-wrap">
+              <p class="tw-font-light tw-text-neutral-500">Country Of Purchase:</p>
+              <p class="tw-text-neutral-800 tw-font-medium tw-px-3">{{ product.country_of_purchase }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h1 v-if="isLoaded" class="tw-text-neutral-700 tw-font-bold tw-mb-1 tw-mt-5">Tracking</h1>
     <div v-if="isLoaded" class="tw-border bg-white tw-w-full tw-rounded-md">
       <ProductTracking :product="product" />
@@ -69,9 +100,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="variant in product.variations" :key="variant.id" class="tw-bg-white tw-border-b tw-whitespace-nowrap hover:tw-bg-gray-50">
+                        <tr v-for="(variant, index) in product.variations" :key="variant.id" class="tw-bg-white tw-border-b tw-whitespace-nowrap hover:tw-bg-gray-50">
                             <th scope="row" class="tw-px-6 tw-py-2 tw-font-medium tw-text-gray-900">
-                                {{ variant.id }}
+                               <span v-if="this.user.role=='admin'"> {{ variant.id }} </span> <span v-if="this.user.role=='seller'"> {{ index + 1 }} </span>
                             </th>
                             <th scope="row" class="tw-px-6 tw-py-2 tw-font-medium tw-text-gray-900">
                                 {{ variant.size }}
@@ -148,6 +179,9 @@ export default {
     },
 
     computed: {
+      user() {
+            return this.$store.getters['user/user']
+        },
       qtyTotalDelivered() {
         let total = 0;
         this.product.tracking.deliveries.forEach(element => {

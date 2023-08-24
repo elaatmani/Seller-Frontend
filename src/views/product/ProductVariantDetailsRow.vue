@@ -3,8 +3,8 @@
                 
                 class="tw-bg-white tw-border-b tw-whitespace-nowrap hover:tw-bg-gray-50"
               >
-                <td class="tw-w-4 tw-px-2 tw-py-1">
-                  {{ item.id }}
+                <td class="tw-w-4 tw-px-2 tw-py-1" >
+                  <span v-if="this.user.role=='admin'"> {{ item.id }} </span> <span v-if="this.user.role=='seller'">{{ index+1 }}</span>
                 </td>
                 <td class="tw-w-4 tw-px-2 tw-py-1">
                   {{ item.size }}
@@ -102,11 +102,16 @@
 
 <script>
 export default {
-    props: ['type', 'item'],
+    props: ['type', 'item','index'],
     data() {
         return {
             showDetails: false
         }
+    },
+    computed:{
+      user() {
+            return this.$store.getters['user/user']
+        },
     }
 }
 </script>

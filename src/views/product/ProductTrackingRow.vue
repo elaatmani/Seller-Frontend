@@ -5,10 +5,10 @@
       class=" tw-px-6 tw-py-2 tw-font-medium tw-text-gray-900"
     >
       <div class="tw-flex tw-items-start tw-h-full">
-        {{ item.id }}
+        <span v-if="this.user.role=='admin'">{{ item.id }}</span>  <span v-if="this.user.role=='seller'">{{ index }}</span>
       </div>
     </th>
-    <th
+    <th  v-if="this.user.role=='admin'"
       scope="row"
       class=" tw-px-6 tw-py-2 tw-font-medium tw-text-gray-900"
     >
@@ -192,14 +192,18 @@ import ShowProductVariantActions from "@/views/product/ShowProductVariantActions
 
 export default {
   components: { ShowProductVariantActions },
-  props: ["source", "item"],
+  props: ["source", "item","index"],
 
   data() {
     return {
       showDetails: false,
     };
   },
-
+  computed:{
+    user() {
+            return this.$store.getters['user/user']
+        },
+  },
   methods: {
     get_total_quantity(variations, type = "on_hand_quantity") {
       let total = 0;
