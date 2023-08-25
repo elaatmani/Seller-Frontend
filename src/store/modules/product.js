@@ -21,6 +21,17 @@ export default {
             state.products = payload
         },
 
+        SET_PRODUCT: (state, payload) => {
+            state.products = state.products.map(
+                item => {
+                    if(item.id === payload.id) {
+                        return payload
+                    }
+                    return item
+                }
+            )
+        },
+
         ADD_PRODUCT: (state, payload) => {
             state.products.push(payload)
         },
@@ -33,6 +44,10 @@ export default {
     actions: {
         setProducts: ({ commit }, payload) => {
             commit('SET_PRODUCTS', payload)
+        },
+
+        setProduct: ({ commit }, payload) => {
+            commit('SET_PRODUCT', payload)
         },
 
         addProduct: ({ commit }, payload) => {

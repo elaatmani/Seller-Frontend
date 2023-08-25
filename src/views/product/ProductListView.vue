@@ -34,7 +34,6 @@
       <div class="tw-max-h-0 tw-duration-500 tw-overflow-hidden" :class="{'!tw-max-h-[500px]': showFilters}">
         <div class="tw-grid tw-grid-cols-12 tw-gap-2 tw-mb-4">
           
-
           <div class="lg:tw-col-span-4 md:tw-col-span-6 tw-col-span-12 tw-h-fit"> 
             <span class="tw-text-sm tw-text-neutral-600">Date</span>
             <div class="tw-relative">

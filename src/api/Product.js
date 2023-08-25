@@ -70,6 +70,26 @@ class Product {
         // });
     }
 
+    
+    async updateStatus(id, product) {
+        await Csrf.getCookie();
+        const formData = new FormData();
+        formData.append('status',  product.status)
+        formData.append('note',  product.note)
+        
+        return ApiForm.post('api/products/status/update/' + id, formData)
+        // return Api.post('api/products/update/' + id, {
+        //     name: product.name,
+        //     buying_price: product.buyingPrice,
+        //     selling_price: product.sellingPrice,
+        //     ref: product.reference,
+        //     variations: product.variants,
+        //     description: product.description,
+        //     status: 1,
+        //     deliveries: product.selectedDeliveries
+        // });
+    }
+
     async all() {
         await Csrf.getCookie();
         return Api.get('api/products');
