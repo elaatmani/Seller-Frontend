@@ -22,7 +22,6 @@ class Product {
         formData.append('description',  product.description)
         formData.append('image',  product.image)
         formData.append('deliveries',  JSON.stringify(product.selectedDeliveries))
-        formData.append('status',  1)
 
         return ApiForm.post('api/products/new', formData)
         // return ApiForm.post('api/products/new', {
@@ -55,7 +54,6 @@ class Product {
         formData.append('description',  product.description)
         formData.append('image',  product.image)
         formData.append('deliveries',  JSON.stringify(product.selectedDeliveries))
-        formData.append('status',  1)
         
         return ApiForm.post('api/products/update/' + id, formData)
         // return Api.post('api/products/update/' + id, {
