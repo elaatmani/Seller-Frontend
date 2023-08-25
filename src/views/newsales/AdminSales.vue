@@ -31,6 +31,7 @@
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
+              width="16" height="16" 
               stroke="currentColor"
               class="tw-w-5 tw-h-5"
             >
@@ -60,8 +61,18 @@
         active-statistics
       />
 
+      <div
+        :class="[selected.length > 0 ? 'tw-grid-rows-[1fr]' : 'tw-grid-rows-[0fr]']"
+        class="tw-grid tw-duration-300 tw-transition-all"
+      >
+        <div class="tw-overflow-hidden tw-col-span-1">
+            <BulkActions @update="handleBulkUpdate" v-model:selected="selected" />
+        </div>
+      </div>
+
       <div>
         <IndexTable
+          v-model:selected="selected"
           @update="handleItemUpdate"
           @page-change="handlePageChange"
           @sort-order="handleSortOrderChange"
@@ -73,6 +84,7 @@
           :total="total"
           :current-page="current_page"
           :items="items"
+          :deliveries="deliveries"
         />
       </div>
 
@@ -89,9 +101,11 @@ import IndexTable from "@/views/newsales/partials/IndexTable";
 import IndexFilters from "@/views/newsales/partials/filters/IndexFilters";
 import { getPath } from "@/helpers/methods";
 import CreatePopup from '@/views/newsales/partials/components/CreatePopup'
+import BulkActions from "./partials/components/bulk/BulkActions.vue";
+import User from '@/api/User';
 
 export default {
-  components: { IndexTable, IndexFilters, CreatePopup },
+  components: { IndexTable, IndexFilters, CreatePopup, BulkActions },
 
   data() {
     return {
@@ -99,6 +113,11 @@ export default {
       create_popup: false,
 
       items: [],
+      selected: [],
+      deliveries: {
+        fetched: false,
+        items: []
+      },
 
       statistics: null,
 
@@ -128,7 +147,9 @@ export default {
         agente_id: "all",
         upsell: "all",
         confirmation: "all",
+        product_id: "all",
         delivery: "all",
+        reported_first: false,
       },
     };
   },
@@ -186,15 +207,18 @@ export default {
         agente_id: "all",
         upsell: "all",
         confirmation: "all",
+        product_id: "all",
         delivery: "all",
+        reported_first: false,
       };
 
       this.handlePageChange(1);
     },
 
-    handleNext() {},
-
-    handlePrev() {},
+    handleBulkUpdate() {
+      this.selected = [];
+      this.paginateOrders();
+    },
 
     handleItemUpdate(item) {
       this.items = this.items.map((i) => (i.id == item.id ? item : i));
@@ -206,7 +230,6 @@ export default {
     },
 
     handlePerPageChange(n) {
-      console.log(n);
       this.per_page = parseInt(n);
       this.handlePageChange(1);
     },
@@ -215,10 +238,24 @@ export default {
       this.sort_order = this.sort_order == "asc" ? "desc" : "asc";
       this.paginateOrders();
     },
+
+    getDeliveries() {
+        this.deliveries.fetched = false;
+        User.allDeliveries()
+        .then((res) => {
+            if (res?.data.code == "SUCCESS") {
+            this.deliveries.items = res.data.data.deliveries;
+
+            this.deliveries.fetched = true;
+            }
+        })
+        .catch(this.$handleApiError);
+    },
   },
 
   mounted() {
     this.paginateOrders();
+    this.getDeliveries();
   },
 };
 </script>
