@@ -556,7 +556,7 @@
                 </div>
                 <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
                   <input
-                  v-model="product.expedition_date.split(' ')[0]"
+                  v-model="product.expedition_date"
                   type="date"
                   class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
                   />
@@ -982,7 +982,7 @@ export default {
           this.product.reference = ref;
           this.product.link_video = link_video;
           this.product.link_store = link_store;
-          this.product.expedition_date = expedition_date;
+          this.product.expedition_date = expedition_date ? expedition_date.split(' ')[0] : null;
           this.product.transport_mode = transport_mode;
           this.product.country_of_purchase = country_of_purchase;
           this.product.description = description;

@@ -25,13 +25,28 @@ export const links = [
         id: 1,
         title: 'Dashboard',
         module: 'dashboard',
-        to: '/',
-        hasChildren: false,
+        hasChildren: true,
         gate: 'all',
         icon: {
             type: 'svg',
             value: 'assets/img/icons/dashboard.svg'
-        }
+        },
+        children: [
+            {
+                id: 1,
+                title: 'Dashboard',
+                subModule: 'dashboard/dashboard',
+                gate: 'all',
+                to: '/'
+            },
+            {
+                id: 2,
+                title: 'Dashboard Analytics',
+                subModule: 'dashboard/analytics',
+                gate: 'all',
+                to: '/analytics'
+            },
+        ]
     },
 
     {

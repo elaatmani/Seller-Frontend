@@ -45,6 +45,7 @@ export default {
             .then(res => {
                 if(res.data.code == 'SUCCESS') {
                     this.statistics = res.data.data.statistics;
+                
                     this.fetching = false;
                 }
             })

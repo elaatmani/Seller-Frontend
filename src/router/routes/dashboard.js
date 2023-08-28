@@ -3,6 +3,7 @@ import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 
 import DashboardView from '@/views/newdashboards/admin/DashboardView'
 import SellerDashboardView from '@/views/newdashboards/seller/DashboardView'
+import DashboardAnalytics from '@/views/dashboardanalytics/DashboardAnalytics'
 
 export default 
     {
@@ -39,6 +40,17 @@ export default
                     gate: 'all'
                 }
             },
+            { 
+                name: 'dashboards/analytics',
+                path: '/analytics',
+                component: DashboardAnalytics,
+                meta: {
+                    module: 'dashboards',
+                    subModule: 'dashboards/analytics',
+                    title: 'Dashboard Analytics',
+                    gate: 'all'
+                }
+            }
 
         ]
     }
