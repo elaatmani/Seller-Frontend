@@ -129,6 +129,13 @@ export const links = [
                 subModule: 'sale/shipping',
                 gate: 'show_all_expidations',
                 to: '/sales/shipping'
+            },
+            {
+                id: 4,
+                title: 'Follow Up',
+                subModule: 'sale/followup',
+                gate: 'show_all_expidations',
+                to: '/sales/followup'
             }
         ]
     },
@@ -171,6 +178,27 @@ export const links = [
                 subModule: 'factorisation/list',
                 gate: 'show_all_factorisations',
                 to: '/factorisations'
+            },
+        ]
+    },
+
+    {
+        id: 20,
+        module: 'ads',
+        title: 'Ads',
+        hasChildren: true,
+        gate: 'access_to_ads', 
+        icon: {
+            type: 'icon',
+            value: 'mdi-google-ads'
+        },
+        children: [
+            {
+                id: 1,
+                title: 'Ads list',
+                subModule: 'ads/list',
+                gate: 'show_all_factorisations',
+                to: '/ads'
             },
         ]
     },
