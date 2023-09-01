@@ -1,13 +1,14 @@
 import store from '@/store'
 import User from '@/api/User';
-export default function (to) {
+import app from '@/main.js'
 
+/* eslint-disable*/
+export default function (to, from, router) {
 
     // Changing page title
     document.title = to.meta?.title + ' | Vldo Shop'
     // return true
 
-    console.log(to)
     // const user = store.getters['user/user']
     
     // handle if user is not logged
@@ -21,7 +22,8 @@ export default function (to) {
 
 
     // Update user's last action
-    User.online();
+    User.online()
+    .catch(app.$handleApiError);
 
     // handle if user is logged and want to show login
     if (to.path == '/login') {
@@ -50,7 +52,6 @@ export default function (to) {
 
 
     return true
-    /* eslint-disable*/
 
     // check if route doesn't have a gate (permission)
     if (!permission || to.path === '/404') {

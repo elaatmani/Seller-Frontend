@@ -7,7 +7,8 @@ import main from './routes/main'
 import product from './routes/product'
 import user from './routes/user'
 import sale from './routes/sale'
-import order from './routes/order'
+// import order from './routes/order'
+import agent from './routes/agent'
 import delivery from './routes/delivery'
 import inventory from './routes/inventory'
 import shop from './routes/shop'
@@ -31,7 +32,8 @@ const routes = [
   product,
   user,
   sale,
-  order,
+  // order,
+  agent,
   delivery,
   inventory,
   shop,
@@ -92,6 +94,6 @@ const router = createRouter({
   routes
 });
 
-router.beforeEach(beforeEach);
+router.beforeEach((to, from) => beforeEach(to, from, router));
 
 export default router

@@ -4,6 +4,7 @@ import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 import DashboardView from '@/views/newdashboards/admin/DashboardView'
 import SellerDashboardView from '@/views/newdashboards/seller/DashboardView'
 import DashboardAnalytics from '@/views/dashboardanalytics/DashboardAnalytics'
+import AgentDashboard from '@/views/newdashboards/agent/AgentDashboard'
 
 export default 
     {
@@ -51,6 +52,17 @@ export default
                     gate: 'all'
                 }
             }
+            { 
+                name: 'dashboards/agent',
+                path: 'agent',
+                component: AgentDashboard,
+                meta: {
+                    module: 'dashboards',
+                    subModule: 'dashboards/agent',
+                    title: 'Dashboard',
+                    gate: 'all'
+                }
+            },
 
         ]
     }
