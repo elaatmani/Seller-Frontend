@@ -3,29 +3,15 @@ import Csrf from './Csrf'
 
 class Ads {
 
+   
     async create(ads) {
         await Csrf.getCookie();
-        
-        return Api.post('api/ads/new', {
-            source : ads.source,
-            amount : ads.amount,
-            ads_at: ads.ads_at
-        });
+        return Api.post('api/ads/new', ads);
     }
 
     async update(id, ads) {
         await Csrf.getCookie();
-        
-        return Api.post('api/ads/update/' + id, {
-            source : ads.source,
-            amount : ads.amount,
-            ads_at: ads.ads_at
-        });
-    }
-
-    async getShop(id) {
-        await Csrf.getCookie();
-        return Api.get('api/ads/' + id);
+        return Api.post('api/ads/update/' + id , ads);
     }
 
     async delete(id) {

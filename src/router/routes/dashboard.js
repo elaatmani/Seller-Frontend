@@ -49,9 +49,9 @@ export default
                     module: 'dashboards',
                     subModule: 'dashboards/analytics',
                     title: 'Dashboard Analytics',
-                    gate: 'all'
+                    gate: 'show_all_ads'
                 }
-            }
+            },
             { 
                 name: 'dashboards/agent',
                 path: 'agent',

@@ -128,7 +128,6 @@ export default {
 
     setOptions(options) {
       this.items = (options.data)
-      console.log(options.data)
       this.first_page_url = getPath(options.first_page_url)
       this.lase_page_url = getPath(options.last_page_url)
       this.next_page_url = getPath(options.next_page_url)

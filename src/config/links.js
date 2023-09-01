@@ -43,7 +43,7 @@ export const links = [
                 id: 2,
                 title: 'Dashboard Analytics',
                 subModule: 'dashboard/analytics',
-                gate: 'all',
+                gate: 'show_all_ads',
                 to: '/analytics'
             },
         ]

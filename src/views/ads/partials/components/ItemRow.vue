@@ -44,16 +44,7 @@
             <option value="" disabled>Choose Variation</option>
             <option v-for="pv in product.variations" :key="pv.id" :value="pv.id">{{ pv.color }} {{ pv.size }}</option>
           </select>
-            <!-- <div v-else class="tw-block tw-whitespace-nowrap tw-border-solid focus:tw-outline-none tw-w-full tw-p-2 tw-pr-6 tw-text-xs tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded tw-bg-gray-50 focus:tw-ring-orange-500 focus:tw-border-orange-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500">
-                Default
-            </div> -->
 
-          <!-- <select
-            v-else
-            class="tw-block tw-border-solid focus:tw-outline-none tw-w-full tw-p-2 tw-pr-6 tw-text-xs tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded tw-bg-gray-50 focus:tw-ring-orange-500 focus:tw-border-orange-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
-          >
-            <option :value="0">Default {{  }}</option>
-          </select> -->
 
           <div
           v-if="product.variations.length > 1"

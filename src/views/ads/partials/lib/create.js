@@ -1,4 +1,4 @@
-import Admin from "@/api/Admin";
+import Ads from "@/api/Ads";
 
 
 const success = (app, res) => {
@@ -25,10 +25,11 @@ const failed = (app, res) => {
     app.isLoading = false;
 }
 
-export const create = (app, order) => {
+export const create = (app, items) => {
+    console.log(items);
     app.isLoading = true;
     app.errors  = {};
-    Admin.create(order)
+    Ads.create(items)
     .then((res) => success(app, res.data))
     .catch((err) => failed(app, err.response.data))
     .finally(() => app.isLoading = false);

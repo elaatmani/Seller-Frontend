@@ -7,243 +7,119 @@
         <div
           class="tw-p-4 tw-text-lg tw-border-b tw-border-solid tw-font-medium tw-flex dark:tw-text-neutral-400 tw-text-neutral-500 tw-items-center tw-gap-4 dark:tw-bg-neutral-800 tw-bg-gray-50"
         >
-          Order Informations
+          Ads Informations
         </div>
 
         <div class="tw-bg-white tw-p-4">
-            <div class="tw-grid tw-gap-6 tw-gap-y-5 tw-grid-cols-1 md:tw-grid-cols-2">
+          <div
+            class="tw-grid tw-gap-6 tw-gap-y-5 tw-grid-cols-1 md:tw-grid-cols-2"
+          >
+            <div class="tw-col-span-2 md:tw-col-span-1">
+              <label
+                class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
+                >Source</label
+              >
+              <input
+                v-model="items.source"
+                @input="errors.source = null"
+                type="text"
+                :class="[errors.source && '!tw-border-red-400']"
+                class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+                placeholder="John"
+                required
+              />
+              <label
+                v-if="errors.source"
+                class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
+                >{{ errors.source }}</label
+              >
+            </div>
 
-              <div class="tw-col-span-2 md:tw-col-span-1">
-                <label
-                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
-                  >Client Name</label
-                >
-                <input
-                  v-model="itemCopy.fullname"
-                  @input="errors.fullname = null"
-                  type="text"
-                  :class="[errors.fullname && '!tw-border-red-400']"
-                  class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
-                  placeholder="John"
-                  required
-                />
-                <label
-                  v-if="errors.fullname"
-                  class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
-                  >{{ errors.fullname }}</label
-                >
-              </div>
+            <div class="tw-col-span-2 md:tw-col-span-1">
+              <label
+                class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
+                >Amount</label
+              >
+              <input
+              v-model="items.amount"
+              @input="errors.amount = null"
+              :class="[errors.amount && '!tw-border-red-400']"
+             
+              type="text"
+              class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+              required
+              />
+              
+              <label
+                v-if="errors.amount"
+                class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
+                >{{ errors.amount }}</label
+              >
+            </div>
 
-              <div class="tw-col-span-2 md:tw-col-span-1">
-                <label
-                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
-                  >Phone Number</label
-                >
-                <input
-                  v-model="itemCopy.phone"
-                  @input="errors.phone = null"
-                  :class="[errors.phone && '!tw-border-red-400']"
-                  type="text"
-                  class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
-                  placeholder="123-45-678"
-                  required
-                />
-                <label
-                  v-if="errors.phone"
-                  class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
-                  >{{ errors.phone }}</label
-                >
-              </div>
+            <div class="tw-col-span-2 md:tw-col-span-1">
+              <label
+                class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
+                >Product</label
+              >
+              <select
+                @change="errors.product_id = null"
+                v-model="items.product_id"
+                :class="[errors.product_id && '!tw-border-red-400']"
+                required
 
-              <div class="tw-col-span-2 md:tw-col-span-1">
-                <label
-                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
-                  >City</label
-                >
-                <div class="tw-relative">
-                  <select
-                    v-model="itemCopy.city"
-                    @change="errors.city = null"
-                    :class="[errors.city && '!tw-border-red-400']"
-                    class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 tw-pr-7"
-                  >
-                    <option :value="null" disabled>Choose a City</option>
-                    <option :value="itemCopy.city" disabled>{{ itemCopy.city }}</option>
-                    <option v-for="c in cities" :value="c.name" :key="c.id">{{ c.name }}</option>
-                  </select>
-                  <div
-                    class="tw-pointer-events-none tw-absolute tw-inset-y-0 tw-right-0 tw-flex tw-items-center tw-px-2 tw-text-gray-700"
-                  >
-                    <svg
-                      class="tw-fill-current tw-h-4 tw-w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <label
-                  v-if="errors.city"
-                  class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
-                  >{{ errors.city }}</label
-                >
-              </div>
+                class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+              >
+                <option :value="0" selected>Choose Product</option>
+                <option v-for="p in products" :key="p.id" :value="p.id">
+                  {{ p.name }}
+                </option>
+              </select>
+              <label
+                v-if="errors.product_id"
+                class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
+                >{{ errors.product_id }}</label
+              >
+            </div>
 
-              <div class="tw-col-span-2 md:tw-col-span-1">
-                <label
-                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
-                  >Address</label
-                >
-                <input
-                  v-model="itemCopy.adresse"
-                  @input="errors.adresse = null"
-                  :class="[errors.adresse && '!tw-border-red-400']"
-                  type="text"
-                  class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
-                  placeholder="Address"
-                  required
-                />
-                <label
-                  v-if="errors.adresse"
-                  class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
-                  >{{ errors.adresse }}</label
-                >
-              </div>
+            <div
+              class="md:tw-col-span-1 tw-col-span-2"
+              
+            >
+              <label
+                class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
+                >Ads Date</label
+              >
+              <input
+                v-model="items.ads_at"
+                @input="errors.ads_at = null"
+                :class="[errors.ads_at && '!tw-border-red-400']"
+                type="date"
+                class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+                required
+              />
+              <label
+                
+                class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
+                >{{ errors.ads_at }}</label
+              >
+            </div>
 
-              <div class="tw-col-span-2">
-                <label
-                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
-                  >Confirmation</label
-                >
-                <div class="tw-relative">
-                  <select
-                    v-model="itemCopy.confirmation"
-                    @change="errors.confirmation = null"
-                  :class="[errors.confirmation && '!tw-border-red-400']"
-                    class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
-                  >
-                    <option :value="c.value" :class="[c.text, !c.value && '!tw-text-green-500']" v-for="c in confirmations" :key="c.id">{{ c.name }}</option>
-                  </select>
-                  <div
-                    class="tw-pointer-events-none tw-absolute tw-inset-y-0 tw-right-0 tw-flex tw-items-center tw-px-2 tw-text-gray-700"
-                  >
-                    <svg
-                      class="tw-fill-current tw-h-4 tw-w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <label
-                  v-if="errors.confirmation"
-                  class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
-                  >{{ errors.confirmation }}</label
-                >
-              </div>
-
-              <div class="md:tw-col-span-1 tw-col-span-2" v-if="itemCopy.confirmation == 'reporter'">
-                <label
-                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
-                  >Reported Date</label
-                >
-                <input
-                  v-model="itemCopy.reported_agente_date"
-                  @input="errors.reported_agente_date = null"
-                  :class="[errors.reported_agente_date && '!tw-border-red-400']"
-                  type="date"
-                  class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
-                  required
-                />
-                <label
-                  v-if="errors.reported_agente_date"
-                  class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
-                  >{{ errors.reported_agente_date }}</label
-                >
-              </div>
-
-              <div class="md:tw-col-span-1 tw-col-span-2" v-if="itemCopy.confirmation == 'reporter'">
-                <label
-                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
-                  >Reported Note</label
-                >
-                <textarea
-                    v-model="itemCopy.reported_agente_note"
-                    rows="1"
-                    class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
-                    placeholder="Enter a note"
-                  ></textarea>
-              </div>
-
-              <div class="tw-col-span-2">
-                <label
-                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
-                  >Note</label
-                >
-                <textarea
-                v-model="itemCopy.note"
-                @input="errors.note = null"
-                  :class="[errors.note && '!tw-border-red-400']"
+            <div class="tw-col-span-2">
+              <label
+                class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
+                >Note</label
+              >
+              <textarea
+                v-model="items.note"
+                @input="note"
                 rows="3"
-                  class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
-                  placeholder="Enter a note"
-                ></textarea>
-                <label
-                  v-if="errors.note"
-                  class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
-                  >{{ errors.note }}</label
-                >
-              </div>
-
-              <div class="md:tw-col-span-1 tw-col-span-2">
-                <OrderAffectation :item="itemCopy" v-model:error="errors.affectation" v-model:affectation="itemCopy.affectation" />
-              </div>
-
-              <div class="md:tw-col-span-1 tw-col-span-2">
-                <label
-                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
-                  >Upsell</label
-                >
-                <div class="tw-relative">
-                  <select
-                  v-model="itemCopy.upsell"
-                    class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
-                  >
-                    <option :class="[u.text]" :value="u.value" v-for="u in upsells" :key="u.id">{{ u.name }}</option>
-                  </select>
-                  <div
-                    class="tw-pointer-events-none tw-absolute tw-inset-y-0 tw-right-0 tw-flex tw-items-center tw-px-2 tw-text-gray-700"
-                  >
-                    <svg
-                      class="tw-fill-current tw-h-4 tw-w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-
-              <div class="tw-col-span-2">
-                <label
-                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
-                  >Order Items <span v-if="errors.items" class="tw-text-red-400 tw-text-xs"> # {{errors.items}}</span></label
-                >
-                <div>
-                  <OrderItems :order="itemCopy" :error="errors.items" :products="products" :products-fetched="products_fetched" v-model:items="itemCopy.items" />
-                </div>
-              </div>
-
-              </div>
+                class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+                placeholder="Enter a note"
+              ></textarea>
+             
+            </div>
+          </div>
         </div>
 
         <div
@@ -258,7 +134,7 @@
           <button
             @click="handleCreate"
             :disabled="isLoading"
-            class="tw-py-2 tw-px-7 tw-flex tw-items-center  tw-rounded tw-text-sm tw-bg-orange-400 tw-border tw-border-solid tw-border-tansparent hover:tw-border-orange-600 dark:tw-border-neutral-900 dark:hover:tw-border-orange-500 hover:tw-bg-orange-500/80 dark:hover:tw-bg-orange-400 tw-duration-300 tw-text-white"
+            class="tw-py-2 tw-px-7 tw-flex tw-items-center tw-rounded tw-text-sm tw-bg-orange-400 tw-border tw-border-solid tw-border-tansparent hover:tw-border-orange-600 dark:tw-border-neutral-900 dark:hover:tw-border-orange-500 hover:tw-bg-orange-500/80 dark:hover:tw-bg-orange-400 tw-duration-300 tw-text-white"
           >
             <v-icon
               size="small"
@@ -277,13 +153,10 @@
 <script>
 import { validate } from "../lib/validate";
 import { create } from "../lib/create";
-import { confirmations, upsells } from '@/config/orders';
-import OrderItems from '@/views/followup/partials/components/OrderItems'
-import OrderAffectation from '@/views/followup/partials/components/OrderAffectation'
-import Product from '@/api/Product';
+import Product from "@/api/Product";
 
 export default {
-  components: { OrderItems, OrderAffectation },
+  components: {},
 
   props: {
     visible: {
@@ -293,39 +166,39 @@ export default {
 
   data() {
     return {
-      confirmations: confirmations,
-      upsells: upsells,
       isLoading: false,
 
       products_fetched: null,
       products: null,
-      itemCopy: null,
-
+      items:{
+        product_id: 0,
+        source:null,
+        amount: 0,
+        ads_at: null,
+        note:null
+      },
+    
       errors: {
-        fullname: null,
-        phone: null,
-        city: null,
-        adresse: null,
-        note: null,
-        reported_agente_date: null,
-        affectation: null,
-        items: null
-      }
+        product_id: null,
+        source: null,
+        amount: null,
+        ads_at: null,
+      },
     };
   },
 
   computed: {
     cities() {
       return this.$store.getters["city/cities"];
-    }
+    },
   },
 
   methods: {
     handleCreate() {
-      const validated = validate(this, this.itemCopy);
+      const validated = validate(this,this.items);
       if (!validated) return false;
 
-      create(this, this.itemCopy);
+      create(this,this.items);
     },
 
     cancel() {
@@ -336,30 +209,24 @@ export default {
     getProducts() {
       this.products_fetched = false;
       Product.allForOrder()
-      .then((res) => {
-        if(res.data.code == 'SUCCESS') {
-          this.products = res.data.data.products;
-        } else {
-          this.products = [];
-        }
+        .then((res) => {
+          if (res.data.code == "SUCCESS") {
+            this.products = res.data.data.products;
+          } else {
+            this.products = [];
+          }
 
-        this.products_fetched = true;
-      })
-      .catch(this.$handleApiError)
-    }
+          this.products_fetched = true;
+        })
+        .catch(this.$handleApiError);
+    },
   },
 
   mounted() {
-    this.itemCopy = {
-        confirmation: null,
-        upsell: null,
-        items: []
-    }
-    this.getProducts();
   
-  }
+    this.getProducts();
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

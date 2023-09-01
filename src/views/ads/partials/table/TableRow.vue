@@ -42,13 +42,13 @@
     >
       <div>
         <h2 class="tw-font-medium tw-text-gray-800 darkx:tw-text-white tw-font-[cairo]">
-          {{ item.product_id }}
+          {{ item.products.name }}
         </h2>
       </div>
     </td>
       <td class="tw-px-4 tw-py-2 tw-text-sm tw-whitespace-nowrap">
         <div>
-          <TableActions @update="newItem => $emit('update', newItem)" :item="item" />
+          <TableActions @update=" newItem => $emit('update', newItem)" :item="item" />
         </div>
       </td>
     </tr>
@@ -56,8 +56,7 @@
 
 <script>
 import moment from 'moment';
-// import { confirmationsFollowup as confirmations, deliveryStatus } from '@/config/orders';
-import TableActions from '@/views/followup/partials/table/TableActions'
+import TableActions from '@/views/ads/partials/table/TableActions'
 
 export default {
   components: {TableActions},
@@ -72,15 +71,16 @@ export default {
     return {
       moment: moment
     }
+    
   },
-
-  computed: {
   
+  computed: {
+    
 
   },
 
   methods: {
-
+    
   }
 };
 </script>

@@ -32,8 +32,6 @@
                                     Product
                                 </th>
 
-
-
                                 <th scope="col" class="tw-relative tw-py-3.5 tw-px-4">
                                     <span class="tw-sr-only">Actions</span>
                                 </th>
@@ -100,8 +98,8 @@
 </template>
 
 <script>
-import TablePaginationNoNums from '@/views/followup/partials/table/TablePaginationNoNums';
-import TableRow from '@/views/followup/partials/table/TableRow';
+import TablePaginationNoNums from '@/views/ads/partials/table/TablePaginationNoNums';
+import TableRow from '@/views/ads/partials/table/TableRow';
 
 export default {
   components: { TablePaginationNoNums, TableRow },
@@ -140,7 +138,9 @@ export default {
     }
   },
 
-
+  // mounted(){
+  //   console.log(this.props.items)
+  // }
 }
 </script>
 

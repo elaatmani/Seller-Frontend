@@ -120,8 +120,8 @@
 </template>
 
 <script>
-import IndexStatistics from '@/views/followup/partials/filters/IndexStatistics'
-import FiltersWrapper from '@/views/followup/partials/filters/FiltersWrapper'
+import IndexStatistics from '@/views/ads/partials/filters/IndexStatistics'
+import FiltersWrapper from '@/views/ads/partials/filters/FiltersWrapper'
 
 export default {
   components: { IndexStatistics, FiltersWrapper },

@@ -1,4 +1,4 @@
-import FollowUp from "@/api/FollowUp";
+import Ads from "@/api/Ads";
 
 
 const success = (app, res) => {
@@ -30,7 +30,7 @@ const failed = (app, res) => {
 export const update = (app, order) => {
     app.isLoading = true;
     app.errors  = {};
-    FollowUp.update(order.id, order)
+    Ads.update(order.id, order)
     .then((res) => success(app, res.data))
     .catch((err) => failed(app, err.response.data))
     .finally(() => app.isLoading = false);
