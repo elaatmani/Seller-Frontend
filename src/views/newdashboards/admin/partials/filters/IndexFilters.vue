@@ -11,6 +11,7 @@
 
       <AgentFilter :filters="filters" @update="f => filters = f" />
 
+        <SellerFilter :filters="filters" @update="f => filters = f" />
       <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
         <label
           for="countries"
@@ -103,11 +104,12 @@
 import { confirmations, deliveryStatus } from "@/config/orders";
 import AffectationFilter from '@/views/newdashboards/admin/partials/filters/components/AffectationFilter'
 import AgentFilter from '@/views/newdashboards/admin/partials/filters/components/AgentFilter'
+import SellerFilter from '@/views/newdashboards/admin/partials/filters/components/SellerFilter'
 import ProductFilter from '@/views/newdashboards/admin/partials/filters/components/ProductFilter'
 import DateFilter from '@/views/newdashboards/admin/partials/filters/components/DateFilter'
 
 export default {
-  components: { AffectationFilter, AgentFilter, ProductFilter, DateFilter },
+  components: { AffectationFilter, AgentFilter, ProductFilter, DateFilter, SellerFilter },
 
   props: {},
 
@@ -139,6 +141,7 @@ export default {
                 dropped_to: null,
                 affectation: 'all',
                 agente_id: 'all',
+                user_id: 'all',
                 upsell: 'all',
                 confirmation: 'all',
                 delivery: 'all',
