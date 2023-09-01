@@ -14,6 +14,7 @@ import shop from './routes/shop'
 import warehouse from './routes/warehouse'
 import factorisation from './routes/factorisation'
 import sheet from './routes/sheet'
+import ads from './routes/ads'
 import seller from './routes/seller'
 import followup from './routes/followup'
 import dashboard from './routes/dashboard'
@@ -24,6 +25,7 @@ import TestView from '@/views/TestView'
 
 const routes = [
   auth,
+  ads,
   main,
   dashboard,
   product,

@@ -1,4 +1,4 @@
-import Admin from "@/api/Admin";
+import FollowUp from "@/api/FollowUp";
 
 
 const success = (app, res) => {
@@ -30,7 +30,7 @@ const failed = (app, res) => {
 export const update = (app, order) => {
     app.isLoading = true;
     app.errors  = {};
-    Admin.update(order.id, order)
+    FollowUp.update(order.id, order)
     .then((res) => success(app, res.data))
     .catch((err) => failed(app, err.response.data))
     .finally(() => app.isLoading = false);

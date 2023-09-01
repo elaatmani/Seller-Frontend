@@ -23,11 +23,6 @@ class Ads {
         });
     }
 
-    async all() {
-        await Csrf.getCookie();
-        return Api.get('api/ads');
-    }
-
     async getShop(id) {
         await Csrf.getCookie();
         return Api.get('api/ads/' + id);
@@ -36,6 +31,11 @@ class Ads {
     async delete(id) {
         await Csrf.getCookie();
         return Api.delete('api/ads/delete/' + id)
+    }
+
+    async paginate(url = '/', options) {
+        await Csrf.getCookie();
+        return Api.post('api/ads' + url, options);
     }
 }
 

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { confirmations } from '@/config/orders'
+import { confirmationsFollowup } from '@/config/orders'
 export default {
   props: {
     statistics: {
@@ -33,7 +33,7 @@ export default {
 
   methods: {
     getConfirmation(value) {
-      return confirmations.find(c => c.value == value)
+      return confirmationsFollowup.find(c => c.value == value)
     }
   }
 }

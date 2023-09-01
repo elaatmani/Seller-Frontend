@@ -120,12 +120,12 @@
                 >
                 <div class="tw-relative">
                   <select
-                    v-model="itemCopy.confirmation"
-                    @change="errors.confirmation = null"
-                  :class="[errors.confirmation && '!tw-border-red-400']"
+                    v-model="itemCopy.followup_confirmation"
+                    @change="errors.followup_confirmation = null"
+                  :class="[errors.followup_confirmation && '!tw-border-red-400']"
                     class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
                   >
-                    <option :value="c.value" :class="[c.text, !c.value && '!tw-text-green-500']" v-for="c in confirmations" :key="c.id">{{ c.name }}</option>
+                    <option :value="c.value" :class="[c.text, !c.value && '!tw-text-green-500']" v-for="c in confirmationsFollowup" :key="c.id">{{ c.name }}</option>
                   </select>
                   <div
                     class="tw-pointer-events-none tw-absolute tw-inset-y-0 tw-right-0 tw-flex tw-items-center tw-px-2 tw-text-gray-700"
@@ -142,13 +142,13 @@
                   </div>
                 </div>
                 <label
-                  v-if="errors.confirmation"
+                  v-if="errors.followup_confirmation"
                   class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
-                  >{{ errors.confirmation }}</label
+                  >{{ errors.followup_confirmation }}</label
                 >
               </div>
 
-              <div class="md:tw-col-span-1 tw-col-span-2" v-if="itemCopy.confirmation == 'reporter'">
+              <div class="md:tw-col-span-1 tw-col-span-2" v-if="itemCopy.followup_confirmation == 'reporter'">
                 <label
                   class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
                   >Reported Date</label
@@ -168,7 +168,7 @@
                 >
               </div>
 
-              <div class="md:tw-col-span-1 tw-col-span-2" v-if="itemCopy.confirmation == 'reporter'">
+              <div class="md:tw-col-span-1 tw-col-span-2" v-if="itemCopy.followup_confirmation == 'reporter'">
                 <label
                   class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
                   >Reported Note</label
@@ -203,41 +203,6 @@
 
               <div class="md:tw-col-span-1 tw-col-span-2">
                 <OrderAffectation :item="itemCopy" v-model:error="errors.affectation" v-model:affectation="itemCopy.affectation" />
-              </div>
-
-              <div class="tw-col-span-1">
-                <label
-                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
-                  >Delivery</label
-                >
-                <div class="tw-relative">
-                  <select
-                    v-model="itemCopy.delivery"
-                    @change="errors.delivery = null"
-                  :class="[errors.delivery && '!tw-border-red-400']"
-                    class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
-                  >
-                    <option :value="c.value" :class="[c.text, !c.value && '!tw-text-green-500']" v-for="c in deliveryStatus" :key="c.id">{{ c.name }}</option>
-                  </select>
-                  <div
-                    class="tw-pointer-events-none tw-absolute tw-inset-y-0 tw-right-0 tw-flex tw-items-center tw-px-2 tw-text-gray-700"
-                  >
-                    <svg
-                      class="tw-fill-current tw-h-4 tw-w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <label
-                  v-if="errors.delivery"
-                  class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
-                  >{{ errors.delivery }}</label
-                >
               </div>
 
               <div class="md:tw-col-span-1 tw-col-span-2">
@@ -278,12 +243,8 @@
                 </div>
               </div>
 
-                <div class="tw-col-span-2" v-if="products_fetched">
-                    <ProductOffersTable :products="products" :item="itemCopy" />
-                </div>
               </div>
         </div>
-
 
         <div
           class="tw-flex tw-justify-end tw-items-center tw-p-4 tw-gap-3 dark:tw-bg-neutral-900 tw-bg-gray-50 tw-border-t tw-border-solid"
@@ -316,14 +277,13 @@
 <script>
 import { validate } from "../lib/validate";
 import { update } from "../lib/update";
-import { confirmations, upsells, deliveryStatus } from '@/config/orders';
-import OrderItems from '@/views/newsales/partials/components/OrderItems'
-import OrderAffectation from '@/views/newsales/partials/components/OrderAffectation'
-import ProductOffersTable from "./ProductOffersTable.vue";
+import { confirmationsFollowup, upsells } from '@/config/orders';
+import OrderItems from '@/views/followup/partials/components/OrderItems'
+import OrderAffectation from '@/views/followup/partials/components/OrderAffectation'
 import Product from '@/api/Product';
 
 export default {
-  components: { OrderItems, OrderAffectation, ProductOffersTable },
+  components: { OrderItems, OrderAffectation },
 
   props: {
     visible: {
@@ -336,8 +296,7 @@ export default {
 
   data() {
     return {
-      confirmations: confirmations,
-      deliveryStatus: deliveryStatus,
+      confirmationsFollowup: confirmationsFollowup,
       upsells: upsells,
       isLoading: false,
 
