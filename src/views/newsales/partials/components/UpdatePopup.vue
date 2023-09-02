@@ -378,7 +378,7 @@ export default {
 
     getProducts() {
       this.products_fetched = false;
-      Product.allForOrder()
+      Product.allForOrder(this.itemCopy.user_id)
       .then((res) => {
         if(res.data.code == 'SUCCESS') {
           this.products = res.data.data.products;
