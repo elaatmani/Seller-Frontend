@@ -6,7 +6,7 @@ import app from '@/main.js'
 export default function (to, from, router) {
 
     // Changing page title
-    document.title = to.meta?.title + ' | Vldo Shop'
+    document.title = to.meta?.title + ' | COD Squad'
     // return true
 
     // const user = store.getters['user/user']
