@@ -56,6 +56,20 @@
               </v-col>
               <v-col class="!tw-py-2" cols="12" md="6">
                 <div class="tw-w-full">
+                  <div class="mb-1 text-body-2 tw-text-zinc-700">User Name</div>
+                  <v-text-field
+                    v-model="username"
+                    clearable
+                    clear-icon="mdi-close"
+                    class="tw-w-full"
+                    variant="outlined"
+                    color="primary-color"
+                    density="compact"
+                  ></v-text-field>
+                </div>
+              </v-col>
+              <v-col class="!tw-py-2" cols="12" md="6">
+                <div class="tw-w-full">
                   <div class="mb-1 text-body-2 tw-text-zinc-700">Email</div>
                   <v-text-field
                     :error-messages="formStatus.email.message"
@@ -354,6 +368,7 @@ export default {
       email: '',
       password: '',
       confirmPassword: '',
+      username: '',
       role: '',
       user_image: null,
       status: false,
@@ -386,6 +401,7 @@ export default {
             id: this.id,
             firstname: this.firstname,
             lastname: this.lastname,
+            username: this.username,
             phone: this.phone,
             email: this.email,
             password: this.password,
@@ -545,6 +561,7 @@ export default {
                   this.id = user.id
                   this.firstname = user.firstname
                   this.lastname = user.lastname
+                  this.username = user.username
                   this.email = user.email
                   this.phone = user.phone
                   this.role = user.role

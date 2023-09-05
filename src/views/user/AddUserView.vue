@@ -57,6 +57,21 @@
                   <div class="tw-h-[3px] tw-text-red-700 tw-mb-3 tw-mt-1 tw-text-xs">{{ formStatus.lastname.message }}</div>
                 </div>
               </v-col>
+              <v-col v-if="isSeller" class="!tw-py-2" cols="12" md="6">
+                <div class="tw-w-full">
+                  <div class="mb-1 text-body-2 tw-text-zinc-700">User Name</div>
+                  <v-text-field
+                    :hide-details="true"
+                    v-model="user.username"
+                    clearable
+                    clear-icon="mdi-close"
+                    class="tw-w-full"
+                    variant="outlined"
+                    color="primary-color"
+                    density="compact"
+                  ></v-text-field>
+                </div>
+              </v-col>
               <v-col class="!tw-py-2" cols="12" md="6">
                 <div class="tw-w-full">
                   <div class="mb-1 text-body-2 tw-text-zinc-700">Email</div>
@@ -343,6 +358,7 @@ export default {
         firstname: "",
         lastname: "",
         phone: "",
+        username:"",
         email: "",
         password: "",
         confirmPassword: "",
@@ -382,6 +398,9 @@ export default {
 
     isDelivery() {
       return this.role === 3;
+    },
+    isSeller() {
+      return this.role === 4;
     },
     selectProducts() {
       if(this.isMultipleProducts) {
@@ -449,6 +468,7 @@ export default {
               firstname: "",
               lastname: "",
               phone: "",
+              username: "",
               email: "",
               password: "",
               confirmPassword: "",
