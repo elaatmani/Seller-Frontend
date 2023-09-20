@@ -55,11 +55,11 @@
           <div class="tw-grid tw-grid-cols-12 tw-gap-2">
             <div class="tw-col-span-12 md:tw-col-span-6 tw-flex tw-gap-2 tw-items-center tw-justify-between tw-flex-wrap">
               <p class="tw-font-light tw-text-neutral-500">Store Link:</p>
-              <a target="_blank" href="{{ product.link_store }}" class="tw-text-blue-800 tw-font-medium tw-underline tw-px-3">{{ product.link_store }}</a>
+              <a target="_blank" :href="product.link_store" class="tw-text-blue-800 tw-font-medium tw-underline tw-px-3">{{ product.link_store }}</a>
             </div>
             <div class="tw-col-span-12 md:tw-col-span-6 tw-flex tw-gap-2 tw-items-center tw-justify-between tw-flex-wrap">
               <p class="tw-font-light tw-text-neutral-500">Video Link:</p>
-              <a target="_blank" href="{{ product.link_video }}" class="tw-text-blue-800 tw-font-medium tw-underline tw-px-3">{{ product.link_video }}</a>
+              <a target="_blank" :href="product.link_video" class="tw-text-blue-800 tw-font-medium tw-underline tw-px-3">{{ product.link_video }}</a>
             </div>
             <div class="tw-col-span-12 md:tw-col-span-6 tw-flex tw-gap-2 tw-items-center tw-justify-between tw-flex-wrap">
               <p class="tw-font-light tw-text-neutral-500">Expidition Date:</p>
