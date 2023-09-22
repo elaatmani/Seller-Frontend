@@ -35,6 +35,9 @@
                         {{ product.id }}
                     </th>
                     <td class="tw-px-6 tw-py-4">
+                        <span v-if="product.seller_user">{{ product.seller_user.firstname }} {{ product.seller_user.lastname }}</span> 
+                    </td>
+                    <td class="tw-px-6 tw-py-4">
                         {{ product.ref }}
                     </td>
                     <td class="tw-px-6 tw-py-4">

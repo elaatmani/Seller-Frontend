@@ -70,7 +70,7 @@
         <h2
           class="tw-font-medium tw-text-gray-800 darkx:tw-text-white tw-font-[cairo] tw-max-w-[150px] tw-truncate"
         >
-          {{ item.seller_user.username }}
+        <span v-if="item.seller_user">{{ item.seller_user.username }}</span>  
         </h2>
       </div>
     </td>

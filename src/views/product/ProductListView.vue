@@ -73,6 +73,10 @@ export default {
             name: '#',
         },
         {
+            prop: 'seller',
+            name: 'Seller',
+        },
+        {
             prop: 'ref',
             name: 'Ref',
         },
