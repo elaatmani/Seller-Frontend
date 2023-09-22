@@ -282,34 +282,44 @@
             </div>
 
             <div class="tw-col-span-2" v-if="products_fetched">
-              <div v-for="product in products" :key="product.id">
-                <div class="tw-grid lg:tw-grid-cols-2 md:tw-grid-cols-2 tw-grid-cols-1  tw-gap-5 tw-divide-x-2">
-                  <div class="tw-space-y-2 tw-px-5">
-                    <div class="tw-flex tw-items-center tw-gap-2">
-                      <i class="mdi mdi-youtube tw-text-orange-400 tw-text-2xl"></i> 
-                      <span
-                        class="tw-font-[cairo] tw-text-sm tw-font-medium tw-text-gray-600"
-                        >Video Link</span
-                      >
-                    </div>
-                    <a target="_blank" class="tw-underline" :href="product.video">{{
-                      product.video
-                    }}</a>
+              <div v-for="p in product" :key="p.id">
+              <div
+                class="tw-grid lg:tw-grid-cols-2 md:tw-grid-cols-2 tw-grid-cols-1 tw-gap-5 tw-divide-x-2"
+              >
+                <div class="tw-space-y-2 tw-px-5">
+                  <div class="tw-flex tw-items-center tw-gap-2">
+                    <i
+                      class="mdi mdi-youtube tw-text-orange-400 tw-text-2xl"
+                    ></i>
+                    <span
+                      class="tw-font-[cairo] tw-text-sm tw-font-medium tw-text-gray-600"
+                      >Video Link</span
+                    >
                   </div>
-
-                  <div class="tw-space-y-2 tw-px-5">
-                    <div class="tw-flex tw-items-center tw-gap-2">
-                      <i class="mdi mdi-store tw-text-orange-400 tw-text-2xl"></i>
-                      <span
-                        class="tw-font-[cairo] tw-text-sm tw-font-medium tw-text-gray-600"
-                        >Store Link</span
-                      >
-                    </div>
-                    <a target="_blank" class="tw-underline" :href="product.store">{{
-                      product.store
-                    }}</a>
-                  </div>
+                  <a
+                    target="_blank"
+                    class="tw-underline"
+                    :href="p.video"
+                    >{{ p.video }}</a
+                  >
                 </div>
+
+                <div class="tw-space-y-2 tw-px-5">
+                  <div class="tw-flex tw-items-center tw-gap-2">
+                    <i class="mdi mdi-store tw-text-orange-400 tw-text-2xl"></i>
+                    <span
+                      class="tw-font-[cairo] tw-text-sm tw-font-medium tw-text-gray-600"
+                      >Store Link</span
+                    >
+                  </div>
+                  <a
+                    target="_blank"
+                    class="tw-underline"
+                    :href="p.store"
+                    >{{ p.store }}</a
+                  >
+                </div>
+              </div>
               </div>
             </div>
 
@@ -378,6 +388,8 @@ export default {
       products: null,
       itemCopy: null,
 
+      product: null,
+
       errors: {
         fullname: null,
         phone: null,
@@ -415,9 +427,16 @@ export default {
         .then((res) => {
           if (res.data.code == "SUCCESS") {
             this.products = res.data.data.products;
+
+            const productIdsToFind = this.itemCopy.items.map((p) => p.product_id);
+             this.product = this.products.filter((p) => productIdsToFind.includes(p.id) );
+
           } else {
             this.products = [];
           }
+
+         
+    
           this.products_fetched = true;
         })
         .catch(this.$handleApiError);
