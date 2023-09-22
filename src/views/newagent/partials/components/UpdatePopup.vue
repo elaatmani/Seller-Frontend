@@ -298,9 +298,9 @@
                   </div>
                   <a
                     target="_blank"
-                    class="tw-underline"
+                    class="tw-underline truncate-link tw-max-w-xs tw-overflow-hidden tw-overflow-ellipsis"
                     :href="p.video"
-                    >{{ p.video }}</a
+                    >{{ truncateText(p.video,30) }}</a
                   >
                 </div>
 
@@ -314,9 +314,9 @@
                   </div>
                   <a
                     target="_blank"
-                    class="tw-underline"
+                    class="tw-underline truncate-link tw-max-w-xs tw-overflow-hidden tw-overflow-ellipsis"
                     :href="p.store"
-                    >{{ p.store }}</a
+                    >{{ truncateText(p.store,30) }}</a
                   >
                 </div>
               </div>
@@ -440,6 +440,13 @@ export default {
           this.products_fetched = true;
         })
         .catch(this.$handleApiError);
+    },
+
+    truncateText(text, maxLength) {
+      if (text.length > maxLength) {
+        return text.slice(0, maxLength) + '...';
+      }
+      return text;
     },
   },
 
