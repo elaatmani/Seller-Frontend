@@ -3,17 +3,16 @@
         <label
           for="countries"
           class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
-          >Agent</label
+          >Marketer</label
         >
 
         <select
-          @change="e=> $emit('update', {...filters, agente_id: e.target.value})"
-          :value="filters.agente_id"
+          @change="e=> $emit('update', {...filters, marketer_id: e.target.value})"
+          :value="filters.marketer_id"
           class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
         >
           <option value="all"  >All</option>
-          <option value=""  >No Agent</option>
-          <option :value="d.id" class="tw-capitalize" v-for="d in agents" :key="d.id">
+          <option :value="d.id" class="tw-capitalize" v-for="d in marketers" :key="d.id">
             {{ d.firstname }} {{ d.lastname }}
           </option>
         </select>
@@ -21,6 +20,7 @@
 </template>
 
 <script>
+   
 export default {
 
     props: {
@@ -38,8 +38,8 @@ export default {
         users() {
             return this.$store.getters['user/users']
         },
-        agents() {
-            return this.fetched ? this.users.filter(u => u.role.name == 'agente') : []
+        marketers() {
+            return this.fetched ? this.users.filter(u => u.role.name == 'marketer') : []
         },
         fetched() {
             return this.$store.getters['user/fetched']

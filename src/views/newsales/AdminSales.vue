@@ -206,6 +206,7 @@ export default {
         dropped_to: null,
         affectation: "all",
         agente_id: "all",
+        user_id: "all",
         upsell: "all",
         confirmation: "all",
         product_id: "all",

@@ -63,7 +63,6 @@
         />
       </div>
 
-      <AgentFilter v-if="false"  :filters="filters" @update="f => $emit('update', f)" />
 
       <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
         <label
@@ -82,9 +81,8 @@
           </option>
         </select>
       </div>
-      
 
-      <AffectationFilter v-if="false"  :filters="filters" @update="f => $emit('update', f)" />
+      <ProductFilter :filters="filters" @update="f => $emit('update', f)" />
 
       <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
         <label
@@ -157,11 +155,11 @@
 <script>
 import { confirmations, deliveryStatus } from "@/config/orders";
 import DateFilter from '@/views/seller/partials/filters/DateFilter'
-import AffectationFilter from '@/views/seller/partials/filters/AffectationFilter'
-import AgentFilter from '@/views/seller/partials/filters/AgentFilter'
+import ProductFilter from '@/views/seller/partials/filters/ProductFilter'
+
 
 export default {
-  components: { DateFilter, AffectationFilter, AgentFilter },
+  components: { DateFilter, ProductFilter },
 
   props: {
     filters: {
