@@ -205,7 +205,7 @@
                   <OrderAffectation :item="itemCopy" v-model:error="errors.affectation" v-model:affectation="itemCopy.affectation" />
                 </div>
   
-                <div v-if="false" class="md:tw-col-span-1 tw-col-span-2">
+                <div class="md:tw-col-span-1 tw-col-span-2">
                   <label
                     class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
                     >Upsell</label
@@ -277,7 +277,7 @@
   <script>
   import { validate } from "../lib/validate";
   import { create } from "../lib/create";
-  import { confirmations, upsells } from '@/config/orders';
+  import { addOrderConfirmations, upsells } from '@/config/orders';
   import OrderItems from '@/views/newagent/partials/components/OrderItems'
   import OrderAffectation from '@/views/newagent/partials/components/OrderAffectation'
   import Product from '@/api/Product';
@@ -293,7 +293,7 @@
   
     data() {
       return {
-        confirmations: confirmations,
+        confirmations: addOrderConfirmations,
         upsells: upsells,
         isLoading: false,
   
@@ -339,6 +339,7 @@
         .then((res) => {
           if(res.data.code == 'SUCCESS') {
             this.products = res.data.data.products;
+            console.log(this.products)
           } else {
             this.products = [];
           }
