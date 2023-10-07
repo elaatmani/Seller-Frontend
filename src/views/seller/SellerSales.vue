@@ -44,7 +44,7 @@
     :class="[selected.length > 0 ? 'tw-grid-rows-[1fr]' : 'tw-grid-rows-[0fr]']"
     class="tw-grid tw-duration-300 tw-transition-all"
   >
-    <div class="tw-overflow-hidden tw-col-span-1">
+    <div v-if="false" class="tw-overflow-hidden tw-col-span-1">
         <BulkActions @update="handleBulkUpdate" v-model:selected="selected" />
     </div>
   </div>
