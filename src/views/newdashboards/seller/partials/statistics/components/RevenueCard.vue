@@ -9,7 +9,7 @@
             </div>
             <div class="tw-flex tw-w-full tw-items-center tw-gap-2">
                 <span class="tw-text-gray-700 tw-text-xl tw-font-bold">
-                    {{ format(value) }}
+                    {{ value }}
                 </span>
             </div>
             </div>
