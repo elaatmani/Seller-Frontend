@@ -17,6 +17,11 @@ class Seller {
         await Csrf.getCookie();
         return Api.post('api/v1/seller/orders/' + id + '/update', order);
     }
+
+    async export(options = {}) {
+        await Csrf.getCookie();
+        return Api.post('api/v1/seller/orders/export', options);
+    }
 }
 
 

@@ -27,6 +27,7 @@
 
     <!-- Filters Section -->
     <IndexFilters 
+      v-model:search-by-field="searchByField"
       v-model:search="search" 
       v-model:filters="filters"
       @filter="handlePerPageChange(per_page)" 
@@ -39,8 +40,17 @@
       :per-page="per_page"
     />
 
+    <div
+    :class="[selected.length > 0 ? 'tw-grid-rows-[1fr]' : 'tw-grid-rows-[0fr]']"
+    class="tw-grid tw-duration-300 tw-transition-all"
+  >
+    <div class="tw-overflow-hidden tw-col-span-1">
+        <BulkActions @update="handleBulkUpdate" v-model:selected="selected" />
+    </div>
+  </div>
     <div>
       <IndexTable 
+      v-model:selected="selected"
       @update="handleItemUpdate" 
       @page-change="handlePageChange" 
       @sort-order="handleSortOrderChange"  
@@ -66,16 +76,17 @@ import Seller from '@/api/Seller';
 import IndexTable from '@/views/seller/partials/IndexTable'
 import IndexFilters from '@/views/seller/partials/filters/IndexFilters'
 import { getPath } from '@/helpers/methods';
+import BulkActions from "./partials/components/bulk/BulkActions.vue";
 
 export default {
-  components: { IndexTable, IndexFilters },
+  components: { IndexTable, IndexFilters,BulkActions },
 
   data() {
     return {
       fetching: true,
 
       items: [],
-
+      selected: [],
       statistics: null,
 
       first_page_url: null,
@@ -89,6 +100,7 @@ export default {
       totalOrders: 0,
       links: null,
       search: '',
+      searchByField: "all",
 
       sort_by: 'created_at',
       sort_order: 'desc',
@@ -119,6 +131,7 @@ export default {
         per_page: this.per_page,
         current_page: this.current_page,
         search: this.search,
+        searchByField: this.searchByField,
         filters: this.filters
       };
 
@@ -190,8 +203,12 @@ export default {
     handleSortOrderChange() {
       this.sort_order = this.sort_order == 'asc' ? 'desc' : 'asc';
       this.paginateOrders()
-    }
+    },
 
+    handleBulkUpdate() {
+      this.selected = [];
+      this.paginateOrders();
+    },
   },
 
 

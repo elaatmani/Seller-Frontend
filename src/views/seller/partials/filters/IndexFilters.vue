@@ -94,14 +94,17 @@
       </div>
 
       <div class="tw-relative tw-flex tw-items-center tw-mt-4 md:tw-mt-0">
-
+        <select @change="e => $emit('update:search-by-field', e.target.value)" :value="searchByField" class="tw-block !tw-w-fit tw-py-1.5  tw-pl-5 tw-text-gray-700 tw-bg-white tw-border tw-border-solid tw-border-gray-200 tw-rounded-r-none tw-rounded-lg md:tw-w-80 placeholder-gray-400/70 tw-pr-11 rtl:tw-pr-11 rtl:tw-pl-5 darkx:tw-bg-gray-900 darkx:tw-text-gray-300 darkx:tw-border-gray-600 focus:tw-border-orange-400 darkx:focus:tw-border-orange-300 focus:tw-ring-orange-300 focus:tw-outline-none focus:tw-ring focus:tw-ring-opacity-40">
+          <option value="all">All</option>
+          <option value="id">ID</option>
+        </select>
         <input
           type="text"
           placeholder="Search"
           :value="search"
           @input="e => $emit('update:search', e.target.value)"
           @keyup.enter="$emit('filter')"
-          class="tw-block tw-w-full tw-py-1.5  tw-pl-5 tw-text-gray-700 tw-bg-white tw-border tw-border-solid tw-border-gray-200 tw-rounded-lg md:tw-w-80 placeholder-gray-400/70 tw-pr-11 rtl:tw-pr-11 rtl:tw-pl-5 darkx:tw-bg-gray-900 darkx:tw-text-gray-300 darkx:tw-border-gray-600 focus:tw-border-orange-400 darkx:focus:tw-border-orange-300 focus:tw-ring-orange-300 focus:tw-outline-none focus:tw-ring focus:tw-ring-opacity-40"
+          class="tw-block tw-w-full tw-py-1.5  tw-pl-5 tw-text-gray-700 tw-bg-white tw-border tw-border-solid tw-border-gray-200 tw-border-l-0 tw-rounded-r-lg md:tw-w-80 placeholder-gray-400/70 tw-pr-11 rtl:tw-pr-11 rtl:tw-pl-5 darkx:tw-bg-gray-900 darkx:tw-text-gray-300 darkx:tw-border-gray-600 focus:tw-border-orange-400 darkx:focus:tw-border-orange-300 focus:tw-ring-orange-300 focus:tw-outline-none focus:tw-ring focus:tw-ring-opacity-40"
         />
 
         <button @click="$emit('filter')" class="tw-absolute tw-right-0 tw-px-2 tw-py-1 tw-w-[38px] tw-h-[36px] tw-border-solid tw-rounded-r-lg  tw-border-l tw-text-orange-500/80  tw-border-orange-500/20 hover:tw-bg-orange-500/10 hover:tw-border-orange-500/70 tw-duration-300 tw-flex tw-items-center tw-justify-center">
@@ -126,7 +129,7 @@
       class="tw-grid tw-duration-300 tw-transition-all"
     >
       <div class="tw-overflow-hidden tw-col-span-1">
-          <IndexExport />
+          <IndexExport :filters="filters" />
       </div>
     </div>
 
@@ -168,6 +171,9 @@ export default {
     },
     search: {
       default: ''
+    },
+    searchByField:{
+      default:"all"
     },
     filters: {
       required: true,
