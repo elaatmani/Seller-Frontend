@@ -181,12 +181,13 @@
                   ></textarea>
               </div>
 
-              <div v-if="false" class="tw-col-span-2">
+              <div class="tw-col-span-2">
                 <label
                   class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
                   >Note</label
                 >
                 <textarea
+                readonly
                 v-model="itemCopy.note"
                 @input="errors.note = null"
                   :class="[errors.note && '!tw-border-red-400']"
@@ -327,6 +328,7 @@ export default {
     handleUpdate() {
       const validated = validate(this, this.itemCopy);
       if (!validated) return false;
+      this.itemCopy.note = this.item.note
       update(this, this.itemCopy);
     },
 

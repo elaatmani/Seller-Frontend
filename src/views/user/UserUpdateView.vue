@@ -271,7 +271,7 @@
                       {{  cities.filter(i => i.id == c.city_id)[0]?.name }}
                       </div>
                       <div>
-                        {{ c.fee }} DH
+                        {{ c.fee }} {{ currency }}
                       </div>
                       <div>
                         <v-icon color="red" @click="removeCity(c.id)" size="x-small">mdi-delete</v-icon>
@@ -303,7 +303,7 @@
 
 <script>
 import User from "@/api/User";
-import { serverUrl } from '@/config/config'
+import { serverUrl, currency } from '@/config/config'
 import {
   validateEmail,
   validateName,
@@ -317,6 +317,7 @@ export default {
   data() {
     return {
       serverUrl,
+      currency,
       isFetched: false,
       isRolesFetched: false,
       isUserFetched: false,
@@ -592,7 +593,7 @@ export default {
                         if (parseInt(item.id) >= id) {
                           id = parseInt(item.id) + 1
                         }
-                        return { id: item.id, city_id: item.city_id, fee: parseInt(item.fee) }
+                        return { id: item.id, city_id: item.city_id, fee: (item.fee) }
                       }
                     );
 

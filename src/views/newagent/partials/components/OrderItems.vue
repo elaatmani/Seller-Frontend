@@ -53,7 +53,7 @@
 
           <tbody v-if="productsFetched">
             <template v-for="(i) in items" :key="i.id">
-              <ItemRow :item="i" :products="products" @delete="deleteItem" @update="updateItem" />
+              <ItemRow  :item="i" :order="order" :products="products" @delete="deleteItem" @update="updateItem" />
             </template>
 
             <tr>
@@ -136,6 +136,9 @@ export default {
   computed: {
     price() {
       return getPrice(this.order)
+    },
+    filteredProducts() {
+      return this.products.filter(i => i.user_id == this.order.user_id)
     }
   },
 

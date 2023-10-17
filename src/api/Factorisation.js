@@ -42,19 +42,39 @@ class Factorisation {
         });
     }
 
-    async all() {
-        await Csrf.getCookie();
-        return Api.get('api/factorisations');
-    }
+    // async all() {
+    //     await Csrf.getCookie();
+    //     return Api.get('api/factorisations');
+    // }
 
-    async getFactorisation(id) {
-        await Csrf.getCookie();
-        return Api.get('api/factorisations/' + id);
-    }
+    // async getFactorisation(id) {
+    //     await Csrf.getCookie();
+    //     return Api.get('api/factorisations/' + id);
+    // }
+
+    // async delete(id) {
+    //     await Csrf.getCookie();
+    //     return Api.delete('api/factorisations/delete/' + id)
+    // }
+
+    // async create(ads) {
+    //     await Csrf.getCookie();
+    //     return Api.post('api/v1/factorisation/new', ads);
+    // }
+
+    // async update(id, ads) {
+    //     await Csrf.getCookie();
+    //     return Api.post('api/v1/factorisation/update/' + id , ads);
+    // }
 
     async delete(id) {
         await Csrf.getCookie();
-        return Api.delete('api/factorisations/delete/' + id)
+        return Api.delete('api/v1/factorisation/delete/' + id)
+    }
+
+    async paginate(url = '/', options) {
+        await Csrf.getCookie();
+        return Api.post('api/v1/factorisation' + url, options);
     }
 }
 

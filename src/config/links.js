@@ -172,13 +172,20 @@ export const links = [
             value: 'mdi-note-multiple'
         },
         children: [
+            // {
+            //     id: 1,
+            //     title: 'Factorisation list',
+            //     subModule: 'factorisation/list',
+            //     gate: 'show_all_factorisations',
+            //     to: '/factorisations'
+            // },
             {
                 id: 1,
                 title: 'Factorisation list',
                 subModule: 'factorisation/list',
                 gate: 'show_all_factorisations',
                 to: '/factorisations'
-            },
+            }
         ]
     },
 

@@ -12,7 +12,7 @@
             class="tw-block tw-border-solid focus:tw-outline-none tw-w-full tw-p-2 tw-pr-6 tw-text-xs tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded tw-bg-gray-50 focus:tw-ring-orange-500 focus:tw-border-orange-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
           >
             <option :value="0" selected>Choose Product</option>
-            <option v-for="p in products" :key="p.id" :value="p.id">{{ p.name }}</option>
+            <option v-for="p in filteredProducts" :key="p.id" :value="p.id">{{ p.name }}</option>
           </select>
 
           <div
@@ -115,6 +115,9 @@ export default {
         },
         products:{
             required: true,
+        },
+        order: {
+          required: false
         }
     },
 
@@ -122,6 +125,9 @@ export default {
         product() {
             if(this.item.product_id == 0) return null;
             return this.products.find(p => p.id == this.item.product_id)
+        },
+        filteredProducts() {
+          return this.products.filter(i => i.user_id == this.order.user_id)
         }
     },
 

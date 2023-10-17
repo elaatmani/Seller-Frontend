@@ -5,7 +5,7 @@
     <div class="tw-flex tw-items-center tw-justify-between tw-flex-wrap">
         <div>
             <div class="tw-flex tw-items-center tw-gap-x-3">
-                <h2 class="tw-text-lg tw-font-medium tw-text-gray-800 darkx:tw-text-white">Orders</h2>
+                <h2 class="tw-text-lg tw-font-medium tw-text-gray-800 darkx:tw-text-white">Factorisation</h2>
 
                 <span class="tw-px-3 tw-py-1 tw-text-xs tw-text-emerald-600 tw-bg-emerald-100 tw-rounded-full darkx:tw-bg-gray-800 darkx:tw-text-orange-400">{{ totalOrders }} order</span>
             </div>
@@ -13,7 +13,7 @@
             <!-- <p class="tw-mt-1 tw-text-sm tw-text-gray-500 darkx:tw-text-gray-300">These orders have needs to reconfirmed.</p> -->
         </div>
 
-        <div @click="create_popup = true" class="tw-flex tw-items-center tw-mt-4 tw-gap-x-3">
+        <!-- <div @click="create_popup = true" class="tw-flex tw-items-center tw-mt-4 tw-gap-x-3">
 
             <button class="tw-flex tw-items-center tw-justify-center  tw-px-5 tw-py-2 tw-text-sm tw-tracking-wide tw-text-white tw-transition-colors tw-duration-200 tw-bg-orange-500 tw-rounded-lg shrink-0 sm:tw-w-auto tw-gap-x-2 hover:tw-bg-orange-600 darkx:hover:tw-bg-orange-500 darkx:tw-bg-orange-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="tw-w-5 tw-h-5">
@@ -22,7 +22,7 @@
 
                 <span>Create</span>
             </button>
-        </div>
+        </div> -->
     </div>
 
     <!-- Filters Section -->
@@ -54,21 +54,21 @@
 </section>
 
       <div v-if="create_popup">
-        <CreatePopup v-model:visible="create_popup" />
+        <!-- <CreatePopup v-model:visible="create_popup" /> -->
       </div>
 
   </div>
 </template>
 
 <script>
-import Ads from '@/api/Ads';
-import IndexTable from '@/views/ads/partials/IndexTable'
-import IndexFilters from '@/views/ads/partials/filters/IndexFilters';
-import CreatePopup from '@/views/ads/partials/components/CreatePopup'
+import Factorisation from '@/api/Factorisation';
+import IndexTable from '@/views/newfactorisation/partials/IndexTable'
+import IndexFilters from '@/views/newfactorisation/partials/filters/IndexFilters';
+// import CreatePopup from '@/views/newfactorisation/partials/components/CreatePopup'
 import { getPath } from '@/helpers/methods';
 
 export default {
-  components: { IndexTable, IndexFilters, CreatePopup },
+  components: { IndexTable, IndexFilters },
 
   data() {
     return {
@@ -95,13 +95,9 @@ export default {
       current_page: 1,
 
       filters: {
-        created_from: null,
-        created_to: null,
-        ads_from: null,
-        ads_to: null,
-        marketer_id:'all',
-        product_id:'all',
-        source:'all'
+        user_id:'all',
+        close:'all',
+        paid:'all'
       }
 
     }
@@ -123,9 +119,9 @@ export default {
 
       this.fetching = true
       
-      return Ads.paginate(url, options)
+      return Factorisation.paginate(url, options)
       .then(({data}) => {
-        const options = data.data.ads;
+        const options = data.data.factorisation;
         this.setOptions(options);
       })
       .then(() => {
@@ -135,13 +131,9 @@ export default {
 
     handleClearFilters() {
       this.filters = {
-        created_from: null,
-        created_to: null,
-        ads_from: null,
-        ads_to: null,
-        marketer_id:'all',
-        product_id:'all',
-        source:'all'
+        user_id:'all',
+        close:'all',
+        paid:'all'
       };
 
       this.handlePageChange(1);
