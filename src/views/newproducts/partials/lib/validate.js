@@ -20,7 +20,7 @@ export const validate = (app, order) => {
         return false;
     }
 
-    if(!!order.affectation && ['confirmer', 'refund', 'change'].includes(order.confirmation)) {
+    if(!!order.affectation && order.confirmation != "confirmer") {
         app.errors.affectation = "Cannot update affectation: Order not confirmed.";
         return false;
     }
