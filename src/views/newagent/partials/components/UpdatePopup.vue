@@ -272,6 +272,7 @@
               >
               <div>
                 <OrderItems
+                  action="update"
                   :order="itemCopy"
                   :error="errors.items"
                   :products="products"

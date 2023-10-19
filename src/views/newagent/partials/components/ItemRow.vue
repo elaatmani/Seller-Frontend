@@ -117,7 +117,10 @@ export default {
             required: true,
         },
         order: {
-          required: false
+          required: false,
+        },
+        action: {
+          required: true,
         }
     },
 
@@ -126,8 +129,19 @@ export default {
             if(this.item.product_id == 0) return null;
             return this.products.find(p => p.id == this.item.product_id)
         },
+        productsForUpdate() {
+          return this.products.filter(i => i.user_id == this.order.user_id);
+        },
+
+        productsForCreate() {
+          if(!this.order.items.length) return this.products;
+          const firstItem = this.order.items[0]
+          if(!firstItem.product_id) return this.products;
+          return this.products.filter(i => i.user_id == firstItem.product.user_id);
+        },
+
         filteredProducts() {
-          return this.products.filter(i => i.user_id == this.order.user_id)
+          return this.action == 'update' ? this.productsForUpdate: this.productsForCreate;
         }
     },
 
@@ -147,7 +161,13 @@ export default {
                 product_variation: product.variations.length > 0 ? product.variations[0] : null,
             }
             
-            this.$emit('update', item)
+            this.$emit('update', item);
+
+            console.log(this.order);
+            if(this.order.items.length) {
+              const firstItem = this.order.items[0]
+              console.log(firstItem);
+            }
         },
 
         handleVariationChange(e) {

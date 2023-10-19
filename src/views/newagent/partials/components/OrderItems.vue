@@ -53,7 +53,7 @@
 
           <tbody v-if="productsFetched">
             <template v-for="(i) in items" :key="i.id">
-              <ItemRow  :item="i" :order="order" :products="products" @delete="deleteItem" @update="updateItem" />
+              <ItemRow :action="action"  :item="i" :order="order" :products="products" @delete="deleteItem" @update="updateItem" />
             </template>
 
             <tr>
@@ -124,6 +124,10 @@ export default {
     },
     order: {
       required: true,
+    },
+    action: {
+      required: false,
+      default: 'update'
     }
   },
 

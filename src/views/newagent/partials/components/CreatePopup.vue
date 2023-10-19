@@ -239,7 +239,7 @@
                     >Order Items <span v-if="errors.items" class="tw-text-red-400 tw-text-xs"> # {{errors.items}}</span></label
                   >
                   <div>
-                    <OrderItems :order="itemCopy" :error="errors.items" :products="products" :products-fetched="products_fetched" v-model:items="itemCopy.items" />
+                    <OrderItems action="create" :order="itemCopy" :error="errors.items" :products="products" :products-fetched="products_fetched" v-model:items="itemCopy.items" />
                   </div>
                 </div>
   
