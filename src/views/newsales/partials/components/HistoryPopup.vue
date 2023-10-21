@@ -24,7 +24,7 @@
                 size="x-small"
               >
                 <div
-                  class="d-flextw-flex-col justify-space-between flex-grow-1"
+                  class="d-flex tw-flex-col justify-space-between flex-grow-1"
                 >
                   <div class="tw-flex tw-items-center tw-gap-2 tw-my-2">
                     <v-chip
@@ -82,15 +82,21 @@
                     </v-chip>
                     <div>New Order Created</div>
                   </div>
+               
                   <div
-                    class="flex-shrink-0 tw-flex tw-items-center tw-gap-2 tw-text-sm"
+                    class="tw-flex tw-flex-col"
                   >
+                  <div class="tw-text-sm tw-capitalize tw-text-gray-500 tw-flex tw-items-center tw-mt-2 tw-gap-2 tw-font-bold tw-font-['cairo']">
+                    <v-icon>mdi-account</v-icon><span>{{ item.created_by.firstname }} {{ item.created_by.lastname }}</span>
+                  </div>
+                  <div class="flex-shrink-0 tw-text-neutral-500 tw-flex tw-items-center tw-gap-2 tw-text-sm">
                     <span>
                       {{ item.created_at?.split("T")[0] }}
                     </span>
                     <span>
                       {{ item.created_at?.split("T")[1].split(".")[0] }}
                     </span>
+                  </div>
                   </div>
                 </div>
               </v-timeline-item>
