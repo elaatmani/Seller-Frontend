@@ -5,7 +5,7 @@
     </div>
     <div class="tw-grid tw-grid-cols-12 tw-gap-4 tw-p-1">
 
-      <DateFilter v-model:from="filters.created_from" v-model:to="filters.created_to" label="Created" />
+      <DateFilter v-model:from="filters.created_from" v-model:to="filters.created_to" label="Dropped" />
 
 
       <div  class="tw-col-span-12 tw-flex tw-justify-end tw-gap-2">
