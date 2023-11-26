@@ -181,7 +181,7 @@
                   ></textarea>
               </div>
 
-              <div class="tw-col-span-2">
+              <div class="tw-col-span-2" v-if="!['change','refund'].includes(itemCopy.confirmation)">
                 <label
                   class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white"
                   >Note</label
