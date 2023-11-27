@@ -8,7 +8,7 @@
           </div>
       </div>
 
-      <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
+      <div v-if="false"  class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
         <label
           for="countries"
           class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
@@ -22,7 +22,7 @@
         />
       </div>
 
-      <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
+      <div v-if="false" class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
         <label
           for="countries"
           class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
@@ -35,94 +35,12 @@
           class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
         />
       </div>
-      <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
-        <label
-          for="countries"
-          class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
-          >Dropped From</label
-        >
-        <input
-          :value="filters.dropped_from"
-          type="date"
-          @change="e => $emit('update', {...filters, dropped_from: e.target.value})"
-          class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
-        />
-      </div>
 
-      <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
-        <label
-          for="countries"
-          class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
-          >Dropped To</label
-        >
-        <input
-          :value="filters.dropped_to"
-          type="date"
-          @change="e => $emit('update', {...filters, dropped_to: e.target.value})"
-          class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
-        />
-      </div>
+      <ProductFilter v-if="false" :filters="filters" @update="f => $emit('update', f)" />
 
-      <ProductFilter :filters="filters" @update="f => $emit('update', f)" />
+      <SellerFilter   :filters="filters" @update="f => $emit('update', f)" />
 
-      <AgentFilter :filters="filters" @update="f => $emit('update', f)" />
 
-      <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
-        <label
-          for="countries"
-          class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
-          >Confirmation</label
-        >
-        <select
-          :value="filters.confirmation"
-          @change="e=> $emit('update', {...filters, confirmation: e.target.value})"
-          class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
-        >
-          <option value="all" selected>All</option>
-          <!-- <option value="" class="tw-text-green-500">New</option> -->
-          <option :class="[c.text, c.value == null && '!tw-text-green-500']" :value="!c.value ? '' : c.value" class="tw-capitalize" v-for="c in confirmations" :key="c.value">
-            {{ c.name }}
-          </option>
-        </select>
-      </div>
-      
-
-      <AffectationFilter :filters="filters" @update="f => $emit('update', f)" />
-
-      <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
-        <label
-          for="countries"
-          class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
-          >Delivery</label
-        >
-        <select
-          @change="e=> $emit('update', {...filters, delivery: e.target.value})"
-          :value="filters.delivery"
-          class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
-        >
-          <option value="all"  selected>All</option>
-          <option :class="[d.text, d.value == null && '!tw-text-gray-500']" :value="!d.value ? '' : d.value" class="tw-capitalize" v-for="d in deliveries" :key="d.id">
-            {{ d.name }}
-          </option>
-        </select>
-      </div>
-
-      <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
-        <label
-          for="countries"
-          class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
-          >Upsell</label
-        >
-        <select
-          :value="filters.upsell"
-          @change="e=> $emit('update', {...filters, upsell: e.target.value})"
-          class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
-        >
-          <option value="all" selected>All</option>
-          <option value="oui" class="tw-capitalize">Yes</option>
-          <option value="non" class="tw-capitalize">Non</option>
-        </select>
-      </div>
 
       <div  class="tw-col-span-12 tw-flex tw-justify-end tw-gap-2">
         <button
@@ -158,14 +76,13 @@
 </template>
 
 <script>
-import { confirmations, deliveryStatus } from "@/config/orders";
-import DateFilter from '@/views/newproducts/partials/filters/DateFilter'
-import AffectationFilter from '@/views/newproducts/partials/filters/AffectationFilter'
-import AgentFilter from '@/views/newproducts/partials/filters/AgentFilter'
-import ProductFilter from '@/views/newproducts/partials/filters/ProductFilter'
+
+import DateFilter from '@/views/newproducts/partials/filters/components/DateFilter'
+import ProductFilter from '@/views/newproducts/partials/filters/components/ProductFilter'
+import SellerFilter from '@/views/newproducts/partials/filters/components/SellerFilter'
 
 export default {
-  components: { DateFilter, AffectationFilter, AgentFilter, ProductFilter },
+  components: { DateFilter, ProductFilter,SellerFilter },
 
   props: {
     filters: {
@@ -175,8 +92,6 @@ export default {
   },
     data() {
         return {
-            confirmations: confirmations,
-            deliveries: deliveryStatus,
             dateFilter: ['', '']
         }
     },

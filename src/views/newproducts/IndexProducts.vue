@@ -99,14 +99,15 @@ export default {
       search: "",
 
       sort_by: "created_at",
-      sort_order: "asc",
+      sort_order: "desc",
       per_page: 10,
       current_page: 1,
 
       filters: {
         created_from: null,
         created_to: null,
-        // user_id: "all",
+        user_id: "all",
+        product_id: "all",
       },
     };
   },

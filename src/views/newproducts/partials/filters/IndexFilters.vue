@@ -23,7 +23,6 @@
                 Yesterday
             </button> -->
         <button
-        v-if="false"
           title="Show Filters Tab"
           @click="showFilters = !showFilters"
           :class="[showFilters && '!tw-bg-gray-100']"
