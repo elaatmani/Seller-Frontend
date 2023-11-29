@@ -136,7 +136,7 @@
     >
 
       <div class="tw-overflow-hidden tw-col-span-1">
-        <FiltersWrapper @clear="$emit('clear')" @filter="$emit('filter')" :filters="filters" @update="v => $emit('update:filters', v)" />
+        <FiltersWrapper v-if="this.user.role == 'admin'" @clear="$emit('clear')" @filter="$emit('filter')" :filters="filters" @update="v => $emit('update:filters', v)" />
       </div>
 
     </div>
@@ -204,7 +204,12 @@ export default {
       showToday: false,
     };
   },
+  computed: {
 
+    user() {
+            return this.$store.getters['user/user']
+      },
+  },
   methods: {
     handlePerPageChange(e) {
       this.$emit('perPageChange', e.target.value);
