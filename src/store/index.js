@@ -12,6 +12,7 @@ import notification from './modules/notification'
 import warehouse from './modules/warehouse'
 import factorisation from './modules/factorisation'
 import sheet from './modules/sheet'
+import supplyRequest from './modules/supply-request'
 
 
 export default createStore({
@@ -36,6 +37,8 @@ export default createStore({
     notification,
     warehouse,
     factorisation,
-    sheet
+    sheet,
+    
+    'supply-request': supplyRequest
   }
 })

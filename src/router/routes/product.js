@@ -8,6 +8,8 @@ import AddProductView from '@/views/product/AddProductView'
 import UpdateProductView from '@/views/product/UpdateProductView'
 import ShowProductView from '@/views/product/ShowProductView'
 
+import SellerSupplyRequestView from '@/views/product/seller/SupplyRequestView'
+import AdminSupplyRequestView from '@/views/product/admin/SupplyRequestView'
 
 export default 
     {
@@ -52,6 +54,29 @@ export default
                     subModule: 'product/add',
                     title: 'Add Product',
                     gate: 'create_product'
+                }
+            },
+
+            { 
+                name: 'product/seller/request',
+                path: 'seller/request',
+                component: SellerSupplyRequestView,
+                meta: {
+                    module: 'product',
+                    subModule: 'product/seller/request',
+                    title: 'Supply Request',
+                    gate: 'access_to_seller_sales'
+                }
+            },
+            { 
+                name: 'product/admin/request',
+                path: 'admin/request',
+                component: AdminSupplyRequestView,
+                meta: {
+                    module: 'product',
+                    subModule: 'product/admin/request',
+                    title: 'Supply Request',
+                    gate: 'access_to_sales'
                 }
             },
 

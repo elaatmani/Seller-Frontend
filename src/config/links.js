@@ -75,11 +75,25 @@ export const links = [
                 to: '/newproducts'
             },
             {
-                id: 2,
+                id: 3,
                 title: 'Add Product',
                 subModule: 'product/add',
                 gate: 'create_product',
                 to: '/products/add'
+            },
+            {
+                id: 4,
+                title: 'Supply Requests',
+                subModule: 'product/seller/request',
+                gate: 'access_to_seller_sales',
+                to: '/products/seller/request'
+            },
+            {
+                id: 5,
+                title: 'Supply Requests',
+                subModule: 'product/admin/request',
+                gate: 'access_to_sales',
+                to: '/products/admin/request'
             },
         ]
     },
