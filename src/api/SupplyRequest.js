@@ -13,6 +13,11 @@ class SupplyRequest {
         return Api.post('api/supply-requests/new', supply);
     }
 
+    async update(id, supply) {
+        await Csrf.getCookie();
+        return Api.post('api/supply-requests/' + id, supply);
+    }
+
     async delete(id) {
         await Csrf.getCookie();
         return Api.delete('api/supply-requests/' + id);

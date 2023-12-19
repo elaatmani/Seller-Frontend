@@ -9,8 +9,11 @@
         <td class="tw-px-4 tw-py-2 tw-truncate">
             <p class="tw-max-w-[200px] tw-truncate">{{ item.product.name }}</p>
         </td>
-        <td class="tw-px-4 tw-py-2">
-            <p><span class="tw-text-blue-500 ">{{ item.product_variation.color }}</span> <span class="tw-text-green-500">{{ item.product_variation.size  }}</span></p>
+        <td class="tw-px-4 tw-py-2 tw-uppercase tw-font-semibold">
+            <div class="tw-flex tw-items-center tw-gap-2 tw-text-sm">
+                <div v-if="!!item.product_variation.color" class="tw-px-1 tw-rounded-md tw-bg-orange-500 tw-text-white">{{ item.product_variation.color }}</div>
+                <div v-if="!!item.product_variation.size" class="tw-px-1 tw-rounded-md tw-bg-green-500 tw-text-white">{{ item.product_variation.size  }}</div>
+            </div>
         </td>
         <td class="tw-px-4 tw-py-2 tw-truncate">
             <p class="tw-max-w-[200px] tw-truncate">{{ item.quantity }}</p>

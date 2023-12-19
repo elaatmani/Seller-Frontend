@@ -186,7 +186,6 @@ const create = async () => {
     loading.value = false;
 }
 
-props
 
 </script>
 

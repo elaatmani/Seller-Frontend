@@ -6,7 +6,7 @@
         <td class="tw-px-4 tw-py-2 tw-truncate">
             <p class="tw-max-w-[200px] tw-truncate">{{ item.product.name }}</p>
         </td>
-        <td class="tw-px-4 tw-py-2">
+        <td class="tw-px-4 tw-py-2 tw-uppercase tw-font-semibold">
             <p><span class="tw-text-blue-500 ">{{ item.product_variation.color }}</span> <span class="tw-text-green-500">{{ item.product_variation.size  }}</span></p>
         </td>
         <td class="tw-px-4 tw-py-2 tw-truncate">

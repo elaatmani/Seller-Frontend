@@ -8,7 +8,7 @@
                             <tr>
 
                                 <th scope="col"
-                                class="tw-w-[100px] tw-px-3 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                class="tw-w-[50px] tw-px-3 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                     ID
                                 </th>
 
