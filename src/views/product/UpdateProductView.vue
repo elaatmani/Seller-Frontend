@@ -58,6 +58,7 @@
                   <v-text-field
                     :error="!formStatus.quantity.valid"
                     @keyup="resetError('quantity')"
+                    disabled
                     :hide-details="true"
                     v-model="product.reference"
                     clearable
@@ -176,8 +177,8 @@
                 {{ formStatus.warehouse.message }}
               </div>
             </div>
-            <div>
-              <div class="tw-grid tw-grid-cols-12 md:tw-gap-3">
+            <div >
+              <div v-if="user.role=='admin'" class="tw-grid tw-grid-cols-12 md:tw-gap-3">
                 <div class="md:tw-col-span-3 tw-col-span-12">
                   <div class="mb-1 text-body-2 tw-text-zinc-700">Size</div>
                   <v-text-field
@@ -265,7 +266,7 @@
                   </div>
                 </div>
               </div>
-              <div>
+              <div v-if="user.role=='admin'">
                 <div class="tw-col-span-12 tw-flex tw-justify-end">
                   <button
                     :disabled="!quantity"
@@ -328,7 +329,7 @@
                             'color',
                             'qty',
                             'Stock Alert',
-                            'actions',
+                            user.role == 'admin' ? 'actions' : '',
                           ]"
                           :class="[column == 'actions' && '!tw-w-[40px]']"
                           :key="column"
@@ -376,6 +377,7 @@
                           {{ variant.stockAlert }}
                         </td>
                         <td
+                        v-if="user.role=='admin'"
                           class="tw-flex tw-items-center tw-px-6 tw-py-2 tw-space-x-3"
                         >
                           <div>
