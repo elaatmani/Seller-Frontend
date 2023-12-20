@@ -3,7 +3,7 @@ import Csrf from './Csrf'
 
 class SupplyRequest {
 
-    async paginate(url = '/', options) {
+    async paginate(url = '', options) {
         await Csrf.getCookie();
         return Api.post('api/supply-requests' + url, options);
     }
