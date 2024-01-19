@@ -9,6 +9,8 @@
 
       <DateFilter v-model:from="filters.dropped_from" v-model:to="filters.dropped_to" label="Dropped" />
 
+      <DateFilter v-model:from="filters.delivered_from" v-model:to="filters.delivered_to" label="Delivered" />
+
       <AgentFilter :filters="filters" @update="f => filters = f" />
 
         <SellerFilter :filters="filters" @update="f => filters = f" />
@@ -139,13 +141,15 @@ export default {
                 created_to: null,
                 dropped_from: null,
                 dropped_to: null,
+                delivered_from:null,
+                delivered_to: null,
                 affectation: 'all',
                 agente_id: 'all',
                 user_id: 'all',
                 upsell: 'all',
                 confirmation: 'all',
                 delivery: 'all',
-                product_id: 'all',
+                product_id: 'all'
             }
         },
         filter() {
