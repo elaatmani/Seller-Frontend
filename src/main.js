@@ -5,6 +5,7 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import ability from './plugins/ability'
 import alert from './plugins/alert'
+import attributes from './plugins/attributes'
 import apiErrorHandler from './plugins/apiErrorHandler'
 import VueNumber from 'vue-number-animation'
 
@@ -16,6 +17,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import JsonCSV from 'vue-json-csv';
 import PopupNew from '@/components/PopupNew'
+import { Icon } from '@iconify/vue';
 
 // import styling and tailwind
 import '@/assets/style.css'
@@ -29,6 +31,7 @@ export default createApp(App)
   .use(vuetify)
   .use(ability)
   .use(alert)
+  .use(attributes)
   .use(apiErrorHandler)
   .use(VueNumber)
 
@@ -40,5 +43,6 @@ export default createApp(App)
   .component('VueDatePicker', VueDatePicker)
   .component('downloadCsv', JsonCSV)
   .component('popupNew', PopupNew)
+  .component('icon', Icon)
 
   .mount('#app')
