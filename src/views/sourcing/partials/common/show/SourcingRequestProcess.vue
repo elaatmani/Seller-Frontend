@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="tw-p-3 tw-border-b tw-border-solid tw-border-neutral-200 tw-text-sm">
-            <p><span class="tw-font-bold">Request No:</span> 21471</p>
-            <p><span class="tw-font-bold">Requested at:</span> 2024-01-11 13:43:31</p>
+            <p><span class="tw-font-bold">Request No:</span> {{ route.params.id }}</p>
+            <p><span class="tw-font-bold">Requested at:</span> {{ moment(sourcing.created_at).format("YYYY-MM-DD HH:mm:ss") }}</p>
         </div>
         <div class="tw-p-5">
             <div class="tw-grid tw-grid-cols-5">
@@ -66,10 +66,15 @@
     </div>
 </template>
 
-<script>
-export default {
+<script setup>
+import { useRoute } from "vue-router";
+import { defineProps, toRef } from 'vue';
+import moment from 'moment'
 
-}
+const route = useRoute();
+const props = defineProps(['sourcing']);
+const sourcing = toRef(props, 'sourcing');
+
 </script>
 
 <style>

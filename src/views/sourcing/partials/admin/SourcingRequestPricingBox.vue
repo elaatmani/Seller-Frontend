@@ -4,27 +4,28 @@
             <ul class="tw-space-y-4">
                 <li class="tw-flex tw-items-center tw-justify-between">
                     <span>Destination Country:</span>
-                    <span class="tw-font-black tw-text-neutral-800">Morocco</span>
+                    <span class="tw-font-black tw-text-neutral-800 tw-capitalize">{{ sourcing.destination_country }}</span>
                 </li>
 
                 <li class="tw-flex tw-items-center tw-justify-between">
                     <span>Shipping Method:</span>
-                    <span class="tw-font-black tw-text-neutral-800">Air freight</span>
+                    <span v-if="sourcing.shipping_method == 'air-freight'" class="tw-font-black tw-text-neutral-800">Air freight</span>
+                    <span v-if="sourcing.shipping_method == 'ocean-freight'" class="tw-font-black tw-text-neutral-800">Ocean freight</span>
                 </li>
 
                 <li class="tw-flex tw-items-center tw-justify-between">
                     <span>Quantity:</span>
-                    <span class="tw-font-black tw-text-neutral-800">50</span>
+                    <span class="tw-font-black tw-text-neutral-800">{{ sourcing.estimated_quantity }}</span>
                 </li>
 
                 <li class="tw-flex tw-items-center tw-justify-between">
                     <span>Unit Price:</span>
-                    <span class="tw-font-black tw-text-neutral-800">9.21 {{ currency }}</span>
+                    <span class="tw-font-black tw-text-neutral-800">{{ sourcing.cost_per_unit }} {{ currency }}</span>
                 </li>
 
                 <li class="tw-flex tw-items-center tw-justify-between tw-">
                     <span>Additional Fees:</span>
-                    <span class="tw-font-black tw-text-neutral-800">0 {{ currency }}</span>
+                    <span class="tw-font-black tw-text-neutral-800">{{ sourcing.additional_fees }} {{ currency }}</span>
                 </li>
 
                 <li class="tw-border-b tw-border-solid tw-border-neutral-200">
@@ -32,7 +33,7 @@
 
                 <li class="tw-flex tw-items-center tw-justify-between">
                     <span>Total:</span>
-                    <span class="tw-font-black tw-text-neutral-800">460.50 {{ currency }}</span>
+                    <span class="tw-font-black tw-text-neutral-800">{{ sourcing.total_cost }} {{ currency }}</span>
                 </li>
             </ul>
         </div>
@@ -50,7 +51,7 @@
             </button>
         </div>
 
-        <SourcingRequestPricingEdit v-model:visible="visible" />
+        <SourcingRequestPricingEdit :sourcing="sourcing" v-model:visible="visible" />
     </div>
 </template>
 
@@ -58,8 +59,10 @@
 // import { useAlert } from '@/composables/useAlert';
 import { currency } from '@/config/config';
 import SourcingRequestPricingEdit from './SourcingRequestPricingEdit'
-import { ref } from 'vue';
+import { ref, defineProps, toRef } from 'vue';
 
+const props = defineProps(['sourcing']);
+const sourcing = toRef(props, 'sourcing');
 const visible = ref(false);
 // const isLoading = ref(false);
 // const handleConfirm = () => {

@@ -68,7 +68,7 @@ const colsForAdmin = [
     { field: 'quantity', name: 'Quantity', class: 'tw-w-[100px]' },
     { field: 'country', name: 'Country', class: 'tw-w-[100px]' },
     { field: 'status', name: 'Status', class: 'tw-w-[100px]' },
-    { field: 'actions', name: '', class: 'tw-w-[100px]' }
+    { field: 'actions', name: 'Actions', class: 'tw-w-[100px]' }
 ];
 
 const colsForSeller = [
@@ -78,7 +78,7 @@ const colsForSeller = [
     { field: 'quantity', name: 'Quantity', class: 'tw-w-[100px]' },
     { field: 'country', name: 'Country', class: 'tw-w-[100px]' },
     { field: 'status', name: 'Status', class: 'tw-w-[100px]' },
-    { field: 'actions', name: '', class: 'tw-w-[100px]' }
+    { field: 'actions', name: 'Actions', class: 'tw-w-[100px]' }
 ];
 
 const cols = ref(user.value.role == 'admin' ? colsForAdmin : colsForSeller);

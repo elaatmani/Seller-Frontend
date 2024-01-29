@@ -18,6 +18,16 @@ class Sourcing {
         return Api.post('api/sourcings/' + id, sourcing);
     }
 
+    async get(id) {
+        await Csrf.getCookie();
+        return Api.get('api/sourcings/' + id);
+    }
+
+    async history(id) {
+        await Csrf.getCookie();
+        return Api.get('api/sourcings/' + id + '/history');
+    }
+
     async delete(id) {
         await Csrf.getCookie();
         return Api.delete('api/sourcings/' + id);

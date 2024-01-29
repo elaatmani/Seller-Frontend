@@ -42,13 +42,13 @@
                         <div>
                             <label
                                 class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Unit Price</label>
-                            <input v-model.number="form.sourcing.unit_price" @input="form.errors.unit_price = null" type="number"
-                                :class="[form.errors.unit_price && '!tw-border-red-400']"
+                            <input v-model.number="form.sourcing.cost_per_unit" @input="form.errors.cost_per_unit = null" type="number"
+                                :class="[form.errors.cost_per_unit && '!tw-border-red-400']"
                                 class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
                                 placeholder="Enter a unit price for the quotation" required />
-                            <label v-if="form.errors.unit_price"
+                            <label v-if="form.errors.cost_per_unit"
                                 class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white">{{
-                                    form.errors.unit_price }}</label>
+                                    form.errors.cost_per_unit }}</label>
                         </div>
 
 
@@ -95,25 +95,24 @@
 </template>
 
 <script setup>
+import Sourcing from '@/api/Sourcing';
+import { useAlert } from '@/composables/useAlert';
 import { currency } from '@/config/config';
-import { defineEmits, defineProps, ref, computed, reactive } from 'vue';
+import { clone } from '@/helpers/methods';
+import { defineEmits, defineProps, ref, computed, reactive, watch, inject } from 'vue';
 
 const emit = defineEmits(['update:visible']);
 const props = defineProps(['visible', 'sourcing']);
+const sourcingOptions = inject('sourcing')
 
 const loading = ref(false);
 const form = reactive({
-    sourcing: {
-        estimated_quantity: 0,
-        unit_price: 0,
-        additional_fees: 0,
-        shipping_method: 'not-selected'
-    },
+    sourcing: {},
     errors: {}
 });
 
 const total = computed(() => {
-    return (form.sourcing.estimated_quantity * form.sourcing.unit_price) + form.sourcing.additional_fees
+    return ((form.sourcing.estimated_quantity ?? 0) * (form.sourcing.cost_per_unit ?? 0)) + (form.sourcing.additional_fees ?? 0)
 })
 
 
@@ -122,12 +121,32 @@ const hide = () => {
     emit('update:visible', false)
 }
 
+
 const update = async () => {
     loading.value = true;
-    
+    await Sourcing.update(form.sourcing.id, {...form.sourcing, total_cost: total.value})
+    .then(
+        res => {
+            if(res.data.code == 'SUCCESS') {
+                sourcingOptions.updateSourcing(res.data.sourcing);
+                useAlert('Updated success');
+                hide();
+            }
+        },
+        err => {
+            if(err?.response?.status == 422) {
+                for(let e in err?.response?.data?.errors) {
+                    form.errors[e] = err?.response?.data?.errors[e][0]
+                }
+            }
+        }
+    );
     loading.value = false;
 }
 
+watch(() => props.visible, () => {
+    form.sourcing = clone(props.sourcing);
+})
 
 </script>
 

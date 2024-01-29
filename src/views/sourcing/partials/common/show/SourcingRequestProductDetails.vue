@@ -14,10 +14,10 @@
         <tbody>
             <tr>
                 <td class="tw-pt-2">
-                    <p class="tw-truncate tw-text-blue-500 tw-cursor-pointer hover:tw-underline">XXXX....</p>
+                    <a :href="sourcing.product_url" class="tw-truncate tw-text-blue-500 tw-cursor-pointer hover:tw-underline">{{ sourcing.product_name }}</a>
                 </td>
                 <td class="tw-pt-2">
-                    50
+                    {{ sourcing.estimated_quantity }}
                 </td>
             </tr>
         </tbody>
@@ -26,6 +26,10 @@
 </template>
 
 <script setup>
+import { defineProps, toRef } from 'vue';
+
+const props = defineProps(['sourcing']);
+const sourcing = toRef(props, 'sourcing');
 </script>
 
 <style>

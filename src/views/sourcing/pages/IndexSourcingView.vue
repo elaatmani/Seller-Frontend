@@ -42,7 +42,7 @@
   import Sourcing from '@/api/Sourcing';
   import IndexOptions from '@/views/sourcing/partials/common/options/IndexOptions';
   import IndexTable from '@/views/sourcing/partials/common/table/IndexTable';
-import { ref } from 'vue';
+  import { ref } from 'vue';
 
   const sourcings = ref([]);
   const isLoading = ref(false);
@@ -53,7 +53,7 @@ import { ref } from 'vue';
     .then(
       res => {
         if(res.data.code == 'SUCCESS') {
-          sourcings.value = res.data.sourcings
+          sourcings.value = res.data.sourcings.data
         }
       }
     );

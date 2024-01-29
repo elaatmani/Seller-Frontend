@@ -29,7 +29,6 @@ import TestView from '@/views/TestView'
 const routes = [
   auth,
   ads,
-  main,
   dashboard,
   product,
   user,
@@ -46,7 +45,8 @@ const routes = [
   seller,
   sourcing,
   settings,
-  
+  main,
+
   {
     name: 'default',
     path: '/test',
