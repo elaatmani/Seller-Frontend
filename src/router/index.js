@@ -23,6 +23,7 @@ import dashboard from './routes/dashboard'
 import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 import NotFound from '@/views/NotFound'
 import TestView from '@/views/TestView'
+import settings from './routes/settings'
 
 const routes = [
   auth,
@@ -42,6 +43,7 @@ const routes = [
   sheet,
   followup,
   seller,
+  settings,
   
   {
     name: 'default',

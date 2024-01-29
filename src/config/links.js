@@ -438,11 +438,20 @@ export const links = [
         module: 'settings',
         to: '/settings',
         gate: 'access_to_account',
-        hasChildren: false,
+        hasChildren: true,
         icon: {
             type: 'svg',
             value: 'assets/img/icons/settings.svg'
-        }
+        },
+        children: [
+            {
+                id: 1,
+                title: 'Cron Jobs',
+                subModule: 'settings/cronJobs',
+                gate: 'access_to_account',
+                to: '/settings/cronJobs'
+            },
+        ]
     },
 
     {

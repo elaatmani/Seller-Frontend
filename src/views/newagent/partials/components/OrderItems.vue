@@ -31,7 +31,6 @@
               <th
                 v-for="column in [
                   'product',
-                  '',
                   'variation',
                   'quantity',
                   'price',
@@ -57,7 +56,7 @@
             </template>
 
             <tr>
-              <td colspan="6">
+              <td colspan="5">
                 <div class="tw-flex tw-justify-end tw-items-center tw-py-3">
                   <button @click="addItem" class="tw-flex tw-items-center tw-justify-center  tw-px-5 tw-py-2 tw-text-sm tw-tracking-wide tw-text-white tw-transition-colors tw-duration-200 tw-bg-orange-400 tw-rounded-lg shrink-0 sm:tw-w-auto tw-gap-x-2 hover:tw-bg-orange-600 darkx:hover:tw-bg-orange-500 darkx:tw-bg-orange-600">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="tw-w-5 tw-h-5">
@@ -72,8 +71,6 @@
 
             <tr>
               <td colspan="4">
-              </td>
-              <td>
               </td>
               <td colspan="1" class="tw-p-2">
                 <div class="tw-p-2 tw-py-1 tw-text-lg tw-font-['cairo'] tw-text-green-500 tw-w-24 tw-font-bold tw-tracking-wide tw-block  focus:tw-outline-none tw-shadow-sm tw-border-gray-300 tw-rounded tw-bg-gray-50 focus:tw-ring-orange-500 focus:tw-border-orange-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500">

@@ -1055,6 +1055,10 @@ export default {
 
   mounted() {
     this.getWarhouses();
+    const firstDelivery = this.deliveries[1];
+    if (firstDelivery) {
+      this.selectedDeliveries = [firstDelivery.id];
+    }
   },
 };
 </script>

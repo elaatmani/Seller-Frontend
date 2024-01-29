@@ -31,7 +31,7 @@
               <th
                 v-for="column in [
                   'product',
-                  '',
+                  
                   'variation',
                   'quantity',
                   'price',
@@ -73,8 +73,6 @@
             <tr>
               <td colspan="4">
               </td>
-              <td>
-              </td>
               <td colspan="1" class="tw-p-2">
                 <div class="tw-p-2 tw-py-1 tw-text-lg tw-font-['cairo'] tw-text-green-500 tw-w-24 tw-font-bold tw-tracking-wide tw-block  focus:tw-outline-none tw-shadow-sm tw-border-gray-300 tw-rounded tw-bg-gray-50 focus:tw-ring-orange-500 focus:tw-border-orange-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500">
                   <p>{{ currency }} {{price}}</p>
@@ -86,7 +84,7 @@
 
           <tbody v-else>
             <tr>
-              <td colspan="6">
+              <td colspan="5">
                 <div class="tw-scale-75 tw-p-5">
                   <loading />
                 </div>
