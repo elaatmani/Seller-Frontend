@@ -19,16 +19,17 @@ import ads from './routes/ads'
 import seller from './routes/seller'
 import followup from './routes/followup'
 import dashboard from './routes/dashboard'
+import sourcing from './routes/sourcing'
+import settings from './routes/settings'
 
 import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 import NotFound from '@/views/NotFound'
 import TestView from '@/views/TestView'
-import settings from './routes/settings'
 
 const routes = [
   auth,
-  ads,
   main,
+  ads,
   dashboard,
   product,
   user,
@@ -43,8 +44,9 @@ const routes = [
   sheet,
   followup,
   seller,
+  sourcing,
   settings,
-  
+
   {
     name: 'default',
     path: '/test',

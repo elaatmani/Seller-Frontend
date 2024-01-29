@@ -51,6 +51,33 @@ export const links = [
 
     {
         id: 2,
+        module: 'sourcing',
+        title: 'Sourcing',
+        hasChildren: true,
+        role: ['admin', 'seller'], 
+        icon: {
+            type: 'icon',
+            value: 'mdi-truck-outline'
+        },
+        children: [
+            {
+                id: 1,
+                title: 'Request a new product',
+                subModule: 'sourcing/new',
+                role: ['seller'],
+                to: '/sourcings/new'
+            },
+            {
+                id: 2,
+                title: 'All Requests',
+                subModule: 'sourcing/index',
+                role: ['seller', 'admin'],
+                to: '/sourcings'
+            },
+        ]
+    },
+    {
+        id: 2,
         module: 'product',
         title: 'Product',
         hasChildren: true,
@@ -436,8 +463,7 @@ export const links = [
         id: 12,
         title: 'Settings',
         module: 'settings',
-        to: '/settings',
-        gate: 'access_to_account',
+        role: 'admin',
         hasChildren: true,
         icon: {
             type: 'svg',
@@ -448,8 +474,15 @@ export const links = [
                 id: 1,
                 title: 'Cron Jobs',
                 subModule: 'settings/cronJobs',
-                gate: 'access_to_account',
+                role: 'admin',
                 to: '/settings/cronJobs'
+            },
+            {
+                id: 2,
+                title: 'Account',
+                subModule: 'settings/account',
+                role: 'admin',
+                to: '/settings/account'
             },
         ]
     },

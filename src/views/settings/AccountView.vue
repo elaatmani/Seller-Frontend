@@ -7,8 +7,8 @@
       <!-- <h2 class="tw-text-gray-500 tw-text-sm">Update user informations</h2> -->
     </div>
 
-    <div v-if="!isFormReady">
-      <LoadingAnimation />
+    <div v-if="!isFormReady" class="tw-h-[calc(100vh-170px)] tw-flex tw-items-center tw-justify-center tw-rounded-md tw-border tw-bg-white">
+        <loading />
     </div>
 
     <div
