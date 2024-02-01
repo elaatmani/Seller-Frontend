@@ -9,7 +9,7 @@ import AccountView from '@/views/settings/AccountView'
 export default {
 
         path: '/settings',
-        name: 'home',
+        name: 'settings',
         component: DefaultLayout,
         meta: {
           module: 'settings'

@@ -45,10 +45,7 @@
                     <icon icon="clarity:edit-solid" class="tw-text-lg tw-text-white" />
                 <span>Edit</span>
             </button>
-            <button
-                class="tw-py-2 tw-px-7 tw-w-full justify-center tw-flex tw-items-center tw-rounded tw-text-sm tw-border tw-border-solid tw-border-tansparent dark:tw-border-neutral-900 hover:tw-border-neutral-400 dark:hover:tw-border-neutral-500 hover:tw-bg-gray-300 tw-bg-gray-200 dark:tw-bg-neutral-600 tw-duration-300 tw-text-neutral-900 dark:tw-text-neutral-300">
-                Cancel
-            </button>
+            <SourcingRequestCancel v-if="false" />
         </div>
 
         <SourcingRequestPricingEdit :sourcing="sourcing" v-model:visible="visible" />
@@ -59,6 +56,7 @@
 // import { useAlert } from '@/composables/useAlert';
 import { currency } from '@/config/config';
 import SourcingRequestPricingEdit from './SourcingRequestPricingEdit'
+import SourcingRequestCancel from './../common/show/SourcingRequestCancel'
 import { ref, defineProps, toRef } from 'vue';
 
 const props = defineProps(['sourcing']);

@@ -38,13 +38,14 @@
           </div>
         </div>
 
+        <div class="tw-border tw-bg-white tw-w-full tw-rounded-md">
+          <SourcingRequestProcess :sourcing="sourcing" />
+        </div>
+
         <div class="tw-p-4 tw-border tw-bg-white tw-w-full tw-rounded-md">
           <SourcingRequestProductDetails :sourcing="sourcing" />
         </div>
 
-        <div class="tw-border tw-bg-white tw-w-full tw-rounded-md">
-          <SourcingRequestProcess :sourcing="sourcing" />
-        </div>
 
         <div class="tw-border tw-bg-white tw-w-full tw-rounded-md">
           <SourcingRequestDetails :sourcing="sourcing" />
@@ -65,9 +66,9 @@
 <script setup>
 import moment from 'moment'
 import { useRoute } from "vue-router";
-import { defineProps, toRef } from 'vue'
+import { defineProps, toRef, computed } from 'vue'
 import { quotation_statuses, sourcing_statuses } from '@/config/sourcing';
-import SourcingRequestProcess from '@/views/sourcing/partials/common/show/SourcingRequestProcess';
+import SourcingRequestProcess from '@/views/sourcing/partials/admin/SourcingRequestProcess';
 import SourcingRequestPricingBox from '@/views/sourcing/partials/admin/SourcingRequestPricingBox';
 import SourcingRequestDetails from '@/views/sourcing/partials/admin/SourcingRequestDetails';
 import SourcingRequestProductDetails from '@/views/sourcing/partials/common/show/SourcingRequestProductDetails';
@@ -76,8 +77,8 @@ const route = useRoute();
 const props = defineProps(['sourcing', 'loading']);
 const sourcing = toRef(props, 'sourcing');
 const loading = toRef(props, 'loading');
-const quotation_status = quotation_statuses.find(s => s.value == sourcing.value.quotation_status);
-const sourcing_status = sourcing_statuses.find(s => s.value == sourcing.value.sourcing_status);
+const quotation_status = computed(() => quotation_statuses.find(s => s.value == sourcing.value.quotation_status));
+const sourcing_status = computed(() => sourcing_statuses.find(s => s.value == sourcing.value.sourcing_status));
 
 
 sourcing;

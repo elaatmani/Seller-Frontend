@@ -13,7 +13,7 @@
                     Today
                 </button>
 
-                <button title="Filters" :class="[visible.filters && '!tw-bg-gray-100']"
+                <button v-if="['admin'].includes($user.role)" title="Filters" :class="[visible.filters && '!tw-bg-gray-100']"
                     @click="visible.filters = !visible.filters"
                     class="tw-h-[40px] tw-flex tw-items-center tw-justify-center tw-px-5 tw-py-2 tw-text-xs tw-font-medium tw-border-solid tw-text-gray-600 tw-transition-colors tw-duration-200 sm:tw-text-sm darkx:hover:tw-bg-gray-800 darkx:tw-text-gray-300 hover:tw-bg-gray-100">
                     <icon icon="mi:filter" class="tw-text-2xl" />
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div>
+        <div v-if="['admin'].includes($user.role)">
             <div :class="[visible.filters ? 'tw-grid-rows-[1fr]' : 'tw-grid-rows-[0fr]']"
                 class="tw-grid tw-duration-300 tw-transition-all">
                 <div class="tw-overflow-hidden tw-col-span-1">

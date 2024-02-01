@@ -9,7 +9,7 @@
               </h2>
   
               <span
-                class="tw-px-3 tw-py-1 tw-text-xs tw-text-emerald-600 tw-bg-emerald-100 tw-rounded-full darkx:tw-bg-gray-800 darkx:tw-text-orange-400">0
+                class="tw-px-3 tw-py-1 tw-text-xs tw-text-emerald-600 tw-bg-emerald-100 tw-rounded-full darkx:tw-bg-gray-800 darkx:tw-text-orange-400">{{ options.total }}
                 request</span>
             </div>
   
@@ -42,9 +42,13 @@
   import Sourcing from '@/api/Sourcing';
   import IndexOptions from '@/views/sourcing/partials/common/options/IndexOptions';
   import IndexTable from '@/views/sourcing/partials/common/table/IndexTable';
-  import { ref } from 'vue';
+  import { ref, reactive, provide } from 'vue';
 
   const sourcings = ref([]);
+  const options = reactive({
+    total: 0,
+    filters: {}
+  });
   const isLoading = ref(false);
 
   const getData = async () => {
@@ -54,12 +58,17 @@
       res => {
         if(res.data.code == 'SUCCESS') {
           sourcings.value = res.data.sourcings.data
+          options.total = res.data.sourcings.total
         }
       }
     );
     isLoading.value = false;
   };
 
+  provide('options', {
+    options,
+    setOptions: v => Object.assign(options, v)
+  })
   getData();
   
   </script>

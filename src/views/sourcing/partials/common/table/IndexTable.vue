@@ -67,7 +67,8 @@ const colsForAdmin = [
     { field: 'product_name', name: 'Product name', class: '' },
     { field: 'quantity', name: 'Quantity', class: 'tw-w-[100px]' },
     { field: 'country', name: 'Country', class: 'tw-w-[100px]' },
-    { field: 'status', name: 'Status', class: 'tw-w-[100px]' },
+    { field: 'quotation', name: 'Quotation', class: 'tw-w-[100px]' },
+    { field: 'sourcing', name: 'Sourcing', class: 'tw-w-[100px]' },
     { field: 'actions', name: 'Actions', class: 'tw-w-[100px]' }
 ];
 
@@ -77,7 +78,8 @@ const colsForSeller = [
     { field: 'product_name', name: 'Product name', class: '' },
     { field: 'quantity', name: 'Quantity', class: 'tw-w-[100px]' },
     { field: 'country', name: 'Country', class: 'tw-w-[100px]' },
-    { field: 'status', name: 'Status', class: 'tw-w-[100px]' },
+    { field: 'quotation', name: 'Quotation', class: 'tw-w-[100px]' },
+    { field: 'sourcing', name: 'Sourcing', class: 'tw-w-[100px]' },
     { field: 'actions', name: 'Actions', class: 'tw-w-[100px]' }
 ];
 

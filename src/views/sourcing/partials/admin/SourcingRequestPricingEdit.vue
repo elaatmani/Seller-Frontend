@@ -76,7 +76,7 @@
                     </div>
 
                     <div
-                        class="tw-flex tw-justify-end tw-items-center tw-p-2 tw-gap-3 dark:tw-bg-neutral-900 tw-bg-gray-100 tw-border-t tw-border-solid">
+                        class="tw-flex tw-justify-end tw-items-center tw-p-4 tw-gap-3 dark:tw-bg-neutral-900 tw-bg-gray-100 tw-border-t tw-border-solid">
                         <button @click="hide"
                             class="tw-py-2 tw-px-7 tw-rounded tw-text-sm tw-border tw-border-solid tw-border-tansparent dark:tw-border-neutral-900 hover:tw-border-neutral-400 dark:hover:tw-border-neutral-500 hover:tw-bg-gray-300 tw-bg-gray-200 dark:tw-bg-neutral-600 tw-duration-300 tw-text-neutral-900 dark:tw-text-neutral-300">
                             Cancel
@@ -86,7 +86,7 @@
                             <v-icon size="small"
                                 class="tw-duration-300 tw-animate-spin tw-overflow-hidden tw-max-w-0 tw-mr-0"
                                 :class="[loading && '!tw-max-w-[50px] !tw-mr-3']">mdi-loading</v-icon>
-                            <span>Update</span>
+                            <span>Send quotation</span>
                         </button>
                     </div>
                 </div>
@@ -124,12 +124,13 @@ const hide = () => {
 
 const update = async () => {
     loading.value = true;
-    await Sourcing.update(form.sourcing.id, {...form.sourcing, total_cost: total.value})
+    const quotation = form.sourcing.quotation_status == 'pending' ? 'quoting' : form.sourcing.quotation_status;
+    await Sourcing.update(form.sourcing.id, {...form.sourcing, total_cost: total.value, quotation_status: quotation })
     .then(
         res => {
             if(res.data.code == 'SUCCESS') {
                 sourcingOptions.updateSourcing(res.data.sourcing);
-                useAlert('Updated success');
+                useAlert('Quotation sent');
                 hide();
             }
         },

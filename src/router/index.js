@@ -28,7 +28,6 @@ import TestView from '@/views/TestView'
 
 const routes = [
   auth,
-  main,
   ads,
   dashboard,
   product,
@@ -45,6 +44,7 @@ const routes = [
   followup,
   seller,
   sourcing,
+  main,
   settings,
 
   {

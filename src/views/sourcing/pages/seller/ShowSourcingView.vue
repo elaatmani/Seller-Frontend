@@ -12,8 +12,8 @@
                   <div :class="quotation_status.class" class="tw-rounded tw-px-4 tw-py-1 tw-text-sm tw-text-center">
                     {{ quotation_status.name }}
                   </div>
-                  <div :class="request_status.class" class="tw-rounded tw-px-4 tw-py-1 tw-text-sm tw-text-center">
-                    {{ request_status.name }}
+                  <div :class="sourcing_status.class" class="tw-rounded tw-px-4 tw-py-1 tw-text-sm tw-text-center">
+                    {{ sourcing_status.name }}
                   </div>
                 </div>
               </div>
@@ -61,15 +61,16 @@
   <script setup>
   import moment from 'moment'
   import { useRoute } from "vue-router";
-  import { defineProps, toRef } from 'vue'
-  import { quotation_statuses } from '@/config/sourcing';
+  import { defineProps, toRef, computed } from 'vue'
+  import { quotation_statuses, sourcing_statuses } from '@/config/sourcing';
   import SourcingRequestProcess from '@/views/sourcing/partials/common/show/SourcingRequestProcess';
   import SourcingRequestPricingBox from '@/views/sourcing/partials/common/show/SourcingRequestPricingBox';
   import SourcingRequestProductDetails from '@/views/sourcing/partials/common/show/SourcingRequestProductDetails';
   
   const route = useRoute();
-  const quotation_status = quotation_statuses[1];
-  const request_status = quotation_statuses[0];
+
+  const quotation_status = computed(() => quotation_statuses.find(s => s.value == sourcing.value.quotation_status));
+const sourcing_status = computed(() => sourcing_statuses.find(s => s.value == sourcing.value.sourcing_status));
 
   const props = defineProps(['sourcing', 'loading']);
   const sourcing = toRef(props, 'sourcing');

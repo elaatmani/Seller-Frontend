@@ -21,11 +21,19 @@
     </td>
 
     <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap tw-capitalize">
-        <div class="tw-px-4">
-            <div :class="status.class" class="tw-rounded tw-px-4 tw-py-1 tw-text-center">
-                {{ status.name }}
+            <div class="tw-px-4">
+                <div :class="quotation_status.class" class="tw-rounded tw-px-4 tw-py-1 tw-text-center">
+                    {{ quotation_status.name }}
+                </div>
             </div>
-        </div>
+    </td>
+
+    <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap tw-capitalize">
+            <div class="tw-px-4">
+                <div :class="sourcing_status.class" class="tw-rounded tw-px-4 tw-py-1 tw-text-center">
+                    {{ sourcing_status.name }}
+                </div>
+            </div>
     </td>
 
 
@@ -41,7 +49,7 @@
 import { computed, ref, defineProps, toRef } from 'vue';
 import moment from 'moment';
 import { useStore } from 'vuex';
-import { quotation_statuses } from '@/config/sourcing'
+import { quotation_statuses, sourcing_statuses } from '@/config/sourcing'
 import TableActions from './actions/TableActions';
 
 const store = useStore();
@@ -53,7 +61,8 @@ const props = defineProps({
     }
 });
 const item = toRef(props, 'item');
-const status = ref(quotation_statuses.find((s) => s.value == item.value.quotation_status));
+const quotation_status = ref(quotation_statuses.find((s) => s.value == item.value.quotation_status));
+const sourcing_status = ref(sourcing_statuses.find((s) => s.value == item.value.sourcing_status));
 
 
 </script>
