@@ -95,6 +95,7 @@
 
   const handlePageChange = (p) => {
     options.current_page = p;
+    options.page = p;
     getData();
   }
 
