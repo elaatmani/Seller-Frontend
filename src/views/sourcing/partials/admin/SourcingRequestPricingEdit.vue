@@ -112,7 +112,7 @@ const form = reactive({
 });
 
 const total = computed(() => {
-    return ((form.sourcing.estimated_quantity ?? 0) * (form.sourcing.cost_per_unit ?? 0)) + (form.sourcing.additional_fees ?? 0)
+    return ((form.sourcing.estimated_quantity ?? 0) * (form.sourcing.cost_per_unit ?? 0)) + (form.sourcing.additional_fees ?? 0).toFixed(2)
 })
 
 

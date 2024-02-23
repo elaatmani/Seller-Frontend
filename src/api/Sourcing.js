@@ -5,7 +5,7 @@ class Sourcing {
 
     async paginate(url = '', options) {
         await Csrf.getCookie();
-        return Api.post('api/sourcings' + url, options);
+        return Api.get('api/sourcings' + url, { params: options });
     }
 
     async create(sourcing) {

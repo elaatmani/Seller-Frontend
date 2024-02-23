@@ -34,12 +34,25 @@
         <div>
           <IndexTable :loading="isLoading" :sourcings="sourcings" />
         </div>
+
+        <div class="tw-mt-5">
+          <TablePaginationNoNums 
+            :total="options.total" 
+            :current-page="options.current_page" 
+            :last-page="options.last_page" 
+            :from="options.from" 
+            :to="options.to"
+            :per-page="options.per_page"
+            @page-change="handlePageChange"
+            />
+        </div>
       </section>
     </div>
   </template>
   
   <script setup>
   import Sourcing from '@/api/Sourcing';
+  import TablePaginationNoNums from '@/components/TablePaginationNoNums';
   import IndexOptions from '@/views/sourcing/partials/common/options/IndexOptions';
   import IndexTable from '@/views/sourcing/partials/common/table/IndexTable';
   import { ref, reactive, provide } from 'vue';
@@ -47,28 +60,51 @@
   const sourcings = ref([]);
   const options = reactive({
     total: 0,
-    filters: {}
+    current_page: 1,
+    last_page: 1,
+    from: 1,
+    to: 1,
+    per_page: 10,
+    sort_by: 'created_at',
+    sort_order: 'desc',
+
+    filters: {
+    },
   });
   const isLoading = ref(false);
 
   const getData = async () => {
     isLoading.value = true;
-    await Sourcing.paginate()
+    await Sourcing.paginate('', options)
     .then(
       res => {
         if(res.data.code == 'SUCCESS') {
           sourcings.value = res.data.sourcings.data
           options.total = res.data.sourcings.total
+          options.current_page = res.data.sourcings.current_page;
+          options.last_page = res.data.sourcings.last_page
+          options.from = res.data.sourcings.from
+          options.to = res.data.sourcings.to
+          options.per_page = res.data.sourcings.per_page
+          options.page = options.current_page
         }
       }
     );
     isLoading.value = false;
   };
 
+  const handlePageChange = (p) => {
+    options.current_page = p;
+    getData();
+  }
+
   provide('options', {
     options,
-    setOptions: v => Object.assign(options, v)
+    getData,
+    setOptions: v => Object.assign(options, v),
+    setFilter: (key, value) => options.filters[key] = value,
   })
+
   getData();
   
   </script>

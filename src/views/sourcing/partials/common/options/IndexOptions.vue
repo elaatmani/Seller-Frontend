@@ -8,10 +8,10 @@
                     View all
                 </button>
 
-                <button title="Requests created today" :class="[false && '!tw-bg-gray-100']" :disabled="false"
+                <!-- <button title="Requests created today" :class="[false && '!tw-bg-gray-100']" :disabled="false"
                     class="tw-h-[40px] tw-flex tw-items-center tw-justify-center tw-px-5 tw-py-2 tw-text-xs tw-font-medium tw-border-solid tw-text-gray-600 tw-transition-colors tw-duration-200 sm:tw-text-sm darkx:hover:tw-bg-gray-800 darkx:tw-text-gray-300 hover:tw-bg-gray-100">
                     Today
-                </button>
+                </button> -->
 
                 <button v-if="['admin'].includes($user.role)" title="Filters" :class="[visible.filters && '!tw-bg-gray-100']"
                     @click="visible.filters = !visible.filters"
@@ -20,7 +20,8 @@
                 </button>
 
                 <div class="tw-relative tw-h-[40px]">
-                    <select :value="5"
+                    <select :value="10"
+                        @change="v => handlePerPageChange(v.target.value)"
                         class="tw-h-full tw-px-5 tw-py-2 tw-w-20 focus:tw-outline-none tw-text-xs tw-font-medium tw-text-gray-600 tw-transition-colors tw-duration-200 sm:tw-text-sm darkx:hover:tw-bg-gray-800 darkx:tw-text-gray-300 hover:tw-bg-gray-100">
                         <option :value="i" :key="i" v-for="i in [5, 10, 20, 50, 100, 250, 500]">{{ i }}</option>
                     </select>
@@ -49,13 +50,22 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, inject } from 'vue';
 import FilterOption from './partials/FilterOption';
 import SearchOption from './partials/SearchOption';
 
 const visible = reactive({
     filters: false
-})
+});
+
+const ioptions = inject('options');
+
+const handlePerPageChange = (n) => {
+    ioptions.setOptions({...ioptions.options, per_page: parseInt(n)})
+    ioptions.getData();
+}
+
+
 </script>
 
 <style></style>

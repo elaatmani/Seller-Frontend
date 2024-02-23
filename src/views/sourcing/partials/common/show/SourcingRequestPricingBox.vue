@@ -33,7 +33,7 @@
 
                 <li class="tw-flex tw-items-center tw-justify-between">
                     <span>Total:</span>
-                    <span class="tw-font-black tw-text-neutral-800">{{ sourcing.total_cost }} {{ currency }}</span>
+                    <span class="tw-font-black tw-text-neutral-800">{{ parseFloat(sourcing.total_cost).toFixed(2) }} {{ currency }}</span>
                 </li>
             </ul>
         </div>

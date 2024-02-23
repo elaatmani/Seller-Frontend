@@ -6,8 +6,9 @@
           >Seller</label
         >
 
-        <select
-          @change="e=> emit('update', {...filters, user_id: e.target.value})"
+        <select 
+          @change="e => ioptions.setFilter('user_id', e.target.value)"
+          value="all"
           
           class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
         >
@@ -21,12 +22,11 @@
 
 <script setup>
 import { useStore } from 'vuex';
-import { computed, defineProps, defineEmits, toRef } from 'vue';
+import { computed, inject } from 'vue';
+
+const ioptions = inject('options');
 
 const store = useStore();
-const props = defineProps(['filters']);
-const emit = defineEmits(['update']);
-const filters = toRef(props, 'filters');
 const fetched = computed(() => store.getters['user/fetched']);
 const users = computed(() => store.getters['user/users']);
 const sellers = computed(() => fetched.value ? users.value.filter(u => u.role.name == 'seller') : []);
