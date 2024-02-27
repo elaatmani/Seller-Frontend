@@ -70,7 +70,7 @@
                         <div class="tw-flex tw-items-center tw-justify-between">
                             <label
                                 class="tw-block tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Total</label>
-                                <span class="tw-text-lg tw-font-bold">{{ total }} {{ currency }}</span>
+                                <span class="tw-text-lg tw-font-bold">{{ total.toFixed(2) }} {{ currency }}</span>
                         </div>
 
                     </div>
@@ -112,7 +112,8 @@ const form = reactive({
 });
 
 const total = computed(() => {
-    return ((form.sourcing.estimated_quantity ?? 0) * (form.sourcing.cost_per_unit ?? 0)) + (form.sourcing.additional_fees ?? 0).toFixed(2)
+    return ((form.sourcing.estimated_quantity ?? 0) * (form.sourcing.cost_per_unit ?? 0)) + (form.sourcing.additional_fees ?? 0);
+    // return ((form.sourcing.estimated_quantity ?? 0) * (form.sourcing.cost_per_unit ?? 0)) + (form.sourcing.additional_fees ?? 0).toFixed(2)
 })
 
 
