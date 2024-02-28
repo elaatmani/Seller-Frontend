@@ -8,6 +8,10 @@
         {{ moment(item.created_at).format('YYYY-MM-DD HH:mm:ss') }}
     </td>
 
+    <td v-if="user.role == 'admin'" class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
+        {{ item.seller_name }}
+    </td>
+
     <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
         {{ item.product_name }}
     </td>

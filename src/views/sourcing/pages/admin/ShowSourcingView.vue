@@ -28,13 +28,15 @@
 
     <div class="tw-grid lg:tw-grid-cols-12 tw-grid-cols-1 tw-gap-4 tw-mt-4">
       <div class="tw-space-y-4 lg:tw-col-span-8">
-        <div v-if="!!sourcing.note_by_seller" class=" tw-bg-white tw-w-full tw-rounded-md tw-overflow-hidden">
+        <div class=" tw-bg-white tw-w-full tw-rounded-md tw-overflow-hidden">
           <div class="tw-flex tw-items-center tw-gap-2 tw-p-2 tw-bg-blue-100 tw-border tw-border-blue-200 tw-rounded-t-md">
-            <icon icon="ph:info-fill" class="tw-text-xl tw-text-blue-500" />
-            <span>Note from <span class="tw-font-bold">{{ sourcing.seller.firstname }} {{ sourcing.seller.lastname }}</span></span>
+            <icon icon="solar:user-bold" class="tw-text-xl tw-text-blue-500" />
+            <span><span class="tw-font-bold">{{ sourcing.seller.firstname }} {{ sourcing.seller.lastname }}</span></span>
           </div>
-          <div class="tw-p-2 tw-border tw-border-t-0 tw-bg-white tw-border-blue-200 tw-rounded-b-md">
-            <h1>{{ sourcing.note_by_seller }}</h1>
+          <div v-if="!!sourcing.note_by_seller" class="tw-w-full tw-overflow-hidden">
+            <div class="tw-p-2 tw-border tw-border-t-0 tw-border-blue-200 tw-rounded-b-md">
+              <h1>{{ sourcing.note_by_seller }}</h1>
+            </div>
           </div>
         </div>
 

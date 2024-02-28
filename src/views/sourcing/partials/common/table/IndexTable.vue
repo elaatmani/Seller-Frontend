@@ -64,6 +64,7 @@ const loading = toRef(props, 'loading');
 const colsForAdmin = [
     { field: 'id', name: 'ID', class: 'tw-w-[60px]' },
     { field: 'created', name: 'Requested at', class: 'tw-w-[100px]' },
+    { field: 'seller', name: 'Seller', class: 'tw-max-w-[150px] tw-truncate' },
     { field: 'product_name', name: 'Product name', class: '' },
     { field: 'quantity', name: 'Quantity', class: 'tw-w-[100px]' },
     { field: 'country', name: 'Country', class: 'tw-w-[100px]' },
