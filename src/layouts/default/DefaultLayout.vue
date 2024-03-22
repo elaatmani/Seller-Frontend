@@ -10,7 +10,7 @@
 
         <!-- Alert component -->
         <Alert />
-
+        <AlertNotification/>
         <!-- Application container -->
         <v-main class="tw-bg-gray-50 tw-min-h-screen tw-overflow-y-auto">
             
@@ -36,9 +36,10 @@ import Echo from 'laravel-echo'
 import Sheet from '@/api/Sheet'
 import Product from '@/api/Product'
 import Sale from '@/api/Sale'
+import AlertNotification from '@/components/AlertNotification.vue'
 
 export default {
-    components: { AppHeader, AppSidebar, Alert },
+    components: { AppHeader, AppSidebar, Alert,AlertNotification },
 
     data() {
         return {
