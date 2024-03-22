@@ -27,7 +27,7 @@
 
           <div class="tw-flex tw-items-center tw-gap-2">
             <!-- Notifications -->
-            <Notification />
+            <GlobalNotification />
             
             <!-- User Menu -->
             <HeaderMenu />
@@ -43,11 +43,11 @@
 <script>
 import { localUrl } from '@/config/config'
 import HeaderMenu from '@/layouts/default/partials/header/HeaderMenu'
-import Notification from '@/layouts/default/partials/header/NotificationView'
+import GlobalNotification from '@/layouts/default/partials/header/GlobalNotification'
 
 export default {
     emits: [ 'toggleSidebar' ],
-    components: { HeaderMenu, Notification },
+    components: { HeaderMenu, GlobalNotification },
 
     data() {
       return {

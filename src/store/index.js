@@ -7,6 +7,7 @@ import order from './modules/order'
 import inventory from './modules/inventory'
 import agent from './modules/agent'
 import city from './modules/city'
+import app from './modules/app'
 import shop from './modules/shop'
 import notification from './modules/notification'
 import warehouse from './modules/warehouse'
@@ -38,6 +39,7 @@ export default createStore({
     warehouse,
     factorisation,
     sheet,
+    app,
     
     'supply-request': supplyRequest
   }
