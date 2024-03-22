@@ -14,7 +14,9 @@
         <tbody>
             <tr>
                 <td class="tw-pt-2">
-                    <a :href="sourcing.product_url" class="tw-truncate tw-text-blue-500 tw-cursor-pointer hover:tw-underline">{{ sourcing.product_name }}</a>
+                    <p class="tw-whitespace-normal tw-max-w-[500px] tw-truncate">
+                        <a :href="sourcing.product_url" class="tw-text-blue-500 tw-cursor-pointer hover:tw-underline">{{ sourcing.product_name }}</a>
+                    </p>
                 </td>
                 <td class="tw-pt-2">
                     {{ sourcing.estimated_quantity }}

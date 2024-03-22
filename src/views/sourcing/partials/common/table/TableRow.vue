@@ -9,11 +9,15 @@
     </td>
 
     <td v-if="user.role == 'admin'" class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
-        {{ item.seller_name }}
+        <p class="tw-w-[100px] tw-truncate">
+            {{ item.seller_name }}
+        </p>
     </td>
 
     <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
-        {{ item.product_name }}
+        <p class="tw-w-[200px] tw-truncate">
+            {{ item.product_name }}
+        </p>
     </td>
 
     <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
