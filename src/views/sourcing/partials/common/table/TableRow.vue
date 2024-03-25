@@ -29,7 +29,7 @@
     </p>
     </td>
     <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
-        ${{ item.total_cost }}
+        {{ currency }}{{ item.total_cost }}
     </td>
     <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
         {{ item.estimated_quantity }}
@@ -70,6 +70,7 @@ import moment from 'moment';
 import { useStore } from 'vuex';
 import { quotation_statuses, sourcing_statuses } from '@/config/sourcing'
 import TableActions from './actions/TableActions';
+import {currency} from "@/config/config";
 
 const store = useStore();
 const user = computed(() => store.getters['user/user']);
