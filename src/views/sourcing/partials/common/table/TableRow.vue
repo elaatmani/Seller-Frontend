@@ -29,6 +29,17 @@
     </td>
 
     <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap tw-capitalize">
+        <div>
+            <div v-if="item.is_paid" class="tw-flex tw-items-center tw-justify-center tw-gap-2">
+                <icon icon="mingcute:check-2-fill" class="tw-text-xl tw-text-emerald-500" />
+            </div>
+            <div v-else class="tw-flex tw-items-center tw-justify-center tw-gap-2">
+                <icon icon="mdi:clock-time-two-outline" class="tw-text-xl tw-text-yellow-500" />
+            </div>
+        </div>
+    </td>
+
+    <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap tw-capitalize">
             <div class="tw-px-4">
                 <div :class="quotation_status.class" class="tw-rounded tw-px-4 tw-py-1 tw-text-center">
                     {{ quotation_status.name }}

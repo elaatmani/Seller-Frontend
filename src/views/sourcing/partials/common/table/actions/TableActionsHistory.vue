@@ -69,6 +69,8 @@ import moment from 'moment'
 const field_names = {
     'product_name': 'Product name',
     'product_url': 'Product URL',
+    'is_paid': 'Paid',
+    'paid_at': 'Paid at',
     'estimated_quantity': 'Estimated Quantity',
     'destination_country': 'Destination Country',
     'note_by_seller': 'Note by seller',
@@ -85,6 +87,10 @@ const field_values = {
     shipping_method: {
         'air-freight': 'Air Freight',
         'ocean-freight': 'Ocean Freight'
+    },
+    is_paid: {
+        1: 'YES',
+        0: 'NO'
     }
 }
 
@@ -101,7 +107,6 @@ const getHistory = async () => {
     .then(
         res => {
             if(res.data.code == 'SUCCESS') {
-                console.log(res.data)
                 history.value = res.data.history;
                 history.value.reverse();
             }
