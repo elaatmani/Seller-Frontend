@@ -46,27 +46,31 @@ class Factorisation {
     //     await Csrf.getCookie();
     //     return Api.get('api/factorisations');
     // }
-
+    
     // async getFactorisation(id) {
-    //     await Csrf.getCookie();
-    //     return Api.get('api/factorisations/' + id);
-    // }
-
-    // async delete(id) {
-    //     await Csrf.getCookie();
-    //     return Api.delete('api/factorisations/delete/' + id)
-    // }
-
+        //     await Csrf.getCookie();
+        //     return Api.get('api/factorisations/' + id);
+        // }
+        
+        // async delete(id) {
+            //     await Csrf.getCookie();
+            //     return Api.delete('api/factorisations/delete/' + id)
+            // }
+            
     // async create(ads) {
-    //     await Csrf.getCookie();
-    //     return Api.post('api/v1/factorisation/new', ads);
-    // }
-
-    // async update(id, ads) {
-    //     await Csrf.getCookie();
-    //     return Api.post('api/v1/factorisation/update/' + id , ads);
-    // }
-
+        //     await Csrf.getCookie();
+        //     return Api.post('api/v1/factorisation/new', ads);
+        // }
+        
+        // async update(id, ads) {
+            //     await Csrf.getCookie();
+            //     return Api.post('api/v1/factorisation/update/' + id , ads);
+            // }
+                    
+    async sumToBePaid() {
+        await Csrf.getCookie();
+        return Api.get('api/v1/factorisation/sum');
+    }
     async delete(id) {
         await Csrf.getCookie();
         return Api.delete('api/v1/factorisation/delete/' + id)

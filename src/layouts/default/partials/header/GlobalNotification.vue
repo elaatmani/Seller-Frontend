@@ -46,11 +46,10 @@
                     :class="notificationClass(notification)"
                     class="tw-p-2 tw-border-y tw-flex tw-flex-col tw-border-neutral-100"   
                   >
+                  <router-link :to="`/sourcings/${notification.action}`">
                     <p class="tw-text-sm">{{ notification.message }} 
-                      <router-link :to="`/sourcing/${notification.action}`">
-                      View Product
-                    </router-link>
                     </p>
+                  </router-link>
                  
                     <div
                       class="tw-ml-auto tw-mt-2 tw-text-xs tw-font-normal tw-text-gray-400 tw-whitespace-nowrap"

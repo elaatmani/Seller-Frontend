@@ -26,6 +26,9 @@
           </v-btn> -->
 
           <div class="tw-flex tw-items-center tw-gap-2">
+            
+            <!-- to be paid -->
+            <ToBePaid v-if="$user.role == 'seller'"/>
             <!-- Notifications -->
             <GlobalNotification />
             
@@ -44,10 +47,11 @@
 import { localUrl } from '@/config/config'
 import HeaderMenu from '@/layouts/default/partials/header/HeaderMenu'
 import GlobalNotification from '@/layouts/default/partials/header/GlobalNotification'
+import ToBePaid from '@/layouts/default/partials/header/ToBePaid'
 
 export default {
     emits: [ 'toggleSidebar' ],
-    components: { HeaderMenu, GlobalNotification },
+    components: { HeaderMenu, GlobalNotification,ToBePaid },
 
     data() {
       return {
