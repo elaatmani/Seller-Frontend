@@ -13,17 +13,28 @@ export default {
       factorisations: {
         fetched: false,
         tobepaid: 0
+      },
+      alerts: {
+        fetched: false,
+        data: []
       }
     },
   
     getters: {
       notifications: (state) => state.notifications,
       factorisations: (state) => state.factorisations,
+      alerts: (state) => state.alerts,
     },
   
     mutations: {
       SET_DATA: (state, payload) => {
         state.notifications.data = payload;
+      },
+      SET_ALERTS_FETCHED: (state, payload) => {
+        state.alerts.fetched = payload;
+      },
+      SET_ALERTS_DATA: (state, payload) => {
+        state.alerts.data = payload;
       },
       SET_TO_BE_PAID: (state, payload) => {
         state.factorisations.tobepaid = payload;
@@ -51,6 +62,12 @@ export default {
     actions: {
       setData({ commit }, payload) {
         commit("SET_DATA", payload);
+      },
+      setAlertsFetched({ commit }, payload) {
+        commit("SET_ALERTS_FETCHED", payload);
+      },
+      setAlertsData({ commit }, payload) {
+        commit("SET_ALERTS_DATA", payload);
       },
       settobepaid({ commit }, payload) {
         commit("SET_TO_BE_PAID", payload);

@@ -21,6 +21,7 @@ import followup from './routes/followup'
 import dashboard from './routes/dashboard'
 import sourcing from './routes/sourcing'
 import settings from './routes/settings'
+import alert from './routes/alert'
 
 import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 import NotFound from '@/views/NotFound'
@@ -46,6 +47,7 @@ const routes = [
   sourcing,
   main,
   settings,
+  alert,
 
   {
     name: 'default',
