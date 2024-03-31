@@ -24,8 +24,8 @@ const gettobepaid = () => {
 Factorisation.sumToBePaid()
     .then((res) => {
     if (res.data.code == "SUCCESS") {
-        store.dispatch("app/settobepaid", res.data.totalPrice);
-        console.log( res.data.totalPrice);
+        store.dispatch("app/settobepaid", parseInt(res.data.data.totalPrice));
+        console.log( res.data.data );
     }
     })
     .catch((error) => {
