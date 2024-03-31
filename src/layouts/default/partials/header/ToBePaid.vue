@@ -1,6 +1,6 @@
 <template>
     <div v-if="isLoaded" class="tw-text-emerald-600 tw-text-sm tw-font-semibold tw-rounded ">
-        {{ currency }}{{ paidtobe.tobepaid.toFixed(2) }} 
+        {{ currency }}{{ paidtobe.tobepaid }} 
     </div>
     <div v-else >
         <v-icon size="medium" class="tw-animate-spin" color="green"
