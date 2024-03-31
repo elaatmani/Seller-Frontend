@@ -68,9 +68,10 @@ class Factorisation {
             // }
                     
     async sumToBePaid() {
-        await Csrf.getCookie();
-        return Api.get('api/v1/factorisation/sum');
+            await Csrf.getCookie()
+            return Api.get('api/v1/factorisation/sum')
     }
+
     async delete(id) {
         await Csrf.getCookie();
         return Api.delete('api/v1/factorisation/delete/' + id)

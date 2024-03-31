@@ -28,7 +28,7 @@
           <div class="tw-flex tw-items-center tw-gap-2">
             
             <!-- to be paid -->
-            <ToBePaid v-if="$user.role == 'seller'"/>
+            <ToBePaid v-if="$user.role == 'admin'"/>
             <!-- Notifications -->
             <GlobalNotification />
             
