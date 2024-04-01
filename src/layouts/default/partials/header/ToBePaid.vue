@@ -1,6 +1,6 @@
 <template>
     <div v-if="isLoaded" class="tw-text-emerald-600 tw-text-sm tw-font-semibold tw-rounded ">
-        {{ currency }}{{ paidtobe.tobepaid }} 
+        {{ currency }}{{ parseFloat(paidtobe.tobepaid).toFixed(2) }} 
     </div>
     <div v-else >
         <v-icon size="medium" class="tw-animate-spin" color="green"
@@ -25,7 +25,7 @@ Factorisation.sumToBePaid()
     .then((res) => {
     if (res.data.code == "SUCCESS") {
         store.dispatch("app/settobepaid", res.data.data.totalPrice);
-        console.log( res.data.data );
+        console.log( parseFloat(res.data.data.totalPrice).toFixed(2) );
     }
     })
     .catch((error) => {
