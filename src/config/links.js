@@ -470,6 +470,18 @@ export const links = [
             value: 'mdi-bell-alert-outline'
         }
     },
+    {
+        id: 16,
+        title: 'Scanner',
+        module: 'scanner',
+        to: '/scanner',
+        role: 'admin',
+        hasChildren: false,
+        icon: {
+            type: 'icon',
+            value: 'mdi-qrcode'
+        }
+    },
 
     {
         id: 12,
