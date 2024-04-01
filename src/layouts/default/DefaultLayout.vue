@@ -138,6 +138,30 @@ export default {
             ).catch(this.$handleApiError)
         },
 
+        async fetchNewOrders() {
+            if(this.salesFetched || !this.firstFetch) {
+                const ids = this.sales.map(s => s.id);
+                return Sale.getNewOrders(ids)
+                .then(res => {
+                    if(res.data.code == 'SUCCESS') {
+                        const newSales = res.data.data.orders;
+                        const count = res.data.data.count;
+                            this.$store.dispatch('sale/setCount', count);
+                        if(newSales.length > 0) {
+                            this.$store.dispatch('sale/addSales', newSales);
+                            this.$alert({
+                                type: 'info',
+                                title: newSales.length + ' New orders has been added'
+                            })
+                        }
+
+                        this.firstFetch = true;
+                    }
+                })
+            }
+            // .catch(this.$handleApiError)
+        },
+
         async getAlerts() {
             return AlertApi.alerts()
             .then(
@@ -165,6 +189,10 @@ export default {
         this.getCities();
         this.getAlerts();
         // !this.subscribed && this.subscribe();
+
+        if(this.user.role == 'admin') {
+            this.fetchNewOrders()
+        }
 
         if (this.$can('show_all_products')) {
             this.getProducts();

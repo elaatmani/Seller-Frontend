@@ -147,7 +147,6 @@ import Alert from '@/api/Alert'
 const visible = ref(false);
 const loading = ref(false);
 const alerts = inject('alerts')
-alerts
 const form = ref({
     variant: 'success',
     type: 'global',
@@ -181,12 +180,14 @@ const handleSubmit = async () => {
     }
 
     loading.value = true;
-
     await Alert.create(form.value)
     .then(res => {
         console.log(res)
-        useAlert('Sent successfully')
-        visible.value = false;
+        if(res.data.code == 'SUCCESS') {
+            visible.value = false;
+            alerts.data.value.unshift(res.data.alert);
+            useAlert('Sent successfully')
+        }
     })
     .catch(
         err => {

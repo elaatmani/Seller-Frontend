@@ -52,6 +52,8 @@ const loading = toRef(props, 'loading');
 const cols = [
     { field: 'id', name: 'ID', class: 'tw-w-[60px]' },
     { field: 'created', name: 'Added at', class: 'tw-w-[100px]' },
+    { field: 'type', name: 'Type', class: 'tw-w-[70px] tw-truncate' },
+    { field: 'to', name: 'To', class: 'tw-w-[70px] tw-truncate' },
     { field: 'content', name: 'Content', class: 'tw-max-w-[150px] tw-truncate' },
     { field: 'actions', name: 'Actions', class: 'tw-w-[100px]' }
 ];

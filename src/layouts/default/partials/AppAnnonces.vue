@@ -7,7 +7,7 @@
         <div v-if="alerts.fetched &&  data.length" class="tw-space-y-2 tw-mb-5 tw-opacity-100">
           <div v-for="a in data" :key="a.id"
           :class="[a.variant == 'danger' && 'tw-bg-rose-500', a.variant == 'info' && 'tw-bg-cyan-500', a.variant == 'warning' && 'tw-bg-amber-500', a.variant == 'success' && 'tw-bg-emerald-500']"
-          class="tw-h-fit tw-w-full tw-bg-red-500  tw-border tw-border-solid ">
+          class="tw-h-fit tw-w-full tw-border tw-border-solid ">
               <div class="tw-flex tw-items-start ">
                   <div class="tw-p-2">
                       <icon icon="line-md:bell-alert-loop" class="tw-text-2xl tw-text-white" />
@@ -34,12 +34,13 @@ import store from '@/store/'
 import { computed, ref } from 'vue';
 
 const alerts = computed(() => store.getters['app/alerts']);
+const user = computed(() => store.getters['user/user']);
 const closedAlerts = ref([])
-const data = computed(() => alerts.value.data.filter(a => !closedAlerts.value.includes(a.id)));
+const data = computed(() => alerts.value.data.filter(a => !closedAlerts.value.includes( user.value.id + '*' + a.id)));
 
 
 const closeAlert = (id) => {
-    closedAlerts.value.push(id);
+    closedAlerts.value.push(user.value.id + '*' +id);
     localStorage.setItem('closed_alerts', JSON.stringify(closedAlerts.value))
 }
 

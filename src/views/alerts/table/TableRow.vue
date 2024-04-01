@@ -9,6 +9,18 @@
         </td>
 
         <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
+            <p class="tw-w-[70px] tw-truncate">
+                {{ item.type }}
+            </p>
+        </td>
+
+        <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
+            <p class="tw-w-[80px] tw-truncate">
+                {{ item.to }}
+            </p>
+        </td>
+
+        <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
             <p class="tw-w-[100px] tw-truncate">
                 {{ item.content }}
             </p>
