@@ -6,7 +6,7 @@
           >Product</label
         >
         <vue-select :reduce="(o) => o.id" @option:selected="e=> $emit('update', {...filters, product_id: e.id})" :clearable="false" class="tw-bg-gray-50 tw-border-solid tw-outline-none  tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full"
-          placeholder="Choose Product" :v-model="products" :options="allProducts" label="name">
+          placeholder="All" :v-model="products" :options="allProducts" label="name">
         </vue-select>
         <select
            v-if="false"
@@ -48,7 +48,7 @@ export default {
             return this.$store.getters['product/fetched']
         },
         allProducts() {
-        return [{ id: 0, name: 'All' }, ...this.products]
+        return [{ id: 'all', name: 'All' }, ...this.products]
       },
     }
 }

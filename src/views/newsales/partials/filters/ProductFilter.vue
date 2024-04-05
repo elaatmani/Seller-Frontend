@@ -39,7 +39,7 @@ export default {
             return this.$store.getters['product/fetched']
         },
         allProducts() {
-        return [{ id: 0, name: 'All' }, ...this.products]
+        return [{ id: 'all', name: 'All' }, ...this.products]
       },
     },
 
