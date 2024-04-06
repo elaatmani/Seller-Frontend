@@ -23,7 +23,18 @@ export default function (to, from, router) {
 
     // Update user's last action
     User.online()
+    .then(
+        res => {
+            if(res.data.code == 'USER_SHOWED') {
+                if(res.data.data.user.email != store.getters['user/user']?.email) {
+                    store.dispatch('user/logout');
+                    router.push({ name: 'login' })
+                }
+            }
+        }
+    )
     .catch(app.$handleApiError);
+
 
     // handle if user is logged and want to show login
     if (to.path == '/login') {
