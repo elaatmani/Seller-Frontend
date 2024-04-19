@@ -33,7 +33,7 @@
                       label
                       size="small"
                     >
-                      {{ event.type }}
+                      {{ (event.type in keys ? keys[event.type] : event.type) }}
                     </v-chip>
                     <v-icon
                       v-if="event.type != 'responsibility'"
@@ -138,6 +138,9 @@ export default {
     return {
       allEvents: [],
       isLoaded: false,
+      keys: {
+        in_warehouse: 'Warehouse State'
+      }
     };
   },
 
