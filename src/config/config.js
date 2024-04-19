@@ -9,3 +9,4 @@ export const serverUrl = 'https://api.codsquad.net/'
 export const version = '1.0.1';
 
 export const currency = "$";
+export const prefix = 'cods';
