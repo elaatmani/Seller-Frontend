@@ -32,7 +32,8 @@
       @filter="handlePerPageChange(per_page)" 
       @clear="handleClearFilters"
       @per-page-change="handlePerPageChange" 
-      @fresh="paginateOrders" 
+      @fresh="paginateOrders"
+      :per-page="per_page"
       :loading="fetching" 
     />
 

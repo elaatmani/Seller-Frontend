@@ -52,16 +52,17 @@
 
         <div class="tw-relative">
           <select
-            @change="(e) => $emit('perPageChange', e.target.value)"
+            @change="handlePerPageChange"
             :value="perPage"
             class="tw-h-full tw-px-5 tw-py-2 tw-w-20 focus:tw-outline-none tw-text-xs tw-font-medium tw-text-gray-600 tw-transition-colors tw-duration-200 sm:tw-text-sm darkx:hover:tw-bg-gray-800 darkx:tw-text-gray-300 hover:tw-bg-gray-100"
           >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="200">200</option>
+          <option :value="5">5</option>
+            <option :value="10">10</option>
+            <option :value="20">20</option>
+            <option :value="50">50</option>
+            <option :value="100">100</option>
+            <option :value="250">250</option>
+            <option :value="500">500</option>
           </select>
           <div
             class="tw-pointer-events-none tw-absolute tw-inset-y-0 tw-right-0 tw-flex tw-items-center tw-px-2 tw-text-gray-700"
@@ -129,7 +130,6 @@ export default {
   props: {
     perPage: {
         type: Number,
-        default: 10
     },
     statistics: {
       default: null,
@@ -147,6 +147,13 @@ export default {
     filters: {
       required: true,
     }
+  },
+
+  methods: {
+    handlePerPageChange(e) {
+      this.$emit('perPageChange', e.target.value);
+      console.log(e.target.value)
+    },
   },
 
 
