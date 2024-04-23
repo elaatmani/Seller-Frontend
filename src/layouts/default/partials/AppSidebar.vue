@@ -9,8 +9,9 @@
         >
             <!-- NavBar Logo  -->
             <v-list-item class="tw-py-3">
-                <div>
-                    <v-img width="140" :src="localUrl + 'assets/img/logo.png'"></v-img>
+                <div class="tw-h-[60px] tw-flex tw-items-center tw-justify-center tw-max-w-[200px]">
+                    <img class="tw-w-full" :src="localUrl + 'images/logo.png'" />
+                    <!-- <v-img width="140" :src="localUrl + 'assets/images/logo.svg'"></v-img> -->
                 </div>
             </v-list-item>
             <!-- /NavBar Logo -->
