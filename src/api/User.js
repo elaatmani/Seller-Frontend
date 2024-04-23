@@ -87,6 +87,11 @@ class User {
     }
 
 
+    async permessions() {
+        await Csrf.getCookie();
+        return Api.get('api/permissions')
+    }
+
     async permession() {
         await Csrf.getCookie();
         return Api.get('api/auth/permission')
@@ -115,6 +120,11 @@ class User {
     async getUser(id) {
         await Csrf.getCookie();
         return Api.get('api/users/' + id)
+    }
+
+    async createPermission(name) {
+        await Csrf.getCookie();
+        return Api.post('api/permissions/new', { name })
     }
 
     async createRole({ name, permissions }) {
