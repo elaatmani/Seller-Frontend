@@ -8,6 +8,7 @@
             type="number"
             :hide-details="true"
             v-model="quantity"
+            :error-messages="formStatusOffers[index]?.quantity"
             clearable
             clear-icon="mdi-close"
             class="tw-w-full"
@@ -15,6 +16,9 @@
             color="primary-color"
             density="compact"
           ></v-text-field>
+          <div class="tw-h-[3px] tw-text-red-700 tw-mb-3 tw-mt-1 tw-text-xs">
+      {{ formStatusOffers[index]?.quantity }}
+    </div>
         </div>
       <div class="md:tw-col-span-3 tw-col-span-12">
           <div class="mb-1 text-body-2 tw-text-zinc-700">Price</div>
@@ -110,7 +114,16 @@
 import { currency } from '@/config/config';
 
 export default {
-  props: ["offers"],
+  props: {
+    offers: {
+      type: Array,
+      default: () => [],
+    },
+    formStatusOffers: {
+      type: Array,
+      default: () => [],
+    },
+  },
 
   data() {
     return {
@@ -136,6 +149,8 @@ export default {
       }
 
       this.$emit('update:offers', this.offers.filter(o => o.id != this.toDeleteID))
+      this.$emit('offers-changed', this.offers.length > 1); // because we haven't removed the offer yet
+
     },
 
     handleAdd() {
@@ -151,7 +166,8 @@ export default {
       };
 
       this.$emit('update:offers', [...this.offers, offer]);
-
+      this.$emit('offers-changed', this.offers.length > 0);
+      
       // Reset the input fields for the next entry
       this.quantity = 1;
       this.price = 0;

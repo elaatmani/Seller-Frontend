@@ -2,9 +2,9 @@
   <div>
     <div class="mb-5">
       <h1 class="tw-text-gray-700 font-weight-medium tw-text-md md:tw-text-lg">
-        Add Expedition
+        Add Product
       </h1>
-      <h2 class="tw-text-gray-500 tw-text-sm">Create new expedition</h2>
+      <h2 class="tw-text-gray-500 tw-text-sm">Create new Product</h2>
     </div>
 
     <div v-if="!isLoaded">
@@ -631,10 +631,16 @@
 
         <div class="mb-5">
           <h4 class="tw-font-bold tw-text-gray-500/75">Offers</h4>
-          <v-row class="py-5 px-5 tw-border bg-white tw-w-full tw-rounded-md">
+          <v-row class="py-2 px-5 tw-border bg-white tw-w-full tw-rounded-md">
             <v-col cols="12">
               <div>
-                <ProductOffers v-model:offers="offers" />
+                <div
+                  class=" tw-text-red-700 tw-text-lg"
+                >
+                  {{ formStatus.offers.message }}
+                </div>
+                <ProductOffers v-model:offers="offers"  @offers-changed="handleOffersChanged"/>
+              
               </div>
             </v-col>
           </v-row>
@@ -792,6 +798,10 @@ export default {
         variants: {
           valid: true,
           message: "",
+        },  
+        offers: {
+          valid: true,
+          message: "",
         },
       },
     };
@@ -820,6 +830,13 @@ export default {
   },
 
   methods: {
+    handleOffersChanged(hasOffers) {
+      this.formStatus.offers = {
+        valid: hasOffers,
+        message: hasOffers ? "" : "Please add at least one offer",
+      };
+      console.log(hasOffers);
+    },
     create() {
 
       if (!this.validate()) return false;
@@ -915,6 +932,10 @@ export default {
     },
 
     validate() {
+      this.formStatus.offers = {
+      valid: this.offers.length > 0,
+      message: this.offers.length > 0 ? "" : "Please add at least one offer",
+    };
       this.formStatus.name = validateName(this.product.name, "Product name");
       this.formStatus.reference = validateName(
         this.product.reference,
@@ -976,7 +997,8 @@ export default {
         this.formStatus.description.valid &&
         (this.addVariants ? this.formStatus.variants.valid : true) &&
         (this.addVariants ? true : this.formStatus.quantity.valid) &&
-        (this.addVariants ? true : this.formStatus.warehouse.valid)
+        (this.addVariants ? true : this.formStatus.warehouse.valid) &&
+        this.formStatus.offers.valid
       );
     },
 
