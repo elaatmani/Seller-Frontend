@@ -64,6 +64,8 @@
       </div>
 
       <ProductFilter :filters="filters" @update="f => $emit('update', f)" />
+      <UserFilter :filters="filters" @update="f => $emit('update', f)" />
+
 
       <AgentFilter :filters="filters" @update="f => $emit('update', f)" />
 
@@ -183,9 +185,10 @@ import AffectationFilter from '@/views/newsales/partials/filters/AffectationFilt
 import AgentFilter from '@/views/newsales/partials/filters/AgentFilter'
 import SellerFilter from '@/views/newsales/partials/filters/SellerFilter'
 import ProductFilter from '@/views/newsales/partials/filters/ProductFilter'
+import UserFilter from '@/views/newsales/partials/filters/UserFilter'
 
 export default {
-  components: { DateFilter, AffectationFilter, AgentFilter, ProductFilter, SellerFilter },
+  components: { DateFilter, AffectationFilter, AgentFilter, ProductFilter, SellerFilter,UserFilter },
 
   props: {
     filters: {

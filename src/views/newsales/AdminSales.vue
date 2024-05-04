@@ -142,6 +142,8 @@ export default {
 
       filters: {
         created_from: null,
+        created_by: 'all',
+
         created_to: null,
         dropped_from: null,
         dropped_to: null,
@@ -204,6 +206,7 @@ export default {
 
     handleClearFilters() {
       this.filters = {
+        created_by: 'all',
         created_from: null,
         created_to: null,
         dropped_from: null,
