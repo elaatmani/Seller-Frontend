@@ -7,7 +7,7 @@
             <div class="tw-flex tw-items-center tw-gap-x-3">
                 <h2 class="tw-text-lg tw-font-medium tw-text-gray-800 darkx:tw-text-white">Factorisation</h2>
 
-                <span class="tw-px-3 tw-py-1 tw-text-xs tw-text-emerald-600 tw-bg-emerald-100 tw-rounded-full darkx:tw-bg-gray-800 darkx:tw-text-orange-400">{{ totalOrders }} order</span>
+                <span class="tw-px-3 tw-py-1 tw-text-xs tw-text-emerald-600 tw-bg-emerald-100 tw-rounded-full darkx:tw-bg-gray-800 darkx:tw-text-orange-400">{{ totalOrders }}</span>
             </div>
 
             <!-- <p class="tw-mt-1 tw-text-sm tw-text-gray-500 darkx:tw-text-gray-300">These orders have needs to reconfirmed.</p> -->
@@ -42,7 +42,9 @@
       @update="handleItemUpdate" 
       @page-change="handlePageChange" 
       @sort-order="handleSortOrderChange"  
-      :loading="fetching" 
+      :loading="fetching"
+      :withdrawal-methods="withdrawal_methods"
+      :is-withdrawal-methods-fetched="is_withdrawal_methods_fetched"
       :from="from" 
       :to="to" 
       :last-page="last_page" 
@@ -67,6 +69,7 @@ import IndexTable from '@/views/newfactorisation/partials/IndexTable'
 import IndexFilters from '@/views/newfactorisation/partials/filters/IndexFilters';
 // import CreatePopup from '@/views/newfactorisation/partials/components/CreatePopup'
 import { getPath } from '@/helpers/methods';
+import WithdrawalMethod from '@/api/WithdrawalMethod'
 
 export default {
   components: { IndexTable, IndexFilters },
@@ -77,6 +80,8 @@ export default {
       create_popup: false,
 
       items: [],
+      withdrawal_methods: [],
+      is_withdrawal_methods_fetched: false,
 
       first_page_url: null,
       lase_page_url: null,
@@ -163,7 +168,10 @@ export default {
     },
 
     handleItemUpdate(item) {
-      this.items = this.items.map(i => i.id == item.id ? item : i);
+      if(item) {
+        this.items = this.items.map(i => i.id == item.id ? item : i);
+      }
+      console.log('Item: ', item)
     },
 
     handlePageChange(page) {
@@ -179,13 +187,47 @@ export default {
     handleSortOrderChange() {
       this.sort_order = this.sort_order == 'asc' ? 'desc' : 'asc';
       this.paginateOrders()
+    },
+
+    async getWithdrawalMethods() {
+      this.is_withdrawal_methods_fetched = false;
+      return await WithdrawalMethod.all()
+      .then(
+        res => {
+          if(res.data.code == 'SUCCESS') {
+            this.withdrawal_methods = res.data.withdrawal_methods
+            this.is_withdrawal_methods_fetched = true;
+            console.log(this.withdrawal_methods)
+          }
+        },
+        err => {
+          console.log(err)
+        }
+      )
     }
 
   },
 
 
+  computed: {
+    user() {
+      return this.$store.getters['user/user']
+    }
+  },
+
+  provide() {
+    return {
+      withdrawal_methods: this.withdrawal_methods,
+      is_withdrawal_methods_fetched: this.is_withdrawal_methods_fetched
+    }
+  },
+
+
   mounted() {
     this.paginateOrders()
+    if(this.user.role == 'seller') {
+      this.getWithdrawalMethods();
+    }
 
   }
 };

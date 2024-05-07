@@ -20,6 +20,7 @@
                 >
                 <input
                   v-model="itemCopy.fullname"
+                  :readonly="itemCopy.affectation || itemCopy.confirmation"
                   @input="errors.fullname = null"
                   type="text"
                   :class="[errors.fullname && '!tw-border-red-400']"
@@ -42,6 +43,7 @@
                 <input
                   v-model="itemCopy.phone"
                   @input="errors.phone = null"
+                  :readonly="itemCopy.affectation || itemCopy.confirmation"
                   :class="[errors.phone && '!tw-border-red-400']"
                   type="text"
                   class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
@@ -63,6 +65,7 @@
                 <div class="tw-relative">
                   <select
                     v-model="itemCopy.city"
+                    readonly
                     @change="errors.city = null"
                     :class="[errors.city && '!tw-border-red-400']"
                     class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 tw-pr-7"
@@ -99,6 +102,7 @@
                 >
                 <input
                   v-model="itemCopy.adresse"
+                  :readonly="itemCopy.affectation || itemCopy.confirmation"
                   @input="errors.adresse = null"
                   :class="[errors.adresse && '!tw-border-red-400']"
                   type="text"
@@ -121,6 +125,7 @@
                 <div class="tw-relative">
                   <select
                     v-model="itemCopy.confirmation"
+                    :readonly="itemCopy.affectation || itemCopy.confirmation"
                     @change="errors.confirmation = null"
                   :class="[errors.confirmation && '!tw-border-red-400']"
                     class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
@@ -155,6 +160,7 @@
                 >
                 <input
                   v-model="itemCopy.reported_agente_date"
+                  :readonly="itemCopy.affectation || itemCopy.confirmation"
                   @input="errors.reported_agente_date = null"
                   :class="[errors.reported_agente_date && '!tw-border-red-400']"
                   type="date"
@@ -175,6 +181,7 @@
                 >
                 <textarea
                     v-model="itemCopy.reported_agente_note"
+                    :readonly="itemCopy.affectation || itemCopy.confirmation"
                     rows="1"
                     class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
                     placeholder="Enter a note"
@@ -257,6 +264,8 @@
             Cancel
           </button>
           <button
+
+            v-if="!itemCopy.affectation && !itemCopy.confirmation"
             @click="handleUpdate"
             :disabled="isLoading"
             class="tw-py-2 tw-px-7 tw-flex tw-items-center  tw-rounded tw-text-sm tw-bg-orange-400 tw-border tw-border-solid tw-border-tansparent hover:tw-border-orange-600 dark:tw-border-neutral-900 dark:hover:tw-border-orange-500 hover:tw-bg-orange-500/80 dark:hover:tw-bg-orange-400 tw-duration-300 tw-text-white"

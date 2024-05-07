@@ -85,6 +85,10 @@
               name: "Total Price",
           },
           {
+              prop: "payment_method",
+              name: "Payment Method",
+          },
+          {
               prop: "close_at",
               name: "Closed at",
           },

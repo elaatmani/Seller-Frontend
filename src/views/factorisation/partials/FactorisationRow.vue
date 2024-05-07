@@ -31,6 +31,13 @@
         <td class="tw-px-6 tw-py-4">
             {{ factorisation.price }}
         </td>
+
+        <td  class="tw-px-6 tw-py-4">
+            <div>
+                Payment Method
+            </div>
+        </td>
+
         <td class="tw-px-6 tw-py-4">
             {{ factorisation.close_at?.split("T")[0] }}
         </td>

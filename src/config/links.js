@@ -488,7 +488,7 @@ export const links = [
         id: 12,
         title: 'Settings',
         module: 'settings',
-        role: 'admin',
+        role: ['admin', 'seller'],
         hasChildren: true,
         icon: {
             type: 'svg',
@@ -508,6 +508,13 @@ export const links = [
                 subModule: 'settings/account',
                 role: 'admin',
                 to: '/settings/account'
+            },
+            {
+                id: 3,
+                title: 'Withdrawal methods',
+                subModule: 'settings/account',
+                role: ['admin', 'seller'],
+                to: { name: 'settings.seller.withdrawal-methods' }
             },
         ]
     },
