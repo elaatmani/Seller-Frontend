@@ -1,4 +1,4 @@
-import Api from './Api'
+import Api, { ApiForm } from './Api'
 import Csrf from './Csrf'
 
 class Factorisation {
@@ -21,6 +21,13 @@ class Factorisation {
         });
     }
 
+    async updateMethod(id , withdrawal_method_id) {
+        await Csrf.getCookie();
+        return Api.post('api/v1/factorisation/update/' + id + '/method', {
+            withdrawal_method_id
+        });
+    }
+
     async updatePaid(id , paid) {
         await Csrf.getCookie();
         return Api.post('api/factorisations/update/payment/' + id, {
@@ -40,6 +47,12 @@ class Factorisation {
         return Api.post('api/factorisations/update/fees/' + id, {
             fees: fees
         });
+    }
+
+    async uploadImage(id, data) {
+        await Csrf.getCookie();
+
+        return ApiForm.post('api/factorisations/update/' + id + '/attachement/', data)
     }
 
     // async all() {
@@ -80,6 +93,11 @@ class Factorisation {
     async paginate(url = '/', options) {
         await Csrf.getCookie();
         return Api.post('api/v1/factorisation' + url, options);
+    }
+
+    async history(id) {
+        await Csrf.getCookie();
+        return Api.get('api/v1/factorisation/' + id + '/history');
     }
 }
 

@@ -8,6 +8,7 @@
         <div class="tw-relative">
           <select
             @change="handleProductChange"
+            :readonly="order.affectation || order.confirmation"
             :value="item.product_id"
             class="tw-block tw-border-solid focus:tw-outline-none tw-w-full tw-p-2 tw-pr-6 tw-text-xs tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded tw-bg-gray-50 focus:tw-ring-orange-500 focus:tw-border-orange-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
           >
@@ -37,6 +38,7 @@
 
           <select
             v-if="product.variations.length > 1"
+            :readonly="order.affectation || order.confirmation"
             @change="handleVariationChange"
             :value="item.product_variation_id"
             class="tw-block tw-border-solid focus:tw-outline-none tw-w-full tw-p-2 tw-pr-6 tw-text-xs tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded tw-bg-gray-50 focus:tw-ring-orange-500 focus:tw-border-orange-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
@@ -77,6 +79,7 @@
         <input
           @input="e => $emit('update', {...item, quantity: parseInt(e.target.value) >= 0 ? parseInt(e.target.value) : 0})"
           :value="item.quantity"
+          :readonly="order.affectation || order.confirmation"
           min="0"
           type="number"
           class="focus:tw-outline-none tw-border-solid tw-block tw-w-24 tw-p-2 tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-bg-gray-50 sm:tw-text-xs focus:tw-ring-orange-500 focus:tw-border-orange-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
@@ -88,6 +91,7 @@
         <input
           @input="e => $emit('update', {...item, price: parseFloat(e.target.value)})"
           :value="item.price"
+          :readonly="order.affectation || order.confirmation"
           min="0"
           type="number"
           class="focus:tw-outline-none tw-border-solid tw-block tw-w-24 tw-p-2 tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-bg-gray-50 sm:tw-text-xs focus:tw-ring-orange-500 focus:tw-border-orange-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
@@ -114,6 +118,9 @@ export default {
             required: true,
         },
         products:{
+            required: true,
+        },
+        order:{
             required: true,
         }
     },

@@ -1,7 +1,8 @@
 <template>
-  <h2 class="tw-font-medium tw-text-gray-800 darkx:tw-text-white">
-    <button class="tw-underline" @click="download(item.id)">
-      {{ item.factorisation_id }}
+  <h2 class="tw-font-medium tw-text-gray-800 darkx:tw-text-white tw-flex tw-items-center tw-gap-2">
+    <span class="tw-text-gray-700">{{ item.factorisation_id }}</span>
+    <button class="tw-h-full tw-w-[28px] tw-aspect-square tw-border tw-border-solid tw-shadowx tw-flex tw-items-center tw-text-gray-500 hover:tw-text-gray-7 tw-duration-200 tw-justify-center hover:tw-bg-gray-100 tw-rounded tw-p-0.5" @click="download(item.id)">
+      <icon icon="ci:arrow-down-sm" class="tw-text-xl" />
     </button>
   </h2>
 </template>

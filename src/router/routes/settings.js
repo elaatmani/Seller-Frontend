@@ -4,6 +4,7 @@ import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 // Views
 import CronJobs from '@/views/settings/cronjobs/CronJobs'
 import AccountView from '@/views/settings/AccountView'
+import WithdrawalMethodsView from '@/views/settings/WithdrawalMethodsView'
 
 
 export default {
@@ -34,6 +35,16 @@ export default {
               module: 'settings',
               title: 'Settings',
               role: 'admin'
+            }
+          },
+          {
+            path: 'withdrawal-methods',
+            name: 'settings.seller.withdrawal-methods',
+            component: WithdrawalMethodsView,
+            meta: {
+              module: 'settings',
+              title: 'Settings',
+              role: ['seller']
             }
           }
         ]

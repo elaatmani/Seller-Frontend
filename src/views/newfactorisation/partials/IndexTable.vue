@@ -8,41 +8,44 @@
                       <table class="tw-min-w-full tw-divide-y tw-divide-gray-200 darkx:tw-divide-gray-700">
                           <thead class="tw-bg-gray-50 darkx:tw-bg-gray-800 tw-whitespace-nowrap">
                               <tr>
-                                  <th scope="col" class="tw-py-3.5 tw-px-4 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                  <th v-if="false" scope="col" class="tw-py-3.5 tw-px-4 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                           <span>ID</span>
                                   </th>
                                
-                                  <th scope="col" class="tw-px-12 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
-                                     Code
+                                  <th scope="col" class="tw-px-4 tw-w-fit tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                     ID
                                  </th>
-                                  <th  v-if="$user.role=='admin'" scope="col" class="tw-px-12 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
-                                      Delivery
+                                  <th  v-if="$user.role=='admin'" scope="col" class="tw-px-4 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                      User
                                   </th>
-                                  <th  v-if="$user.role=='admin'" scope="col" class="tw-px-12 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                  <!-- <th  v-if="$user.role=='admin'" scope="col" class="tw-px-4 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                       Seller
+                                  </th> -->
+                                  <th scope="col" class="tw-w-10 tw-px-4 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                      Orders
                                   </th>
-                                  <th scope="col" class="tw-w-10 tw-px-12 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
-                                      NB Commands
+                                  <th scope="col" class="tw-w-10 tw-px-8 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                      Amount
                                   </th>
-                                  <th scope="col" class="tw-w-10 tw-px-12 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
-                                      Total Price
+                                  <th scope="col" class="tw-w-10 tw-px-8 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                      Payment Method
                                   </th>
-                                  <th v-if="$user.role=='seller'" scope="col" class="tw-w-10 tw-px-12 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                  <th v-if="$user.role=='seller'" scope="col" class="tw-w-10 tw-px-4 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                       Status
                                   </th>
-                                  <th scope="col" class="tw-w-10 tw-px-12 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                  <th scope="col" class="tw-w-10 tw-px-8 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                       Closed At
                                   </th>
-                                  <th scope="col" class="tw-w-10 tw-px-12 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                  <th scope="col" class="tw-w-10 tw-px-8 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                       Paid At
                                   </th>
-                                  <th v-if="$user.role=='admin'"  scope="col" class="tw-w-10 tw-px-12 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                  <th v-if="$user.role=='admin'"  scope="col" class="tw-w-10 tw-px-4 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                       Close
                                   </th>
-                                  <th  v-if="$user.role=='admin'" scope="col" class="tw-w-10 tw-px-12 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                  <th  v-if="$user.role=='admin'" scope="col" class="tw-w-10 tw-px-4 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                       Paid
                                   </th>
-                                  <th scope="col" class="tw-py-3.5 tw-px-4 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                  <th v-if="false" scope="col" class="tw-py-3.5 tw-px-4 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                     <button @click="$emit('sortOrder', {name: 'created_at'})" class="tw-flex tw-items-center tw-gap-x-3 focus:tw-outline-none">
                                         <span>Created</span>
 
@@ -53,14 +56,14 @@
                                         </svg>
                                     </button>
                                 </th>
-                                  <th scope="col" class="tw-relative tw-py-3.5 tw-px-4">
+                                  <th v-if="$user.role=='admin'" scope="col" class="tw-relative tw-py-3.5 tw-px-4">
                                       <span class="tw-sr-only">Actions</span>
                                   </th>
                               </tr>
                           </thead>
   
                           <tbody v-if="!loading && items.length > 0" class="tw-bg-white tw-divide-y tw-divide-gray-200 darkx:tw-divide-gray-700 darkx:tw-bg-gray-900">
-                            <TableRow @update="newItem => $emit('update', newItem)" v-for="item in items" :key="item.id" :item="item" />
+                            <TableRow :withdrawal-methods="withdrawalMethods" :is-withdrawal-methods-fetched="isWithdrawalMethodsFetched" @update="newItem => $emit('update', newItem)" v-for="item in items" :key="item.id" :item="item" />
                           </tbody>
   
                           <tbody v-if="!loading && items.length == 0" class="tw-bg-white tw-divide-y tw-divide-gray-200 darkx:tw-divide-gray-700 darkx:tw-bg-gray-900">
@@ -128,6 +131,12 @@
     props: {
       items: {
         default: [],
+      },
+      withdrawalMethods: {
+        required: true
+      },
+      isWithdrawalMethodsFetched: {
+        required: true
       },
       loading: {
         type: Boolean,
