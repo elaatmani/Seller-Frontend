@@ -38,6 +38,7 @@
               <div v-if="notifications.data == ''">
                   <p class="tw-text-center tw-py-4">No messages available. </p>
               </div>
+              
               <div
                   v-for="notification in notifications.data"
                   :key="notification.id"
@@ -46,11 +47,16 @@
                     :class="notificationClass(notification)"
                     class="tw-p-2 tw-border-y tw-flex tw-flex-col tw-border-neutral-100"   
                   >
-                  <router-link :to="`/sourcings/${notification.action}`">
-                    <p class="tw-text-sm">{{ notification.message }} 
-                    </p>
-                  </router-link>
-                 
+                    <router-link v-if="!notification.options" :to="`/sourcings/${notification.action}`">
+                      <p class="tw-text-sm">{{ notification.message }}</p>
+                    </router-link>
+                    <router-link v-else-if="notification.options?.type == 'sourcing'" :to="`/sourcings/${notification.action}`">
+                      <p class="tw-text-sm">{{ notification.message }}</p>
+                    </router-link>
+                    <router-link v-else-if="notification.options?.type == 'products'" :to="`/newproducts`">
+                      <p class="tw-text-sm">{{ notification.message }}</p>
+                    </router-link>
+                  
                     <div
                       class="tw-ml-auto tw-mt-2 tw-text-xs tw-font-normal tw-text-gray-400 tw-whitespace-nowrap"
                     >
