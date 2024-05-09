@@ -113,9 +113,9 @@ class Sale {
         return Api.get('api/orders/count')
     }
 
-    async warehouseControl(id, target) {
+    async warehouseControl(id, data) {
         await Csrf.getCookie();
-        return Api.post('api/warehouse-control', { id, target })
+        return Api.post('api/warehouse-control', { id, target: data.target, scanned: data.scanned })
     }
 }
 
