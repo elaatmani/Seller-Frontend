@@ -161,7 +161,7 @@
   import { currency } from '@/config/config'
   import moment from 'moment'
 
-  const to_ignore = ['commands_number', 'type', 'price', 'paid_at', 'amount_paid', 'close_at', 'total_cod_fees', 'total_shipping_fees', 'total_other_fees'];
+  const to_ignore = ['commands_number', 'type', 'price', 'paid_at', 'amount_paid', 'close_at', 'total_cod_fees', 'total_shipping_fees', 'total_other_fees', 'commands_number', 'price'];
 //   attachement_image, withdrawal_method_id
   const confirmationsValues = computed(() => confirmations.reduce((obj, item) => {
   obj[item.value] = item.name;
@@ -216,7 +216,11 @@
       .then(
           res => {
               if(res.data.code == 'SUCCESS') {
-                  history.value = res.data.data.history;
+                  history.value = res.data.data.history.filter(i => {
+                    return i.fields.every(o => {
+                        return !['commands_number', 'price'].includes(o.field)
+                    })
+                  });
                   history.value.reverse();
               }
           }
