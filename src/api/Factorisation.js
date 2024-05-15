@@ -52,7 +52,7 @@ class Factorisation {
     async uploadImage(id, data) {
         await Csrf.getCookie();
 
-        return ApiForm.post('api/factorisations/update/' + id + '/attachement/', data)
+        return ApiForm.post('api/factorisations/update/' + id + '/attachement', data)
     }
 
     // async all() {
