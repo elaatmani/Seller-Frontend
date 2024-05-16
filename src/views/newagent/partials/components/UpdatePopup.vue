@@ -227,6 +227,27 @@
               />
             </div>
 
+            <div class="tw-col-span-1" v-if="itemCopy.confirmation == 'refund'">
+                <label
+                  class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
+                  >Parent id</label
+                >
+                <input
+                  v-model="itemCopy.parent_id"
+                  @input="errors.parent_id = null"
+                  type="text"
+                  :class="[errors.parent_id && '!tw-border-red-400']"
+                  class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+                  placeholder="123"
+                  required
+                />
+                <label
+                  v-if="errors.parent_id"
+                  class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white"
+                  >{{ errors.parent_id }}</label
+                >
+              </div>
+
             <div class="md:tw-col-span-1 tw-col-span-2">
               <label
                 class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
@@ -397,6 +418,7 @@ export default {
         city: null,
         adresse: null,
         note: null,
+        parent_id: null,
         reported_agente_date: null,
         affectation: null,
         items: null,
