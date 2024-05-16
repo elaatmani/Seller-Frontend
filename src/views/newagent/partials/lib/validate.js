@@ -20,6 +20,11 @@ export const validate = (app, order) => {
         return false;
     }
 
+    if(!order.parent_id && order.confirmation == "refund") {
+        app.errors.parent_id = "Add Parent id !";
+        return false;
+    }
+    
     // if(!order.affectation && order.confirmation == 'confirmer'){
     //     app.errors.affectation = "Warning: Order is confirmed but not affected.";
     //     return false;
