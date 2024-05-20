@@ -209,6 +209,38 @@ export const links = [
         ]
     },
 
+
+    {
+        id: 10,
+        module: 'affiliate',
+        title: 'Affiliate',
+        hasChildren: true,
+        gate: 'access_to_affiliate', 
+        role: ['admin'], 
+        icon: {
+            type: 'icon',
+            value: 'mdi-bookshelf'
+        },
+        children: [
+            {
+                id: 1,
+                title: 'Create New Product',
+                subModule: 'affiliate.create',
+                role: ['admin'],
+                gate: 'create_affiliate_product',
+                to: { name: 'affiliate.create' }
+            },
+            {
+                id: 2,
+                title: 'Products list',
+                subModule: 'affiliate.index',
+                role: ['admin'],
+                gate: 'access_to_affiliate',
+                to: { name: 'affiliate.index' }
+            },
+        ]
+    },
+
     {
         id: 5,
         module: 'factorisation',
@@ -237,26 +269,26 @@ export const links = [
         ]
     },
 
-    {
-        id: 20,
-        module: 'ads',
-        title: 'Ads',
-        hasChildren: true,
-        gate: 'access_to_ads', 
-        icon: {
-            type: 'icon',
-            value: 'mdi-google-ads'
-        },
-        children: [
-            {
-                id: 1,
-                title: 'Ads list',
-                subModule: 'ads/list',
-                gate: 'show_all_factorisations',
-                to: '/ads'
-            },
-        ]
-    },
+    // {
+    //     id: 20,
+    //     module: 'ads',
+    //     title: 'Ads',
+    //     hasChildren: true,
+    //     gate: 'access_to_ads', 
+    //     icon: {
+    //         type: 'icon',
+    //         value: 'mdi-google-ads'
+    //     },
+    //     children: [
+    //         {
+    //             id: 1,
+    //             title: 'Ads list',
+    //             subModule: 'ads/list',
+    //             gate: 'show_all_factorisations',
+    //             to: '/ads'
+    //         },
+    //     ]
+    // },
 
 
     {
@@ -322,68 +354,68 @@ export const links = [
         ]
     },
 
-    {
-        id: 8,
-        module: 'inventory',
-        title: 'Inventory',
-        hasChildren: true,
-        gate: 'access_to_inventory', 
-        icon: {
-            type: 'icon',
-            value: 'mdi-warehouse'
-        },
-        children: [
-            {
-                id: 1,
-                title: 'Inventory State',
-                gate: 'show_all_inventory_states',
-                subModule: 'inventory/state',
-                to: '/inventories'
-            },
-            {
-                id: 2,
-                title: 'Inventory Movements',
-                gate: 'show_all_inventory_movements',
-                subModule: 'inventory/movements',
-                to: '/inventories/movements'
-            },
-            {
-                id: 4,
-                title: 'Add Movement',
-                gate: 'create_inventory_movement',
-                subModule: 'inventory/add',
-                to: '/inventories/add'
-            }
-        ]
-    },
+    // {
+    //     id: 8,
+    //     module: 'inventory',
+    //     title: 'Inventory',
+    //     hasChildren: true,
+    //     gate: 'access_to_inventory', 
+    //     icon: {
+    //         type: 'icon',
+    //         value: 'mdi-warehouse'
+    //     },
+    //     children: [
+    //         {
+    //             id: 1,
+    //             title: 'Inventory State',
+    //             gate: 'show_all_inventory_states',
+    //             subModule: 'inventory/state',
+    //             to: '/inventories'
+    //         },
+    //         {
+    //             id: 2,
+    //             title: 'Inventory Movements',
+    //             gate: 'show_all_inventory_movements',
+    //             subModule: 'inventory/movements',
+    //             to: '/inventories/movements'
+    //         },
+    //         {
+    //             id: 4,
+    //             title: 'Add Movement',
+    //             gate: 'create_inventory_movement',
+    //             subModule: 'inventory/add',
+    //             to: '/inventories/add'
+    //         }
+    //     ]
+    // },
 
-    {
-        id: 9,
-        module: 'shop',
-        title: 'Shop',
-        hasChildren: true,
-        gate: 'access_to_shop', 
-        icon: {
-            type: 'icon',
-            value: 'mdi-store'
-        },
-        children: [
-            {
-                id: 1,
-                title: 'Shop List',
-                gate: 'show_all_shops',
-                subModule: 'shop/list',
-                to: '/shops'
-            },
-            {
-                id: 2,
-                title: 'Add Shop',
-                gate: 'create_shop',
-                subModule: 'shop/add',
-                to: '/shops/add'
-            }
-        ]
-    },
+    // {
+    //     id: 9,
+    //     module: 'shop',
+    //     title: 'Shop',
+    //     hasChildren: true,
+    //     gate: 'access_to_shop', 
+    //     icon: {
+    //         type: 'icon',
+    //         value: 'mdi-store'
+    //     },
+    //     children: [
+    //         {
+    //             id: 1,
+    //             title: 'Shop List',
+    //             gate: 'show_all_shops',
+    //             subModule: 'shop/list',
+    //             to: '/shops'
+    //         },
+    //         {
+    //             id: 2,
+    //             title: 'Add Shop',
+    //             gate: 'create_shop',
+    //             subModule: 'shop/add',
+    //             to: '/shops/add'
+    //         }
+    //     ]
+    // },
     {
         id: 10,
         module: 'warehouse',
