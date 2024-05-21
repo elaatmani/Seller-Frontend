@@ -36,7 +36,7 @@
   </template>
   
   <script setup>
-  import { ref,computed } from "vue";
+  import { ref,computed, watch } from "vue";
   import moment from "moment";
   import { useStore } from "vuex";
   import App from "@/api/App";
@@ -58,6 +58,15 @@
       loading.value = false;
    }
   const Alertnotif = computed(() => store.getters["app/notifications"].highlighted);
+  watch(
+  () => Alertnotif.value,
+  () => {
+    // Note: `newValue` will be equal to `oldValue` here
+    // *unless* state.someObject has been replaced
+    showAlert.value = true;
+  },
+  { deep: true }
+)
   
   </script>
   

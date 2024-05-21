@@ -34,10 +34,15 @@ import AppSidebar from '@/layouts/default/partials/AppSidebar'
 import AppAnnonces from '@/layouts/default/partials/AppAnnonces'
 import Alert from '@/components/AlertVue'
 import User from '@/api/User'
+import Cookie from 'js-cookie'
+// import Api from '@/api/Api'
 import AlertApi from '@/api/Alert'
 import Product from '@/api/Product'
 import Sale from '@/api/Sale'
 import AlertNotification from '@/components/AlertNotification.vue'
+import Pusher from 'pusher-js'; // Add this line to import Pusher
+import {newNotificationHandler} from '@/channels/notification/new-notification';
+
 
 export default {
     components: { AppHeader, AppSidebar, Alert, AlertNotification, AppAnnonces },
@@ -50,6 +55,7 @@ export default {
             delay: 60000,
             showScrollUpButton: false,
             firstFetch: false,
+            pusher:false
             // delay: 6000,
         }
     },
@@ -137,7 +143,38 @@ export default {
                 }
             ).catch(this.$handleApiError)
         },
+        created() {
+            this.subscribe();
+        },  
+        subscribe() {
+                Pusher.logToConsole = true;
+                // if (!localStorage.getItem('XSRF-TOKEN')) {
+                //     console.log('User is not authenticated');
+                //     return;
+                // }
+                Pusher.Runtime.createXHR = function () {
+                    var xhr = new XMLHttpRequest();
+                    xhr.withCredentials = true;
+                    return xhr;
+                    };
+                var pusher = new Pusher('ede7da5b6ea69f4e8ee2', {
+                    cluster: 'eu',
+                    authEndpoint: 'http://localhost:8000/api/pusher_auth',
+                    authTransport: 'ajax',
+                    auth: {
+                        headers: {
+                            // 'Content-Type': 'application/json',
+                            'X-Xsrf-Token': Cookie.get("XSRF-TOKEN")
+                        }
+                    }
+                });
+                console.log(pusher);
 
+                var channel = pusher.subscribe('user.' + this.user.id);
+                channel.bind('new-notification', newNotificationHandler);
+
+                this.subscribed = true;
+            },
         async fetchNewOrders() {
             if(this.salesFetched || !this.firstFetch) {
                 const ids = this.sales.map(s => s.id);
@@ -188,6 +225,8 @@ export default {
     mounted() {
         this.getCities();
         this.getAlerts();
+        this.subscribe();
+
         // !this.subscribed && this.subscribe();
 
         if(this.user.role == 'admin') {

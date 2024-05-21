@@ -48,6 +48,11 @@ export default {
       SET_HIGHLIGHTED: (state, payload) => {
         state.notifications.highlighted = payload;
       },
+      TRIGGER_HIGHLIGHTED: (state, payload) => {
+        state.notifications.highlighted = payload;
+        state.notifications.count++;
+        state.notifications.data.unshift(payload);
+      },
       CHANGE_STATUS:(state) => {
         state.notifications.data = state.notifications.data.map(
           item => {
@@ -77,6 +82,9 @@ export default {
       },
       sethighlighted({ commit }, payload) {
         commit("SET_HIGHLIGHTED", payload);
+      },
+      triggerhighlighted({ commit }, payload) {
+        commit("TRIGGER_HIGHLIGHTED", payload);
       },
       setCount({ commit }, payload){
           commit("SET_COUNT", payload);
