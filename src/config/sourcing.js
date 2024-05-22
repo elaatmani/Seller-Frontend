@@ -1,5 +1,6 @@
 export const quotation_statuses = [
     { name: 'Pending', value: 'pending', class: 'tw-text-white tw-bg-gray-600 tw-font-medium' },
+    { name: 'Processing', value: 'processing', class: 'tw-text-white tw-bg-blue-600 tw-font-medium' },
     { name: 'Quoting', value: 'quoting', class: 'tw-text-black tw-bg-orange-500 tw-font-medium' },
     { name: 'Cancelled', value: 'cancelled', class: 'tw-text-white tw-bg-rose-500 tw-font-medium' },
     { name: 'Confirmed', value: 'confirmed', class: 'tw-text-white tw-bg-emerald-500 tw-font-medium' },
