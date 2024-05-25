@@ -147,7 +147,7 @@ export default {
             this.subscribe();
         },  
         subscribe() {
-                Pusher.logToConsole = true;
+                // Pusher.logToConsole = true;
                 // if (!localStorage.getItem('XSRF-TOKEN')) {
                 //     console.log('User is not authenticated');
                 //     return;
@@ -168,7 +168,6 @@ export default {
                         }
                     }
                 });
-                console.log(pusher);
 
                 var channel = pusher.subscribe('user.' + this.user.id);
                 channel.bind('new-notification', newNotificationHandler);
