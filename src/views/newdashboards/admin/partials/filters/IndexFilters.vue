@@ -13,7 +13,7 @@
 
       <AgentFilter :filters="filters" @update="f => filters = f" />
 
-        <SellerFilter :filters="filters" @update="f => filters = f" />
+        <SellerFilter :filters="filters" @update="f => filters = f" @sellerChanged="selectedSeller = $event" />
       <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
         <label
           for="countries"
@@ -51,7 +51,7 @@
         </select>
       </div>
 
-      <ProductFilter :filters="filters" @update="f => filters = f" />
+      <ProductFilter :filters="filters" :selectedSeller="selectedSeller" @update="f => filters = f" />
 
       <div class="md:tw-col-span-3 tw-col-span-12 tw-rounded">
         <label
@@ -120,6 +120,7 @@ export default {
             confirmations: confirmations,
             deliveries: deliveryStatus,
             dateFilter: ['', ''],
+            selectedSeller: 'all',
 
             filters: {}
         }
@@ -131,7 +132,7 @@ export default {
             handler(value) {
                 console.log(value)
             }
-        }
+        },
     },
 
     methods: {

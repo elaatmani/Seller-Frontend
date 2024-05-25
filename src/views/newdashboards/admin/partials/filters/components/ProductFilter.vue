@@ -5,8 +5,8 @@
           class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900"
           >Product</label
         >
-        <vue-select :reduce="(o) => o.id" @option:selected="e=> $emit('update', {...filters, product_id: e.id})" :clearable="false" class="tw-bg-gray-50 tw-border-solid tw-outline-none  tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full"
-          placeholder="All" :v-model="products" :options="allProducts" label="name">
+        <vue-select :reduce="(o) => o.id" @option:selected="updateSelectedProduct" :clearable="false" class="tw-bg-gray-50 tw-border-solid tw-outline-none  tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full"
+          placeholder="All" :options="allProducts" label="name">
         </vue-select>
         <select
            v-if="false"
@@ -32,17 +32,33 @@ export default {
     props: {
         filters: {
             required: true,
+        },
+        selectedSeller: {
+          required: false,
+          default: 'all'
         }
+
     },
 
     data() {
         return {
+          localSelectedProduct: null,
+
         }
     },
 
     computed: {
         products() {
-            return this.$store.getters['product/products']
+            let allProducts = this.$store.getters['product/products'];
+            let selectedSellerNumber = Number(this.selectedSeller);
+
+            let products;
+            if (this.selectedSeller === 'all') {
+              products = allProducts;
+            } else {
+              products = allProducts.filter(p => p.user_id === selectedSellerNumber);
+            }
+            return products;
         },
         fetched() {
             return this.$store.getters['product/fetched']
@@ -50,8 +66,21 @@ export default {
         allProducts() {
         return [{ id: 'all', name: 'All' }, ...this.products]
       },
-    }
-}
+    },
+    watch: {
+      selectedSeller(newSeller, oldSeller) {
+        if (newSeller !== oldSeller) {
+          this.localSelectedProduct = null;
+        }
+    },
+  },
+    methods: {
+        updateSelectedProduct(selectedOption) {
+          this.localSelectedProduct = selectedOption;
+          this.$emit('update', {...this.filters, product_id: selectedOption.id});
+        }
+      }
+  }
 </script>
 
 <style>
