@@ -51,14 +51,10 @@
             <div class="tw-col-span-2 md:tw-col-span-1">
               <label
                 class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Product</label>
-              <select @change="errors.product_id = null" v-model="items.product_id"
-                :class="[errors.product_id && '!tw-border-red-400']" required
-                class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500">
-                <option :value="0" selected>Choose Product</option>
-                <option v-for="p in products" :key="p.id" :value="p.id">
-                  {{ p.name }}
-                </option>
-              </select>
+                <vue-select
+                :reduce="(o) => o.id"  @option:selected="e => {items.product_id = e.id; errors.product_id = null }" :clearable="false" class="tw-bg-gray-50 tw-border-solid tw-outline-none  tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full"
+                  placeholder="Choose Product" :v-model="product" :options="allProducts" label="name">
+                </vue-select>
               <label v-if="errors.product_id"
                 class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white">{{
                 errors.product_id }}</label>
@@ -123,9 +119,12 @@
   import { validate } from "../lib/validate";
   import { create } from "../lib/create";
   import Product from "@/api/Product";
+  import vueSelect from 'vue-select';
 
-  export default {
-    components: {},
+export default {
+  components: {
+      'vue-select': vueSelect
+    },
 
     props: {
       visible: {
@@ -174,9 +173,18 @@
       fetched() {
         return this.$store.getters['user/fetched']
       },
+      product() {
+            return this.$store.getters['product/products']
+        },
+      allProducts() {
+        return [...this.product]
+      },
     },
 
     methods: {
+      Test(){
+        console.log("check")
+      },
       handleCreate() {
         const validated = validate(this, this.items);
         if (!validated) return false;
