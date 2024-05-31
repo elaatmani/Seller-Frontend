@@ -90,7 +90,7 @@
                                                 <div class="tw-col-span-2 tw-py-1 tw-px-2 tw-font-bold">{{ o.id }}</div>
                                                 <div class="tw-col-span-3 tw-py-1 tw-px-2 ">{{ confirmationsValues[o.confirmation] ?? null }}</div>
                                                 <div class="tw-col-span-2 tw-py-1 tw-px-2 ">{{ deliveryValues[o.delivery] }}</div>
-                                                <div class="tw-col-span-3 tw-py-1 tw-px-2 tw-text-center">{{ o.delivery_date.split('T')[0] }}</div>
+                                                <div class="tw-col-span-3 tw-py-1 tw-px-2 tw-text-center">{{ o.delivery_date?.split('T')[0] ?? o.delivery_date }}</div>
                                                 <div class="tw-col-span-2 tw-py-1 tw-px-2  tw-font-medium tw-text-end">{{ o.price }}</div>
                                             </div>
                                         </div>
