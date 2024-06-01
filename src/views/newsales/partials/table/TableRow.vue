@@ -6,6 +6,10 @@
         item.confirmation == 'reporter' &&
         item.reported_diff <= 0 &&
         ' !tw-shadow-sm !tw-border !tw-border-emerald-300',
+
+        item.is_paid_by_delivery && item.is_delivered && ' tw-bg-emerald-50 tw-bg-gradient-to-r tw-via-white tw-from-emerald-200/50 tw-to-white',
+        item.is_canceled && ' tw-bg-rose-50 tw-bg-gradient-to-r tw-via-white tw-from-rose-200/50 tw-to-white',
+        item.is_paid_to_seller && ' tw-bg-cyan-50 tw-bg-gradient-to-r tw-via-white tw-from-cyan-200/50 tw-to-white',
     ]"
   >
     <td class="tw-p-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
