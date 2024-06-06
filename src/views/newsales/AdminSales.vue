@@ -241,8 +241,9 @@ export default {
       this.handlePageChange(1);
     },
 
-    handleSortOrderChange() {
+    handleSortOrderChange(sort) {
       this.sort_order = this.sort_order == "asc" ? "desc" : "asc";
+      this.sort_by = sort.name;
       this.paginateOrders();
     },
 
