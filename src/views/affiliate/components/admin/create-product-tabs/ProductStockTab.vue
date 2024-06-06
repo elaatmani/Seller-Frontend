@@ -16,14 +16,14 @@
             </button>
           </div>
 
-        <div class="tw-col-span-1">
+        <!-- <div class="tw-col-span-1">
           <label class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Initial quantity</label>
           <input type="text"
             class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
             placeholder="0" required />
           <label v-if="false" class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white">{{
             "" }}</label>
-        </div>
+        </div> -->
         <div class="tw-col-span-1">
             <label class="tw-block tw-text-sm tw-mb-2 tw-font-medium tw-text-gray-900 dark:tw-text-white">
               Warehouse</label>
@@ -37,6 +37,32 @@
                   </select>
             </div>
           </div>
+
+
+          <transition class="tw-duration-200" enter-from-class="tw-opacity-0 tw-translate-x-[10px]"
+            leave-to-class="tw-opacity-0 -tw-translate-x-[10px]">
+              <div v-if="hasVariations" class="tw-col-span-2 tw-mt-5">
+                <div class="tw-flex tw-items-center tw-justify-between tw-mb-2">
+                  <label class="tw-block tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Variations list</label>
+                  <ProductVariationAdd @create="handleVariationCreate" />
+                </div>
+
+                <div v-if="!variations.length" class="tw-p-5 tw-bg-gray-100 tw-text-center">
+                  <p>No variations added yet</p>
+                </div>
+
+                <div v-else class="tw-p-2 tw-bg-gray-100 tw-">
+                  <div :key="v" class="tw-grid tw-grid-cols-4 tw-mb-1 tw-text-center">
+                    <div class="tw-p-2 tw-bg-gray-800 tw-text-white tw-rounded tw-border tw-border-dashed">Quantity</div>
+                    <div class="tw-p-2 tw-bg-gray-800 tw-text-white tw-rounded tw-border tw-border-dashed">Color</div>
+                    <div class="tw-p-2 tw-bg-gray-800 tw-text-white tw-rounded tw-border tw-border-dashed">Size</div>
+                    <div class="tw-p-2 tw-bg-gray-800 tw-text-white tw-rounded tw-border tw-border-dashed">Actions</div>
+                  </div>
+                  <product-variation v-for="v in variations" :key="v" :variation="v" />
+                </div>
+                
+              </div>
+          </transition>
       </div>
     </div>
 
@@ -69,8 +95,16 @@
 
 <script setup>
 import { ref } from 'vue'; 
+import ProductVariationAdd from './product-stock-partials/ProductVariationAdd';
+import ProductVariation from './product-stock-partials/ProductVariation';
 
 const hasVariations = ref(false)
+const variations = ref([]);
+
+
+const handleVariationCreate = v => {
+  variations.value.unshift(v);
+}
 </script>
 <style>
 </style>

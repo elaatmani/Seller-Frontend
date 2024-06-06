@@ -64,20 +64,9 @@
           <h1 class="tw-font-semibold tw-text-white">Category & Tags</h1>
         </div>
         <div class="tw-p-5 tw-space-y-4">
-          <div>
-            <label class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">
-              Category</label>
-            <div class="tw-relative">
-                  <select
-                    value="a"
-                    class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 tw-pr-7"
-                  >
-                    <option value="a" disabled>Choose category</option>
-                  </select>
-            </div>
-          </div>
+          <category-field :categories="categories" />
 
-          <tags-field />
+          <tags-field :tags="tags" />
 
           
         </div>
@@ -126,9 +115,11 @@
 import TiptapEditor from '../partials/editor/TiptapEditor.vue';
 import { ref }  from 'vue';
 import TagsField from './main-details-partials/TagsField.vue';
+import CategoryField from './main-details-partials/CategoryField.vue';
 
 const visible = ref(true);
-// const tags = ref([]);
+const tags = ref([]);
+const categories = ref([]);
 // const form = ref({})
 // const errors = ref({})
 

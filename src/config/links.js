@@ -238,6 +238,14 @@ export const links = [
                 gate: 'access_to_affiliate',
                 to: { name: 'affiliate.index' }
             },
+            {
+                id: 3,
+                title: 'Import list',
+                subModule: 'affiliate.import',
+                role: ['admin', 'seller'],
+                gate: 'access_to_affiliate',
+                to: { name: 'affiliate.import' }
+            },
         ]
     },
 

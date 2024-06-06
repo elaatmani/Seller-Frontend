@@ -6,19 +6,19 @@
       >
         Tags</label
       >
-      <div class="tw-flex tw-items-center tw-h-[42px]">
+      <div class="tw-flex tw-items-center tw-h-[42px] tw-gap-1">
         <input
         @keyup.enter="handleAddTag"
           type="text"
           v-model="tag"
-          class="tw-bg-gray-50 tw-border tw-border-solid tw-flex-1 tw-rounded-r-none focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+          class="tw-bg-gray-50 tw-border tw-border-solid tw-flex-1  focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
           placeholder="Gadgets..."
           required
         />
 
         <button
             @click="handleAddTag"
-          class="tw-h-full tw-aspect-square tw-bg-gray-800 tw-rounded-lg tw-rounded-l-none tw-flex tw-items-center tw-justify-center"
+          class="tw-h-full tw-aspect-square tw-bg-gray-800 tw-rounded-lg  tw-flex tw-items-center tw-justify-center"
         >
           <icon icon="pepicons-pop:plus" class="tw-text-white tw-text-xl" />
         </button>
