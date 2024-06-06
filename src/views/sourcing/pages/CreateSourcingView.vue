@@ -37,6 +37,21 @@
                                 errors.product_name }}</label>
                     </div>
 
+
+                    <div class="md:tw-col-span-6 tw-col-span-12">
+                        <label
+                            class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Estimated
+                            Quantity</label>
+                        <input v-model="form.estimated_quantity" @input="errors.estimated_quantity = null"
+                            :class="[errors.estimated_quantity && '!tw-border-red-400']" type="number"
+                            class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+                            placeholder="Estimated quantity" required />
+                        <label v-if="errors.estimated_quantity"
+                            class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white">{{
+                                errors.estimated_quantity }}</label>
+                    </div>
+                    
+
                     <div class="md:tw-col-span-6 tw-col-span-12">
                         <label
                             class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Product
@@ -50,18 +65,27 @@
                                 errors.product_url }}</label>
                     </div>
 
-
                     <div class="md:tw-col-span-6 tw-col-span-12">
                         <label
-                            class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Estimated
-                            Quantity</label>
-                        <input v-model="form.estimated_quantity" @input="errors.estimated_quantity = null"
-                            :class="[errors.estimated_quantity && '!tw-border-red-400']" type="number"
+                            class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Video
+                            URL</label>
+                        <input v-model="form.video_url" @input="errors.video_url = null"
+                            :class="[errors.video_url && '!tw-border-red-400']" type="text"
                             class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
-                            placeholder="Estimated quantity" required />
-                        <label v-if="errors.estimated_quantity"
+                            placeholder="https://..." required />
+                        <label v-if="errors.video_url"
                             class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white">{{
-                                errors.estimated_quantity }}</label>
+                                errors.video_url }}</label>
+                    </div>
+
+                   
+
+                    <div class="tw-col-span-12">
+                        <label
+                            class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Note</label>
+                        <textarea v-model="form.note_by_seller" rows="4"
+                            class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+                            placeholder="Special request..."></textarea>
                     </div>
 
                     <div class="md:tw-col-span-6 tw-col-span-12">
@@ -86,14 +110,6 @@
                                 errors.destination_country }}</label>
                     </div>
 
-
-                    <div class="tw-col-span-12">
-                        <label
-                            class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Note</label>
-                        <textarea v-model="form.note_by_seller" rows="4"
-                            class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
-                            placeholder="Special request..."></textarea>
-                    </div>
 
                     <div class="md:tw-col-span-6 tw-col-span-12">
                         <label

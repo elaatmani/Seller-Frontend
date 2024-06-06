@@ -42,7 +42,11 @@ export default {
 
     computed: {
         products() {
+          if(this.filters.user_id != 'all') {
+            return this.$store.getters['product/products']?.filter(p => p.user_id == this.filters.user_id)
+          } else {
             return this.$store.getters['product/products']
+          }
         },
         fetched() {
             return this.$store.getters['product/fetched']

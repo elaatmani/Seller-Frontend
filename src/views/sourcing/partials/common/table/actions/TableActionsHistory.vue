@@ -69,6 +69,7 @@ import moment from 'moment'
 const field_names = {
     'product_name': 'Product name',
     'product_url': 'Product URL',
+    'video_url': 'Video URL',
     'is_paid': 'Paid',
     'paid_at': 'Paid at',
     'estimated_quantity': 'Estimated Quantity',

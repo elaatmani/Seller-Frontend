@@ -17,13 +17,35 @@
             <div class="md:tw-col-span-6 tw-col-span-12">
                 <label class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Product
                     URL</label>
-                <input v-model="form.sourcing.product_url" @input="errors.product_url = null"
-                    :class="[errors.product_url && '!tw-border-red-400']" type="text"
-                    class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
-                    placeholder="https://..." required />
+                <div class="tw-relative">
+                    <a :href="form.sourcing.product_url" target="_blank" class="tw-p-1 tw-absolute tw-right-2 tw-top-1/2 -tw-translate-y-1/2" >
+                            <icon icon="quill:link-out" class="tw-text-xl tw-text-gray-500 hover:tw-text-orange-400 tw-duration-200" />
+                        </a>
+                    <input v-model="form.sourcing.product_url" @input="errors.product_url = null"
+                        :class="[errors.product_url && '!tw-border-red-400']" type="text"
+                        class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+                        placeholder="https://..." required />
+                </div>
                 <label v-if="errors.product_url"
                     class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white">{{
                         errors.product_url }}</label>
+            </div>
+
+            <div class="md:tw-col-span-6 tw-col-span-12">
+                <label class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Video
+                    URL</label>
+                    <div class="tw-relative">
+                        <a :href="form.sourcing.video_url" target="_blank" class="tw-p-1 tw-absolute tw-right-2 tw-top-1/2 -tw-translate-y-1/2" >
+                            <icon icon="quill:link-out" class="tw-text-xl tw-text-gray-500 hover:tw-text-orange-400 tw-duration-200" />
+                        </a>
+                        <input v-model="form.sourcing.video_url" @input="errors.video_url = null"
+                            :class="[errors.video_url && '!tw-border-red-400']" type="text"
+                            class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+                            placeholder="https://..." required />
+                    </div>
+                <label v-if="errors.video_url"
+                    class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white">{{
+                        errors.video_url }}</label>
             </div>
 
 
