@@ -2,7 +2,7 @@
 import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 
 // Views
-import ProductListView from '@/views/affiliate/pages/ProductListView'
+import ProductResearchView from '@/views/affiliate/pages/ProductResearchView'
 import CreateProductView from '@/views/affiliate/pages/CreateProductView'
 import ImportListView from '@/views/affiliate/pages/ImportListView'
 
@@ -23,7 +23,7 @@ export default
             { 
                 name: 'affiliate.index',
                 path: 'products',
-                component: ProductListView,
+                component: ProductResearchView,
                 meta: {
                     module: 'affiliate',
                     subModule: 'affiliate.index',

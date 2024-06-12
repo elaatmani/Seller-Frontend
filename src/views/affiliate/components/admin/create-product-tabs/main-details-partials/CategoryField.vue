@@ -9,11 +9,12 @@
       <div class="tw-flex-1">
         <div class="tw-relative">
           <select
-            :value="selected"
+            :disabled="!fetched"
+            v-model="product.category_id"
             class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 tw-pr-7"
           >
-            <option disabled>Choose category</option>
-            <option :value="c.name" v-for="c in categories" :key="c">{{ c.name }}</option>
+            <option value="" selected>Choose category</option>
+            <option :value="c.id" v-for="c in categories" :key="c">{{ c.name }}</option>
           </select>
         </div>
       </div>
@@ -93,33 +94,64 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from "vue";
+import Category from "@/api/Category";
+import { useAlert } from "@/composables/useAlert";
+import { ref, inject } from "vue";
 
-const emit = defineEmits(["create"]);
-emit
+const product = inject("product");
+
 const visible = ref(false);
 const loading = ref(false);
+const fetched = ref(false);
+const category = ref({ type: 'products' });
 const categories = ref([]);
-const category = ref({});
-const selected = ref(null);
 const errors = ref({});
 
-const handleCreate = () => {
+const handleCreate = async () => {
     errors.value = {};
 
   if(!category.value.name) {
     errors.value.name = "Name is required";
     return false;
   }
+  loading.value = true
+  await Category.create(category.value).then(
+    r => {
+      if(r.data.code == 'SUCCESS') {
+        categories.value.unshift(r.data.category)
+        useAlert('New category has been added');
+        cancel();
+      }
+      },
+    e => {
+      console.log(e)
+    })
 
-  categories.value.push(category.value);
-  cancel();
+    loading.value = false;
 };
 
 const cancel = () => {
-  category.value = {};
+  category.value = { type: 'products' };
   visible.value = false;
 };
+
+const getCategories = async () => {
+  fetched.value = false;
+  await Category.all().then(
+    r => {
+      if(r.data.code == 'SUCCESS') {
+        categories.value = r.data.categories;
+        fetched.value = true;
+      }
+    },
+    e => {
+      console.log(e)
+    });
+}
+
+if(!fetched.value) {
+  getCategories();
+}
 </script>
 
 <style></style>

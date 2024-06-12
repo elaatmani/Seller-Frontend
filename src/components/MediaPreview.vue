@@ -45,7 +45,7 @@
               v-else-if="props.files[props.index].type.startsWith('video/')"
               :src="props.files[props.index].url"
               controls
-              class="tw-max-w-full tw-h-auto"
+              class="tw-max-w-full tw-h-auto tw-max-h-[calc(100vh-200px)]"
             ></video>
             <div v-else>
               {{ props.files[props.index].name }} ({{

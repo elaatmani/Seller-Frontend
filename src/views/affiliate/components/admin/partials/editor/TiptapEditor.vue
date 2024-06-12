@@ -1,11 +1,12 @@
 <template>
   <div>
     <editor-toolbar :editor="editor" />
-    <editor-content :editor="editor" class="tw-w-full tw-min-h-[300px] tw-outline-none no-tailwind" />
+    <editor-content v-model="product.description" :editor="editor" class="tw-w-full tw-min-h-[300px] tw-outline-none no-tailwind" />
   </div>
 </template>
 
 <script setup>
+import { inject } from 'vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import Underline from "@tiptap/extension-underline"
 import StarterKit from '@tiptap/starter-kit'
@@ -13,6 +14,7 @@ import TextAlign from '@tiptap/extension-text-align'
 import Image from '@tiptap/extension-image'
 import EditorToolbar from './EditorToolbar'
 
+const product = inject('product')
 const editor = useEditor({
       content: '<p>I’m running Tiptap with Vue.js. 🎉</p>',
       extensions: [

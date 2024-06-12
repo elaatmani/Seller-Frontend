@@ -224,7 +224,7 @@ export const links = [
         children: [
             {
                 id: 1,
-                title: 'Create New Product',
+                title: 'Create new product',
                 subModule: 'affiliate.create',
                 role: ['admin'],
                 gate: 'create_affiliate_product',
@@ -232,7 +232,7 @@ export const links = [
             },
             {
                 id: 2,
-                title: 'Products list',
+                title: 'Product research',
                 subModule: 'affiliate.index',
                 role: ['admin'],
                 gate: 'access_to_affiliate',

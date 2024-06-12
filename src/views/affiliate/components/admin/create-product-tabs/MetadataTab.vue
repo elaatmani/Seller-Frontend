@@ -110,7 +110,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, defineProps, defineEmits, toRef } from 'vue';
+
+const props = defineProps(['product'])
+const emit = defineEmits(['update:product'])
+const product = toRef(props, 'product');
+product;emit
 
 const video = ref('')
 const videos = ref([])

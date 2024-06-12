@@ -119,12 +119,14 @@
     <div class="tw-border-l tw-h-4 tw-border-solid tw-border-gray-400"></div>
 
     <button
+      v-if="false"
     @click="editor?.chain().focus().setImage({ src: 'https://i.ytimg.com/vi/Q2Drpzkqvtc/hqdefault.jpg?sqp=-oaymwE2CNACELwBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB_gmAAtAFigIMCAAQARhyIGQoJTAP&rs=AOn4CLAxAb440uL5NioexSLJFaR2mssENA' }).run()"
       class="tw-rounded tw-w-8 tw-h-8 tw-bg-white tw-border tw-border-solid tw-border-gray-200 tw-text-gray-500 tw-flex tw-items-center tw-justify-center"
     >
       <icon icon="hugeicons:image-01" class="tw-text-sm tw-text-gray-500" />
     </button>
     <button
+      v-if="false"
       class="tw-rounded tw-w-8 tw-h-8 tw-bg-white tw-border tw-border-solid tw-border-gray-200 tw-text-gray-500 tw-flex tw-items-center tw-justify-center"
     >
       <icon
@@ -133,12 +135,13 @@
       />
     </button>
     <button
+      v-if="false"
       class="tw-rounded tw-w-8 tw-h-8 tw-bg-white tw-border tw-border-solid tw-border-gray-200 tw-text-gray-500 tw-flex tw-items-center tw-justify-center"
     >
       <icon icon="ph:link-bold" class="tw-text-sm tw-text-gray-500" />
     </button>
 
-    <div class="tw-border-l tw-h-4 tw-border-solid tw-border-gray-400"></div>
+    <div v-if="false" class="tw-border-l tw-h-4 tw-border-solid tw-border-gray-400"></div>
 
     <button
       @click="editor?.chain().focus().toggleBulletList().run()"
