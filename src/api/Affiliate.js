@@ -5,14 +5,18 @@ class Affiliate {
 
     async paginate(url = '/', options) {
         await Csrf.getCookie();
-        return Api.post('api/v1/products' + url, options);
+        return Api.get('api/affiliate/products' + url, { params: options });
+    }
+
+    async get(id) {
+        await Csrf.getCookie();
+        return Api.get('api/affiliate/products/' + id);
     }
     
     async create(product) {
         await Csrf.getCookie();
         return Api.post('api/affiliate/products', product)
     }
-
 
 }
 

@@ -5,6 +5,7 @@ import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 import ProductResearchView from '@/views/affiliate/pages/ProductResearchView'
 import CreateProductView from '@/views/affiliate/pages/CreateProductView'
 import ImportListView from '@/views/affiliate/pages/ImportListView'
+import ShowProductView from '@/views/affiliate/pages/ShowProductView'
 
 
 
@@ -40,6 +41,17 @@ export default
                     subModule: 'affiliate.create',
                     title: 'Create Affiliate Product',
                     role: ['admin']
+                }
+            },
+            { 
+                name: 'affiliate.show',
+                path: 'products/:id',
+                component: ShowProductView,
+                meta: {
+                    module: 'affiliate',
+                    subModule: 'affiliate.show',
+                    title: 'Product Details',
+                    role: ['admin', 'seller']
                 }
             },
             { 

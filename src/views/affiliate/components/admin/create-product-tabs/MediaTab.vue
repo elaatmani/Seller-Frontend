@@ -2,6 +2,8 @@
   <div>
 
 
+    <MediaCollection label="Thumbnail" collection="thumbnail" :multiple="false" />
+
     <MediaCollection label="Images & Videos" collection="normal" />
 
     <MediaCollection label="Facebook ADS" collection="facebook_ads" />

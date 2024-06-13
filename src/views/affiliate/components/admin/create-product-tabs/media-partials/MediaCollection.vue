@@ -6,7 +6,7 @@
           type="file"
           name="image-input"
           @change="handleImageUpload"
-          multiple
+          :multiple="props.multiple"
           class="tw-invisible tw-absolute tw-pointer-events-none"
         />
       </div>
@@ -28,6 +28,7 @@
     </h1>
 
     <button
+      v-if="props.multiple || (!props.multiple && !files.length)"
       @click="imageFilePicker.click()"
       class="tw-bg-gray-200 tw-flex tw-items-center tw-gap-2 tw-pr-6 tw-pl-4 tw-py-1 tw-rounded tw-text-gray-700 tw-border tw-border-solid tw-duration-200 hover:tw-border-gray-700"
     >
@@ -62,7 +63,20 @@ import MediaPreview from "@/components/MediaPreview.vue";
 import { useAlert } from "@/composables/useAlert";
 import { ref, inject, computed, defineProps } from "vue";
 
-const props = defineProps(['label', 'collection'])
+const props = defineProps({
+  label: {
+    type: String,
+    default: 'Media'
+  },
+  collection: {
+    type: String,
+    default: 'normal'
+  },
+  multiple: {
+    type: Boolean,
+    default: true
+  }
+});
 const product = inject('product');
 const imageFilePicker = ref(null);
 const filePreviewVisible = ref(false);  

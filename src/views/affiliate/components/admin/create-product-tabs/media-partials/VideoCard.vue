@@ -29,7 +29,7 @@
           :class="[file.showOptions && '!tw-hidden']"
           class="tw-p-2 tw-flex tw-items-center tw-justify-between group-hover:tw-translate-y-0 tw-absolute tw-bottom-0 tw-translate-y-full tw-duration-200 tw-w-full tw-h-fit tw-backdrop-blur-sm tw-bg-black/50 tw-left-0"
         >
-          <p class="tw-text-sm tw-text-white">{{ file.name }}</p>
+          <p class="tw-text-sm tw-text-white tw-truncate">{{ file.name }}</p>
           <div class="tw-relative">
             <button
               @click="file.showOptions = !file.showOptions"
