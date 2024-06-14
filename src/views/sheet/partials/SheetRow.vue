@@ -18,6 +18,11 @@
         </td>
         <td class="tw-px-6 tw-py-4">
             <div>
+                {{ sheet.username }} 
+            </div>
+        </td>
+        <td class="tw-px-6 tw-py-4">
+            <div>
                 {{ sheet.sheet_name }} 
             </div>
         </td>

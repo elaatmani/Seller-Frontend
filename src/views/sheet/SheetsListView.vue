@@ -62,7 +62,9 @@
             </div>
           </div>
         </div>
-  
+        <div  v-if="user.role == 'admin'"  class="tw-grid tw-grid-cols-12 tw-gap-2 tw-mb-4">
+            <SellerFilter :filters="filters" @update="updateFilters" />
+        </div>
         <div class="">
           <SheetsTable :sheets="sheets" />
         </div>
@@ -77,9 +79,11 @@
   import SheetsTable from './SheetsTable.vue'
   import AddSheet from './partials/AddSheet'
   import Sheet from '@/api/Sheet'
+  import SellerFilter from './filters/component/SellerFilter.vue';
+
   
   export default {
-    components: {  SheetsTable, AddSheet },
+    components: {  SheetsTable, AddSheet, SellerFilter},
     data() {
       return {
         localUrl,
@@ -88,20 +92,29 @@
         date: null,
         search: '',
         showPopup:false,
-        email: 'new-service-account@testing-379416.iam.gserviceaccount.com'
-        
+        email: 'new-service-account@testing-379416.iam.gserviceaccount.com',
+        filters: {
+            user_id: 'all',
+        },
       }
     },
     computed: {
       sheets() {
         return this.$store.getters['sheet/sheets'];
       },
+      user() {
+              return this.$store.getters['user/user']
+      },
     },
 
     methods: {
+        updateFilters(newFilters) {
+            this.filters = newFilters;
+            this.getSheets();
+        },
         getSheets() {
             this.isLoaded = false;
-            return Sheet.all()
+            return Sheet.all(this.filters)
             .then(
                 (res) => {
                     if(res.data.code == "SUCCESS") {
