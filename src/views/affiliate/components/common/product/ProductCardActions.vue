@@ -1,17 +1,45 @@
 <template>
-    <div class="tw-flex tw-justify-end tw-gap-2 tw-p-2">
-        <button @click="onImportClick"
-            class="tw-px-2 tw-aspect-square tw-bg-emerald-500 tw-rounded tw-flex tw-items-center tw-gap-2 tw-justify-between tw-h-[40px]">
-            <icon v-if="!loading.import" icon="charm:plus" class="tw-text-2xl tw-text-white" />
-            <icon v-else icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-white" />
+    <div v-if="!props.isCard" class="tw-w-full tw-mt-10 tw-grid md:tw-grid-cols-2 tw-grid-cols-1 tw-gap-2 ">
+        <button @click="onImportClick" :disabled="imported || loading.import" :class="[imported && '!tw-bg-gray-100 tw-text-emerald-500']" class="tw-px-2 tw-flex tw-items-center tw-justify-center tw-gap-4 tw-bg-emerald-500 tw-text-white tw-rounded tw-py-3 hover:tw-saturate-150x tw-duration-200 tw-border-2 tw-border-solid tw-border-white hover:tw-border-emerald-200 tw-text-lg">
+            <icon v-if="loading.import" icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-white" />
+            <template v-else>
+                <icon v-if="!imported" icon="charm:plus" class="tw-text-3xl" />
+                <icon v-if="imported" icon="uis:check" class="tw-text-3xl tw-text-emerald-500" />
+            </template>
+            <span v-if="!imported" >Add to import list</span>
+            <span v-if="imported" >Imported</span>
         </button>
 
-        <button @click="onWishlistClick"
-            class="tw-px-2 tw-aspect-square tw-bg-rose-500 tw-rounded tw-flex tw-items-center tw-gap-2 tw-justify-between tw-h-[40px]">
-            <icon v-if="!loading.wishlist" :icon="wishlisted ? 'ph:heart-fill' : 'ph:heart-light'"
-                class="tw-text-2xl tw-text-white" />
-            <icon v-else icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-white" />
+        <button @click="onWishlistClick" class="tw-px-2 tw-flex tw-items-center tw-justify-center tw-gap-4 tw-bg-rose-500/10 tw-text-rose-500 tw-text-whitxe tw-rounded tw-py-3 hover:tw-saturate-150x tw-duration-200 tw-border-2 tw-border-solid tw-border-white hover:tw-border-rose-200 tw-text-lg">
+            <icon v-if="loading.wishlist" icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-rose-500" />
+            <template v-else>
+                <icon v-if="!wishlisted" icon="ph:heart-light" class="tw-text-3xl tw-text-rose-500" />
+                <icon v-if="wishlisted" icon="ph:heart-fill" class="tw-text-3xl tw-text-rose-500" />
+            </template>
+            <span v-if="!wishlisted" >Add to wishlist</span>
+            <span v-if="wishlisted" >Wishlisted</span>
         </button>
+    </div>
+
+    <div
+        v-if="props.isCard"
+        :class="[(loading.import || loading.wishlist) && '!tw-translate-y-0' ]"
+        class="tw-absolute tw-top-0 tw-left-0 tw-z-20 tw-w-full tw-h-[60px] tw-bg-gradient-to-b tw-from-black/40 tw-to-transparent -tw-translate-y-full group-hover:tw-translate-y-0 tw-duration-200">
+        <div class="tw-flex tw-justify-end tw-gap-2 tw-p-2">
+            <button @click="onImportClick"
+                class="tw-px-2 tw-aspect-square tw-bg-emerald-500 tw-rounded tw-flex tw-items-center tw-gap-2 tw-justify-between tw-h-[40px]">
+                <icon v-if="!loading.import" icon="charm:plus" class="tw-text-2xl tw-text-white" />
+                <icon v-else icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-white" />
+            </button>
+
+            <button @click="onWishlistClick"
+                class="tw-px-2 tw-aspect-square tw-bg-rose-500 tw-rounded tw-flex tw-items-center tw-gap-2 tw-justify-between tw-h-[40px]">
+                <icon v-if="!loading.wishlist" :icon="wishlisted ? 'ph:heart-fill' : 'ph:heart-light'"
+                    class="tw-text-2xl tw-text-white" />
+                <icon v-else icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-white" />
+            </button>
+        </div>
+
     </div>
 
     <popup-new :visible="visible.import" :closeable="!loading.import" @cancel="visible.import = false">
@@ -44,13 +72,23 @@
 </template>
 
 <script setup>
-import Affiliate from '@/api/Affiliate';
+// import Affiliate from '@/api/Affiliate';
+import { useAlert } from '@/composables/useAlert';
 import { ref, defineProps, toRef } from 'vue';
 
-const props = defineProps(['product'])
+const props = defineProps({
+    product: {
+        required: false
+    },
+    isCard: {
+        type: Boolean,
+        default: true
+    }
+})
 const product = toRef(props, 'product')
 
 const wishlisted = ref(false)
+const imported = ref(false)
 const loading = ref({
     wishlist: false,
     import: false,
@@ -65,6 +103,11 @@ const onWishlistClick = () => {
     setTimeout(() => {
         loading.value.wishlist = false
         wishlisted.value = !wishlisted.value
+        if (wishlisted.value) {
+            useAlert('Added to wishlist')
+        } else {
+            useAlert('Removed from wishlist')
+        }
     }, 2000)
 }
 
@@ -74,17 +117,27 @@ const onImportClick = () => {
 
 const onConfirmImport = async () => {
     loading.value.import = true;
-    await Affiliate.addToImport(product.value.id)
-        .then(
-            r => {
-                console.log(r)
-            },
-            e => {
-                console.log(e)
-            }
-        )
+    // await Affiliate.addToImport(product.value.id)
+    //     .then(
+    //         r => {
+    //             console.log(r)
+    //         },
+    //         e => {
+    //             console.log(e)
+    //         }
+    //     )
+    visible.value.import = false;
+    setTimeout(() => {
+        loading.value.import = false;
+        imported.value = !imported.value
+        if (imported.value) {
+            useAlert('Product added to import list!')
+        } else {
+            useAlert('Product removed from import list')
+        }
+        product
+    }, 2000);
 
-    loading.value.import = false;
 }
 
 </script>

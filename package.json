@@ -33,6 +33,7 @@
     "roboto-fontface": "*",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
+    "swiper": "^11.1.4",
     "utf8": "^3.0.0",
     "vue": "^3.2.13",
     "vue-json-csv": "^2.1.0",

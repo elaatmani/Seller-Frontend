@@ -3,6 +3,7 @@ import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 
 // Views
 import ProductResearchView from '@/views/affiliate/pages/ProductResearchView'
+import ProductListView from '@/views/affiliate/pages/ProductListView'
 import CreateProductView from '@/views/affiliate/pages/CreateProductView'
 import ImportListView from '@/views/affiliate/pages/ImportListView'
 import ShowProductView from '@/views/affiliate/pages/ShowProductView'
@@ -22,6 +23,29 @@ export default
 
             // Adss routes
             { 
+                name: 'affiliate.admin.list',
+                path: 'admin/products',
+                component: ProductListView,
+                meta: {
+                    module: 'affiliate',
+                    subModule: 'affiliate.admin.list',
+                    title: 'Affiliate Products',
+                    role: ['admin']
+                }
+            },
+            { 
+                name: 'affiliate.admin.create',
+                path: 'admin/products/create',
+                component: CreateProductView,
+                meta: {
+                    module: 'affiliate',
+                    subModule: 'affiliate.create',
+                    title: 'Create Affiliate Product',
+                    role: ['admin']
+                }
+            },
+            
+            { 
                 name: 'affiliate.index',
                 path: 'products',
                 component: ProductResearchView,
@@ -32,17 +56,7 @@ export default
                     role: ['admin', 'seller']
                 }
             },
-            { 
-                name: 'affiliate.create',
-                path: 'products/create',
-                component: CreateProductView,
-                meta: {
-                    module: 'affiliate',
-                    subModule: 'affiliate.create',
-                    title: 'Create Affiliate Product',
-                    role: ['admin']
-                }
-            },
+            
             { 
                 name: 'affiliate.show',
                 path: 'products/:id',
@@ -62,6 +76,18 @@ export default
                     module: 'affiliate',
                     subModule: 'affiliate.import',
                     title: 'Import List',
+                    role: ['admin', 'seller']
+                }
+            },
+
+            { 
+                name: 'affiliate.wishlist',
+                path: 'products/wishlist',
+                component: ImportListView,
+                meta: {
+                    module: 'affiliate',
+                    subModule: 'affiliate.wishlist',
+                    title: 'My wishlist',
                     role: ['admin', 'seller']
                 }
             },

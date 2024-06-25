@@ -224,27 +224,43 @@ export const links = [
         children: [
             {
                 id: 1,
-                title: 'Create new product',
-                subModule: 'affiliate.create',
+                title: 'All Products',
+                subModule: 'affiliate.admin.list',
                 role: ['admin'],
-                gate: 'create_affiliate_product',
-                to: { name: 'affiliate.create' }
+                gate: 'manage_affiliate_product',
+                to: { name: 'affiliate.admin.list' }
             },
             {
                 id: 2,
-                title: 'Product research',
+                title: 'Create new product',
+                subModule: 'affiliate.admin.create',
+                role: ['admin'],
+                gate: 'create_affiliate_product',
+                to: { name: 'affiliate.admin.create' }
+            },
+            {
+                id: 3,
+                title: 'Winning Products',
                 subModule: 'affiliate.index',
                 role: ['admin'],
                 gate: 'access_to_affiliate',
                 to: { name: 'affiliate.index' }
             },
             {
-                id: 3,
+                id: 4,
                 title: 'Import list',
                 subModule: 'affiliate.import',
                 role: ['admin', 'seller'],
                 gate: 'access_to_affiliate',
                 to: { name: 'affiliate.import' }
+            },
+            {
+                id: 5,
+                title: 'My wishlist',
+                subModule: 'affiliate.wishlist',
+                role: ['admin', 'seller'],
+                gate: 'access_to_affiliate',
+                to: { name: 'affiliate.wishlist' }
             },
         ]
     },

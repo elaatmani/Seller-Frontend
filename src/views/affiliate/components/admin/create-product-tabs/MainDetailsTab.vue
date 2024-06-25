@@ -48,7 +48,7 @@
           <label
             class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Description</label>
           
-            <tiptap-editor />
+            <tiptap-editor v-model="product.description" />
           <label v-if="errors.description" class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white">{{
             errors.description }}</label>
         </div>

@@ -16,6 +16,7 @@
             >
             <div class="tw-flex tw-items-center tw-h-[42px] tw-gap-2">
               <input
+                v-model="landing_page"
                 type="text"
                 class="tw-bg-gray-50 tw-border tw-flex-1 tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
                 placeholder="https://www..."
@@ -45,13 +46,18 @@
         <div v-if="!landing_pages.length" class="tw-bg-gray-100 tw-p-5 tw-rounded tw-text-center">
           No landing pages has been added
         </div>
-        <div v-else>
+        <div v-else class="tw-flex tw-items-center tw-gap-2 tw-flex-wrap">
+          <a :href="v.meta_value" target="_blank" v-for="(v, index) in landing_pages" :key="v" class="tw-px-4 tw-py-2 tw-uppercase tw-border tw-border-solid tw-border-gray-200 tw-rounded">
+              <span class="tw-text-sm">Link {{ index + 1 }}</span>
+              <div>
 
+              </div>
+          </a>
         </div>
       </div>
     </div>
     <div class="md:tw-col-span-5"></div>
-    <div
+    <div v-if="false"
       class="md:tw-col-span-7 tw-col-span-12 tw-border tw-border-gray-400 tw-bg-white tw-w-full tw-overflow-hidden tw-rounded-md"
     >
       <div class="tw-bg-gray-700 tw-border-b tw-border-solid tw-p-2">
@@ -96,7 +102,7 @@
         <div v-if="!videos.length" class="tw-bg-gray-100 tw-p-5 tw-rounded tw-text-center">
           No videos has been added
         </div>
-        <div class="tw-flex tw-items-center tw-gap-2 tw-flex-wrap">
+        <div v-else class="tw-flex tw-items-center tw-gap-2 tw-flex-wrap">
           <div v-for="(v, index) in videos" :key="v" class="tw-px-4 tw-py-2 tw-uppercase tw-border tw-border-solid tw-border-gray-200 tw-rounded">
               <span class="tw-text-sm">Video {{ index + 1 }}</span>
               <div>

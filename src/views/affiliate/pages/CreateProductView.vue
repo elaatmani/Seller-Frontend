@@ -48,6 +48,7 @@ import MediaTab from '@/views/affiliate/components/admin/create-product-tabs/Med
 import MetadataTab from '@/views/affiliate/components/admin/create-product-tabs/MetadataTab'
 import { shallowRef, ref, provide } from 'vue';
 import Affiliate from '@/api/Affiliate';
+import { useAlert } from '@/composables/useAlert';
 
 const tabs = [
   { key: 'main-details-tab', 'component': MainDetailsTab, name: 'Informations', icon: 'clarity:help-info-solid', fields: ['name', 'description', 'buying_price', 'selling_price', 'sku', 'status', 'offers', 'categories', 'tags'] },
@@ -66,7 +67,8 @@ const product = ref({
   has_variations: false,
   media: [],
   category_id: '',
-  initial_quantity: 0
+  initial_quantity: 0,
+  description: 'Hello'
 })
 
 provide('product', product)
@@ -77,7 +79,20 @@ const create = async () => {
   await Affiliate.create(formattedProduct)
   .then(
     r => {
-      console.log(r)
+      if(r.data.code == 'SUCCESS') {
+        useAlert('Product created successfully','success')
+        product.value = {
+            status: true,
+            tags: [],
+            categories: [],
+            variations: [],
+            has_variations: false,
+            media: [],
+            category_id: '',
+            initial_quantity: 0,
+            description: 'Hello'
+          }
+      }
     },
     e => {
       if(e?.response?.data?.errors && e?.response.status == 422) {
