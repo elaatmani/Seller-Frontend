@@ -1,5 +1,5 @@
-export const path = 'api/orders/count'
-export const method = 'get'
+export const path = '/api/storeimport'
+export const method = 'post'
 
 export default {
    'name': 'Orders from Youcan',
