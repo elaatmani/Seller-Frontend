@@ -116,19 +116,17 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits, toRef } from 'vue';
+import { ref, inject, computed } from 'vue';
 
-const props = defineProps(['product'])
-const emit = defineEmits(['update:product'])
-const product = toRef(props, 'product');
-product;emit
+const product = inject('product');
+const errors = inject('errors');
+errors
 
 const video = ref('')
-const videos = ref([])
+const videos = computed(() => product.metadata.filter(m => m.meta_key == 'video_link'))
 
 const landing_page = ref('')
-const landing_pages = ref([])
-
+const landing_pages = computed(() => product.metadata.filter(m => m.meta_key == 'landing_page_link'))
 
 const handleVideoAdd = () => {
   const metadata = {
@@ -136,7 +134,7 @@ const handleVideoAdd = () => {
     meta_value: video.value
   }
 
-  videos.value.push(metadata);
+  product.value.metadata.push(metadata);
   video.value = "";
 }
 
@@ -147,7 +145,7 @@ const handleLandingPageAdd = () => {
     meta_value: landing_page.value
   }
 
-  landing_pages.value.push(metadata);
+  product.value.metadata.push(metadata);
   landing_page.value = "";
 }
 </script>

@@ -3,7 +3,8 @@
     class="hover:tw-bg-gray-50"
     :class="[
       availableQuantity <= 0 &&
-        '!tw-border !tw-border-red-300 tw-bg-red-100 hover:tw-bg-red-100',
+        '!tw-border !tw-border-red-300 tw-bg-red-100 hover:tw-bg-red-100 ',
+        item.type == 'affiliate' && ' tw-bg-gradient-to-r tw-from-emerald-100 tw-via-white tw-to-white'
     ]"
   >
     <td class="tw-p-2 tw-py-1 tw-text-sm tw-font-medium tw-whitespace-nowrap">
@@ -50,11 +51,16 @@
         </h2>
       </div>
     </td>
-    <td class="tw-px-4 tw-py-1 tw-text-sm tw-font-medium tw-whitespace-nowrap">
-      <div>
+    <td v-if="$user.role == 'admin'" class="tw-px-4 tw-py-1 tw-text-sm tw-font-medium tw-whitespace-nowrap">
+      <div v-if="item.type != 'affiliate'">
         <h2 class="tw-font-medium tw-text-gray-800 darkx:tw-text-white">
           {{  item.seller_user.firstname }} {{  item.seller_user.lastname }}
         </h2>
+      </div>
+      <div v-else>
+        <router-link :to="{ name: 'affiliate.show.sellers', params: { id: item.id } }" class="tw-font-medium tw-text-gray-800 darkx:tw-text-white tw-underline-offset-2 tw-underline">
+          {{ item.imported_count }} sellers
+        </router-link>
       </div>
     </td>
     <td class="tw-px-4 tw-py-1 tw-text-sm tw-font-medium tw-whitespace-nowrap">
@@ -130,15 +136,16 @@
           class="tw-font-medium tw-text-gray-800 darkx:tw-text-white tw-max-w-[100px] tw-flex tw-items-center tw-gap-2"
         >
           <!-- {{ getDate(item.created_at) }} -->
-          <p>{{ moment(item.created_at).format("DD[/]MM[/]YY") }}</p>
+          <p>{{ moment(item.created_at).format("DD[-]MM[-]YY") }}</p>
         </h2>
       </div>
     </td>
     <td class="tw-px-4 tw-py-1 tw-text-sm tw-whitespace-nowrap">
-      <div>
+      <div v-if="item.type == 'normal'">
         <TableActions
           @update="(newItem) => $emit('update', newItem)"
           :item="item"
+          
         />
       </div>
     </td>

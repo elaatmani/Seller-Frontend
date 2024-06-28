@@ -57,8 +57,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="tw-p-2 tw-text-start tw-border-r tw-border-solid tw-border-gray-200 last:tw-border-none">76%</td>
-                            <td class="tw-p-2 tw-text-start tw-border-r tw-border-solid tw-border-gray-200 last:tw-border-none">80%</td>
+                            <td class="tw-p-2 tw-text-start tw-border-r tw-border-solid tw-border-gray-200 last:tw-border-none">{{ product.confirmation_rate }}%</td>
+                            <td class="tw-p-2 tw-text-start tw-border-r tw-border-solid tw-border-gray-200 last:tw-border-none">{{ product.delivery_rate }}%</td>
                         </tr>
                     </tbody>
     
@@ -66,7 +66,7 @@
             </div>
         </div>
         
-        <product-card-actions :is-card="false" />
+        <product-card-actions :is-card="false" :product="product" />
 
         <div v-if="false" class="tw-w-full tw-h-[300px] tw-bg-gray-50 tw-mt-10 tw-rounded"></div>
         <div v-if="false" class="tw-w-full  tw-mt-10">

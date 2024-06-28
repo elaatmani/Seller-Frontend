@@ -66,6 +66,7 @@ const product = ref({
   variations: [],
   has_variations: false,
   media: [],
+  metadata: [],
   category_id: '',
   initial_quantity: 0,
   description: 'Hello'
@@ -86,6 +87,7 @@ const create = async () => {
             tags: [],
             categories: [],
             variations: [],
+            metadata: [],
             has_variations: false,
             media: [],
             category_id: '',

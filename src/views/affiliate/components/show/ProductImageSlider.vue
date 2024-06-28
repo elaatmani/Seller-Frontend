@@ -9,7 +9,7 @@
             :slides-per-view="5.5"
             :space-between="8"
         >
-            <swiper-slide v-for="img in product.media" :key="img" :navigation="true">
+            <swiper-slide v-for="img in product.media.filter(m => ['thumbnail', 'normal'].includes(m.collection_name))" :key="img" :navigation="true">
                 <button @click="active = img" :class="[active.url == img.url && '!tw-border-orange-500']" class="tw-aspect-square tw-border-2 tw-border-solid tw-border-transparent tw-rounded tw-overflow-hidden tw-cursor-pointer">
                     <img :src="img.url" class="tw-w-full tw-h-full tw-object-cover">
                 </button>

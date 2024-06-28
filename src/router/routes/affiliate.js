@@ -6,7 +6,9 @@ import ProductResearchView from '@/views/affiliate/pages/ProductResearchView'
 import ProductListView from '@/views/affiliate/pages/ProductListView'
 import CreateProductView from '@/views/affiliate/pages/CreateProductView'
 import ImportListView from '@/views/affiliate/pages/ImportListView'
+import WishlistView from '@/views/affiliate/pages/WishlistView'
 import ShowProductView from '@/views/affiliate/pages/ShowProductView'
+import ProductSellerListView from '@/views/affiliate/pages/ProductSellerListView'
 
 
 
@@ -69,8 +71,19 @@ export default
                 }
             },
             { 
+                name: 'affiliate.show.sellers',
+                path: 'products/:id/sellers',
+                component: ProductSellerListView,
+                meta: {
+                    module: 'affiliate',
+                    subModule: 'affiliate.show.sellers',
+                    title: 'Product Sellers',
+                    role: ['admin']
+                }
+            },
+            { 
                 name: 'affiliate.import',
-                path: 'products/import',
+                path: 'products/imported',
                 component: ImportListView,
                 meta: {
                     module: 'affiliate',
@@ -82,8 +95,8 @@ export default
 
             { 
                 name: 'affiliate.wishlist',
-                path: 'products/wishlist',
-                component: ImportListView,
+                path: 'products/wishlisted',
+                component: WishlistView,
                 meta: {
                     module: 'affiliate',
                     subModule: 'affiliate.wishlist',

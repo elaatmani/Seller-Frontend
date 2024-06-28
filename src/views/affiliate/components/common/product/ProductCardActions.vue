@@ -1,6 +1,6 @@
 <template>
     <div v-if="!props.isCard" class="tw-w-full tw-mt-10 tw-grid md:tw-grid-cols-2 tw-grid-cols-1 tw-gap-2 ">
-        <button @click="onImportClick" :disabled="imported || loading.import" :class="[imported && '!tw-bg-gray-100 tw-text-emerald-500']" class="tw-px-2 tw-flex tw-items-center tw-justify-center tw-gap-4 tw-bg-emerald-500 tw-text-white tw-rounded tw-py-3 hover:tw-saturate-150x tw-duration-200 tw-border-2 tw-border-solid tw-border-white hover:tw-border-emerald-200 tw-text-lg">
+        <button @click="onImportClick" :disabled="loading.import" :class="[imported && '!tw-bg-gray-100 tw-text-emerald-500']" class="tw-px-2 tw-flex tw-items-center tw-justify-center tw-gap-4 tw-bg-emerald-500 tw-text-white tw-rounded tw-py-3 hover:tw-saturate-150x tw-duration-200 tw-border-2 tw-border-solid tw-border-white hover:tw-border-emerald-200 tw-text-lg">
             <icon v-if="loading.import" icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-white" />
             <template v-else>
                 <icon v-if="!imported" icon="charm:plus" class="tw-text-3xl" />
@@ -28,8 +28,9 @@
         <div class="tw-flex tw-justify-end tw-gap-2 tw-p-2">
             <button @click="onImportClick"
                 class="tw-px-2 tw-aspect-square tw-bg-emerald-500 tw-rounded tw-flex tw-items-center tw-gap-2 tw-justify-between tw-h-[40px]">
-                <icon v-if="!loading.import" icon="charm:plus" class="tw-text-2xl tw-text-white" />
-                <icon v-else icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-white" />
+                <icon v-if="!loading.import && imported" icon="gravity-ui:check" class="tw-text-2xl tw-text-white" />
+                <icon v-if="!loading.import && !imported" icon="charm:plus" class="tw-text-2xl tw-text-white" />
+                <icon v-if="loading.import" icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-white" />
             </button>
 
             <button @click="onWishlistClick"
@@ -50,8 +51,11 @@
                 Import
             </div>
             <div class="tw-p-4 tw-bg-white">
-                <p class="tw-text-lg tw-font-medium">
+                <p v-if="!imported" class="tw-text-lg tw-font-medium">
                     Are you sure you want to import with this product ?
+                </p>
+                <p v-else class="tw-text-lg tw-font-medium">
+                    Are you sure you want to remove from import list ?
                 </p>
             </div>
             <div
@@ -60,11 +64,17 @@
                     class="tw-py-2 tw-px-7 tw-rounded tw-text-sm tw-border tw-border-solid tw-border-tansparent dark:tw-border-neutral-900 hover:tw-border-neutral-400 dark:hover:tw-border-neutral-500 hover:tw-bg-gray-300 tw-bg-gray-200 dark:tw-bg-neutral-600 tw-duration-300 tw-text-neutral-900 dark:tw-text-neutral-300">
                     Cancel
                 </button>
-                <button @click="onConfirmImport" :disabled="loading.import"
-                    class="tw-py-2 tw-px-7 tw-flex tw-items-center  tw-rounded tw-text-sm tw-bg-emerald-400 tw-border tw-border-solid tw-border-tansparent hover:tw-border-emerald-600 dark:tw-border-neutral-900 dark:hover:tw-border-emerald-500 hover:tw-bg-emerald-500/80 dark:hover:tw-bg-emerald-400 tw-duration-300 tw-text-white">
+                <button v-if="!imported" @click="onConfirmImport" :disabled="loading.import"
+                    class="tw-py-2 tw-px-7 tw-flex tw-items-center  tw-rounded tw-text-sm tw-bg-emerald-400 tw-border tw-border-solid tw-border-tansparent hover:tw-border-emerald-600 tw-border-neutral-900 dark:hover:tw-border-emerald-500 hover:tw-bg-emerald-500/80 tw-duration-300 tw-text-white">
                     <v-icon size="small" class="tw-duration-300 tw-animate-spin tw-overflow-hidden tw-max-w-0 tw-mr-0"
                         :class="[loading.import && '!tw-max-w-[50px] !tw-mr-3']">mdi-loading</v-icon>
                     <span>Confirm</span>
+                </button>
+                <button v-else @click="onConfirmImport" :disabled="loading.import"
+                    class="tw-py-2 tw-px-7 tw-flex tw-items-center  tw-rounded tw-text-sm tw-bg-rose-400 tw-border tw-border-solid tw-border-tansparent hover:tw-border-rose-600 tw-border-rose-800 dark:hover:tw-border-rose-500 hover:tw-bg-rose-500/80 tw-duration-300 tw-text-white">
+                    <v-icon size="small" class="tw-duration-300 tw-animate-spin tw-overflow-hidden tw-max-w-0 tw-mr-0"
+                        :class="[loading.import && '!tw-max-w-[50px] !tw-mr-3']">mdi-loading</v-icon>
+                    <span>Remove</span>
                 </button>
             </div>
         </div>
@@ -72,9 +82,10 @@
 </template>
 
 <script setup>
-// import Affiliate from '@/api/Affiliate';
+import Affiliate from '@/api/Affiliate';
 import { useAlert } from '@/composables/useAlert';
 import { ref, defineProps, toRef } from 'vue';
+
 
 const props = defineProps({
     product: {
@@ -87,8 +98,8 @@ const props = defineProps({
 })
 const product = toRef(props, 'product')
 
-const wishlisted = ref(false)
-const imported = ref(false)
+const wishlisted = ref(product.value.wishlisted)
+const imported = ref(product.value.imported)
 const loading = ref({
     wishlist: false,
     import: false,
@@ -98,17 +109,48 @@ const visible = ref({
     import: false,
 })
 
-const onWishlistClick = () => {
-    loading.value.wishlist = true
-    setTimeout(() => {
-        loading.value.wishlist = false
-        wishlisted.value = !wishlisted.value
-        if (wishlisted.value) {
-            useAlert('Added to wishlist')
-        } else {
-            useAlert('Removed from wishlist')
-        }
-    }, 2000)
+const onWishlistClick = async () => {
+    loading.value.wishlist = true;
+
+    if(wishlisted.value) {
+        await Affiliate.removeWishlist(product.value.id)
+           .then(
+                r => {
+                    if(r.data.code == 'SUCCESS') {
+                        useAlert('Removed from wishlist')
+                        visible.value.wishlist = false;
+                        wishlisted.value = false;
+                    }
+                },
+                e => {
+                    console.log(e)
+                    useAlert('Something wrong happend', 'danger')
+                }
+        )
+    } else {
+
+        await Affiliate.addWishlist(product.value.id)
+            .then(
+                r => {
+                    if(r.data.code == 'SUCCESS') {
+                        useAlert('Added to wishlist')
+                        visible.value.wishlist = false;
+                        wishlisted.value = true;
+                    }
+                    
+                    if(r.data.code == 'ALREADY_WISHLISTED') {
+                        useAlert('Already in wishlist')
+                        visible.value.wishlist = false;
+                        wishlisted.value = true;
+                    }
+                },
+                e => {
+                    console.log(e)
+                    useAlert('Something wrong happend', 'danger')
+                }
+        )
+    }
+    loading.value.wishlist = false;
 }
 
 const onImportClick = () => {
@@ -116,27 +158,48 @@ const onImportClick = () => {
 }
 
 const onConfirmImport = async () => {
+    
     loading.value.import = true;
-    // await Affiliate.addToImport(product.value.id)
-    //     .then(
-    //         r => {
-    //             console.log(r)
-    //         },
-    //         e => {
-    //             console.log(e)
-    //         }
-    //     )
-    visible.value.import = false;
-    setTimeout(() => {
-        loading.value.import = false;
-        imported.value = !imported.value
-        if (imported.value) {
-            useAlert('Product added to import list!')
-        } else {
-            useAlert('Product removed from import list')
+
+    if(!imported.value) {
+    
+    await Affiliate.addImport(product.value.id)
+        .then(
+            r => {
+                if(r.data.code == 'SUCCESS') {
+                    useAlert('Imported successfully')
+                    visible.value.import = false;
+                    imported.value = true;
+                }
+                
+                if(r.data.code == 'ALREADY_IMPORTED') {
+                    useAlert('Already imported')
+                    visible.value.import = false;
+                    imported.value = true;
+                }
+            },
+            e => {
+                console.log(e)
+                useAlert('Something wrong happend', 'danger')
+            }
+    )
+        } else  {
+            await Affiliate.removeImport(product.value.id)
+               .then(
+                    r => {
+                        if(r.data.code == 'SUCCESS') {
+                            useAlert('Removed from imported')
+                            visible.value.import = false;
+                            imported.value = false;
+                        }
+                    },
+                    e => {
+                        console.log(e)
+                        useAlert('Something wrong happend', 'danger')
+                    }
+            )
         }
-        product
-    }, 2000);
+    loading.value.import = false;
 
 }
 

@@ -216,7 +216,7 @@ export const links = [
         title: 'Affiliate',
         hasChildren: true,
         gate: 'access_to_affiliate', 
-        role: ['admin'], 
+        role: ['admin', 'seller'], 
         icon: {
             type: 'icon',
             value: 'mdi-bookshelf'
@@ -226,8 +226,8 @@ export const links = [
                 id: 1,
                 title: 'All Products',
                 subModule: 'affiliate.admin.list',
-                role: ['admin'],
-                gate: 'manage_affiliate_product',
+                // role: ['admin'],
+                // gate: 'manage_affiliate_product',
                 to: { name: 'affiliate.admin.list' }
             },
             {
@@ -242,7 +242,7 @@ export const links = [
                 id: 3,
                 title: 'Winning Products',
                 subModule: 'affiliate.index',
-                role: ['admin'],
+                role: ['admin', 'seller'],
                 gate: 'access_to_affiliate',
                 to: { name: 'affiliate.index' }
             },
