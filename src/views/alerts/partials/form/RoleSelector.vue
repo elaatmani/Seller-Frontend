@@ -1,7 +1,7 @@
 <template>
     <div>
         <label class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900">Role</label>
-        <vue-select :loading="loading" append-to-body :reduce="(o) => o.id" @option:selected="(e) => handleUserChange(e, 2)" :clearable="false"
+        <vue-select append-to-body :loading="loading" :reduce="(o) => o.id" @option:selected="(e) => handleUserChange(e, 2)" :clearable="false"
             class="tw-min-w-[200px]" placeholder="Choose Role" v-model="user" :options="options" label="name">
             <template #open-indicator="{ attributes }">
                 <icon icon="octicon:chevron-down-24" v-bind="attributes" class="tw-text-xl" />

@@ -5,7 +5,7 @@
     </td> -->
     <td>
       <div class="tw-p-2">
-        <vue-select :reduce="(o) => o.id" :key="item.id" @option:selected="(e) => handleProductChange(e, 2)" :clearable="false" class="tw-min-w-[200px]"
+        <vue-select append-to-body :reduce="(o) => o.id" :key="item.id" @option:selected="(e) => handleProductChange(e, 2)" :clearable="false" class="tw-min-w-[200px]"
           placeholder="Choose Product" v-model="product" :options="allProducts" label="name">
         </vue-select>
         <div v-if="false" class="tw-relative">
