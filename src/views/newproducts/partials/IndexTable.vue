@@ -72,6 +72,9 @@
                                 <th scope="col" class="tw-px-3  !tw-w-5 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                     Available
                                 </th>
+                                <th scope="col" class="tw-px-3  !tw-w-5 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                    Status
+                                </th>
                                 <th scope="col" class="tw-py-3.5 tw-w-5 tw-px-4 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                     <button @click="$emit('sortOrder', {name: 'created_at'})" class="tw-flex tw-items-center tw-gap-x-3 focus:tw-outline-none">
                                         <span>Created</span>

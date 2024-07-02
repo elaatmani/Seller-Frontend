@@ -67,6 +67,7 @@
         </h2>
       </div>
     </td>
+   
     <td class="tw-px-4 tw-py-1 tw-text-sm tw-font-medium tw-whitespace-nowrap">
       <div>
         <h2
@@ -121,6 +122,26 @@
           class="tw-p-1 tw-w-fit darkx:tw-text-white tw-font-[cairo] tw-max-w-[120px] tw-truncate"
         >
           {{ availableQuantity }}
+        </h2>
+      </div>
+    </td>
+    <td class="tw-px-2 tw-py-1 tw-text-sm tw-font-medium tw-whitespace-nowrap">
+      <div>
+        <h2
+          :class="{'!tw-text-emerald-500': item.status, '!tw-text-amber-500': !item.status}"
+          class="tw-font-bold tw-text-gray-800 darkx:tw-text-white tw-font-[cairo] tw-max-w-[70px]"
+        >
+          <template v-if="item.status">
+            <v-icon class="tw-text-lg tw-mr-1 tw-text-green-400">mdi-check</v-icon>
+            Approved
+          </template>
+          
+          <template v-else>
+            <div>
+            <v-icon class="tw-text-lg tw-mr-1 tw-text-amber-500">mdi-clock-outline</v-icon>
+            Pending
+            </div>
+          </template>
         </h2>
       </div>
     </td>
