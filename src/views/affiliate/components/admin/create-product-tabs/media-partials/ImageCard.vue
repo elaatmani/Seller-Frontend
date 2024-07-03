@@ -41,6 +41,7 @@
             <div class="tw-max-w-2/3 tw-p-5 tw-flex tw-flex-col tw-gap-4">
 
               <button
+              @click="emit('delete')"
                 class="tw-flex tw-items-center tw-gap-2 tw-text-red-300 hover:tw-text-red-500 tw-duration-200"
               >
                 <icon icon="mdi:trash-can-empty" class="tw-text-xl" />
@@ -65,7 +66,7 @@ import { defineProps, defineEmits, toRef, ref } from 'vue';
 import TemporaryMedia from "@/api/TemporaryMedia";
 
 const props = defineProps(['file']);
-const emit = defineEmits(['show-preview', 'update']);
+const emit = defineEmits(['show-preview', 'update', 'delete']);
 
 const file = toRef(props, 'file');
 const uploading = ref(false);

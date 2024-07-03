@@ -47,17 +47,24 @@
           No landing pages has been added
         </div>
         <div v-else class="tw-flex tw-items-center tw-gap-2 tw-flex-wrap">
-          <a :href="v.meta_value" target="_blank" v-for="(v, index) in landing_pages" :key="v" class="tw-px-4 tw-py-2 tw-uppercase tw-border tw-border-solid tw-border-gray-200 tw-rounded">
-              <span class="tw-text-sm">Link {{ index + 1 }}</span>
-              <div>
-
+          <div v-for="(v, index) in landing_pages" :key="v"  class="tw-border tw-border-solid tw-border-gray-200 tw-rounded tw-px-4 tw-py-1 tw-flex tw-items-center tw-gap-4">
+            <a :href="v.meta_value" target="_blank" class=" tw-uppercase ">
+                <span class="tw-text-sm">LP Link {{ index + 1 }}</span>
+              </a>
+              <div class="tw-flex tw-items-center tw-gap-2">
+                <a :href="v.meta_value" target="_blank" class="tw-flex tw-items-center tw-p-1">
+                  <icon icon="quill:link-out" class="tw-text-xl tw-text-gray-500" />
+                </a>
+                <button @click="deleteLandingPageLink(v.meta_value)" class="tw-flex tw-items-center tw-p-1">
+                  <icon icon="flowbite:close-outline" class="tw-text-xl tw-text-gray-500" />
+                </button>
               </div>
-          </a>
+          </div>
         </div>
       </div>
     </div>
     <div class="md:tw-col-span-5"></div>
-    <div v-if="false"
+    <div
       class="md:tw-col-span-7 tw-col-span-12 tw-border tw-border-gray-400 tw-bg-white tw-w-full tw-overflow-hidden tw-rounded-md"
     >
       <div class="tw-bg-gray-700 tw-border-b tw-border-solid tw-p-2">
@@ -74,6 +81,7 @@
             <div class="tw-flex tw-items-center tw-h-[42px] tw-gap-2">
               <input
                 type="text"
+                v-model="video"
                 class="tw-bg-gray-50 tw-border tw-flex-1 tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
                 placeholder="https://www..."
                 required
@@ -103,10 +111,17 @@
           No videos has been added
         </div>
         <div v-else class="tw-flex tw-items-center tw-gap-2 tw-flex-wrap">
-          <div v-for="(v, index) in videos" :key="v" class="tw-px-4 tw-py-2 tw-uppercase tw-border tw-border-solid tw-border-gray-200 tw-rounded">
-              <span class="tw-text-sm">Video {{ index + 1 }}</span>
-              <div>
-
+          <div v-for="(v, index) in videos" :key="v"  class="tw-border tw-border-solid tw-border-gray-200 tw-rounded tw-px-4 tw-py-1 tw-flex tw-items-center tw-gap-4">
+            <a :href="v.meta_value" target="_blank" class=" tw-uppercase ">
+                <span class="tw-text-sm">Video Link {{ index + 1 }}</span>
+              </a>
+              <div class="tw-flex tw-items-center tw-gap-2">
+                <a :href="v.meta_value" target="_blank" class="tw-flex tw-items-center tw-p-1">
+                  <icon icon="quill:link-out" class="tw-text-xl tw-text-gray-500" />
+                </a>
+                <button @click="deleteVideoLink(v.meta_value)" class="tw-flex tw-items-center tw-p-1">
+                  <icon icon="flowbite:close-outline" class="tw-text-xl tw-text-gray-500" />
+                </button>
               </div>
           </div>
         </div>
@@ -123,10 +138,10 @@ const errors = inject('errors');
 errors
 
 const video = ref('')
-const videos = computed(() => product.metadata.filter(m => m.meta_key == 'video_link'))
+const videos = computed(() => product.value.metadata.filter(m => m.meta_key == 'video_link'))
 
 const landing_page = ref('')
-const landing_pages = computed(() => product.metadata.filter(m => m.meta_key == 'landing_page_link'))
+const landing_pages = computed(() => product.value.metadata.filter(m => m.meta_key == 'landing_page_link'))
 
 const handleVideoAdd = () => {
   const metadata = {
@@ -136,6 +151,14 @@ const handleVideoAdd = () => {
 
   product.value.metadata.push(metadata);
   video.value = "";
+}
+
+const deleteLandingPageLink = link => {
+  product.value.metadata = product.value.metadata.filter(m => !(m.meta_key == 'landing_page_link' && m.meta_value == link));
+}
+
+const deleteVideoLink = link => {
+  product.value.metadata = product.value.metadata.filter(m => !(m.meta_key == 'video_link' && m.meta_value == link));
 }
 
 

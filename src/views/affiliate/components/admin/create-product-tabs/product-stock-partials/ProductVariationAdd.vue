@@ -121,7 +121,7 @@ const handleCreate = () => {
     useAlert('Quantity is required', 'error');
     return false;
   }
-
+  variation.value.id = Date.now();
   emit('create', variation.value);
   cancel();
 }

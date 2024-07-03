@@ -49,8 +49,8 @@
 
     <div v-else class="tw-grid md:tw-grid-cols-4 lg:tw-grid-cols-4 xl:tw-grid-cols-6 tw-grid-cols-1 tw-gap-4 ">
       <template  v-for="(f, index) in files" :key="f.id" >
-        <ImageCard :file="f" @update="handleFileUpdate" v-if="f.category == 'image'" @show-preview="showFile(index)" />
-        <VideoCard :file="f" @update="handleFileUpdate" v-if="f.category == 'video'" @show-preview="showFile(index)" />
+        <ImageCard :file="f" @update="handleFileUpdate" v-if="f.category == 'image'" @show-preview="showFile(index)" @delete="handleDelete(f)" />
+        <VideoCard :file="f" @update="handleFileUpdate" v-if="f.category == 'video'" @show-preview="showFile(index)" @delete="handleDelete(f)" />
       </template>
     </div>
   </div>
@@ -83,6 +83,10 @@ const filePreviewVisible = ref(false);
 const currentIndex = ref(0);
 
 const files = computed(() => product.value.media.filter(m => m.collection_name == props.collection));
+
+const handleDelete = file => {
+  product.value.media = product.value.media.filter(m => m.id != file.id);
+}
 
 const handleImageUpload = (event) => {
   const fs = event.target.files;

@@ -28,12 +28,12 @@
 import { shallowRef, inject } from 'vue';
 import AdvertisingTab from './AdvertisingTab';
 import OverviewTab from './OverviewTab';
-import LandingPageTab from './LandingPageTab';
+import LinksTab from './LinksTab';
 
 const tabs = [
   { key: 'overview-tab', 'component': OverviewTab, name: 'Overview', icon: 'clarity:help-info-solid'},
   { key: 'advertising-tab', 'component': AdvertisingTab, name: 'Advertising Data', icon: 'ic:sharp-ads-click'},
-  { key: 'landing-page-tab', 'component': LandingPageTab, name: 'Landing Pages', icon: 'iconoir:multiple-pages-empty'},
+  { key: 'links-tab', 'component': LinksTab, name: 'Links', icon: 'lucide:link'},
 ] 
 const product = inject('product');
 const tab = shallowRef(tabs[0])

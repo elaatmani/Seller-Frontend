@@ -67,13 +67,13 @@
                 </div>
 
                 <div v-else class="tw-p-2 tw-bg-gray-100 tw-">
-                  <div :key="v" class="tw-grid tw-grid-cols-4 tw-mb-1 tw-text-center">
+                  <div class="tw-grid tw-grid-cols-4 tw-mb-1 tw-text-center">
                     <div class="tw-p-2 tw-bg-gray-800 tw-text-white tw-rounded tw-border tw-border-dashed">Quantity</div>
                     <div class="tw-p-2 tw-bg-gray-800 tw-text-white tw-rounded tw-border tw-border-dashed">Color</div>
                     <div class="tw-p-2 tw-bg-gray-800 tw-text-white tw-rounded tw-border tw-border-dashed">Size</div>
                     <div class="tw-p-2 tw-bg-gray-800 tw-text-white tw-rounded tw-border tw-border-dashed">Actions</div>
                   </div>
-                  <product-variation v-for="v in product.variations" :key="v" :variation="v" />
+                  <product-variation v-for="v in product.variations" :key="v" :variation="v" @update="handleUpdate" />
                 </div>
                 
               </div>
@@ -118,6 +118,10 @@ const errors = inject('errors');
 
 const handleVariationCreate = v => {
   product.value.variations.unshift(v);
+}
+
+const handleUpdate = v => {
+  product.value.variations = product.value.variations.map(i => i.id == v.id ? v : i);
 }
 </script>
 <style>

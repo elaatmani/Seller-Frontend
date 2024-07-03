@@ -22,6 +22,11 @@ class Affiliate {
         await Csrf.getCookie();
         return Api.get('api/affiliate/products/' + id);
     }
+
+    async details(id) {
+        await Csrf.getCookie();
+        return Api.get('api/affiliate/products/' + id + '/details');
+    }
     
     async create(product) {
         await Csrf.getCookie();
