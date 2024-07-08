@@ -1,29 +1,30 @@
 <template>
     <div v-if="!props.isCard" class="tw-w-full tw-mt-10 tw-grid md:tw-grid-cols-2 tw-grid-cols-1 tw-gap-2 ">
-        <button @click="onImportClick" :disabled="loading.import" :class="[imported && '!tw-bg-gray-100 tw-text-emerald-500']" class="tw-px-2 tw-flex tw-items-center tw-justify-center tw-gap-4 tw-bg-emerald-500 tw-text-white tw-rounded tw-py-3 hover:tw-saturate-150x tw-duration-200 tw-border-2 tw-border-solid tw-border-white hover:tw-border-emerald-200 tw-text-lg">
+        <button @click="onImportClick" :disabled="loading.import"
+            :class="[imported && '!tw-bg-gray-100 tw-text-emerald-500']"
+            class="tw-px-2 tw-flex tw-items-center tw-justify-center tw-gap-4 tw-bg-emerald-500 tw-text-white tw-rounded tw-py-3 hover:tw-saturate-150x tw-duration-200 tw-border-2 tw-border-solid tw-border-white hover:tw-border-emerald-200 tw-text-lg">
             <icon v-if="loading.import" icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-white" />
             <template v-else>
                 <icon v-if="!imported" icon="charm:plus" class="tw-text-3xl" />
                 <icon v-if="imported" icon="uis:check" class="tw-text-3xl tw-text-emerald-500" />
             </template>
-            <span v-if="!imported" >Add to import list</span>
-            <span v-if="imported" >Imported</span>
+            <span v-if="!imported">Add to import list</span>
+            <span v-if="imported">Imported</span>
         </button>
 
-        <button @click="onWishlistClick" class="tw-px-2 tw-flex tw-items-center tw-justify-center tw-gap-4 tw-bg-rose-500/10 tw-text-rose-500 tw-text-whitxe tw-rounded tw-py-3 hover:tw-saturate-150x tw-duration-200 tw-border-2 tw-border-solid tw-border-white hover:tw-border-rose-200 tw-text-lg">
+        <button @click="onWishlistClick"
+            class="tw-px-2 tw-flex tw-items-center tw-justify-center tw-gap-4 tw-bg-rose-500/10 tw-text-rose-500 tw-text-whitxe tw-rounded tw-py-3 hover:tw-saturate-150x tw-duration-200 tw-border-2 tw-border-solid tw-border-white hover:tw-border-rose-200 tw-text-lg">
             <icon v-if="loading.wishlist" icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-rose-500" />
             <template v-else>
                 <icon v-if="!wishlisted" icon="ph:heart-light" class="tw-text-3xl tw-text-rose-500" />
                 <icon v-if="wishlisted" icon="ph:heart-fill" class="tw-text-3xl tw-text-rose-500" />
             </template>
-            <span v-if="!wishlisted" >Add to wishlist</span>
-            <span v-if="wishlisted" >Wishlisted</span>
+            <span v-if="!wishlisted">Add to wishlist</span>
+            <span v-if="wishlisted">Wishlisted</span>
         </button>
     </div>
 
-    <div
-        v-if="props.isCard"
-        :class="[(loading.import || loading.wishlist) && '!tw-translate-y-0' ]"
+    <div v-if="props.isCard" :class="[(loading.import || loading.wishlist) && '!tw-translate-y-0']"
         class="tw-absolute tw-top-0 tw-left-0 tw-z-20 tw-w-full tw-h-[60px] tw-bg-gradient-to-b tw-from-black/40 tw-to-transparent -tw-translate-y-full group-hover:tw-translate-y-0 tw-duration-200">
         <div class="tw-flex tw-justify-end tw-gap-2 tw-p-2">
             <button @click="onImportClick"
@@ -112,11 +113,11 @@ const visible = ref({
 const onWishlistClick = async () => {
     loading.value.wishlist = true;
 
-    if(wishlisted.value) {
+    if (wishlisted.value) {
         await Affiliate.removeWishlist(product.value.id)
-           .then(
+            .then(
                 r => {
-                    if(r.data.code == 'SUCCESS') {
+                    if (r.data.code == 'SUCCESS') {
                         useAlert('Removed from wishlist')
                         visible.value.wishlist = false;
                         wishlisted.value = false;
@@ -126,19 +127,19 @@ const onWishlistClick = async () => {
                     console.log(e)
                     useAlert('Something wrong happend', 'danger')
                 }
-        )
+            )
     } else {
 
         await Affiliate.addWishlist(product.value.id)
             .then(
                 r => {
-                    if(r.data.code == 'SUCCESS') {
+                    if (r.data.code == 'SUCCESS') {
                         useAlert('Added to wishlist')
                         visible.value.wishlist = false;
                         wishlisted.value = true;
                     }
-                    
-                    if(r.data.code == 'ALREADY_WISHLISTED') {
+
+                    if (r.data.code == 'ALREADY_WISHLISTED') {
                         useAlert('Already in wishlist')
                         visible.value.wishlist = false;
                         wishlisted.value = true;
@@ -148,7 +149,7 @@ const onWishlistClick = async () => {
                     console.log(e)
                     useAlert('Something wrong happend', 'danger')
                 }
-        )
+            )
     }
     loading.value.wishlist = false;
 }
@@ -158,47 +159,57 @@ const onImportClick = () => {
 }
 
 const onConfirmImport = async () => {
-    
+
     loading.value.import = true;
 
-    if(!imported.value) {
-    
-    await Affiliate.addImport(product.value.id)
-        .then(
-            r => {
-                if(r.data.code == 'SUCCESS') {
-                    useAlert('Imported successfully')
-                    visible.value.import = false;
-                    imported.value = true;
-                }
-                
-                if(r.data.code == 'ALREADY_IMPORTED') {
-                    useAlert('Already imported')
-                    visible.value.import = false;
-                    imported.value = true;
-                }
-            },
-            e => {
-                console.log(e)
-                useAlert('Something wrong happend', 'danger')
-            }
-    )
-        } else  {
-            await Affiliate.removeImport(product.value.id)
-               .then(
-                    r => {
-                        if(r.data.code == 'SUCCESS') {
-                            useAlert('Removed from imported')
-                            visible.value.import = false;
-                            imported.value = false;
-                        }
-                    },
-                    e => {
-                        console.log(e)
-                        useAlert('Something wrong happend', 'danger')
+    if (!imported.value) {
+
+        await Affiliate.addImport(product.value.id)
+            .then(
+                r => {
+                    if (r.data.code == 'SUCCESS') {
+                        useAlert('Imported successfully')
+                        visible.value.import = false;
+                        imported.value = true;
                     }
+
+                    if (r.data.code == 'ORDERS_EXISTS') {
+                        useAlert('Product cannot be removed from import list because it has orders', 'info')
+                        visible.value.import = false;
+                    }                    
+
+                    if (r.data.code == 'ALREADY_IMPORTED') {
+                        useAlert('Already imported')
+                        visible.value.import = false;
+                        imported.value = true;
+                    }
+                },
+                e => {
+                    console.log(e)
+                    useAlert('Something wrong happend', 'danger')
+                }
             )
-        }
+    } else {
+        await Affiliate.removeImport(product.value.id)
+            .then(
+                r => {
+                    if (r.data.code == 'SUCCESS') {
+                        useAlert('Removed from imported')
+                        visible.value.import = false;
+                        imported.value = false;
+                    }
+
+                    if (r.data.code == 'ORDERS_EXISTS') {
+                        useAlert('Product cannot be removed from import list because it has orders', 'info')
+                        visible.value.import = false;
+                    }
+                },
+                e => {
+                    console.log(e)
+                    useAlert('Something wrong happend', 'danger')
+                }
+            )
+    }
     loading.value.import = false;
 
 }
