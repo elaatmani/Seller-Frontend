@@ -209,6 +209,54 @@ export const links = [
         ]
     },
 
+    {
+        id: 5,
+        module: 'factorisation',
+        title: 'Factorisation',
+        hasChildren: true,
+        gate: 'access_to_factorisations', 
+        icon: {
+            type: 'icon',
+            value: 'mdi-note-multiple'
+        },
+        children: [
+            // {
+            //     id: 1,
+            //     title: 'Factorisation list',
+            //     subModule: 'factorisation/list',
+            //     gate: 'show_all_factorisations',
+            //     to: '/factorisations'
+            // },
+            {
+                id: 1,
+                title: 'Factorisation list',
+                subModule: 'factorisation/list',
+                gate: 'show_all_factorisations',
+                to: '/factorisations'
+            }
+        ]
+    },
+
+    {
+        id: 20,
+        module: 'ads',
+        title: 'Ads',
+        hasChildren: true,
+        gate: 'access_to_ads', 
+        icon: {
+            type: 'icon',
+            value: 'mdi-google-ads'
+        },
+        children: [
+            {
+                id: 1,
+                title: 'Ads list',
+                subModule: 'ads/list',
+                gate: 'show_all_factorisations',
+                to: '/ads'
+            },
+        ]
+    },
 
     {
         id: 10,
@@ -264,55 +312,6 @@ export const links = [
             },
         ]
     },
-
-    {
-        id: 5,
-        module: 'factorisation',
-        title: 'Factorisation',
-        hasChildren: true,
-        gate: 'access_to_factorisations', 
-        icon: {
-            type: 'icon',
-            value: 'mdi-note-multiple'
-        },
-        children: [
-            // {
-            //     id: 1,
-            //     title: 'Factorisation list',
-            //     subModule: 'factorisation/list',
-            //     gate: 'show_all_factorisations',
-            //     to: '/factorisations'
-            // },
-            {
-                id: 1,
-                title: 'Factorisation list',
-                subModule: 'factorisation/list',
-                gate: 'show_all_factorisations',
-                to: '/factorisations'
-            }
-        ]
-    },
-
-    // {
-    //     id: 20,
-    //     module: 'ads',
-    //     title: 'Ads',
-    //     hasChildren: true,
-    //     gate: 'access_to_ads', 
-    //     icon: {
-    //         type: 'icon',
-    //         value: 'mdi-google-ads'
-    //     },
-    //     children: [
-    //         {
-    //             id: 1,
-    //             title: 'Ads list',
-    //             subModule: 'ads/list',
-    //             gate: 'show_all_factorisations',
-    //             to: '/ads'
-    //         },
-    //     ]
-    // },
 
 
     {
@@ -378,68 +377,68 @@ export const links = [
         ]
     },
 
-    // {
-    //     id: 8,
-    //     module: 'inventory',
-    //     title: 'Inventory',
-    //     hasChildren: true,
-    //     gate: 'access_to_inventory', 
-    //     icon: {
-    //         type: 'icon',
-    //         value: 'mdi-warehouse'
-    //     },
-    //     children: [
-    //         {
-    //             id: 1,
-    //             title: 'Inventory State',
-    //             gate: 'show_all_inventory_states',
-    //             subModule: 'inventory/state',
-    //             to: '/inventories'
-    //         },
-    //         {
-    //             id: 2,
-    //             title: 'Inventory Movements',
-    //             gate: 'show_all_inventory_movements',
-    //             subModule: 'inventory/movements',
-    //             to: '/inventories/movements'
-    //         },
-    //         {
-    //             id: 4,
-    //             title: 'Add Movement',
-    //             gate: 'create_inventory_movement',
-    //             subModule: 'inventory/add',
-    //             to: '/inventories/add'
-    //         }
-    //     ]
-    // },
+    {
+        id: 8,
+        module: 'inventory',
+        title: 'Inventory',
+        hasChildren: true,
+        gate: 'access_to_inventory x', 
+        icon: {
+            type: 'icon',
+            value: 'mdi-warehouse'
+        },
+        children: [
+            {
+                id: 1,
+                title: 'Inventory State',
+                gate: 'show_all_inventory_states',
+                subModule: 'inventory/state',
+                to: '/inventories'
+            },
+            {
+                id: 2,
+                title: 'Inventory Movements',
+                gate: 'show_all_inventory_movements',
+                subModule: 'inventory/movements',
+                to: '/inventories/movements'
+            },
+            {
+                id: 4,
+                title: 'Add Movement',
+                gate: 'create_inventory_movement',
+                subModule: 'inventory/add',
+                to: '/inventories/add'
+            }
+        ]
+    },
 
-    // {
-    //     id: 9,
-    //     module: 'shop',
-    //     title: 'Shop',
-    //     hasChildren: true,
-    //     gate: 'access_to_shop', 
-    //     icon: {
-    //         type: 'icon',
-    //         value: 'mdi-store'
-    //     },
-    //     children: [
-    //         {
-    //             id: 1,
-    //             title: 'Shop List',
-    //             gate: 'show_all_shops',
-    //             subModule: 'shop/list',
-    //             to: '/shops'
-    //         },
-    //         {
-    //             id: 2,
-    //             title: 'Add Shop',
-    //             gate: 'create_shop',
-    //             subModule: 'shop/add',
-    //             to: '/shops/add'
-    //         }
-    //     ]
-    // },
+    {
+        id: 9,
+        module: 'shop',
+        title: 'Shop',
+        hasChildren: true,
+        gate: 'access_to_shop', 
+        icon: {
+            type: 'icon',
+            value: 'mdi-store'
+        },
+        children: [
+            {
+                id: 1,
+                title: 'Shop List',
+                gate: 'show_all_shops',
+                subModule: 'shop/list',
+                to: '/shops'
+            },
+            {
+                id: 2,
+                title: 'Add Shop',
+                gate: 'create_shop',
+                subModule: 'shop/add',
+                to: '/shops/add'
+            }
+        ]
+    },
     {
         id: 10,
         module: 'warehouse',

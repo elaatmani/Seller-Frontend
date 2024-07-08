@@ -4,7 +4,7 @@ import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 // Views
 import ProductListView from '@/views/product/ProductListView'
 import IndexProducts from '@/views/newproducts/IndexProducts'
-import ShowAffiliateProduct from '@/views/newproducts/ShowAffiliateProduct'
+
 import AddProductView from '@/views/product/AddProductView'
 import UpdateProductView from '@/views/product/UpdateProductView'
 import ShowProductView from '@/views/product/ShowProductView'
@@ -43,17 +43,6 @@ export default
                     module: 'product',
                     subModule: 'product/newlist',
                     title: 'Products List',
-                    gate: 'show_all_products'
-                }
-            },
-            { 
-                name: 'product/newlist/show',
-                path: '/newproducts/:id',
-                component: ShowAffiliateProduct,
-                meta: {
-                    module: 'product',
-                    subModule: 'product/newlist/show',
-                    title: 'Affiliate Product',
                     gate: 'show_all_products'
                 }
             },

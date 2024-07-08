@@ -36,7 +36,7 @@
                     
                 </div>
                 
-                <div>
+                <div v-if="false">
                     <div v-if="product.tags.length" class="tw-flex tw-gap-2 tw-flex-wrap">
                         <p v-for="tag in product.tags" :key="tag"
                             class="tw-px-1 tw-text-xs tw-bg-gray-100 tw-rounded tw-w-fit tw-my-1">{{

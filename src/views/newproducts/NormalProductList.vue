@@ -95,7 +95,7 @@
     },
   
     methods: {
-      paginateProducts() {
+      async paginateProducts() {
         const url = "?page=" + this.current_page;
         const options = {
           sort_by: this.sort_by,
@@ -172,6 +172,15 @@
   
     mounted() {
       this.paginateProducts();
+    },
+
+    provide() {
+      return {
+        refresh: this.paginateProducts,
+        update: item => {
+          this.items = this.items.map(i => i.id == item.id ? item : i)
+        }
+      };
     },
   };
   </script>

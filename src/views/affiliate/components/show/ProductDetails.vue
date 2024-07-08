@@ -9,7 +9,7 @@
             {{ product.category }}</div>
             <div class="tw-px-4 tw-border-l tw-border-solid tw-border-gray-200 tw-flex tw-items-center tw-gap-4">
                 <span>SKU:</span>
-                <button class="tw-py-0.5 tw-px-2 tw-bg-orange-50 tw-text-orange-500 tw-rounded tw-flex tw-items-center tw-gap-2">
+                <button @click="copy(product.sku)" class="tw-py-0.5 tw-px-2 tw-bg-orange-50 tw-text-orange-500 tw-rounded tw-flex tw-items-center tw-gap-2">
                     <span>{{ product.sku }}</span>
                     <icon icon="solar:copy-linear" />
                 </button>
@@ -80,8 +80,14 @@ import { inject } from 'vue';
 import { currency } from '@/config/config';
 import ProductCardActions from '@/views/affiliate/components/common/product/ProductCardActions.vue';
 import TiptapEditor from '@/views/affiliate/components/admin/partials/editor/TiptapEditor';
+import { useAlert } from '@/composables/useAlert';
 
 const product = inject('product');
+
+const copy = (value) => {
+  navigator.clipboard.writeText(value);
+  useAlert('Copied to clipboard');
+}
 </script>
 
 <style></style>

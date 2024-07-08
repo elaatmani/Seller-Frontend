@@ -19,11 +19,12 @@
 
         <div class="tw-col-span-2">
           <label class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">SKU</label>
-          <input type="text" v-model="product.sku"
+          <input :disabled="isUpdate" type="text" v-model="product.sku"
             class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
             placeholder="Enter product SKU..." required />
-          <label class="tw-block tw-mb-1 tw-mt-1 tw-text-xs tw-font-medium tw-text-gray-400 dark:tw-text-white">SKU
+          <label v-if="!isUpdate" class="tw-block tw-mb-1 tw-mt-1 tw-text-xs tw-font-medium tw-text-gray-400 dark:tw-text-white">SKU
             should be unique for all products</label>
+          <label v-if="isUpdate" class="tw-block tw-mb-1 tw-mt-1 tw-text-xs tw-font-medium tw-text-gray-400 dark:tw-text-white">SKU cannot be updated</label>
           <label v-if="errors.sku"
             class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white">{{
               errors.sku }}</label>
@@ -152,6 +153,7 @@ import { inject } from 'vue';
 
 const product = inject('product');
 const errors = inject('errors');
+const isUpdate = inject('isUpdate');
 
 
 // const errors = ref({})

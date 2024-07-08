@@ -3,8 +3,7 @@
     class="hover:tw-bg-gray-50"
     :class="[
       availableQuantity <= 0 &&
-        '!tw-border !tw-border-red-300 tw-bg-red-100 hover:tw-bg-red-100 ',
-        item.type == 'affiliate' && ' tw-bg-gradient-to-r tw-from-emerald-100 tw-via-white tw-to-white'
+        '!tw-border !tw-border-red-300 tw-bg-red-50 hover:tw-bg-red-100 '
     ]"
   >
     <td class="tw-p-2 tw-py-1 tw-text-sm tw-font-medium tw-whitespace-nowrap">

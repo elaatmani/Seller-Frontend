@@ -174,6 +174,15 @@
     mounted() {
       this.paginateProducts();
     },
+
+    provide() {
+      return {
+        refresh: this.paginateProducts,
+        update: item => {
+          this.items = this.items.map(i => i.id == item.id ? item : i)
+        }
+      };
+    },
   };
   </script>
   

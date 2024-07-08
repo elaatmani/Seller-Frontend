@@ -18,8 +18,9 @@
           </div>
 
           <div>
-            <button @click="create" class="tw-bg-gray-800 hover:tw-bg-gray-900   tw-text-white tw-flex tw-items-center tw-gap-2 tw-pr-8 tw-pl-6 tw-py-3 tw-rounded">
-              <icon icon="mynaui:plus" class="tw-text-2xl" />
+            <button :disabled="loading" :class="[loading && '!tw-bg-gray-300 !tw-text-gray-600 tw-cursor-not-allowed']" @click="create" class="tw-bg-gray-800 hover:tw-bg-gray-900   tw-text-white tw-flex tw-items-center tw-gap-2 tw-pr-8 tw-pl-6 tw-py-3 tw-rounded">
+              <icon v-if="loading" icon="eos-icons:three-dots-loading" class="tw-text-2xl" />
+              <icon v-else icon="mynaui:plus" class="tw-text-2xl" />
               <span>Create</span>
             </button>
           </div>
@@ -59,6 +60,7 @@ const tabs = [
 
 const tab = shallowRef(tabs[0])
 const errors = ref({});
+const loading = ref(false);
 const product = ref({
   status: true,
   tags: [],
@@ -69,7 +71,7 @@ const product = ref({
   metadata: [],
   category_id: '',
   initial_quantity: 0,
-  description: 'Hello'
+  description: ''
 })
 
 provide('product', product)
@@ -77,6 +79,7 @@ provide('errors', errors)
 
 const create = async () => {
   const formattedProduct = {...product.value, media: product.value.media.map(m => ({uuid: m.uuid, id: m.id, collection_name: m.collection_name}))}
+  loading.value = true;
   await Affiliate.create(formattedProduct)
   .then(
     r => {
@@ -92,7 +95,7 @@ const create = async () => {
             media: [],
             category_id: '',
             initial_quantity: 0,
-            description: 'Hello'
+            description: ''
           }
       }
     },
@@ -108,6 +111,7 @@ const create = async () => {
       }
     }
   )
+  loading.value = false;
 }
 
 </script>

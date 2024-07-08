@@ -28,9 +28,20 @@ class Affiliate {
         return Api.get('api/affiliate/products/' + id + '/details');
     }
     
+
+    async edit(id) {
+        await Csrf.getCookie();
+        return Api.get('api/affiliate/products/' + id + '/edit');
+    }
+    
     async create(product) {
         await Csrf.getCookie();
         return Api.post('api/affiliate/products', product)
+    }
+
+    async update(id, product) {
+        await Csrf.getCookie();
+        return Api.post('api/affiliate/products/' + id, product)
     }
 
     async addImport(id) {
