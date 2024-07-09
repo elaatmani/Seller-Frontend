@@ -3,9 +3,9 @@ import Csrf from './Csrf'
 
 class Sheet {
 
-    async all() {
+    async all(filters) {
         await Csrf.getCookie();
-        return Api.get('api/sheets');
+        return Api.get('api/sheets', { params: filters });
     }
 
     async create(sheet) {

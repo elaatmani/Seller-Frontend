@@ -24,6 +24,7 @@ import dashboard from './routes/dashboard'
 import sourcing from './routes/sourcing'
 import settings from './routes/settings'
 import alert from './routes/alert'
+import affiliate from './routes/affiliate'
 
 import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 import NotFound from '@/views/NotFound'
@@ -51,6 +52,7 @@ const routes = [
   settings,
   alert,
   scanner,
+  affiliate,
 
 
   {

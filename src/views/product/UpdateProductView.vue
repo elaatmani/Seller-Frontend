@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <div class="mb-5">
@@ -15,17 +16,32 @@
       v-if="isLoaded"
       
     >
-      <div class="tw-flex py-5 px-5 tw-border bg-white tw-w-full tw-rounded-md tw-gap-2 tw-text-neutral-800 tw-items-center tw-mb-5" v-if="this.user.role=='admin'">
+      <div class="tw-flex py-3 px-5 tw-border tw-justify-between bg-white tw-w-full tw-rounded-md tw-text-neutral-800 tw-items-center tw-mb-5" v-if="this.user.role=='admin'">
+        <div class="tw-flex tw-items-center">
         Product ID:
         <span
           class="tw-block tw-py-1 tw-px-2 tw-rounded-md text-primary-color"
           >{{ id }}</span
         >
+        </div>
+        <div>
+            <div class="tw-w-full tw-flex tw-items-center">
+              <div class="text-body-2 tw-text-zinc-700">Status Approval :</div>
+              <label class="tw-relative tw-inline-flex tw-items-center tw-cursor-pointer tw-w-fit tw-scale-75">
+                <input :disabled="isLoadingStatus" v-model="status" @change="updateApprouved" type="checkbox" class="tw-sr-only tw-peer" />
+                <div
+                    class="tw-flex tw-items-center peer-checked:tw-bg-emerald-500 tw-w-11 tw-h-6 tw-bg-gray-200 peer-focus:tw-outline-none tw-rounded-full tw-peer dark:tw-bg-neutral-600 peer-checked:after:tw-translate-x-full peer-checked:after:tw-border-white after:tw-content-[''] after:tw-absolute after:tw-top-[2px] after:tw-left-[2px] after:tw-bg-white after:tw-border-gray-300 after:tw-border after:tw-rounded-full after:tw-h-5 after:tw-w-5 after:tw-transition-all dark:tw-border-gray-600">
+                </div>
+            </label>
+            <v-icon v-if="isLoadingStatus" color="green" size="small" class="tw-animate-spin">mdi-loading</v-icon>
+              
+            </div>
+          </div>
       </div>
       <div>
-        <div class="mb-5">
+        <div class="mb-5 px-3">
           <h4 class="tw-font-bold tw-text-gray-500/75">Product Infos</h4>
-        <v-row class="py-5 px-5 tw-border bg-white tw-w-full tw-rounded-md">
+        <v-row class="py-5 tw-border bg-white tw-w-full tw-rounded-md">
           <v-col cols="12" md="12">
             <v-row>
               <v-col class="!tw-py-2" cols="12" sm="6" md="6">
@@ -661,7 +677,9 @@ export default {
       imageFile: null,
 
       offers: [],
-      
+      isLoadingStatus: false,
+      status:false,
+      note:null,
       warehouse: 0,
       product: {
         name: "",
@@ -676,7 +694,6 @@ export default {
         description: "",
       },
       selectedDeliveries:[],
-
       formStatus: {
         name: {
           valid: true,
@@ -743,6 +760,7 @@ export default {
   },
 
   computed: {
+ 
     qtyTotal() {
       let total = 0;
       this.variants.forEach((variant) => (total += parseInt(variant.quantity)));
@@ -812,7 +830,32 @@ export default {
         })
         .finally(() => (this.isLoading = false));
     },
-
+     updateApprouved() {
+          this.isLoadingStatus = true;
+          const product = {status: this.status ? true : false, note: this.note};
+          Product.updateStatus(this.$route.params.id, product)
+          .then((res) => {
+            if (res.data.code == "PRODUCT_UPDATED") {
+              this.$alert({
+                type: "success",
+                title: res.data.message,
+              });
+              this.$store.dispatch("product/setProduct", res.data.data.product);
+              this.$emit("cancel");
+            }
+  
+            if (res.data.code == "PRODUCT_NOT_UPDATED") {
+              this.$alert({
+                type: "warning",
+                title: res.data.message,
+              });
+            }
+          })
+          .catch((err) => {
+            this.$handleApiError(err);
+          })
+          .finally(() => (this.isLoadingStatus = false));
+    },
     handleImageChange(event) {
       const file = event.target.files[0];
       // this.imageFile = file;
@@ -975,7 +1018,7 @@ export default {
             description,
             deliveries,
             image,
-            offers
+            offers,status
           } = res.data.data.products;
           this.variants = variations;
           this.product.buyingPrice = buying_price;
@@ -990,6 +1033,7 @@ export default {
           this.product.description = description;
           this.image = image;
           this.offers = offers;
+          this.status = Boolean(status); // Update status here
           this.variantId = this.getLastVariantId(variations);
           this.selectedDeliveries = deliveries.map(d => (d.delivery_id))
           this.isLoaded = true;

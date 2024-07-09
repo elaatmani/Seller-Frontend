@@ -1,7 +1,7 @@
 <template>
   <div>
     <label class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900">User</label>
-    <vue-select class="tw-min-w-[200px]" append-to-body :reduce="(o) => o.id" @option:selected="(e) => handleUserChange(e)" :clearable="false"
+    <vue-select append-to-body class="tw-min-w-[200px]" :reduce="(o) => o.id" @option:selected="(e) => handleUserChange(e)" :clearable="false"
         placeholder="Choose User" v-model="user" :options="options" label="name">
     </vue-select>
   </div>

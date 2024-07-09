@@ -69,7 +69,7 @@
   
   export default {
     components: {},
-    props: ["product", "visible"],
+    props: ["product", "visible", "updated"],
     data() {
       return {
         isLoading: false,
@@ -96,6 +96,7 @@
                 title: res.data.message,
               });
               this.$store.dispatch("product/setProduct", res.data.data.product);
+              this.$emit("updated", res.data.data.product);
               this.$emit("cancel");
             }
   

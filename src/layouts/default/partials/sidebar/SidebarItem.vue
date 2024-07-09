@@ -143,7 +143,7 @@ export default {
       this.isActive = !this.isActive;
     },
     isSublinkActive(sublink) {
-      return this.$route.path == sublink.to;
+      return this.$route.path == sublink.to || this.$route.name == sublink.to?.name;
     },
     isLinkActive() {
       if (this.link.hasChildren) {

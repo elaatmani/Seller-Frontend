@@ -4,6 +4,7 @@ import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 // Views
 import ProductListView from '@/views/product/ProductListView'
 import IndexProducts from '@/views/newproducts/IndexProducts'
+
 import AddProductView from '@/views/product/AddProductView'
 import UpdateProductView from '@/views/product/UpdateProductView'
 import ShowProductView from '@/views/product/ShowProductView'

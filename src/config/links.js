@@ -258,6 +258,61 @@ export const links = [
         ]
     },
 
+    {
+        id: 10,
+        module: 'affiliate',
+        title: 'Affiliate',
+        hasChildren: true,
+        gate: 'access_to_affiliate', 
+        role: ['admin', 'seller'], 
+        icon: {
+            type: 'icon',
+            value: 'mdi-bookshelf'
+        },
+        children: [
+            {
+                id: 1,
+                title: 'All Products',
+                subModule: 'affiliate.admin.list',
+                // role: ['admin'],
+                // gate: 'manage_affiliate_product',
+                to: { name: 'affiliate.admin.list' }
+            },
+            {
+                id: 2,
+                title: 'Create new product',
+                subModule: 'affiliate.admin.create',
+                role: ['admin'],
+                gate: 'create_affiliate_product',
+                to: { name: 'affiliate.admin.create' }
+            },
+            {
+                id: 3,
+                title: 'Winning Products',
+                subModule: 'affiliate.index',
+                role: ['admin', 'seller'],
+                gate: 'access_to_affiliate',
+                to: { name: 'affiliate.index' }
+            },
+            {
+                id: 4,
+                title: 'Import list',
+                subModule: 'affiliate.import',
+                role: ['admin', 'seller'],
+                gate: 'access_to_affiliate',
+                to: { name: 'affiliate.import' }
+            },
+            {
+                id: 5,
+                title: 'My wishlist',
+                subModule: 'affiliate.wishlist',
+                role: ['admin', 'seller'],
+                gate: 'access_to_affiliate',
+                to: { name: 'affiliate.wishlist' }
+            },
+        ]
+    },
+
 
     {
         id: 6,
@@ -327,7 +382,7 @@ export const links = [
         module: 'inventory',
         title: 'Inventory',
         hasChildren: true,
-        gate: 'access_to_inventory', 
+        gate: 'access_to_inventory x', 
         icon: {
             type: 'icon',
             value: 'mdi-warehouse'

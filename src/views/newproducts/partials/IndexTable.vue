@@ -48,7 +48,7 @@
                                 <th scope="col" class="tw-py-3.5 tw-px-4 tw-w-5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                         <span>ID</span>
                                 </th>
-                                <th scope="col" class="tw-py-3.5 tw-px-4 tw-w-5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
+                                <th v-if="$user.role == 'admin'" scope="col" class="tw-py-3.5 tw-px-4 tw-w-5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
                                         <span>Seller</span>
                                 </th>
                                 <th scope="col" class="tw-px-3 tw-py-3.5 tw-text-sm tw-font-normal tw-text-left rtl:tw-text-right tw-text-gray-500 darkx:tw-text-gray-400">
@@ -100,7 +100,7 @@
 
                         <tbody v-if="!loading && items.length == 0" class="tw-bg-white tw-divide-y tw-divide-gray-200 darkx:tw-divide-gray-700 darkx:tw-bg-gray-900">
                           <tr>
-                            <td colspan="8">
+                            <td colspan="11">
                               <div class="tw-p-5 tw-text-center tw-text-gray-600 tw-font-medium">
                                 No Order was found !
                               </div>
@@ -118,7 +118,7 @@
                               <loading />
                             </td>
                             <td
-                              colspan="11"
+                              colspan="13"
                             >
                             
                               <div role="status" class="tw-w-full tw-p-4 tw-space-y-4  tw-border-gray-200 tw-divide-y tw-divide-gray-200 tw-rounded tw-shadow tw-animate-pulse dark:tw-divide-gray-300 md:tw-p-6 dark:tw-border-gray-300">
