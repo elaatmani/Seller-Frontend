@@ -28,23 +28,44 @@ export const links = [
         hasChildren: true,
         gate: 'all',
         icon: {
-            type: 'svg',
-            value: 'assets/img/icons/dashboard.svg'
+            type: 'icon',
+            value: 'mdi-chart-box-outline'
         },
         children: [
             {
                 id: 1,
-                title: 'Dashboard',
+                title: 'Overview',
                 subModule: 'dashboard/dashboard',
                 gate: 'all',
                 to: '/'
             },
             {
                 id: 2,
-                title: 'Dashboard Analytics',
+                title: 'Finance',
                 subModule: 'dashboard/analytics',
-                gate: 'show_all_ads',
+                role: ['admin'],
                 to: '/analytics'
+            },
+        ]
+    },
+
+    {
+        id: 1,
+        title: 'Analytics',
+        module: 'analytics',
+        hasChildren: true,
+        role: ['admin'],
+        icon: {
+            type: 'icon',
+            value: 'mdi-chart-arc'
+        },
+        children: [
+            {
+                id: 1,
+                title: 'Sellers',
+                subModule: 'analytics.admin.sellers',
+                gate: 'all',
+                to: '/admin/analytics/sellers'
             },
         ]
     },
