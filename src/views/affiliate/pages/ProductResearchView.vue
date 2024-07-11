@@ -67,7 +67,7 @@ const products = ref([]);
 const getProducts = async () => {
   loading.value = true;
 
-  await Affiliate.paginate('/')
+  await Affiliate.paginate()
     .then(
       r => {
         products.value = r.data.products.data
