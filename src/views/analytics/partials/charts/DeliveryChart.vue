@@ -24,7 +24,7 @@
     <div v-else class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[350px]">
       <div class="tw-flex tw-items-center tw-gap-2">
             <p class="tw-p-2 tw-font-bold tw-text-lg">Delivery</p>
-            <p class="tw-px-1 tw-bg-sky-500 tw-text-white tw-text-sm tw-rounded">{{ new Intl.NumberFormat().format(totalDelivered)  }}</p>
+            <p class="tw-px-1 tw-bg-sky-500 tw-text-white tw-text-sm tw-rounded">{{ new Intl.NumberFormat().format(total)  }}</p>
         </div>
         <div class="tw-h-fullx tw-flex tw-gap-2">
             <div class="tw-w-fit">
@@ -175,38 +175,42 @@ const handleData = dt => {
     let newOrders = { name: 'Not Selected', value: newCount, percentage: `${newPercentage}%`, color: '#000' };
     result.push(newOrders)
 
-
-    // delivered
-    let deliveredCount = dt.find(o => o.delivery == 'livrer')?.count ?? 0;
-    let deliveredPercentage = deliveredCount > 0 ? ((deliveredCount / total.value) * 100).toFixed(0) : 0;
-    // let delivered = { name: 'Delivered', value: deliveredCount, percentage: `${deliveredPercentage}%`, color: '#10b981' };
-    // result.push(delivered)
-    totalDelivered.value = deliveredCount
-    series.value = [deliveredPercentage]
-
-    // transfer
-    let transferCount = dt.find(o => o.delivery == 'transfer')?.count ?? 0;
-
-    // shipped
-    let shippedCount = dt.find(o => o.delivery == 'shipped')?.count ?? 0 + transferCount;
-    let shippedPercentage = shippedCount > 0 ? ((shippedCount / total.value) * 100).toFixed(0) : 0;
-    let shipped = { name: 'Shipped', value: shippedCount, percentage: `${shippedPercentage}%`, color: '#8b5cf6' };
-    result.push(shipped)
-
     // paid
     let paidCount = dt.find(o => o.delivery == 'paid')?.count ?? 0;
     let paidPercentage = paidCount > 0 ? ((paidCount / total.value) * 100).toFixed(0) : 0;
     let paid = { name: 'Paid', value: paidCount, percentage: `${paidPercentage}%`, color: '#06b6d4' };
-    result.push(paid)
 
     // cleared
     let clearedCount = dt.find(o => o.delivery == 'cleared')?.count ?? 0;
     let clearedPercentage = clearedCount > 0 ? ((clearedCount / total.value) * 100).toFixed(0) : 0;
     let cleared = { name: 'Cleared', value: clearedCount, percentage: `${clearedPercentage}%`, color: '#38bdf8' };
+
+
+    // delivered
+    let deliveredCount = dt.find(o => o.delivery == 'livrer')?.count ?? 0;
+    let deliveredPercentage = deliveredCount > 0 ? ((deliveredCount / total.value) * 100).toFixed(0) : 0;
+    let delivered = { name: 'Delivered', value: deliveredCount, percentage: `${deliveredPercentage}%`, color: '#10b981' };
+    result.push(delivered)
+    totalDelivered.value = deliveredCount
+    series.value = [deliveredPercentage + paidPercentage + clearedPercentage]
+
+    // transfer
+    let transferCount = dt.find(o => o.delivery == 'transfer')?.count ?? 0;
+
+    // shipped
+    let shippedCount = dt.find(o => o.delivery == 'expidier')?.count ?? 0 + transferCount;
+    let shippedPercentage = shippedCount > 0 ? ((shippedCount / total.value) * 100).toFixed(0) : 0;
+    let shipped = { name: 'Shipped', value: shippedCount, percentage: `${shippedPercentage}%`, color: '#8b5cf6' };
+    result.push(shipped)
+
+    
+    result.push(paid)
+
+    
     result.push(cleared)
 
     // dispatched
-    let dispatchedCount = dt.find(o => o.delivery == 'dispatched')?.count ?? 0;
+    let dispatchedCount = dt.find(o => o.delivery == 'dispatcher')?.count ?? 0;
     let dispatchedPercentage = dispatchedCount > 0 ? ((dispatchedCount / total.value) * 100).toFixed(0) : 0;
     let dispatched = { name: 'Dispatched', value: dispatchedCount, percentage: `${dispatchedPercentage}%`, color: '#f59e0b' };
     result.push(dispatched)
