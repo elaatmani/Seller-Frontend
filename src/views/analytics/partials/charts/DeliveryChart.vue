@@ -169,11 +169,11 @@ const handleData = dt => {
     // result.push(totalOrders)
     totalOrders
 
-    // new
-    let newCount = dt.find(o => o.delivery == null)?.count ?? 0;
-    let newPercentage = newCount > 0 ? ((newCount / total.value) * 100).toFixed(0) : 0;
-    let newOrders = { name: 'Not Selected', value: newCount, percentage: `${newPercentage}%`, color: '#000' };
-    result.push(newOrders)
+    // printed
+    let printedCount = dt.find(o => o.delivery == 'printed')?.count ?? 0;
+    let printedPercentage = printedCount > 0 ? ((printedCount / total.value) * 100).toFixed(0) : 0;
+    let printedOrders = { name: 'Printed', value: printedCount, percentage: `${printedPercentage}%`, color: '#000' };
+    result.push(printedOrders)
 
     // paid
     let paidCount = dt.find(o => o.delivery == 'paid')?.count ?? 0;
@@ -183,7 +183,7 @@ const handleData = dt => {
     // cleared
     let clearedCount = dt.find(o => o.delivery == 'cleared')?.count ?? 0;
     let clearedPercentage = clearedCount > 0 ? ((clearedCount / total.value) * 100).toFixed(0) : 0;
-    let cleared = { name: 'Cleared', value: clearedCount, percentage: `${clearedPercentage}%`, color: '#38bdf8' };
+    // let cleared = { name: 'Cleared', value: clearedCount, percentage: `${clearedPercentage}%`, color: '#38bdf8' };
 
 
     // delivered
@@ -207,17 +207,21 @@ const handleData = dt => {
     
     result.push(paid)
 
-    
-    result.push(cleared)
+    // returned
+    let returnedCount = dt.find(o => o.delivery == 'retourner')?.count ?? 0 + transferCount;
+    let returnedPercentage = returnedCount > 0 ? ((returnedCount / total.value) * 100).toFixed(0) : 0;
+    let returned = { name: 'Returned', value: returnedCount, percentage: `${returnedPercentage}%`, color: '#e11d48' };
+    result.push(returned)
+
 
     // dispatched
-    let dispatchedCount = dt.find(o => o.delivery == 'dispatcher')?.count ?? 0;
+    let dispatchedCount = dt.find(o => o.delivery == 'dispatch')?.count ?? 0;
     let dispatchedPercentage = dispatchedCount > 0 ? ((dispatchedCount / total.value) * 100).toFixed(0) : 0;
     let dispatched = { name: 'Dispatched', value: dispatchedCount, percentage: `${dispatchedPercentage}%`, color: '#f59e0b' };
     result.push(dispatched)
 
     // others
-    let othersCount = total.value - (newCount + deliveredCount + shippedCount + paidCount + clearedCount + dispatchedCount);
+    let othersCount = total.value - (printedCount + deliveredCount + shippedCount + paidCount + clearedCount + dispatchedCount);
     let othersPercentage = othersCount > 0 ? ((othersCount / total.value) * 100).toFixed(0) : 0;
     let others = { name: 'Others', value: othersCount, percentage: `${othersPercentage}%`, color: '#64748b' };
     result.push(others)
