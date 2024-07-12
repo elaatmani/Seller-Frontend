@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Analytics from '@/api/Analytics'
 
 const loading = ref(true);
@@ -62,7 +62,7 @@ const data = ref({
 
 const series = ref([27]);
 
-const options = ref({
+const options = computed(() => ({
   chart: {
     type: 'radialBar',
     toolbar: {
@@ -138,7 +138,7 @@ const options = ref({
     lineCap: 'round'
   },
   labels: ['Delivered']
-});
+}));
 
 
 const getData = async () => {
@@ -192,7 +192,8 @@ const handleData = dt => {
     let delivered = { name: 'Delivered', value: deliveredCount, percentage: `${deliveredPercentage}%`, color: '#10b981' };
     result.push(delivered)
     totalDelivered.value = deliveredCount
-    series.value = [deliveredPercentage + paidPercentage + clearedPercentage]
+    series.value = [(parseFloat(deliveredPercentage) + parseFloat(paidPercentage) + parseFloat(clearedPercentage)).toFixed(2)]
+    console.log(series.value)
 
     // transfer
     let transferCount = dt.find(o => o.delivery == 'transfer')?.count ?? 0;

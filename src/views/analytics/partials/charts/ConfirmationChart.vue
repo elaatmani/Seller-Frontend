@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import Analytics from '@/api/Analytics'
 
 const loading = ref(true);
@@ -63,7 +63,7 @@ const data = ref({
 })
 const series = ref([77]);
 
-const options = ref({
+const options = computed(() => ({
     chart: {
         type: 'radialBar',
         toolbar: {
@@ -139,7 +139,7 @@ const options = ref({
         lineCap: 'round'
     },
     labels: ['Confirmed']
-});
+}));
 
 
 const getData = async () => {
