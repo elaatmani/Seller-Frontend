@@ -9,7 +9,7 @@
     <div v-if="loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[350px]">
         <div class="tw-flex tw-items-center tw-gap-2">
             <p class="tw-p-2 tw-font-bold tw-text-lg">Orders</p>
-            <p class="tw-px-1 tw-bg-gray-200 tw-text-white tw-text-sm tw-rounded tw-w-[60px] tw-h-[25px] tw-animate-pulse"></p>
+            <p class="tw-px-1 tw-bg-black tw-text-white tw-text-sm tw-rounded"><icon icon="eos-icons:three-dots-loading" class="tw-text-xl" /></p>
         </div>
         <div class="tw-h-[280px] tw-w-full tw-bg-gray-100 tw-rounded tw-animate-pulse">
         </div>

@@ -12,6 +12,26 @@ class Analytics {
             }
         });
     }
+
+    async getConfirmationsCount(from = null, to = null) {
+        await Csrf.getCookie();
+        return Api.get('api/analytics/confirmations-count', {
+            params: {
+                from: from,
+                to: to
+            }
+        });
+    }
+
+    async getDeliveriesCount(from = null, to = null) {
+        await Csrf.getCookie();
+        return Api.get('api/analytics/deliveries-count', {
+            params: {
+                from: from,
+                to: to
+            }
+        });
+    }
 }
 
 export default new Analytics();
