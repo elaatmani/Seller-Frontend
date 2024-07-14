@@ -3,17 +3,17 @@ import Csrf from './Csrf'
 
 class Affiliate {
 
-    async paginate(url = '/', options) {
+    async paginate(url = '', options) {
         await Csrf.getCookie();
         return Api.get('api/affiliate/products' + url, { params: options });
     }
 
-    async imported(url = '/', options) {
+    async imported(url = '', options) {
         await Csrf.getCookie();
         return Api.get('api/affiliate/products/imported' + url, { params: options });
     }
 
-    async wishlisted(url = '/', options) {
+    async wishlisted(url = '', options) {
         await Csrf.getCookie();
         return Api.get('api/affiliate/products/wishlisted' + url, { params: options });
     }

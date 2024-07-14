@@ -18,6 +18,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import JsonCSV from 'vue-json-csv';
 import PopupNew from '@/components/PopupNew'
 import { Icon } from '@iconify/vue';
+import VueApexCharts from "vue3-apexcharts";
 
 // import styling and tailwind
 import '@/assets/style.css'
@@ -34,6 +35,7 @@ export default createApp(App)
   .use(attributes)
   .use(apiErrorHandler)
   .use(VueNumber)
+  .use(VueApexCharts)
 
   // Registering Global Components
   .component('LoadingAnimation', LoadingAnimation)

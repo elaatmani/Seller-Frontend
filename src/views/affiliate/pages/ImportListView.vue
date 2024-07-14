@@ -62,7 +62,7 @@ const products = ref([]);
 const getProducts = async () => {
   loading.value = true;
 
-  await Affiliate.imported('/')
+  await Affiliate.imported()
   .then(
     r => {
       products.value = r.data.products.data
