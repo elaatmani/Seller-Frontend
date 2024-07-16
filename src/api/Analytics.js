@@ -13,6 +13,16 @@ class Analytics {
         });
     }
 
+    async getRevenue(from = null, to = null) {
+        await Csrf.getCookie();
+        return Api.get('api/analytics/revenue', {
+            params: {
+                from: from,
+                to: to
+            }
+        });
+    }
+
     async getConfirmationsCount(from = null, to = null) {
         await Csrf.getCookie();
         return Api.get('api/analytics/confirmations-count', {
