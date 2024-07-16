@@ -39,13 +39,13 @@
             <div class="tw-h-[150px]x tw-col-span-12 md:tw-col-span-3 tw-border-gray-100 tw-p-4 tw-pl-10 tw-flex tw-flex-col tw-gap-2">
                 <p class="tw-text-sm tw-text-gray-400">Total Paid</p>
                 <p class="tw-text-3xl tw-font-bold">{{ new Intl.NumberFormat('en', {style: 'currency', currency: 'USD' }).format(data.sum_paid) }} <span v-if="false" class="tw-text-sm tw-text-emerald-400">+10.8%</span></p>
-                <p v-if="false" class="tw-text-sm tw-text-gray-400 tw-font-medium">{{ moment('2024-07-04').format('MMM D, YYYY') }}: <span class="tw-font-bold tw-text-black">$12,123.26</span></p>
+                <p class="tw-text-sm tw-text-gray-400 tw-font-medium">COD Fees: <span class="tw-font-bold tw-text-black">{{ new Intl.NumberFormat('en', {style: 'currency', currency: 'USD' }).format(data.cod_fees) }}</span></p>
             </div>
 
             <div class="tw-h-[150px]x tw-col-span-12 md:tw-col-span-3 tw-border-gray-100 tw-p-4 tw-pl-10 tw-flex tw-flex-col tw-gap-2">
-                <p class="tw-text-sm tw-text-gray-400">Total With Delivery</p>
-                <p class="tw-text-3xl tw-font-bold">{{ new Intl.NumberFormat('en', {style: 'currency', currency: 'USD' }).format(data.not_paid_by_delivery) }} <span v-if="false" class="tw-text-sm tw-text-emerald-400">+10.8%</span></p>
-                <p v-if="false" class="tw-text-sm tw-text-gray-400 tw-font-medium">{{ moment('2024-07-04').format('MMM D, YYYY') }}: <span class="tw-font-bold tw-text-black">$3,123.26</span></p>
+                <p class="tw-text-sm tw-text-gray-400">Total Net Paid</p>
+                <p class="tw-text-3xl tw-font-bold">{{ new Intl.NumberFormat('en', {style: 'currency', currency: 'USD' }).format(data.net_paid) }} <span v-if="false" class="tw-text-sm tw-text-emerald-400">+10.8%</span></p>
+                <p  class="tw-text-sm tw-text-gray-400 tw-font-medium">Shipping Fees: <span class="tw-font-bold tw-text-black">{{ new Intl.NumberFormat('en', {style: 'currency', currency: 'USD' }).format(data.shipping_fees) }}</span></p>
             </div>
         </div>
     </div>
