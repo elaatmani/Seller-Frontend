@@ -52,27 +52,27 @@ const chartOptions = ref({
     },
     colors: [
         '#10B981', // tw-bg-green-500
-        '#FECACA', // tw-bg-rose-200/10
-        '#FEB2B2', // tw-bg-rose-400/10
-        '#FC8181', // tw-bg-rose-600/10
-        '#C3DAFE', // tw-bg-indigo-200/10
-        '#A3BFFA', // tw-bg-indigo-400/10
-        '#7F9CF5', // tw-bg-indigo-600/10
-        '#BFDBFE', // tw-bg-blue-200/10
-        '#90CDF4', // tw-bg-blue-400/10
-        '#63B3ED', // tw-bg-blue-600/10
-        '#FAE8FF', // tw-bg-fuchsia-500/10
-        '#FEB2B2', // tw-bg-rose-400/10
-        '#B2F5EA', // tw-bg-teal-500/10
-        '#FED7D7', // tw-bg-red-500/10
-        '#FAE8FF', // tw-bg-fuchsia-500/10
-        '#D1FAE5', // tw-bg-green-500/10
-        '#E9D8FD'  // tw-bg-purple-500/10
+        '#FB7185', // tw-bg-rose-500
+        '#FB7185', // tw-bg-rose-500
+        '#FB7185', // tw-bg-rose-500
+        '#6366F1', // tw-bg-indigo-500
+        '#6366F1', // tw-bg-indigo-500
+        '#6366F1', // tw-bg-indigo-500
+        '#3B82F6', // tw-bg-blue-500
+        '#3B82F6', // tw-bg-blue-500
+        '#3B82F6', // tw-bg-blue-500
+        '#EC4899', // tw-bg-fuchsia-500
+        '#FB7185', // tw-bg-rose-500
+        '#14B8A6', // tw-bg-teal-500
+        '#EF4444', // tw-bg-red-500
+        '#EC4899', // tw-bg-fuchsia-500
+        '#10B981', // tw-bg-green-500
+        '#A855F7'  // tw-bg-purple-500
     ],
     plotOptions: {
         bar: {
-            columnWidth: '45%',
-            distributed: false,
+            columnWidth: '90%',
+            distributed: true,
         }
     },
     dataLabels: {
