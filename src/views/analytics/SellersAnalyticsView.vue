@@ -18,6 +18,9 @@
             <div class="tw-col-span-12">
                 <FinanceData />
             </div>
+            <div class="tw-col-span-12">
+                <SellerData />
+            </div>
         </div>
         
     </div>
@@ -28,6 +31,7 @@ import OrdersCountChart from './partials/charts/OrdersCountChart'
 import ConfirmationChart from './partials/charts/ConfirmationChart'
 import DeliveryChart from './partials/charts/DeliveryChart'
 import FinanceData from './partials/charts/FinanceData'
+import SellerData from './partials/charts/SellerData'
 
 </script>
 
