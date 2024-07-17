@@ -32,10 +32,9 @@ import { confirmations } from '@/config/orders';
 import { ref } from 'vue';
 
 const loading = ref(false);
-const total = ref(0)
+const total = ref(0);
 
-const series = ref([
-])
+const series = ref([]);
 
 const chartOptions = ref({
     chart: {
@@ -72,19 +71,17 @@ const chartOptions = ref({
     plotOptions: {
         bar: {
             columnWidth: '90%',
-            distributed: true,
+            distributed: false,
         }
     },
     dataLabels: {
         enabled: true,
-
     },
     legend: {
         show: false
     },
     xaxis: {
-        categories: [
-        ],
+        categories: [],
         labels: {
             style: {
                 // colors: ['#80c7fd', '#008FFB', '#80f1cb', '#00E396'],
@@ -92,8 +89,7 @@ const chartOptions = ref({
             }
         }
     }
-})
-
+});
 
 const getData = async () => {
     loading.value = true;
@@ -102,35 +98,38 @@ const getData = async () => {
         .then(
             res => {
                 if (res.data.code == 'SUCCESS') {
-                    handleData(res.data.data)
+                    handleData(res.data.data);
                 }
             },
             err => {
-                console.log(err)
+                console.log(err);
             }
-        )
+        );
     loading.value = false;
-}; getData();
+};
+getData();
 
 const handleData = response => {
     const usernames = Object.keys(response);
-    chartOptions.value.xaxis.categories = usernames
+    chartOptions.value.xaxis.categories = usernames;
+
     const names = confirmations.map(o => ({ name: o.name, value: o.value }));
 
-    const data = names.map(confirmation => {
-        let value = []
+    const data = names.map((confirmation) => {
+        let value = [];
         usernames.forEach(username => {
             if (confirmation.value) {
-                value.push(response[username][confirmation.value]?.order_count || 0)
+                value.push(response[username][confirmation.value]?.order_count || 0);
             } else {
-                value.push(response[username]['']?.order_count || 0)
+                value.push(response[username]['']?.order_count || 0);
             }
         });
-        return { ...confirmation, data: value }
+        return { ...confirmation, data: value };
     });
 
     series.value = data;
-}
+};
+
 
 </script>
 
