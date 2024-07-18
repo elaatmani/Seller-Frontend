@@ -43,13 +43,10 @@ class Analytics {
         });
     }
 
-    async getOrdersBySellers(from = null, to = null) {
+    async getOrdersBySellers(params) {
         await Csrf.getCookie();
         return Api.get('api/analytics/orders-by-sellers', {
-            params: {
-                from: from,
-                to: to
-            }
+            params
         });
     }
 }
