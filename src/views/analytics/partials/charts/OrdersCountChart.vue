@@ -1,10 +1,10 @@
 <template>
-    <div v-if="!loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[350px]">
+    <div v-if="!loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[300px]">
         <div class="tw-flex tw-items-center tw-gap-2">
             <p class="tw-p-2 tw-font-bold tw-text-lg">Orders</p>
             <p class="tw-px-1 tw-bg-black tw-text-white tw-text-sm tw-rounded">{{ new Intl.NumberFormat().format(total)  }}</p>
         </div>
-        <apexchart type="area" height="280" :options="options" :series="series"></apexchart>
+        <apexchart type="area" height="220" :options="options" :series="series"></apexchart>
     </div>
     <div v-if="loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[350px]">
         <div class="tw-flex tw-items-center tw-gap-2">
@@ -34,7 +34,11 @@ const options = computed(() => {
         chart: {
             id: 'vuechart-example',
             foreColor: "#000",
+            toolbar: {
+        show: false
         },
+        },
+        
         xaxis: {
             categories: data.value.map(i => moment(i.date).format('MMM D')),
         },

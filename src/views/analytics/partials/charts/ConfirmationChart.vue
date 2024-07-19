@@ -1,18 +1,16 @@
 <template>
-    <div v-if="loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[350px]">
+    <div v-if="loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[300px]">
         <div class="tw-flex tw-items-center tw-gap-2">
             <p class="tw-p-2 tw-font-bold tw-text-lg">Confirmation</p>
             <p class="tw-px-1 tw-bg-emerald-500 tw-text-white tw-text-sm tw-rounded"><icon icon="eos-icons:three-dots-loading" class="tw-text-xl" /></p>
         </div>
 
         <div class="tw-flex tw-gap-x">
-            <div class="tw-w-[50%] tw-p-5 tw-h-[280px] tw-flex tw-items-center tw-justify-center">
+            <div class="tw-w-[250px] tw-p-5 tw-h-[230px] tw-flex tw-items-center tw-justify-center">
                 <div class="tw-w-[90%] tw-p-2 tw-bg-gray-100 tw-rounded-full tw-aspect-square tw-animate-pulse">
                 </div>
             </div>
-            <div class="tw-w-[50%] tw-p-2 tw-h-[280px] tw-flex tw-justify-center tw-flex-col tw-gap-5">
-                <div class="tw-w-[60%] tw-p-2 tw-bg-gray-100 tw-rounded-full tw-animate-pulse"></div>
-                <div class="tw-w-[60%] tw-p-2 tw-bg-gray-100 tw-rounded-full tw-animate-pulse"></div>
+            <div class="tw-w-[50%] tw-p-2 tw-h-[230px] tw-flex tw-justify-center tw-flex-col tw-gap-3">
                 <div class="tw-w-[60%] tw-p-2 tw-bg-gray-100 tw-rounded-full tw-animate-pulse"></div>
                 <div class="tw-w-[60%] tw-p-2 tw-bg-gray-100 tw-rounded-full tw-animate-pulse"></div>
                 <div class="tw-w-[60%] tw-p-2 tw-bg-gray-100 tw-rounded-full tw-animate-pulse"></div>
@@ -21,19 +19,19 @@
             </div>
         </div>
     </div>
-    <div v-else class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[350px]">
+    <div v-else class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[300px]">
         <div class="tw-flex tw-items-center tw-gap-2">
             <p class="tw-p-2 tw-font-bold tw-text-lg">Confirmation</p>
             <p class="tw-px-1 tw-bg-emerald-500 tw-text-white tw-text-sm tw-rounded">{{ new Intl.NumberFormat().format(totalConfirmed)  }}</p>
         </div>
         <div class="tw-h-fullx tw-flex tw-gap-2">
-            <div class="tw-w-fit">
-                <apexchart type="radialBar" height="300" :options="options" :series="series"></apexchart>
+            <div class="tw-w-fit tw-flex tw-items-center tw-h-full">
+                <apexchart type="radialBar" height="230" width="230" :options="options" :series="series"></apexchart>
             </div>
-            <div class="tw-flex-1 tw-p-2 tw-flex tw-flex-col tw-gap-4 tw-justify-center">
+            <div class="tw-flex-1 tw-p-0 tw-flex tw-flex-col tw-gap-3 tw-justify-center">
                 <div v-for="c in data.confirmations" :key="c" class="tw-flex tw-items-center tw-gap-2">
                     <div :style="{ background: c.color }" class="tw-p-0 tw-px-1 tw-rounded tw-text-[10px] tw-font-bold tw-text-white tw-text-center tw-w-[35px]">{{ c.percentage }}</div>
-                    <p class="tw-text-smx tw-font-semibold">{{ c.name }} <span class="tw-text-xs">({{ new Intl.NumberFormat().format(c.value) }})</span></p>
+                    <p class="tw-text-xs tw-font-semibold">{{ c.name }} <span class="tw-text-xs">({{ new Intl.NumberFormat().format(c.value) }})</span></p>
                 </div> 
             </div>
 
@@ -107,15 +105,19 @@ const options = computed(() => ({
                 name: {
                     offsetY: -10,
                     show: true,
-                    color: '#888',
-                    fontSize: '17px'
+                    color: '#111',
+                    fontSize: '16px',
+                    fontFamily: 'cairo',
+                    fontWeight: 'medium',
                 },
                 value: {
                     formatter: function (val) {
                         return parseInt(val) + '%';
                     },
                     color: '#111',
-                    fontSize: '36px',
+                    fontSize: '25px',
+                    fontFamily: 'cairo',
+                    fontWeight: 'bold',
                     show: true
                 }
             }

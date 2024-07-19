@@ -49,6 +49,13 @@ class Analytics {
             params
         });
     }
+
+    async getProductsPerformance(params) {
+        await Csrf.getCookie();
+        return Api.get('api/analytics/products-by-performance', {
+            params
+        });
+    }
 }
 
 export default new Analytics();

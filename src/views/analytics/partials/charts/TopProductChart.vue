@@ -2,29 +2,26 @@
     <div v-if="!loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[350px]x">
         <div class="tw-flex tw-items-start tw-justify-between">
             <div class="tw-flex tw-items-center tw-gap-2">
-                <p class="tw-p-2 tw-font-bold tw-text-lg">Sellers</p>
+                <p class="tw-p-2 tw-font-bold tw-text-lg">Products</p>
                 <p class="tw-px-1 tw-bg-black tw-text-white tw-text-sm tw-rounded">{{ new
                     Intl.NumberFormat().format(total)
                     }}</p>
             </div>
 
             <div class="tw-flex tw-items-center">
-                <select v-model="order_by" class="tw-h-[35px] tw-px-2 tw-outline-none tw-border tw-rounded tw-border-solid tw-border-gray-200 tw-w-[180px]">
+                <select v-model="order_by"
+                    class="tw-h-[35px] tw-px-2 tw-outline-none tw-border tw-rounded tw-border-solid tw-border-gray-200 tw-w-[180px]">
                     <option value="high">High to Low</option>
                     <option value="low">Low to High</option>
                 </select>
                 <div class="tw-p-4 tw-flex tw-gap-2 tw-items-center">
-                    <button
-                        :disabled="!options.prev_page_url"
-                        @click="onPrev"
+                    <button :disabled="!options.prev_page_url" @click="onPrev"
                         :class="!options.prev_page_url ? 'tw-cursor-not-allowed' : ''"
                         class="tw-p-0.5 tw-aspect-square tw-rounded tw-border tw-border-solid tw-border-gray-200 hover:tw-bg-gray-100 tw-duration-200">
                         <icon icon="ic:round-chevron-left" class="tw-text-3xl tw-text-gray-500" />
                     </button>
 
-                    <button
-                        :disabled="!options.next_page_url"
-                        @click="onNext"
+                    <button :disabled="!options.next_page_url" @click="onNext"
                         :class="!options.next_page_url ? 'tw-cursor-not-allowed' : ''"
                         class="tw-p-0.5 tw-aspect-square tw-rounded tw-border tw-border-solid tw-border-gray-200 hover:tw-bg-gray-100 tw-duration-200">
                         <icon icon="ic:round-chevron-right" class="tw-text-3xl tw-text-gray-500" />
@@ -40,7 +37,7 @@
     </div>
     <div v-if="loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[550px]">
         <div class="tw-flex tw-items-center tw-gap-2">
-            <p class="tw-p-2 tw-font-bold tw-text-lg">Sellers</p>
+            <p class="tw-p-2 tw-font-bold tw-text-lg">Products</p>
             <p class="tw-px-1 tw-bg-black tw-text-white tw-text-sm tw-rounded">
                 <icon icon="eos-icons:three-dots-loading" class="tw-text-xl" />
             </p>
@@ -58,22 +55,23 @@ import { ref, watch } from 'vue';
 
 const order_by = ref('high');
 const options = ref({});
-const loading = ref(false);
+const loading = ref(true);
 const total = ref(0);
 
 watch(() => order_by.value, () => {
     getData();
 })
 
+
 const series = ref([
     {
         name: 'Orders',
-        group: 'budget',
+        group: 'orders',
         data: []
     },
     {
-        name: 'Confirmed',
-        group: 'actual',
+        name: 'Quantity',
+        group: 'quantity',
         data: []
     },
 ]);
@@ -84,7 +82,7 @@ const chartOptions = ref({
         height: 350,
         stacked: true,
         toolbar: {
-        show: false
+            show: false
         },
     },
     stroke: {
@@ -104,15 +102,27 @@ const chartOptions = ref({
     xaxis: {
         categories: [],
         labels: {
+            show: false,
             formatter: (val) => {
                 return val
-            }
+            },
+            trim: true
+        }
+    },
+    yaxis: {
+        categories: [],
+        labels: {
+            show: true,
+            formatter: (val) => {
+                return val
+            },
+            trim: true
         }
     },
     fill: {
         opacity: 1,
     },
-    colors: ['#000', '#10b981'],
+    colors: ['#000', '#06b6d4'],
     legend: {
         position: 'top',
         horizontalAlign: 'left'
@@ -122,10 +132,11 @@ const chartOptions = ref({
 const getData = async (per_page = 6, page = 1) => {
     loading.value = true;
 
-    await Analytics.getOrdersBySellers({ per_page, page, order_by: order_by.value })
+    await Analytics.getProductsPerformance({ per_page, page, order_by: order_by.value })
         .then(
             res => {
                 if (res.data.code == 'SUCCESS') {
+
                     handleData(res.data.data.data);
                     options.value = res.data.data;
                     total.value = options.value.total;
@@ -140,26 +151,9 @@ const getData = async (per_page = 6, page = 1) => {
 getData();
 
 const handleData = response => {
-    const usernames = Object.keys(response);
-    // chartOptions.value.xaxis.categories = usernames;
-    chartOptions.value.xaxis.categories = ['x', 'w', 'r', 'l', 'm', 'w'];
-
-    const data = usernames.map(username => {
-        const total = Object.keys(response[username]).reduce((acc, cur) => {
-            return acc + (response[username][cur].order_count || 0);
-        }, 0);
-        const confirmed = response[username]['confirmer']?.order_count || 0;
-
-        return [
-            total,
-            confirmed
-        ]
-    })
-
-    series.value[0].data = data.map(o => o[0]);
-    series.value[1].data = data.map(o => o[1]);
-    series.value[1].data = [12, 30, 55, 22, 12, 10];
-    series.value[0].data = [6, 15, 40, 10, 10, 7];
+    series.value[0].data = response.map(i => i.count_orders)
+    series.value[1].data = response.map(i => i.total_quantity)
+    chartOptions.value.xaxis.categories = response.map(i => i.name)
 };
 
 const onNext = () => {
