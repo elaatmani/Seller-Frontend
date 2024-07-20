@@ -141,8 +141,7 @@ getData();
 
 const handleData = response => {
     const usernames = Object.keys(response);
-    // chartOptions.value.xaxis.categories = usernames;
-    chartOptions.value.xaxis.categories = ['x', 'w', 'r', 'l', 'm', 'w'];
+    chartOptions.value.xaxis.categories = usernames;
 
     const data = usernames.map(username => {
         const total = Object.keys(response[username]).reduce((acc, cur) => {
@@ -158,8 +157,6 @@ const handleData = response => {
 
     series.value[0].data = data.map(o => o[0]);
     series.value[1].data = data.map(o => o[1]);
-    series.value[1].data = [12, 30, 55, 22, 12, 10];
-    series.value[0].data = [6, 15, 40, 10, 10, 7];
 };
 
 const onNext = () => {
