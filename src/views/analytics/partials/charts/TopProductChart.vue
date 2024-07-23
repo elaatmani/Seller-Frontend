@@ -51,7 +51,10 @@
 
 <script setup>
 import Analytics from '@/api/Analytics';
-import { ref, watch } from 'vue';
+import { ref, watch, inject } from 'vue';
+
+const filters = inject('filters');
+const register = inject('register');
 
 const order_by = ref('high');
 const options = ref({});
@@ -132,7 +135,7 @@ const chartOptions = ref({
 const getData = async (per_page = 6, page = 1) => {
     loading.value = true;
 
-    await Analytics.getProductsPerformance({ per_page, page, order_by: order_by.value })
+    await Analytics.getProductsPerformance({ per_page, page, order_by: order_by.value, from: filters.value.date.start, to: filters.value.date.end })
         .then(
             res => {
                 if (res.data.code == 'SUCCESS') {
@@ -148,7 +151,6 @@ const getData = async (per_page = 6, page = 1) => {
         );
     loading.value = false;
 };
-getData();
 
 const handleData = response => {
     series.value[0].data = response.map(i => i.count_orders)
@@ -163,6 +165,9 @@ const onNext = () => {
 const onPrev = () => {
     getData(options.value.per_page, options.value.current_page - 1);
 }
+
+getData();
+register(getData)
 
 </script>
 

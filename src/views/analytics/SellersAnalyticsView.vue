@@ -44,6 +44,28 @@ import FinanceData from './partials/charts/FinanceData'
 import SellerData from './partials/charts/SellerData'
 import TopProductChart from './partials/charts/TopProductChart'
 import FilterContainer from './partials/filters/FilterContainer'
+import { provide, ref } from 'vue'
+
+const filters = ref({
+    date: {
+        start: null,
+        end: null
+    }
+})
+
+const charts = ref([]);
+
+const register = chartCallback => {
+    charts.value.push(chartCallback);
+}
+
+const filter = () => {
+    charts.value.forEach(callback => callback());
+}
+
+provide('filter', filter);
+provide('filters', filters);
+provide('register', register);
 
 </script>
 

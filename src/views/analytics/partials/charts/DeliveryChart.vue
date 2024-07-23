@@ -46,9 +46,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, inject } from 'vue';
 import Analytics from '@/api/Analytics'
 
+const filters = inject('filters');
+const register = inject('register');
 const loading = ref(true);
 const total = ref(0);
 const totalDelivered = ref(0);
@@ -151,7 +153,7 @@ const options = computed(() => ({
 
 const getData = async () => {
   loading.value = true;
-  await Analytics.getDeliveriesCount()
+  await Analytics.getDeliveriesCount(filters.value.date.start, filters.value.date.end)
     .then(
       res => {
         if (res.data.code == 'SUCCESS') {
@@ -238,7 +240,7 @@ const handleData = dt => {
 }
 
 getData();
-
+register(getData);
 </script>
 
 <style>

@@ -70,15 +70,17 @@
 <script setup>
 import Analytics from "@/api/Analytics";
 import moment from "moment";
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 
+const filters = inject('filters');
+const register = inject('register');
 const loading = ref(false);
 const data = ref({})
 
 
 const getData = async () => {
     loading.value = true;
-    await Analytics.getRevenue()
+    await Analytics.getRevenue(filters.value.date.start, filters.value.date.end)
     .then(
         res => {
             console.log(res.data)
@@ -92,6 +94,7 @@ const getData = async () => {
 }
 
 getData();
+register(getData)
 </script>
 
 <style>

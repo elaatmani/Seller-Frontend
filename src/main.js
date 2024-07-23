@@ -19,8 +19,10 @@ import JsonCSV from 'vue-json-csv';
 import PopupNew from '@/components/PopupNew'
 import { Icon } from '@iconify/vue';
 import VueApexCharts from "vue3-apexcharts";
+import PolarisVue from '@ownego/polaris-vue'
 
 // import styling and tailwind
+import '@ownego/polaris-vue/dist/style.css'
 import '@/assets/style.css'
 import '@/assets/css/main.css'
 
@@ -36,6 +38,7 @@ export default createApp(App)
   .use(apiErrorHandler)
   .use(VueNumber)
   .use(VueApexCharts)
+  .use(PolarisVue) 
 
   // Registering Global Components
   .component('LoadingAnimation', LoadingAnimation)
