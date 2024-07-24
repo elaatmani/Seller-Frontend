@@ -12,7 +12,7 @@
                 <DateFilter v-show="visible.date" @close="visible.date = false" />
             </div>
 
-            <div v-if="false" class="tw-relative">
+            <div class="tw-relative">
                 <button @click="visible.sellers = !visible.sellers"
                     class="tw-px-4 tw-py-2 tw-rounded tw-flex tw-items-center tw-gap-2 tw-bg-white tw-border tw-border-solid tw-border-gray-200 hover:tw-shadow tw-duration-200">
                     <icon icon="mage:user" class="tw-text-xl tw-text-gray-700" />

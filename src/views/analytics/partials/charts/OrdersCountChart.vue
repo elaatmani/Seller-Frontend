@@ -98,7 +98,7 @@ const series = computed(() => [{
 
 const getData = async () => {
     loading.value = true;
-    await Analytics.getOrdersCountByDays(filters.value.date.start, filters.value.date.end)
+    await Analytics.getOrdersCountByDays({from: filters.value.date.start, to: filters.value.date.end, sellers: filters.value.sellers})
     .then(
         res => {
             if(res.data.code == 'SUCCESS') {

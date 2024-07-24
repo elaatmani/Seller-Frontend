@@ -135,7 +135,7 @@ const chartOptions = ref({
 const getData = async (per_page = 6, page = 1) => {
     loading.value = true;
 
-    await Analytics.getProductsPerformance({ per_page, page, order_by: order_by.value, from: filters.value.date.start, to: filters.value.date.end })
+    await Analytics.getProductsPerformance({ per_page, page, order_by: order_by.value, from: filters.value.date.start, to: filters.value.date.end, sellers: filters.value.sellers })
         .then(
             res => {
                 if (res.data.code == 'SUCCESS') {

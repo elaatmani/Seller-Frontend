@@ -50,7 +50,8 @@ const filters = ref({
     date: {
         start: null,
         end: null
-    }
+    },
+    sellers: []
 })
 
 const charts = ref([]);

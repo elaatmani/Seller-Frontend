@@ -60,8 +60,8 @@
             </div>
             <div class="tw-h-[150px]x  tw-border-gray-100 tw-p-4 tw-pl-10 tw-flex tw-flex-col tw-gap-2">
                 <p class="tw-text-sm tw-text-gray-400">AOV</p>
-                <p class="tw-text-2xl tw-font-bold">{{ new Intl.NumberFormat('en', {style: 'currency', currency: 'USD' }).format((data.sum_livrer + data.sum_paid) / data.count_orders_paid_delivered) }} <span v-if="false" class="tw-text-sm tw-text-emerald-400">+10.8%</span></p>
-                <p  class="tw-text-sm tw-text-gray-400 tw-font-medium">Profit per order: <span class="tw-font-bold tw-text-black">{{ new Intl.NumberFormat('en', {style: 'currency', currency: 'USD' }).format(data.cod_fees / data.count_orders_paid_delivered) }}</span></p>
+                <p class="tw-text-2xl tw-font-bold">{{ new Intl.NumberFormat('en', {style: 'currency', currency: 'USD' }).format(((data.sum_livrer + data.sum_paid) / data.count_orders_paid_delivered) > 0 ? (data.sum_livrer + data.sum_paid) / data.count_orders_paid_delivered : 0) }} <span v-if="false" class="tw-text-sm tw-text-emerald-400">+10.8%</span></p>
+                <p  class="tw-text-sm tw-text-gray-400 tw-font-medium">Profit per order: <span class="tw-font-bold tw-text-black">{{ new Intl.NumberFormat('en', {style: 'currency', currency: 'USD' }).format((data.cod_fees / data.count_orders_paid_delivered) > 0 ? data.cod_fees / data.count_orders_paid_delivered : 0) }}</span></p>
             </div>
         </div>
     </div>
@@ -80,7 +80,7 @@ const data = ref({})
 
 const getData = async () => {
     loading.value = true;
-    await Analytics.getRevenue(filters.value.date.start, filters.value.date.end)
+    await Analytics.getRevenue({from: filters.value.date.start, to: filters.value.date.end, sellers: filters.value.sellers})
     .then(
         res => {
             console.log(res.data)

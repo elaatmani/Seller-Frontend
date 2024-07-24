@@ -60,10 +60,15 @@ setTimeout(() => {
     filters.value.date = selectedDates.value;
 })
 
-const selectedDateName = ref('Today');
+const selectedDateName = ref('Lifetime');
 
 
 const customDates = [
+    {
+        name: 'Lifetime',
+        start: null,
+        end: null
+    },
     {
         name: 'Today',
         start: new Date(today),
