@@ -44,7 +44,7 @@
 <script setup>
 import { ref, watch, inject, defineEmits } from 'vue';
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'setName']);
 const filters = inject('filters');
 const filter = inject('filter');
 const today = new Date(Date.now());
@@ -52,8 +52,8 @@ const month = ref(today.getMonth());
 const year = ref(today.getFullYear());
 const day = ref(today.getDay());
 const selectedDates = ref({
-    start: new Date(today),
-    end: new Date(today),
+    start: null,
+    end: null,
 });
 
 setTimeout(() => {
@@ -153,6 +153,7 @@ const handleCustomDate = (v) => {
     selectedDates.value.start = v.start;
     selectedDates.value.end = v.end;
     selectedDateName.value = v.name;
+    emit('setName', v.name)
 }
 
 

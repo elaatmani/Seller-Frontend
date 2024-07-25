@@ -6,10 +6,10 @@
                     @click="visible.date = !visible.date"
                     class="tw-px-4 tw-py-2 tw-rounded tw-flex tw-items-center tw-gap-2 tw-bg-white tw-border tw-border-solid tw-border-gray-200 hover:tw-shadow tw-duration-200">
                     <icon icon="mage:calendar" class="tw-text-xl tw-text-gray-700" />
-                    <p class="tw-text-sm tw-font-medium tw-text-gray-800">Lifetime</p>
+                    <p class="tw-text-sm tw-font-medium tw-text-gray-800">{{ dateName }}</p>
                 </button>
 
-                <DateFilter v-show="visible.date" @close="visible.date = false" />
+                <DateFilter @set-name="v => dateName = v" v-show="visible.date" @close="visible.date = false" />
             </div>
 
             <div class="tw-relative">
@@ -30,6 +30,8 @@
 import DateFilter from './DateFilter';
 import SellerFilter from './SellerFilter';
 import { ref } from 'vue';
+
+const dateName = ref('Lifetime')
 
 const visible = ref({
     date: false,
