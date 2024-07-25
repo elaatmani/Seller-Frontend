@@ -13,7 +13,7 @@
                             v-if="date.name === selectedDateName" />
                     </button>
                 </div>
-                <div class="tw-col-span-9 tw-p-2 tw-border-l tw-border-solid tw-border-gray-200">
+                <div v-if="selectedDateName != 'Lifetime'" class="tw-col-span-9 tw-p-2 tw-border-l tw-border-solid tw-border-gray-200">
                     <div v-if="false" class="tw-flex tw-items-center tw-gap-1">
                         <input type="text"
                             class="tw-w-[47%] tw-h-[35px] tw-px-2 tw-rounded tw-border tw-border-solid tw-border-gray-200 tw-outline-none tw-flex-1x"
