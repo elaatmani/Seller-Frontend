@@ -28,7 +28,7 @@ const ioptions = inject('options');
 
 const store = useStore();
 const fetched = computed(() => store.getters['user/fetched']);
-const users = computed(() => store.getters['user/users']);
+const users = computed(() => store.getters['user/users'].filter(u => u.status == 1));
 const sellers = computed(() => fetched.value ? users.value.filter(u => u.role.name == 'seller') : []);
 
 </script>
