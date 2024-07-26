@@ -1,28 +1,29 @@
 <template>
-    <div v-if="!loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[350px]">
+    <div v-if="!loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[300px]">
         <div class="tw-flex tw-items-center tw-gap-2">
             <p class="tw-p-2 tw-font-bold tw-text-lg">Orders</p>
             <p class="tw-px-1 tw-bg-black tw-text-white tw-text-sm tw-rounded">{{ new Intl.NumberFormat().format(total)  }}</p>
         </div>
-        <apexchart type="area" height="280" :options="options" :series="series"></apexchart>
+        <apexchart type="area" height="220" :options="options" :series="series"></apexchart>
     </div>
-    <div v-if="loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[350px]">
+    <div v-if="loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[300px]">
         <div class="tw-flex tw-items-center tw-gap-2">
             <p class="tw-p-2 tw-font-bold tw-text-lg">Orders</p>
             <p class="tw-px-1 tw-bg-black tw-text-white tw-text-sm tw-rounded"><icon icon="eos-icons:three-dots-loading" class="tw-text-xl" /></p>
         </div>
-        <div class="tw-h-[280px] tw-w-full tw-bg-gray-100 tw-rounded tw-animate-pulse">
+        <div class="tw-h-[230px] tw-w-full tw-bg-gray-100 tw-rounded tw-animate-pulse">
         </div>
     </div>
 </template>
 
 <script setup>
 import moment from 'moment'
-import { ref, computed } from 'vue'
+import { ref, computed, inject } from 'vue'
 import Analytics from '@/api/Analytics'
 
 
-
+const register = inject('register')
+const filters = inject('filters')
 const loading = ref(true);
 const total = ref(0)
 
@@ -34,7 +35,11 @@ const options = computed(() => {
         chart: {
             id: 'vuechart-example',
             foreColor: "#000",
+            toolbar: {
+        show: false
         },
+        },
+        
         xaxis: {
             categories: data.value.map(i => moment(i.date).format('MMM D')),
         },
@@ -93,7 +98,7 @@ const series = computed(() => [{
 
 const getData = async () => {
     loading.value = true;
-    await Analytics.getOrdersCountByDays(null, null)
+    await Analytics.getOrdersCountByDays({from: filters.value.date.start, to: filters.value.date.end, sellers: filters.value.sellers})
     .then(
         res => {
             if(res.data.code == 'SUCCESS') {
@@ -110,6 +115,8 @@ const getData = async () => {
 }
 
 getData()
+
+register(getData);
 </script>
 
 <style></style>

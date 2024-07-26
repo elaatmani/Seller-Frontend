@@ -11,6 +11,7 @@
   "dependencies": {
     "@iconify/vue": "^4.1.1",
     "@mdi/font": "5.9.55",
+    "@ownego/polaris-vue": "^2.1.3",
     "@tiptap/extension-image": "^2.4.0",
     "@tiptap/extension-strike": "^2.4.0",
     "@tiptap/extension-text-align": "^2.4.0",
