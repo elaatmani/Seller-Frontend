@@ -23,15 +23,21 @@
                     <span v-if="sourcing.shipping_method == 'ocean-freight'" class="tw-font-black tw-text-neutral-800">Ocean freight</span>
                 </li>
 
+                
                 <li class="tw-flex tw-items-center tw-justify-between">
                     <span>Quantity:</span>
                     <span class="tw-font-black tw-text-neutral-800">{{ sourcing.estimated_quantity }}</span>
                 </li>
 
                 <li class="tw-flex tw-items-center tw-justify-between">
-                    <span>Unit Price:</span>
+                    <span>Unit Price for admin:</span>
+                    <span class="tw-font-black tw-text-neutral-800">{{ sourcing.buying_price }} {{ currency }}</span>
+                </li>
+                <li class="tw-flex tw-items-center tw-justify-between">
+                    <span>Unit Price for seller:</span>
                     <span class="tw-font-black tw-text-neutral-800">{{ sourcing.cost_per_unit }} {{ currency }}</span>
                 </li>
+
 
                 <li class="tw-flex tw-items-center tw-justify-between tw-">
                     <span>Additional Fees:</span>
