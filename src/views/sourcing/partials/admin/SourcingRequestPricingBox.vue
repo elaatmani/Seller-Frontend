@@ -32,6 +32,10 @@
                     <span>Unit Price:</span>
                     <span class="tw-font-black tw-text-neutral-800">{{ sourcing.cost_per_unit }} {{ currency }}</span>
                 </li>
+                <li class="tw-flex tw-items-center tw-justify-between">
+                    <span>Buying Price:</span>
+                    <span class="tw-font-black tw-text-neutral-800">{{ sourcing.buying_price }} {{ currency }}</span>
+                </li>
 
                 <li class="tw-flex tw-items-center tw-justify-between tw-">
                     <span>Additional Fees:</span>
