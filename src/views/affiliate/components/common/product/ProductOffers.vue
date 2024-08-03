@@ -7,6 +7,25 @@
                 Manage Offers
             </div>
 
+            <div v-if="!fetching" class="tw-p-2 tw-bg-white">
+                <div class="tw-bg-gray-50 tw-border tw-border-solid tw-border-gray-200 tw-p-2 tw-grid tw-grid-cols-2 tw-gap-2">
+                    <div class="tw-col-span-2 ">
+                        <label
+                            class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Store URL</label>
+                        <input type="text" v-model="store_url"
+                            class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+                            placeholder="Store URL" required />
+                    </div>
+                    <div class="tw-col-span-2 ">
+                        <label
+                            class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Video URL</label>
+                        <input type="text" v-model="video_url"
+                            class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+                            placeholder="Video URL" required />
+                    </div>
+                </div>
+            </div>
+
             <div v-if="fetching" class="tw-p-2 tw-bg-white">
                 <div v-if="!offers.length"
                     class="tw-bg-gray-50 tw-border tw-border-solid tw-border-gray-200 tw-p-5 tw-text-center">
@@ -22,6 +41,7 @@
                 </div>
 
                 <div v-if="offers.length" class="tw-flex tw-flex-col tw-gap-2">
+                    <h1 class="tw-mb-2 tw-text-base tw-font-semibold tw-px-2">Offers</h1>
                     <div class="tw-grid tw-grid-cols-2 tw-gap-2 tw-border tw-border-solid tw-p-2 tw-rounded-xlx tw-shadow-sm tw-bg-white tw-border-gray-200"
                         v-for="offer in offers" :key="offer">
                         <div class="tw-col-span-2 md:tw-col-span-1">
@@ -90,6 +110,8 @@ import { defineEmits, defineProps, ref } from 'vue';
 const props = defineProps(['product', 'visible'])
 const emit = defineEmits(['update:visible'])
 const offers = ref([]);
+const store_url = ref(null);
+const video_url = ref(null);
 
 const loading = ref(false);
 const fetching = ref(false);
@@ -105,27 +127,27 @@ const onSave = async () => {
     let isValid = true;
 
     offers.value.forEach(i => {
-        if(!i.price || !i.quantity) {
+        if (!i.price || !i.quantity) {
             isValid = false;
         }
     })
 
-    if(!isValid) {
+    if (!isValid) {
         useAlert('The offers are not valid. check price and quantity', 'warning');
         return false;
     }
 
     loading.value = true;
-    await Affiliate.setOffers(props.product.id, offers.value)
-    .then(
-        res => {
-            if(res.data.code == 'SUCCESS') {
-                // offers.value = res.data.offers
-                useAlert('Offers has been updated')
-                emit('update:visible', false)
+    await Affiliate.setOffers(props.product.id, {offers: offers.value, store_url: store_url.value, video_url: video_url.value})
+        .then(
+            res => {
+                if (res.data.code == 'SUCCESS') {
+                    // offers.value = res.data.offers
+                    useAlert('Offers has been updated')
+                    emit('update:visible', false)
+                }
             }
-        }
-    )
+        )
     loading.value = false;
 }
 
@@ -137,13 +159,15 @@ const onDelete = (id) => {
 const getOffers = async () => {
     fetching.value = true;
     await Affiliate.getOffers(props.product.id)
-    .then(
-        res => {
-            if(res.data.code == 'SUCCESS') {
-                offers.value = res.data.offers
+        .then(
+            res => {
+                if (res.data.code == 'SUCCESS') {
+                    offers.value = res.data.offers
+                    video_url.value = res.data.video_url
+                    store_url.value = res.data.store_url
+                }
             }
-        }
-    )
+        )
     fetching.value = false;
 }
 

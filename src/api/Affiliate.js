@@ -44,9 +44,9 @@ class Affiliate {
         return Api.post('api/affiliate/products/' + id, product)
     }
 
-    async setOffers(id, offers) {
+    async setOffers(id, data) {
         await Csrf.getCookie();
-        return Api.post('api/affiliate/products/' + id + '/offers', { offers })
+        return Api.post('api/affiliate/products/' + id + '/offers', data)
     }
 
     async getOffers(id) {
