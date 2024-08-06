@@ -5,8 +5,8 @@
     </div>
     <div class="tw-grid tw-grid-cols-12 tw-gap-4 tw-p-1">
 
-      <DateFilter v-model:from="filters.created_from" v-model:to="filters.created_to" label="Dropped" />
-
+      <DateFilter v-model:from="filters.dropped_from" v-model:to="filters.dropped_to" label="Dropped" />
+      <DateFilter v-model:from="filters.treated_from" v-model:to="filters.treated_to" label="Treated" />
 
       <div  class="tw-col-span-12 tw-flex tw-justify-end tw-gap-2">
         <button
@@ -55,7 +55,12 @@ export default {
         return {
             dateFilter: ['', ''],
 
-            filters: {}
+            filters: {
+              dropped_from: null,
+              dropped_to: null,
+              treated_from: null,
+              treated_to: null,
+            }
         }
     },
 
@@ -71,8 +76,10 @@ export default {
     methods: {
         clear() {
             this.filters = {
-                created_from: null,
-                created_to: null,
+              dropped_from: null,
+              dropped_to: null,
+              treated_from: null,
+              treated_to: null,
             }
         },
         filter() {

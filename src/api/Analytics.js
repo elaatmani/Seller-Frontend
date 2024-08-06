@@ -9,7 +9,13 @@ class Analytics {
             params
         });
     }
-
+    
+    async getChartConfirmation(params) {
+        await Csrf.getCookie();
+        return Api.get('api/analytics/chart-confirmation', {
+            params
+        });
+    }
     async getRevenue(params) {
         await Csrf.getCookie();
         return Api.get('api/analytics/revenue', {

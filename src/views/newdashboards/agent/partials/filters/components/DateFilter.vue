@@ -114,6 +114,22 @@ export default {
                 default:
                     break;
             }
+        },
+        from: {
+            immediate: true,
+            handler(newVal) {
+                if (newVal === null) {
+                    this.filterBy = 'all';
+                }
+            }
+        },
+        to: {
+            immediate: true,
+            handler(newVal) {
+                if (newVal === null) {
+                    this.filterBy = 'all';
+                }
+            }
         }
     },
 
@@ -141,7 +157,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>
