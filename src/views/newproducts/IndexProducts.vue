@@ -1,5 +1,5 @@
-<template>
-  <div v-if="$user.role == 'admin'" class="tw-p-2 tw-flex tw-items-center tw-gap-2x tw-mb-2">
+<template :asign="role = $user.role">
+  <div v-if="['admin', 'affiliate-manager'].includes($user.role)" class="tw-p-2 tw-flex tw-items-center tw-gap-2x tw-mb-2">
     <button
       @click="active = 'normal'"
       :class="active == 'normal'? '!tw-border-orange-500' : 'tw-border-gray-200'"
@@ -22,7 +22,8 @@ import { ref } from 'vue';
 import NormalProductList from "./NormalProductList";
 import AffiliateProductList from "./AffiliateProductList";
 
-const active = ref('normal')
+const role = ref(null)
+const active = ref(role.value == 'affiliate-manager' ? 'affiliate' : 'normal')
 </script>
 
 <style></style>

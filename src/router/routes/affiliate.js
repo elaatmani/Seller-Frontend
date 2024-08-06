@@ -34,7 +34,7 @@ export default
                     module: 'affiliate',
                     subModule: 'affiliate.admin.list',
                     title: 'Affiliate Products',
-                    role: ['admin']
+                    role: ['admin', 'affiliate-manager']
                 }
             },
             { 
@@ -45,7 +45,7 @@ export default
                     module: 'product',
                     subModule: 'affiliate.admin.show',
                     title: 'Affiliate Product',
-                    role: ['admin']
+                    role: ['admin', 'affiliate-manager']
                 }
             },
             { 
@@ -56,7 +56,7 @@ export default
                     module: 'affiliate',
                     subModule: 'affiliate.create',
                     title: 'Create Affiliate Product',
-                    role: ['admin']
+                    role: ['admin', 'affiliate-manager']
                 }
             },
 
@@ -68,7 +68,7 @@ export default
                     module: 'affiliate',
                     subModule: 'affiliate.edit',
                     title: 'Edit Affiliate Product',
-                    role: ['admin']
+                    role: ['admin', 'affiliate-manager']
                 }
             },
             
@@ -80,7 +80,7 @@ export default
                     module: 'affiliate',
                     subModule: 'affiliate.index',
                     title: 'Affiliate Products',
-                    role: ['admin', 'seller']
+                    role: ['admin', 'seller', 'affiliate-manager']
                 }
             },
             
@@ -92,7 +92,7 @@ export default
                     module: 'affiliate',
                     subModule: 'affiliate.show',
                     title: 'Product Details',
-                    role: ['admin', 'seller']
+                    role: ['admin', 'seller', 'affiliate-manager']
                 }
             },
             { 
@@ -103,7 +103,7 @@ export default
                     module: 'affiliate',
                     subModule: 'affiliate.show.sellers',
                     title: 'Product Sellers',
-                    role: ['admin']
+                    role: ['admin', ]
                 }
             },
             { 

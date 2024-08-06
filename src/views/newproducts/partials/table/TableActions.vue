@@ -36,14 +36,14 @@
         </div>
     </div>
 
-    <div v-if="item.type == 'affiliate' && $user.role == 'admin'" class="tw-h-full">
+    <div v-if="item.type == 'affiliate' && ['admin', 'affiliate-manager'].includes($user.role)" class="tw-h-full">
         <div class="tw-flex tw-items-center tw-gap-2">
-            <router-link title="Show" :to="{ name: 'affiliate.admin.show', params: { id: item.id } }"
+            <router-link v-if="['admin'].includes($user.role)" title="Show" :to="{ name: 'affiliate.admin.show', params: { id: item.id } }"
                 class="!tw-bg-white tw-aspect-square tw-cursor-pointer tw-p-0.5 tw-w-[32px] tw-flex tw-items-center tw-justify-center tw-rounded tw-border tw-border-solid tw-border-blue-100 hover:tw-border-blue-400  hover:!tw-bg-blue-100 tw-duration-200">
                 <icon icon="solar:eye-bold-duotone" class="tw-text-xl tw-text-blue-500" />
             </router-link>
 
-            <router-link title="Edit" :to="{ name: 'affiliate.admin.edit', params: { id: item.id } }"
+            <router-link v-if="['admin', 'affiliate-manager'].includes($user.role)" title="Edit" :to="{ name: 'affiliate.admin.edit', params: { id: item.id } }"
                 class="!tw-bg-white tw-aspect-square tw-p-0.5 tw-w-[32px] tw-flex tw-items-center tw-justify-center tw-rounded tw-border tw-border-solid tw-border-amber-100 hover:tw-border-amber-400  hover:!tw-bg-amber-100 tw-duration-200">
                 <icon icon="lets-icons:edit-duotone" class="tw-text-xl tw-text-amber-500" />
             </router-link>
