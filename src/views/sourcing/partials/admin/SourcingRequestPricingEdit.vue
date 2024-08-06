@@ -41,7 +41,19 @@
 
                         <div>
                             <label
-                                class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Unit Price</label>
+                                class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Unit Price for Admin</label>
+                            <input v-model.number="form.sourcing.buying_price" @input="form.errors.buying_price = null" type="number"
+                                :class="[form.errors.buying_price && '!tw-border-red-400']"
+                                class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
+                                placeholder="Enter buying price" required />
+                            <label v-if="form.errors.buying_price"
+                                class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white">{{
+                                    form.errors.buying_price }}</label>
+                        </div>
+
+                        <div>
+                            <label
+                                class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Unit Price for Seller</label>
                             <input v-model.number="form.sourcing.cost_per_unit" @input="form.errors.cost_per_unit = null" type="number"
                                 :class="[form.errors.cost_per_unit && '!tw-border-red-400']"
                                 class="tw-bg-gray-50 tw-border tw-border-solid focus:tw-outline-none tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-orange-500 dark:focus:tw-border-orange-500"
@@ -61,6 +73,7 @@
                                 class="tw-block tw-mb-2 tw-text-xs tw-font-medium tw-text-red-400 dark:tw-text-white">{{
                                     form.errors.buying_price }}</label>
                         </div>
+
 
 
                         <div>
