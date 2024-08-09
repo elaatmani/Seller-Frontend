@@ -11,17 +11,17 @@
                 <icon icon="ci:check-big" class="tw-text-base tw-text-emerald-500" />
             </button>
 
-            <router-link :to="'/products/' + item.id"  v-if="$can(`view_product`)"
+            <router-link :to="'/products/' + item.id"  v-if="$can(`view_product`) && $user.role != 'affiliate-manager'"
                 class="tw-bg-white tw-px-2 tw-py-1 tw-aspect-square  tw-border tw-border-solid tw-border-sky-500/20 hover:tw-bg-sky-500/10 hover:tw-border-sky-500/70 tw-duration-300 tw-text-sky-500/80 tw-rounded-md tw-flex tw-items-center tw-justify-center">
                 <icon icon="solar:eye-bold-duotone" class="tw-text-base tw-text-sky-500" />
             </router-link>
 
-            <router-link title="Edit" :to="'/products/update/' + item.id"
+            <router-link title="Edit" v-if="$user.role != 'affiliate-manager'" :to="'/products/update/' + item.id"
                 class="!tw-bg-white tw-aspect-square tw-p-0.5 tw-w-[32px] tw-flex tw-items-center tw-justify-center tw-rounded tw-border tw-border-solid tw-border-amber-100 hover:tw-border-amber-400  hover:!tw-bg-amber-100 tw-duration-200">
                 <icon icon="lets-icons:edit-duotone" class="tw-text-xl tw-text-amber-500" />
             </router-link>
 
-            <button v-if="$can(`delete_product`)" @click="visible.delete = true"
+            <button v-if="$can(`delete_product`) && $user.role != 'affiliate-manager'" @click="visible.delete = true"
                 class="tw-bg-white tw-px-2 tw-py-1 tw-aspect-square  tw-border tw-border-solid tw-border-rose-500/20 hover:tw-bg-rose-500/10 hover:tw-border-rose-500/70 tw-duration-300 tw-text-rose-500/80 tw-rounded-md tw-flex tw-items-center tw-justify-center">
                 <v-icon size="x-small">mdi-delete</v-icon>
             </button>
