@@ -40,6 +40,12 @@
                     class="tw-text-2xl tw-text-white" />
                 <icon v-else icon="line-md:loading-twotone-loop" class="tw-text-2xl tw-text-white" />
             </button>
+
+            <button v-if="imported" @click="onOffersClick"
+                class="tw-px-2 tw-aspect-square tw-bg-amber-500 tw-rounded tw-flex tw-items-center tw-gap-2 tw-justify-between tw-h-[40px]">
+                <icon  icon="ic:outline-local-offer"
+                    class="tw-text-2xl tw-text-white" />
+            </button>
         </div>
 
     </div>
@@ -80,9 +86,11 @@
             </div>
         </div>
     </popup-new>
+    <ProductOffers v-if="visible.offers" v-model:visible="visible.offers" :product="props.product" />
 </template>
 
 <script setup>
+import ProductOffers from './ProductOffers.vue';
 import Affiliate from '@/api/Affiliate';
 import { useAlert } from '@/composables/useAlert';
 import { ref, defineProps, toRef } from 'vue';
@@ -108,6 +116,7 @@ const loading = ref({
 const visible = ref({
     wishlist: false,
     import: false,
+    offers: false
 })
 
 const onWishlistClick = async () => {
@@ -156,6 +165,10 @@ const onWishlistClick = async () => {
 
 const onImportClick = () => {
     visible.value.import = true
+}
+
+const onOffersClick = () => {
+    visible.value.offers = true
 }
 
 const onConfirmImport = async () => {

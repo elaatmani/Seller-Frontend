@@ -284,8 +284,8 @@ export const links = [
         module: 'affiliate',
         title: 'Affiliate',
         hasChildren: true,
-        gate: 'access_to_affiliate', 
-        role: ['admin', 'seller'], 
+        gate: 'manage_affiliate_products', 
+        role: ['admin', 'seller', 'affiliate-manager'], 
         icon: {
             type: 'icon',
             value: 'mdi-bookshelf'
@@ -303,15 +303,15 @@ export const links = [
                 id: 2,
                 title: 'Create new product',
                 subModule: 'affiliate.admin.create',
-                role: ['admin'],
-                gate: 'create_affiliate_product',
+                role: ['admin', 'affiliate-manager'],
+                gate: 'manage_affiliate_products',
                 to: { name: 'affiliate.admin.create' }
             },
             {
                 id: 3,
                 title: 'Winning Products',
                 subModule: 'affiliate.index',
-                role: ['admin', 'seller'],
+                role: ['admin', 'seller', 'affiliate-manager'],
                 gate: 'access_to_affiliate',
                 to: { name: 'affiliate.index' }
             },

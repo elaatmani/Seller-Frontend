@@ -38,6 +38,9 @@ import AlertApi from '@/api/Alert'
 import Product from '@/api/Product'
 import Sale from '@/api/Sale'
 import AlertNotification from '@/components/AlertNotification.vue'
+import Pusher from "pusher-js";
+import Echo from "laravel-echo";
+import { serverUrl } from '@/config/config'
 
 export default {
     components: { AppHeader, AppSidebar, Alert, AlertNotification, AppAnnonces },
@@ -50,6 +53,8 @@ export default {
             delay: 60000,
             showScrollUpButton: false,
             firstFetch: false,
+            echo: null,
+            presenceChannelId: 1
             // delay: 6000,
         }
     },
@@ -139,41 +144,109 @@ export default {
         },
 
         async fetchNewOrders() {
-            if(this.salesFetched || !this.firstFetch) {
+            if (this.salesFetched || !this.firstFetch) {
                 const ids = this.sales.map(s => s.id);
                 return Sale.getNewOrders(ids)
-                .then(res => {
-                    if(res.data.code == 'SUCCESS') {
-                        const newSales = res.data.data.orders;
-                        const count = res.data.data.count;
+                    .then(res => {
+                        if (res.data.code == 'SUCCESS') {
+                            const newSales = res.data.data.orders;
+                            const count = res.data.data.count;
                             this.$store.dispatch('sale/setCount', count);
-                        if(newSales.length > 0) {
-                            this.$store.dispatch('sale/addSales', newSales);
-                            this.$alert({
-                                type: 'info',
-                                title: newSales.length + ' New orders has been added'
-                            })
-                        }
+                            if (newSales.length > 0) {
+                                this.$store.dispatch('sale/addSales', newSales);
+                                this.$alert({
+                                    type: 'info',
+                                    title: newSales.length + ' New orders has been added'
+                                })
+                            }
 
-                        this.firstFetch = true;
-                    }
-                })
+                            this.firstFetch = true;
+                        }
+                    })
             }
             // .catch(this.$handleApiError)
         },
 
         async getAlerts() {
             return AlertApi.alerts()
-            .then(
-                res => {
-                    if (res?.data.code == "SUCCESS") {
-                        const alerts = res.data.alerts
-                        this.$store.dispatch('app/setAlertsData', alerts)
-                        this.$store.dispatch('app/setAlertsFetched', true)
-                        this.isLoaded = true
+                .then(
+                    res => {
+                        if (res?.data.code == "SUCCESS") {
+                            const alerts = res.data.alerts
+                            this.$store.dispatch('app/setAlertsData', alerts)
+                            this.$store.dispatch('app/setAlertsFetched', true)
+                            this.isLoaded = true
+                        }
                     }
-                }
-            ).catch(this.$handleApiError)
+                ).catch(this.$handleApiError)
+        },
+
+        async subscribe() {
+            Pusher.Runtime.createXHR = function () {
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+                return xhr;
+            };
+
+
+            window.Pusher = Pusher
+            const echo = new Echo({
+                broadcaster: "pusher",
+                key: '96c60637f1b07ace1345',
+                cluster: 'eu',
+                channelAuthorization: {
+                    // transport: "jsonp",
+                    endpoint: serverUrl + "api/pusher",
+                    withCredentials: true,
+                },
+            })
+
+            this.echo = echo;
+
+            const channelId = this.presenceChannelId;
+            echo.join(`channel.${channelId}`)
+                .here((members) => {
+                    this.$store.dispatch('online/setUsers', members);
+                    this.$store.dispatch('online/setFetched', true);
+                })
+                .joining((member) => {
+                    const members = this.$store.getters['online/users'];
+
+                    // Find the member if they already exist
+                    const existingMember = members.find(m => m.id === member.id);
+                    if (existingMember) {
+                        // Remove the `left_at` property if they rejoin
+                        delete existingMember.left_at;
+                    } else {
+                        // If they don't exist, add them as a new member
+                        members.push(member);
+                    }
+
+                    this.$store.dispatch('online/setUsers', members);
+                })
+                .leaving((member) => {
+                    let members = this.$store.getters['online/users'];
+
+                    // Update the member with the `left_at` time if they leave
+                    members = members.map(m => {
+                        if (m.id === member.id) {
+                            return {
+                                ...m,
+                                left_at: new Date().toISOString()
+                            };
+                        }
+                        return m;
+                    });
+
+                    this.$store.dispatch('online/setUsers', members);
+                });
+
+        },
+
+        unsubscribe() {
+            console.log('left');
+            
+            this.echo.leaveChannel(`channel.${this.presenceChannelId}`);
         }
     },
 
@@ -190,7 +263,7 @@ export default {
         this.getAlerts();
         // !this.subscribed && this.subscribe();
 
-        if(this.user.role == 'admin') {
+        if (this.user.role == 'admin') {
             this.fetchNewOrders()
         }
 
@@ -204,16 +277,18 @@ export default {
 
         this.getUsers();
 
+        this.subscribe();
+
         window.addEventListener('scroll', this.checkScroll);
     },
 
     unmounted() {
         window.removeEventListener('scroll', this.checkScroll);
+        this.unsubscribe();
     }
 
 
 }
 </script>
 
-<style>
-</style>
+<style></style>

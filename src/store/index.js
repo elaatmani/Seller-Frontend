@@ -13,6 +13,7 @@ import notification from './modules/notification'
 import warehouse from './modules/warehouse'
 import factorisation from './modules/factorisation'
 import sheet from './modules/sheet'
+import online from './modules/online'
 import supplyRequest from './modules/supply-request'
 
 
@@ -40,6 +41,7 @@ export default createStore({
     factorisation,
     sheet,
     app,
+    online,
     
     'supply-request': supplyRequest
   }
