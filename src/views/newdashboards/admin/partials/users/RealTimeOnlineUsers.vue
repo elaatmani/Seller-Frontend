@@ -49,7 +49,7 @@ import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 
 
-const visible = ref({ users: false, lastAction: true });
+const visible = ref({ users: true, lastAction: false });
 const store = useStore();
 const users = computed(() => {
     const members = store.getters['online/users'];
