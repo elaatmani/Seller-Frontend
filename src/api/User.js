@@ -69,6 +69,12 @@ class User {
         return Api.get('api/user')
     }
 
+    async lastAction() {
+        await Csrf.getCookie();
+
+        return Api.get('api/users/last-action')
+    }
+
     async profile() {
         await Csrf.getCookie();
 

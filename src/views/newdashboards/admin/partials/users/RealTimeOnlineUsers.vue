@@ -3,16 +3,20 @@
         <div class="tw-flex tw-items-center tw-justify-between">
             <h1 class="tw-font-semibold">Online (test)</h1>
             <div class="tw-flex tw-items-center tw-gap-2">
-                <button disabled class="tw-flex tw-items-center tw-justify-center tw-p-1 tw-rounded tw-border tw-border-solid tw-border-gray-200 tw-cursor-not-allowed tw-bg-gray-100 tw-duration-200">
-                    <icon icon="ph:user-list" class="tw-text-lg tw-text-gray-700" />
-                </button>
+                <div>
+                    <button @click="visible.lastAction = true" class="tw-flex tw-items-center tw-justify-center tw-p-1 tw-rounded tw-border tw-border-solid tw-border-gray-200 hover:tw-bg-gray-100 tw-duration-200">
+                        <icon icon="ph:user-list" class="tw-text-lg tw-text-gray-700" />
+                    </button>
 
-                <button @click="visible = !visible" class="tw-flex tw-items-center tw-justify-center tw-p-1 tw-rounded tw-border tw-border-solid tw-border-gray-200 hover:tw-bg-gray-100 tw-duration-200">
-                    <icon :icon="visible ? 'ion:chevron-up-outline' : 'ion:chevron-down-outline'" class="tw-text-lg tw-text-gray-700" />
+                    <UsersLastAction v-if="visible.lastAction" @cancel="visible.lastAction = false" />
+                </div>
+
+                <button @click="visible.users = !visible.users" class="tw-flex tw-items-center tw-justify-center tw-p-1 tw-rounded tw-border tw-border-solid tw-border-gray-200 hover:tw-bg-gray-100 tw-duration-200">
+                    <icon :icon="visible.users ? 'ion:chevron-up-outline' : 'ion:chevron-down-outline'" class="tw-text-lg tw-text-gray-700" />
                 </button>
             </div>
         </div>
-        <div v-if="visible">
+        <div v-if="visible.users">
             <div v-if="users.length" class="tw-flex tw-gap-2 tw-flex-wrap tw-mt-4">
                 <div v-for="user in users" :key="user">
                     <div
@@ -39,12 +43,13 @@
 </template>
 
 <script setup>
+import UsersLastAction from './UsersLastAction';
 import moment from 'moment';
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 
 
-const visible = ref(true)
+const visible = ref({ users: false, lastAction: true });
 const store = useStore();
 const users = computed(() => {
     const members = store.getters['online/users'];

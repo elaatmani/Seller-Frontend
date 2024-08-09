@@ -244,8 +244,6 @@ export default {
         },
 
         unsubscribe() {
-            console.log('left');
-            
             this.echo.leaveChannel(`channel.${this.presenceChannelId}`);
         }
     },
