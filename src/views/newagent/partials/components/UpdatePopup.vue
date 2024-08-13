@@ -347,6 +347,45 @@
 
             <div class="tw-col-span-2" v-if="products_fetched">
               <ProductOffersTable :products="products" :item="itemCopy" />
+              <button @click="showProducts = !showProducts" class="tw-bg-whites tw-shadow-sm tw-px-2 tw-py-1 tw-my-5 tw-w-[150px] tw-h-[30px] tw-border tw-border-solid tw-border-emerald-500/20 hover:tw-bg-emerald-500/10 hover:tw-border-emerald-500/70 tw-duration-300 tw-text-emerald-500/80 tw-rounded-md tw-flex tw-items-center tw-justify-center">
+                      Suggested Products
+                    </button>
+                    <div v-if="showProducts">
+                      <div v-if="paginatedProducts.length > 0">
+                        <table class="tw-w-full tw-table-auto tw-border-collapse">
+                        <thead>
+                          <tr>
+                            <th class="tw-border tw-px-4 tw-py-2">Product Name</th>
+                            <th class="tw-border tw-px-4 tw-py-2">Link video</th>
+                            <th class="tw-border tw-px-4 tw-py-2">Link Store</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="product in paginatedProducts" :key="product.id">
+                            <td class="tw-border tw-px-4 tw-py-2">{{ product.name }}</td>
+                            <td class="tw-border tw-px-4 tw-py-2">
+                              <a :href="'https://' + product.video" target="_blank" class="tw-flex tw-items-center tw-text-blue-500 tw-hover:text-blue-800 hover:tw-underline"
+                              > <i
+                                  class="mdi mdi-youtube tw-mx-2 tw-text-orange-400 tw-text-2xl"
+                                ></i>{{ product.video }}</a>
+                            </td>
+                            <td class="tw-border tw-px-4 tw-py-2">
+                              <a :href="'https://' + product.store" target="_blank" class="tw-flex tw-items-center  tw-text-blue-500 tw-hover:text-blue-800 hover:tw-underline	"
+                              ><i class="mdi mdi-store tw-mx-2 tw-text-orange-400 tw-text-2xl"></i>
+                              {{ product.store }}</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                        </table>
+                        <div class="tw-my-2 tw-flex tw-justify-end">
+                          <button class="tw-border-solid tw-border-2 tw-rounded-lg tw-border-gray-400 tw-py-1 tw-px-3 tw-mr-2" @click="previousPage">Previous</button>
+                          <button class="tw-border-solid tw-border-2 tw-rounded-lg tw-border-gray-400 tw-py-1 tw-px-3" @click="nextPage">Next</button>
+                        </div>
+                      </div>
+                      <div v-else class="tw-text-center">
+                        No other products
+                      </div>
+                    </div>
             </div>
           </div>
         </div>
@@ -405,7 +444,9 @@ export default {
       confirmations: confirmations,
       upsells: upsells,
       isLoading: false,
-
+      currentPage: 1,
+      itemsPerPage: 5,
+      showProducts: false,
       products_fetched: null,
       products: null,
       itemCopy: null,
@@ -430,9 +471,28 @@ export default {
     cities() {
       return this.$store.getters["city/cities"];
     },
+    paginatedProducts() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.filteredProducts.slice(start, end);
+    },
+    filteredProducts() {
+      const productIdsToExclude = this.itemCopy.items.map((p) => p.product_id);
+      return this.products.filter(product => product.user_id === this.itemCopy.user_id && !productIdsToExclude.includes(product.id));
+    }
   },
 
   methods: {
+    nextPage() {
+      if (this.currentPage * this.itemsPerPage < this.filteredProducts.length) {
+        this.currentPage++;
+      }
+    },
+    previousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
     handleUpdate() {
       const validated = validate(this, this.itemCopy);
       if (!validated) return false;
