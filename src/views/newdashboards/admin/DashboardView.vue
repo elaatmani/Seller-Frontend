@@ -3,7 +3,7 @@
     <div class="tw-space-y-3">
         <RealTimeOnlineUsers />
 
-        <OnlineUsers />
+        <OnlineUsers v-if="false" />
 
         <IndexFilters @update="f => filters= f" @filter="handleFilter" />
 

@@ -32,10 +32,13 @@
                             </thead>
 
                             <tbody>
-                                <tr v-for="u in users.filter(i => i.id != $user.id).filter(o => o.firstname.toLocaleLowerCase().includes(search.toLocaleLowerCase()) || o.lastname.toLocaleLowerCase().includes(search.toLocaleLowerCase()))" :key="u.id" class="hover:tw-bg-gray-100 tw-duration-200">
+                                <tr v-for="u in filteredUsers" :key="u.id" class="hover:tw-bg-gray-100 tw-duration-200">
                                     <td class="tw-p-2 ">{{ u.id }}</td>
                                     <td class="tw-p-2">
-                                        <p>{{ u.firstname }} {{ u.lastname }}</p>
+                                        <div class="tw-flex tw-items-center tw-gap-2">
+                                            <div :class="[u.is_online && '!tw-bg-emerald-400']" class="tw-w-2 tw-h-2 tw-rounded tw-bg-red-400"></div>
+                                            <p>{{ u.firstname }} {{ u.lastname }}</p>
+                                        </div>
                                     </td>
                                     <td class="tw-p-2 tw-font-semibold tw-">
                                         <div v-if="u.last_action">{{ moment(u.last_action).fromNow() }}</div>
@@ -54,11 +57,20 @@
 <script setup>
 import User from '@/api/User';
 import moment from 'moment';
+import { computed } from 'vue';
 import { ref } from 'vue';
+import { useStore } from 'vuex';
 
+const store = useStore();
 const search = ref('');
 const loading = ref(false);
 const users = ref([]);
+const user = computed(() => store.getters['user/user']);
+const online = computed(() => store.getters['online/users']);
+
+const filteredUsers = computed(() => {
+    return users.value.map(u => ({...u, is_online: online.value.some(p => p.id == u.id)})).filter(i => i.id != user.value.id).filter(o => o.firstname.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()) || o.lastname.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()));
+});
 
 const getData = async () => {
     loading.value = true;
