@@ -23,6 +23,13 @@ class Analytics {
         });
     }
 
+    async getProfit(params) {
+        await Csrf.getCookie();
+        return Api.get('api/analytics/profit', {
+            params
+        });
+    }
+
     async getConfirmationsCount(params) {
         await Csrf.getCookie();
         return Api.get('api/analytics/confirmations-count', {
