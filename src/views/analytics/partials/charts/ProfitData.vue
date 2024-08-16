@@ -6,7 +6,7 @@
 
 
             <div>
-                <div class="tw-grid tw-grid-cols-2 tw-gap-2">
+                <div class="tw-grid tw-grid-cols-3 tw-gap-2">
                     <div class="tw-border tw-border-solid tw-p-2">
                         <div class="tw-flex tw-items-center tw-gap-2 ">
                             <div class=" tw-flex tw-items-center tw-gap-2">
@@ -21,6 +21,17 @@
                         </div>
                     </div>
                     
+
+                    <div class="tw-border tw-border-solid tw-p-2">
+                        <div class="tw-flex tw-items-center tw-gap-2">
+                            <p class="tw-font-bold tw-text-lg">Sourcings</p>
+                        </div>
+                        <div class="tw-px-2x tw-mt-2x">
+                            <p v-if="loading" class="tw-font-semibold tw-text-gray-700 tw-h-[30px] tw-mt-1 tw-w-[150px] tw-bg-gray-100 tw-rounded tw-animate-pulse"></p>
+                            <p v-else class="tw-font-bold tw-text-2xl tw-text-amber-500">{{ formatNumber(data.sourcings_profit) }}</p>
+                        </div>
+                    </div>
+
                     <div class="tw-border tw-border-solid tw-p-2">
                         <div class="tw-flex tw-items-center tw-gap-2">
                             <p class="tw-font-bold tw-text-lg">Profit Per Order</p>
@@ -50,7 +61,7 @@
                         <div class="tw-flex tw-items-center tw-gap-1">
                             <p class="tw-font-semibold tw-text-violet-600">I.Beirut</p>
                             <p v-if="loading" class="tw-font-semibold tw-text-gray-700 tw-h-[15px] tw-w-[50px] tw-bg-gray-100 tw-rounded tw-animate-pulse"></p>
-                            <p v-else class="tw-text-xs">({{ formatNumber(data.orders.inside_b_count) }})</p>
+                            <p v-else class="tw-text-xs">({{ formatNumber(data.orders.inside_b_count, {}) }})</p>
                         </div>
                         <p v-if="loading" class="tw-font-semibold tw-text-gray-700 tw-h-[20px] tw-mt-1 tw-w-[60px] tw-bg-gray-100 tw-rounded tw-animate-pulse"></p>
                         <p v-else class="tw-font-bold tw-text-lg">{{ formatNumber(data.orders.inside_b) }}</p>
@@ -60,7 +71,7 @@
                         <div class="tw-flex tw-items-center tw-gap-1">
                             <p class="tw-font-semibold tw-text-amber-600">O.Beirut</p>
                             <p v-if="loading" class="tw-font-semibold tw-text-gray-700 tw-h-[15px] tw-w-[50px] tw-bg-gray-100 tw-rounded tw-animate-pulse"></p>
-                            <p v-else class="tw-text-xs">({{ formatNumber(data.orders.outside_b_count) }})</p>
+                            <p v-else class="tw-text-xs">({{ formatNumber(data.orders.outside_b_count, {}) }})</p>
                         </div>
                         <p v-if="loading" class="tw-font-semibold tw-text-gray-700 tw-h-[20px] tw-mt-1 tw-w-[60px] tw-bg-gray-100 tw-rounded tw-animate-pulse"></p>
                         <p v-else class="tw-font-bold tw-text-lg">{{ formatNumber(data.orders.outside_b) }}</p>
