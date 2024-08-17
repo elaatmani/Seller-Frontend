@@ -21,8 +21,11 @@
             <div class="tw-col-span-12 md:tw-col-span-6 lg:tw-col-span-4">
                 <DeliveryChart />
             </div>
-            <div class="tw-col-span-12">
-                <FinanceData />
+            <div class="tw-col-span-12 md:tw-col-span-6">
+                <RevenueData />
+            </div>
+            <div class="tw-col-span-12 md:tw-col-span-6">
+                <ProfitData />
             </div>
             <div class="tw-col-span-12 md:tw-col-span-12 lg:tw-col-span-6">
                 <SellerData />
@@ -40,7 +43,8 @@
 import OrdersCountChart from './partials/charts/OrdersCountChart'
 import ConfirmationChart from './partials/charts/ConfirmationChart'
 import DeliveryChart from './partials/charts/DeliveryChart'
-import FinanceData from './partials/charts/FinanceData'
+import ProfitData from './partials/charts/ProfitData'
+import RevenueData from './partials/charts/RevenueData'
 import SellerData from './partials/charts/SellerData'
 import TopProductChart from './partials/charts/TopProductChart'
 import FilterContainer from './partials/filters/FilterContainer'
