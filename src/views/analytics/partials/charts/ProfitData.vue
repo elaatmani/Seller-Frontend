@@ -3,7 +3,18 @@
     <div class="tw-grid tw-grid-cols-12 tw-gap-2">
 
         <div class="tw-col-span-12  tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200">
+            <div class="tw-flex tw-items-center tw-justify-between tw-mb-2">
+                <p class="tw-p-2 tw-font-bold tw-text-lg">Earnings</p>
 
+                <div class="tw-p-2 tw-flex tw-items-center tw-gap-2">
+                    <button :class="[by == 'created' && '!tw-bg-orange-500 !tw-text-white !tw-border-orange-200']" @click="onSwitch('created')" class="tw-text-sm tw-border tw-border-solid tw-border-gray-300 tw-rounded-sm tw-px-2 tw-py-1 tw-cursor-pointer hover:tw-bg-gray-100 tw-duration-200">
+                        Created
+                    </button>
+                    <button :class="[by == 'delivered' && '!tw-bg-orange-500 !tw-text-white !tw-border-orange-200']" @click="onSwitch('delivered')" class="tw-text-sm tw-border tw-border-solid tw-border-gray-300 tw-rounded-sm tw-px-2 tw-py-1 tw-cursor-pointer hover:tw-bg-gray-100 tw-duration-200">
+                        Delivered
+                    </button>
+                </div>
+            </div>
 
             <div>
                 <div class="tw-grid tw-grid-cols-3 tw-gap-2">
@@ -12,7 +23,7 @@
                             <div class=" tw-flex tw-items-center tw-gap-2">
                                 <p class="tw-font-bold tw-text-lg">Profit</p>
                                 <p v-if="loading" class="tw-font-semibold tw-text-gray-700 tw-h-[20px] tw-w-[70px] tw-bg-gray-100 tw-rounded tw-animate-pulse"></p>
-                                <p v-else class="tw-font-semibold tw-text-gray-700">( {{ formatNumber(data.orders.paid_count, {}) }} )</p>
+                                <p v-else class="tw-font-semibold tw-text-gray-700">( {{ formatNumber(data.orders.orders_count, {}) }} )</p>
                             </div>
                         </div>
                         <div class="tw-px-2x tw-mt-2x">
@@ -97,7 +108,9 @@ import { ref, inject } from 'vue';
 const filters = inject('filters');
 const register = inject('register');
 const loading = ref(false);
+const by = ref('created');
 const data = ref({});
+const allData = ref({});
 
 
 const getData = async () => {
@@ -106,7 +119,8 @@ const getData = async () => {
         .then(
             res => {
                 console.log(res.data)
-                data.value = res.data.profit
+                allData.value = res.data.profit
+                data.value = res.data.profit.profit_by_created_at
             },
             err => {
                 console.log(err)
@@ -117,6 +131,15 @@ const getData = async () => {
 
 const formatNumber = (number, type = {style: 'currency', currency: 'USD'}) => {
     return new Intl.NumberFormat('en', { maximumFractionDigits: 2, ...type }).format(number);
+}
+
+const onSwitch = (value) => {
+    if (value == 'created') {
+        data.value = allData.value.profit_by_created_at
+    } else if (value == 'delivered') {
+        data.value = allData.value.profit_by_delivered_at
+    }
+    by.value = value;
 }
 
 getData();

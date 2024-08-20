@@ -2,7 +2,7 @@
 
     <div class="tw-grid tw-grid-cols-12 tw-gap-2">
         <div class="tw-col-span-12  tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200">
-
+            <p class="tw-p-2 tw-font-bold tw-text-lg tw-mb-2">Seller Turnover</p>
 
             <div>
                 <div class="tw-grid tw-grid-cols-2 tw-gap-2">
@@ -11,7 +11,7 @@
                             <div class=" tw-flex tw-items-center tw-gap-2">
                                 <p class="tw-font-bold tw-text-lg">Total Revenue</p>
                                 <p v-if="loading" class="tw-font-semibold tw-text-gray-700 tw-h-[20px] tw-w-[70px] tw-bg-gray-100 tw-rounded tw-animate-pulse"></p>
-                                <p v-else class="tw-font-semibold tw-text-gray-700">( {{ formatNumber(data.orders.paid_count, {}) }} )</p>
+                                <p v-else class="tw-font-semibold tw-text-gray-700">( {{ formatNumber(data.orders.orders_count, {}) }} )</p>
                             </div>
                         </div>
                         <div class="tw-px-2x tw-mt-2x">
