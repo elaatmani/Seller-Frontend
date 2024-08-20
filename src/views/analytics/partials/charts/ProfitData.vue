@@ -120,7 +120,7 @@ const getData = async () => {
             res => {
                 console.log(res.data)
                 allData.value = res.data.profit
-                data.value = res.data.profit.profit_by_created_at
+                data.value = by.value == 'created' ? res.data.profit.profit_by_created_at : res.data.profit.profit_by_delivered_at;
             },
             err => {
                 console.log(err)
