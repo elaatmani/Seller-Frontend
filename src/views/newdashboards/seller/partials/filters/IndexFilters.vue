@@ -149,7 +149,6 @@ export default {
         },
         updateTime() {
           this.now = moment();
-          console.log(this.now); 
         },
         clear() {
             this.filters = {
