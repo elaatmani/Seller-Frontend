@@ -2,7 +2,7 @@
   <div class="tw-pb-40">
     <div class="tw-space-y-3">
 
-        <IndexFilters @update="f => filters= f" @filter="handleFilter" @reload="handleFilter" />
+        <IndexFilters @update="f => filters= f" @filter="handleFilter" />
 
         <IndexRevenue :statistics="statistics" :fetching="fetching" />
         

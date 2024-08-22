@@ -3,9 +3,9 @@
     <div class="tw-flex tw-justify-between">
         <h1 class="tw-mb-3 tw-text-xl tw-font-medium">Filters</h1>
         <div class="tw-flex tw-items-center">
-          <p class="tw-mr-2">Last updated: {{ lastUpdatedFromNow }}</p>
+          <p class="tw-mr-2">Last updated: {{ lastUpdatedAtText }}</p>
           <button
-            @click="reload"
+            @click="filter"
           class="tw-px-2 tw-py-1 tw-w-[25px] tw-h-[25px] tw-border tw-border-solid tw-border-blue-500/20 hover:tw-bg-blue-500/10 hover:tw-border-blue-500/70 tw-duration-300 tw-text-blue-500/80 tw-rounded-md tw-flex tw-items-center tw-justify-center"
         >
           <v-icon size="x-small">mdi-refresh</v-icon>
@@ -123,15 +123,13 @@ export default {
             deliveries: deliveryStatus,
             dateFilter: ['', ''],
             lastUpdated: moment(),
-            now: moment(),
+            lastUpdatedAtText: 'a few seconds ago',
+            interval: null,
             filters: {}
         }
     },
 
     computed: {
-      lastUpdatedFromNow() {
-        return moment(this.lastUpdated).from(this.now);
-      }
     },
     watch: {
         filters: {
@@ -143,13 +141,6 @@ export default {
     },
 
     methods: {
-        reload() {
-          this.$emit('reload');
-          this.updateTime();
-        },
-        updateTime() {
-          this.now = moment();
-        },
         clear() {
             this.filters = {
                 created_from: null,
@@ -167,14 +158,18 @@ export default {
         filter() {
             this.$emit('update', this.filters)
             this.$emit('filter');
-        }
+            this.lastUpdated = Date.now();
+            this.updateRelativeTime();
+        },
+        updateRelativeTime() {
+          this.lastUpdatedAtText = moment(this.lastUpdated).fromNow();
+        },
     },
 
     mounted() {
       this.clear();
       this.filter();
-      this.updateTime();
-      this.interval = setInterval(this.updateTime, 1000);
+      this.interval = setInterval(this.updateRelativeTime, 1000);
     },
 
     beforeUnmount() {
