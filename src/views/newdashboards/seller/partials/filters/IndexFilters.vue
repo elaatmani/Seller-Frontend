@@ -145,6 +145,7 @@ export default {
     methods: {
         reload() {
           this.$emit('reload');
+          this.lastUpdated = moment(); 
           this.updateTime();
         },
         updateTime() {

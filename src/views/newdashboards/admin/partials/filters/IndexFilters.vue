@@ -1,8 +1,17 @@
 <template>
   <div class="tw-bg-white tw-p-5">
-    <div>
-        <h1 class="tw-mb-3 tw-text-xl tw-font-medium">Filters</h1>
+    <div class="tw-flex tw-justify-between">
+    <h1 class="tw-mb-3 tw-text-xl tw-font-medium">Filters</h1>
+    <div class="tw-flex tw-items-center">
+      <p class="tw-mr-2">Last updated: {{ lastUpdatedFromNow }}</p>
+      <button
+        @click="reload"
+        class="tw-px-2 tw-py-1 tw-w-[25px] tw-h-[25px] tw-border tw-border-solid tw-border-blue-500/20 hover:tw-bg-blue-500/10 hover:tw-border-blue-500/70 tw-duration-300 tw-text-blue-500/80 tw-rounded-md tw-flex tw-items-center tw-justify-center"
+      >
+        <v-icon size="x-small">mdi-refresh</v-icon>
+      </button>
     </div>
+  </div>
     <div class="tw-grid tw-grid-cols-12 tw-gap-4 tw-p-1">
 
       <DateFilter v-model:from="filters.created_from" v-model:to="filters.created_to" label="Created" />
@@ -109,6 +118,7 @@ import AgentFilter from '@/views/newdashboards/admin/partials/filters/components
 import SellerFilter from '@/views/newdashboards/admin/partials/filters/components/SellerFilter'
 import ProductFilter from '@/views/newdashboards/admin/partials/filters/components/ProductFilter'
 import DateFilter from '@/views/newdashboards/admin/partials/filters/components/DateFilter'
+import moment from 'moment';
 
 export default {
   components: { AffectationFilter, AgentFilter, ProductFilter, DateFilter, SellerFilter },
@@ -120,7 +130,8 @@ export default {
             confirmations: confirmations,
             deliveries: deliveryStatus,
             dateFilter: ['', ''],
-
+            lastUpdated: moment(),
+            now: moment(),
             filters: {}
         }
     },
@@ -133,8 +144,20 @@ export default {
             }
         }
     },
-
+    computed: {
+        lastUpdatedFromNow() {
+          return moment(this.lastUpdated).from(this.now);
+        }
+      },
     methods: {
+        reload() {
+          this.$emit('reload');
+          this.lastUpdated = moment(); 
+          this.updateTime();
+        },
+        updateTime() {
+          this.now = moment();
+        },
         clear() {
             this.filters = {
                 created_from: null,
@@ -161,7 +184,12 @@ export default {
     mounted() {
         this.clear();
         this.filter();
-    }
+        this.updateTime();
+        this.interval = setInterval(this.updateTime, 1000);
+    },
+    beforeUnmount() {
+        clearInterval(this.interval);
+      },
 
 };
 </script>
