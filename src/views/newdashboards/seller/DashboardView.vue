@@ -2,7 +2,7 @@
   <div class="tw-pb-40">
     <div class="tw-space-y-3">
 
-        <IndexFilters @update="f => filters= f" @filter="handleFilter" />
+        <IndexFilters @update="f => filters= f" @filter="handleFilter" @reload="handleFilter" />
 
         <IndexRevenue :statistics="statistics" :fetching="fetching" />
         
@@ -38,6 +38,7 @@ export default {
 
     methods: {
         handleFilter() {
+            console.log('handleFilter is called');
             this.fetching = true;
             Seller.statistics(this.filters)
             .then(res => {
@@ -52,6 +53,14 @@ export default {
 
     mounted() {
         if(this.user.role != 'seller') this.$router.push({name: '404'});
+        else {
+            this.handleFilter(); 
+            this.interval = setInterval(() => this.handleFilter(), 5 * 60 * 1000);
+        }
+    },
+
+    beforeUnmount() {
+        clearInterval(this.interval);
     }
 }
 </script>

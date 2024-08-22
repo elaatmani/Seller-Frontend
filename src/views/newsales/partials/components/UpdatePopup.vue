@@ -317,15 +317,32 @@
                           <tr v-for="product in paginatedProducts" :key="product.id">
                             <td class="tw-border tw-px-4 tw-py-2">{{ product.name }}</td>
                             <td class="tw-border tw-px-4 tw-py-2 ">
-                              <a :href="'https://' + product.video" target="_blank" class="tw-flex tw-items-center tw-text-blue-500 tw-hover:text-blue-800 hover:tw-underline	"
-                              > <i
+                              <a 
+                                :href="'https://' + product.video" 
+                                target="_blank" 
+                                class="tw-flex tw-items-center tw-text-blue-500 tw-hover:text-blue-800 hover:tw-underline"
+                              > 
+                                <i
                                   class="mdi mdi-youtube tw-mx-2 tw-text-orange-400 tw-text-2xl"
-                                ></i>{{ product.video }}</a>
+                                ></i>
+                                <span class="tw-block tw-w-[150px] tw-truncate">
+                                  {{ product.video }}
+                                </span>
+                              </a>
                             </td>
                             <td class="tw-border tw-px-4 tw-py-2 ">
-                              <a :href="'https://' + product.store" target="_blank" class="tw-flex tw-items-center tw-text-blue-500 tw-hover:text-blue-800 hover:tw-underline	"
-                              ><i class="mdi mdi-store tw-mx-2 tw-text-orange-400 tw-text-2xl"></i>
-                              {{ product.store }}</a>
+                              <a 
+                                :href="'https://' + product.store" 
+                                target="_blank" 
+                                class="tw-flex tw-items-center tw-text-blue-500 tw-hover:text-blue-800 hover:tw-underline"
+                              > 
+                                <i
+                                  class="mdi mdi-store tw-mx-2 tw-text-orange-400 tw-text-2xl"
+                                ></i>
+                                <span class="tw-block tw-w-[150px] tw-truncate">
+                                  {{ product.store }}
+                                </span>
+                              </a>
                             </td>
                           </tr>
                         </tbody>
