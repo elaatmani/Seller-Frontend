@@ -46,6 +46,13 @@ export const links = [
                 role: ['admin'],
                 to: '/analytics'
             },
+            {
+                id: 3,
+                title: 'Agentes',
+                subModule: 'dashboard/Agentes',
+                role: 'admin',
+                to: '/dashboards/admin/agentes'
+            },
         ]
     },
 

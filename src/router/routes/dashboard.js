@@ -5,6 +5,7 @@ import DashboardView from '@/views/newdashboards/admin/DashboardView'
 import SellerDashboardView from '@/views/newdashboards/seller/DashboardView'
 import DashboardAnalytics from '@/views/dashboardanalytics/DashboardAnalytics'
 import AgentDashboard from '@/views/newdashboards/agent/AgentDashboard'
+import DashboardKpiAgente from '@/views/newdashboards/admin/kpiagente/DashboardKpiAgente'
 
 export default 
     {
@@ -61,6 +62,17 @@ export default
                     subModule: 'dashboards/agent',
                     title: 'Dashboard',
                     gate: 'all'
+                }
+            },
+            { 
+                name: 'dashboards/admin/agentes',
+                path: 'admin/agentes',
+                component: DashboardKpiAgente,
+                meta: {
+                    module: 'dashboards',
+                    subModule: 'admin/agentes',
+                    title: 'Agentes',
+                    role: 'admin'
                 }
             },
 
