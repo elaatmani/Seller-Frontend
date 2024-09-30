@@ -99,7 +99,7 @@
     case 'high':
       return 'tw-bg-red-100';
     default:
-      return 'tw-bg-gray-50'; // Default background color if priority is not set
+      return 'tw-bg-gray-50';
   }
 };
   
@@ -107,7 +107,6 @@
     App.notifications()
       .then((res) => {
         if (res.data.code == "SUCCESS") {
-          console.log("success");
           store.dispatch("app/setData", res.data.data);
           store.dispatch("app/setCount", res.data.count);
           store.dispatch("app/sethighlighted", res.data.highlighted);

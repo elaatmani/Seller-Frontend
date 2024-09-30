@@ -599,6 +599,13 @@ export const links = [
                 role: ['admin', 'seller'],
                 to: { name: 'settings.seller.withdrawal-methods' }
             },
+            {
+                id: 4,
+                title: 'Crédits',
+                subModule: 'settings/credit',
+                role: 'admin',
+                to: '/settings/credit'
+            },
         ]
     },
 

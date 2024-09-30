@@ -4,6 +4,7 @@ import DefaultLayout from '@/layouts/default/DefaultLayout.vue'
 // Views
 import CronJobs from '@/views/settings/cronjobs/CronJobs'
 import AccountView from '@/views/settings/AccountView'
+import CreditsSeller from '@/views/settings/credits/CreditsSeller'
 import WithdrawalMethodsView from '@/views/settings/WithdrawalMethodsView'
 
 
@@ -24,6 +25,17 @@ export default {
                 module: 'settings',
                 subModule: 'settings/cronJobs',
                 title: 'Cron Jobs',
+                role: 'admin'
+            }
+        },
+          { 
+            name: 'settings/credit',
+            path: '/settings/credit',
+            component: CreditsSeller,
+            meta: {
+                module: 'settings',
+                subModule: 'settings/credit',
+                title: 'Crédits',
                 role: 'admin'
             }
         },
