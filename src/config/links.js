@@ -601,7 +601,7 @@ export const links = [
             },
             {
                 id: 4,
-                title: 'Crédits',
+                title: 'Credits',
                 subModule: 'settings/credit',
                 role: 'admin',
                 to: '/settings/credit'

@@ -50,7 +50,7 @@
       >
         <div>
           <h2 class="tw-font-medium tw-text-gray-800 darkx:tw-text-white tw-flex tw-items-center tw-gap-2">
-            <p>{{ moment(item.paid_at).format("DD[/]MM[/]YY") }}</p>
+            <p v-if="item.paid_at">{{ moment(item.paid_at).format("DD[/]MM[/]YY") }}</p>
             <p v-if="false">{{ moment(item.paid_at).format("HH[:]mm[:]ss") }}</p>
           </h2>
         </div>
