@@ -7,7 +7,11 @@
 
           <IndexAnalytics :analytics="analytics" :fetching="fetching"/>
           
-    
+          <div class="tw-grid tw-grid-cols-12 tw-gap-3">
+                <div class="tw-col-span-12 md:tw-col-span-12">
+                    <CancelChart />
+                </div>
+            </div>
   
       </div>
     </div>
@@ -16,12 +20,13 @@
   <script>
     import IndexAnalytics from '@/views/dashboardanalytics/partials/analytics/IndexAnalytics'
     import IndexFilters from '@/views/dashboardanalytics/partials/filters/IndexFilters'
+    import CancelChart from './partials/CancelChart'
 
     
     import Admin from '@/api/Admin';
     
     export default {
-        components: { IndexAnalytics, IndexFilters},
+        components: { IndexAnalytics, IndexFilters, CancelChart},
     
         data() {
             return {
