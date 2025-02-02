@@ -13,7 +13,7 @@
     </div>
 
     <div
-      v-if="isLoaded"
+      v-if="isLoaded && product"
       
     >
       <div class="tw-flex py-3 px-5 tw-border tw-justify-between bg-white tw-w-full tw-rounded-md tw-text-neutral-800 tw-items-center tw-mb-5" v-if="this.user.role=='admin'">
@@ -1003,6 +1003,7 @@ export default {
 
     getProduct() {
       return Product.getProduct(this.$route.params.id).then((res) => {
+        console.log(res.data)
         if (res.data.code == "SUCCESS") {
           const {
             variations,
@@ -1019,7 +1020,7 @@ export default {
             deliveries,
             image,
             offers,status
-          } = res.data.data.products;
+          } = res.data.data.product;
           this.variants = variations;
           this.product.buyingPrice = buying_price;
           this.product.sellingPrice = selling_price;
