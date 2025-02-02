@@ -115,13 +115,13 @@ export const links = [
             value: 'assets/img/icons/product.svg'
         },
         children: [
-            {
-                id: 1,
-                title: 'Products List',
-                subModule: 'product/list',
-                gate: 'show_all_products',
-                to: '/products'
-            },
+            // {
+            //     id: 1,
+            //     title: 'Products List',
+            //     subModule: 'product/list',
+            //     gate: 'show_all_products',
+            //     to: '/products'
+            // },
             {
                 id: 2,
                 title: 'New Products List',

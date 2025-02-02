@@ -4,6 +4,9 @@
     <CardsStats :filters="filters" />
     <div class="tw-flex tw-my-2 tw-flex-wrap md:tw-flex-nowrap tw-w-full tw-space-y-2 md:tw-space-y-0 md:tw-space-x-4">
       <div class="tw-w-full md:tw-w-1/2 tw-shadow-md tw-rounded-lg">
+                <PerformanceAgente :filters="filters" />
+      </div>
+      <div class="tw-w-full md:tw-w-1/2 tw-shadow-md tw-rounded-lg">
         <AllAgenteKpi :filters="filters" />
       </div>
       <div class="tw-w-full md:tw-w-1/2 tw-shadow-md tw-rounded-lg">
@@ -39,6 +42,7 @@ import AllAgenteKpi from '@/views/newdashboards/admin/kpiagente/charts/AllAgente
 import GeneralFilter from '@/views/newdashboards/admin/kpiagente/filters/GeneralFilter.vue'
 import { ref } from 'vue';
 import TopAgentes from './charts/TopAgentes.vue'
+import PerformanceAgente from './charts/PerformanceAgente.vue'
 
 const filters = ref({});
 

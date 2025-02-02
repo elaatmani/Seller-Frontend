@@ -35,10 +35,11 @@ class Factorisation {
         });
     }
 
-    async updateClose(id , close) {
+    async updateClose(id , close , exchange_rate) {
         await Csrf.getCookie();
         return Api.post('api/factorisations/update/closing/' + id, {
-            close: close
+            close: close,
+            exchange_rate
         });
     }
 

@@ -45,6 +45,13 @@ class Dashboard {
         return Api.get('api/agentekpi/top_agentes', {params: filters});
     }
 
+    
+    async getAgentsPerformance(params) {
+        await Csrf.getCookie();
+        return Api.get('api/agentekpi/performance', {
+            params
+        });
+    }
 
 }
 

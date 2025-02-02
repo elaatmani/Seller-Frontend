@@ -115,7 +115,7 @@ export default {
               this.$store.dispatch('order/setFetched', true)
               this.isLoaded = true
             }
-            console.log(res);
+            // console.log(res);
           }
         ).catch(this.$handleApiError)
       },
