@@ -65,6 +65,13 @@ class Analytics {
         });
     }
 
+    async turnoverPerDay(params) {
+        await Csrf.getCookie();
+        return Api.get('api/analytics/turnover-per-day', {
+            params
+        });
+    }
+
     async deliveredPerDay(params) {
         await Csrf.getCookie();
         return Api.get('api/analytics/delivered-per-day', {

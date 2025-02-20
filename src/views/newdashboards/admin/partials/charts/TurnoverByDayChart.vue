@@ -2,18 +2,14 @@
     <div v-if="!loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[300px]">
         <div class="tw-flex tw-items-center tw-gap-2">
             <p class="tw-p-2 tw-font-bold tw-text-lg">Orders</p>
-            <p class="tw-px-1 tw-bg-black tw-text-white tw-text-sm tw-rounded">{{ new Intl.NumberFormat().format(total)  }}</p>
-            <div class="tw-ml-auto tw-flex tw-items-center tw-gap-1" :class="[difference > 0 ? 'tw-text-emerald-500' : 'tw-text-rose-500']">
-                <icon :class="[difference <= 0 && '-tw-scale-y-100']" icon="stash:chart-trend-up-light" class="tw-text-xl" />
-                <p class="tw-text-sm">{{ difference }}%</p>
-            </div>
+            <p class="tw-px-1 tw-bg-orange-500 tw-text-white tw-text-sm tw-rounded">${{ new Intl.NumberFormat().format(total)  }}</p>
         </div>
         <apexchart type="area" height="220" :options="options" :series="series"></apexchart>
     </div>
     <div v-if="loading" class="tw-bg-white tw-p-2 tw-border tw-border-solid tw-border-gray-200 tw-h-[300px]">
         <div class="tw-flex tw-items-center tw-gap-2">
             <p class="tw-p-2 tw-font-bold tw-text-lg">Orders</p>
-            <p class="tw-px-1 tw-bg-black tw-text-white tw-text-sm tw-rounded"><icon icon="eos-icons:three-dots-loading" class="tw-text-xl" /></p>
+            <p class="tw-px-1 tw-bg-orange-500 tw-text-white tw-text-sm tw-rounded"><icon icon="eos-icons:three-dots-loading" class="tw-text-xl" /></p>
         </div>
         <div class="tw-h-[230px] tw-w-full tw-bg-gray-100 tw-rounded tw-animate-pulse">
         </div>
@@ -28,11 +24,8 @@ import Analytics from '@/api/Analytics'
 
 const loading = ref(true);
 const total = ref(0)
-const yesterday = ref(0);
-const today = ref(0);
 
 const data = ref([])
-const difference = computed(() => getDifference())
 
 const options = computed(() => {
 
@@ -56,7 +49,7 @@ const options = computed(() => {
         },
         fill: {
             type: 'gradient',
-            colors: ['#000'],
+            colors: ['#f97316'],
             gradient: {
                 shadeIntensity: 1,
                 opacityFrom: 0.7,
@@ -70,7 +63,10 @@ const options = computed(() => {
                 fontSize: '10px',
                 fontFamily: 'Helvetica, Arial, sans-serif',
                 fontWeight: 'bold',
-                colors: ['#000']
+                colors: ['#f97316']
+            },
+            formatter: function (val) {
+                return '$' + val
             },
             background: {
                 enabled: true,
@@ -98,21 +94,19 @@ const options = computed(() => {
 
 const series = computed(() => [{
     name: 'Orders',
-    data: data.value.map(i => i.count),
+    data: data.value.map(i => i.total),
 }])
 
 const getData = async () => {
     loading.value = true;
-    await Analytics.ordersPerDay()
+    await Analytics.turnoverPerDay()
     .then(
         res => {
             if(res.data.code == 'SUCCESS') {
                 console.log(data)
                 data.value = res.data.data
-                yesterday.value = data.value[data.value.length - 2].count
-                today.value = data.value[data.value.length - 1].count
                 total.value = res.data.data.reduce((s, c) => {
-                    return s + c.count
+                    return s + c.total
                 }, 0)
                 
             }
@@ -123,14 +117,6 @@ const getData = async () => {
     )
     loading.value = false;
 }
-
-const getDifference = () => {
-    if (yesterday.value === 0) {
-        return today.value > 0 ? 100 : 0; // Avoid division by zero
-    }
-    return ((today.value - yesterday.value) / yesterday.value) * 100;
-};
-
 
 getData()
 

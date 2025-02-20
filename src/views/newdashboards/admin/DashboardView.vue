@@ -13,7 +13,14 @@
             </div>
         </div>
 
-        <RealTimeOnlineUsers />
+        <div class="tw-grid tw-grid-cols-2 tw-gap-4">
+            <div>
+                <TurnoverByDayChart />
+            </div>
+            <div>
+                <RealTimeOnlineUsers />
+            </div>
+        </div>
 
         <OnlineUsers v-if="false" />
 
@@ -35,11 +42,13 @@ import IndexRevenue from '@/views/newdashboards/admin/partials/statistics/IndexR
 import OrdersByDayChart from './partials/charts/OrdersByDayChart.vue';
 import ConfirmedByDayChart from './partials/charts/ConfirmedByDayChart.vue';
 import DeliveredByDayChart from './partials/charts/DeliveredByDayChart.vue';
+import TurnoverByDayChart from './partials/charts/TurnoverByDayChart.vue';
+
 
 import Admin from '@/api/Admin';
 
 export default {
-    components: { OnlineUsers, IndexStatistics, IndexFilters, IndexRevenue, RealTimeOnlineUsers, OrdersByDayChart, ConfirmedByDayChart, DeliveredByDayChart },
+    components: { OnlineUsers, IndexStatistics, IndexFilters, IndexRevenue, RealTimeOnlineUsers, OrdersByDayChart, ConfirmedByDayChart, DeliveredByDayChart, TurnoverByDayChart },
 
     data() {
         return {
