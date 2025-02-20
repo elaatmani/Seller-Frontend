@@ -109,7 +109,6 @@ const getData = async () => {
         .then(
             res => {
                 if (res.data.code == 'SUCCESS') {
-                    console.log(data)
                     data.value = res.data.data
                     // data
                 }

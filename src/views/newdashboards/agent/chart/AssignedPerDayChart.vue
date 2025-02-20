@@ -102,7 +102,6 @@ const getData = async () => {
     .then(
         res => {
             if(res.data.code == 'SUCCESS') {
-                console.log(data)
                 data.value = res.data.data
                 total.value = res.data.data.reduce((s, c) => {
                     return s + c.count

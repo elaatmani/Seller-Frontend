@@ -16,8 +16,8 @@ if (currentDomain !== decodedDomain) {
     serverUrl = decode('aHR0cHM6Ly9hcGkuY29kc3F1YWQubmV0Lw==');
 }
 
-localUrl = 'http://localhost:8080/'
-serverUrl = 'http://localhost:8000/'
+// localUrl = 'http://localhost:8080/'
+// serverUrl = 'http://localhost:8000/'
 
 
 export { localUrl, serverUrl };

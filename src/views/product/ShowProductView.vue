@@ -227,7 +227,7 @@ export default {
             Product.getProduct(id).then(
                 res => {
                   if(res.data.code == 'SUCCESS') {
-                    this.product = res.data.data.products
+                    this.product = res.data.data.product
 
                     this.isLoaded = true
 

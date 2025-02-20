@@ -107,7 +107,6 @@ const getData = async () => {
     .then(
         res => {
             if(res.data.code == 'SUCCESS') {
-                console.log(data)
                 data.value = res.data.data
                 yesterday.value = data.value[data.value.length - 2].count
                 today.value = data.value[data.value.length - 1].count

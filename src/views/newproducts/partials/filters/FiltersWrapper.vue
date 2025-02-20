@@ -35,8 +35,7 @@
           class="tw-bg-gray-50 tw-border-solid tw-outline-none tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-orange-500 focus:tw-border-orange-500 tw-block tw-w-full tw-p-2.5"
         />
       </div>
-
-      <ProductFilter v-if="false" :filters="filters" @update="f => $emit('update', f)" />
+      <!-- <ProductFilter v-if="false" :filters="filters" @update="f => $emit('update', f)" /> -->
 
       <SellerFilter   :filters="filters" @update="f => $emit('update', f)" />
 
@@ -78,11 +77,10 @@
 <script>
 
 import DateFilter from '@/views/newproducts/partials/filters/components/DateFilter'
-import ProductFilter from '@/views/newproducts/partials/filters/components/ProductFilter'
 import SellerFilter from '@/views/newproducts/partials/filters/components/SellerFilter'
 
 export default {
-  components: { DateFilter, ProductFilter,SellerFilter },
+  components: { DateFilter,SellerFilter },
 
   props: {
     filters: {

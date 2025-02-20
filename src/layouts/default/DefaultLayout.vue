@@ -200,7 +200,6 @@ export default {
                     withCredentials: true,
                 },
             })
-
             this.echo = echo;
 
             const channelId = this.presenceChannelId;

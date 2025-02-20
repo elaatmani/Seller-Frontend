@@ -69,7 +69,7 @@
     <td class="tw-px-4 tw-py-2 tw-text-sm tw-font-medium tw-whitespace-nowrap">
       <div>
         <h2
-          class=" tw-text-emerald-500 tw-text-end tw-font-semibold darkx:tw-text-white tw-font-[cairo]"
+          class=" tw-text-emerald-500 tw-text-end tw-font-semibold darkx:tw-text-white tw-font-[cairo] tw-flex tw-items-center tw-gap-1"
         >
           {{currency}}
           <span v-if="item.type == 'seller'">
@@ -79,7 +79,7 @@
             {{ item.delivery_order_price }} 
           </span>
 
-          
+          <p v-if="item.exchange_rate"> ({{item.exchange_rate * item.seller_order_price}} USDT) </p>
         </h2>
       </div>
     </td>
