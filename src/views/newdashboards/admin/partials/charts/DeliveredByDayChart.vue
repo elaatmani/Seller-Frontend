@@ -5,7 +5,7 @@
             <p class="tw-px-1 tw-bg-emerald-600 tw-text-white tw-text-sm tw-rounded">{{ new Intl.NumberFormat().format(total)  }}</p>
             <div class="tw-ml-auto tw-flex tw-items-center tw-gap-1" :class="[difference > 0 ? 'tw-text-emerald-500' : 'tw-text-rose-500']">
                 <icon :class="[difference <= 0 && '-tw-scale-y-100']" icon="stash:chart-trend-up-light" class="tw-text-xl" />
-                <p class="tw-text-sm">{{ difference }}%</p>
+                <p class="tw-text-sm">{{ difference.toFixed(2) }}%</p>
             </div>
         </div>
         <apexchart type="area" height="220" :options="options" :series="series"></apexchart>
