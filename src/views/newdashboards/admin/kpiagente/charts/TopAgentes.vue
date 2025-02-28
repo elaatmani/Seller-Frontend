@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!loading" class="tw-w-full tw-shadow-md tw-p-4 tw-bg-white tw-rounded-lg">
+    <div v-if="!loading" class="tw-w-full tw-shadow-mdx tw-p-4 tw-bg-white tw-rounded-lgx">
       <div class="tw-flex tw-flex-wrap tw-justify-between tw-items-center">
         <h1 class="tw-text-xl tw-font-medium tw-py-2">
           Top Agents for Confirmations:
@@ -77,7 +77,7 @@ const getData = async (filters) => {
     if (res.data.code === 'SUCCESS') {
       data.value = res.data.data.map(item => ({
         agente_id: item.agente_id,
-        agente_name: item.user.firstname + ' ' + item.user.lastname,
+        agente_name: item.firstname + ' ' + item.lastname,
         confirmed_count: item.confirmed_count,
       }));
     } else {

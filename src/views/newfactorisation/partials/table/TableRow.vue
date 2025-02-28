@@ -78,8 +78,15 @@
           <span v-else>
             {{ item.delivery_order_price }} 
           </span>
+          <div v-if="item.type == 'seller'">
+            <p v-if="item.exchange_rate"> ({{parseFloat(item.exchange_rate * item.seller_order_price).toFixed(2)}} USDT) </p>
+            
+          </div>
+          <div v-else>
+            <p v-if="item.exchange_rate"> ({{parseFloat(item.exchange_rate * item.delivery_order_price).toFixed(2)}} USDT) </p>
 
-          <p v-if="item.exchange_rate"> ({{item.exchange_rate * item.seller_order_price}} USDT) </p>
+          </div>
+
         </h2>
       </div>
     </td>

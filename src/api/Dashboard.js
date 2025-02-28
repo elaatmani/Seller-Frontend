@@ -53,6 +53,16 @@ class Dashboard {
         });
     }
 
+    async agentsPerformanceLifetime(filters){
+        await Csrf.getCookie();
+        return Api.get('api/agentekpi/agents-performance-lifetime', {params: filters});
+    }
+
+    async agentsPerformanceByTime(filters){
+        await Csrf.getCookie();
+        return Api.get('api/agentekpi/agents-performance-by-time', {params: filters});
+    }
+
 }
 
 
